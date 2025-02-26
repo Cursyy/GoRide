@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Chat with Support</h2>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Chat History</h5>
+        </div>
+        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mb-3">
+                        <strong class="text-primary">{{ message.sender.username }}:</strong>
+                        <p class="mb-1">{{ message.content }}</p>
+                        <small class="text-muted">{{ message.created_at|date:"d M Y, H:i" }}</small>
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted text-center">No messages yet. Start the conversation!</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <form method="post" class="card shadow-sm">
+        {% csrf_token %}
+        <div class="card-body">
+            {{ form.as_p }}
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
