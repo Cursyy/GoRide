@@ -175,3 +175,8 @@ Traceback (most recent call last):
     return super().execute(query, params)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 django.db.utils.OperationalError: no such column: find_transport_vehicle.battery_percentage
+[2025-03-03 22:40:37,090] [WARNING] [django.request] [Not Found: /login] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
+[2025-03-03 22:40:50,498] [WARNING] [django.request] [Not Found: /accounts/] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
+```[2025-03-03 22:43] Can't login with created user credentials. Username: 12345``` [2025-03-03 22:51:02,457] [WARNING] [django.request] [Not Found: /favicon.ico] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
+[2025-03-03 22:51:08,977] [WARNING] [django.request] [Not Found: /favicon.ico] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
+[2025-03-03 22:51:14,966] [WARNING] [django.request] [Not Found: /favicon.ico] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
