@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -139,3 +141,31 @@ STATICFILES_FINDERS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+LOG_DIR = os.path.join(BASE_DIR, "logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[%(asctime)s] [%(levelname)s] [%(name)s] [%(message)s] [%(funcName)s()] [%(lineno)d] [%(pathname)s]"
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "WARNING",  # Змінити на 'WARNING', щоб збирати попередження та помилки
+            "class": "logging.FileHandler",
+            "filename": os.path.join(
+                LOG_DIR, f"{datetime.datetime.now().strftime('%Y-%m-%d')}_errors.log"
+            ),
+            "formatter": "verbose",
+        },
+    },
+    "root": {
+        "handlers": ["file"],
+        "level": "WARNING",  # Змінити на 'WARNING', щоб збирати попередження та помилки
+    },
+}

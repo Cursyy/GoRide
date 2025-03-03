@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block title%} Available Transport {%endblock%}
+
+{%block content%}
+    <h2>Available Transport</h2>
+    <form method="get">
+        <label for="type">Type:</label>
+        <select name="type">
+            <option value="">All</option>
+            <option value="E-Bike">E-Bike</option>
+            <option value="E-Scooter">E-Scooter</option>
+            <option value="Bike">Bike</option>
+        </select>
+
+        <label for="min_battery">Minimum Battery:</label>
+        <input type="number" name="min_battery" min="0" max="100">
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <ul>
+        {%for vehicle in vehicles%}
+        <li>
+            {{vehicle.type}} - Battery: {{vehicle.battery_percentage}}%- Price: {{vehicle.price_per_hour}}
+        </li>
+        {%empty%}
+        <li>No vehicles found</li>
+        {%endfor%}
+    </ul>
+{%endblock%}
