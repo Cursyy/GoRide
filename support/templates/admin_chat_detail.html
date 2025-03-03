@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Chat with {{ chat.user.username }}</h2>
+
+<div>
+    {% for message in messages %}
+        <p><strong>{{ message.sender.username }}:</strong> {{ message.content }} <em>{{ message.created_at }}</em></p>
+    {% endfor %}
+</div>
+
+<h3>Reply to the chat:</h3>
+<form method="post">
+    {% csrf_token %}
+    <textarea name="message" rows="4" cols="50"></textarea><br>
+    <button type="submit">Send Reply</button>
+</form>
+
+<a href="{% url 'support:admin_chat_list' %}">Back to chat list</a>
+
+{% endblock %}
