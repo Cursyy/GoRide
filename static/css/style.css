@@ -1,0 +1,80 @@
+html{
+    --main-bg-color: #0E6655;
+    --main-font-color: #fff;
+    --second-font-color: #000;
+    --second-bg-color: #000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: var(--main-font-color);
+}
+
+
+.my_title {
+}
+
+.my_custom_div {
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
+}
+
+.form-text, .form-text li{
+    color: var(--main-font-color);
+}
+
+
+
+/* header */
+
+.bg-custom {
+    background-color: #0d5446; /* Темно-зелений фон */
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffa726 !important; /* Помаранчевий ховер */
+}
+
+.btn-outline-light:hover {
+    background-color: white !important;
+    color: #0d5446 !important;
+}
+
+.btn-light:hover {
+    background-color: #ffa726 !important;
+    color: white !important;
+}
+
+.dropdown-menu {
+    min-width: 150px;
+}
+
+.form-select-sm {
+    background-color: #0d5446;
+    color: white;
+    border: none;
+}
+
+.form-select-sm:focus {
+    background-color: #0d5446;
+    color: white;
+}
+
+/* header */
