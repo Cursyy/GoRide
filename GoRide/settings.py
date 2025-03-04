@@ -35,6 +35,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # project apps
+    "accounts",
+    # default apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -42,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # project apps
-    "accounts",
     "main",
     "support",
     "find_transport",
@@ -176,3 +178,6 @@ LOGGING = {
         "level": "WARNING",  # Змінити на 'WARNING', щоб збирати попередження та помилки
     },
 }
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

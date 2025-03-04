@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+<div class="container p-4">
+    <h1 class="text-center my_title">Edit Profile</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="w-100 my_custom_div p-4 rounded">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="my_label">Username</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="my_label">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="my_label">Phone Number</label>
+                        {{ form.phone_num }}
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="my_label">Profile Picture</label>
+                        {{ form.profile_pic }}
+                    </div>
+                    <button type="submit" class="btn btn-secondary mt-4 w-100">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

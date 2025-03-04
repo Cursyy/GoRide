@@ -14,7 +14,7 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
         return user
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ("username", "profile_pic", "password")
+        fields = ("username", "email", "phone_num", "profile_pic")

@@ -3,3 +3,4 @@ db.sqlite3
 **/migrations/*_initial.py
 **__pycache__/
 *.log
+/media/

@@ -107,7 +107,7 @@ a{
     height: 100%;
 }
 .benefits .card {
-    border: 2px solid var(--second-font-color);
+    border: 2px solid var(--main-bg-color);
     background-color: transparent;
     color: var(--second-font-color);
 }
@@ -131,3 +131,46 @@ a{
 .footer a:hover {
     text-decoration: underline;
 }
+
+/* profile */
+
+.my_title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--main-font-color);
+}
+
+.my_label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: var(--main-font-color);
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--main-font-color);
+    background-color: transparent;
+    color: var(--main-font-color);
+}
+
+form input[type="file"] {
+    padding: 5px;
+}
+
+.btn-secondary {
+    background-color: var(--main-font-color);
+    color: var(--main-bg-color);
+    border: none;
+    padding: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--main-bg-color);
+}
+
+/* profile */
