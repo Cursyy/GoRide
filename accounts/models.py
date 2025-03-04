@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import Group, Permission
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
@@ -25,6 +26,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
 
     objects = CustomUserManager()
+
+    groups = models.ManyToManyField(Group, blank=True, related_name="custom_user_groups")
+    user_permissions = models.ManyToManyField(Permission, blank=True, related_name="custom_user_permissions")
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]

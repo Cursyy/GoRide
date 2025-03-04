@@ -52,7 +52,6 @@ INSTALLED_APPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -142,6 +141,13 @@ STATICFILES_FINDERS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Custom settings
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+LOGIN_REDIRECT_URL = "main:home"
+LOGOUT_REDIRECT_URL = "main:home"
+
 
 
 LOG_DIR = os.path.join(BASE_DIR, "logs")
