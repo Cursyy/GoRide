@@ -1,0 +1,133 @@
+html{
+    --main-bg-color: #0E6655;
+    --main-font-color: #fff;
+    --second-font-color: #000;
+    --second-bg-color: #000;
+    --accent-color: #ffa726;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-font-color);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: var(--main-font-color);
+}
+
+
+.my_title {
+}
+
+.my_custom_div {
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
+}
+
+.form-text, .form-text li{
+    color: var(--main-font-color);
+}
+
+
+
+/* header */
+
+.bg-custom {
+    background-color: var(--main-bg-color); /* Темно-зелений фон */
+}
+
+.navbar-nav .nav-link {
+    color: var(--main-font-color) !important;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--accent-color) !important; /* Помаранчевий ховер */
+}
+
+.btn-outline-light:hover {
+    background-color: var(--main-font-color) !important;
+    color: var(--main-bg-color) !important;
+}
+
+.btn-light:hover {
+    background-color: var(--accent-color) !important;
+    color: var(--main-font-color) !important;
+}
+
+.dropdown-menu {
+    min-width: 150px;
+}
+
+.form-select-sm {
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
+    border: none;
+}
+
+.form-select-sm:focus {
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
+}
+
+/* header */
+
+.hero {
+    background-color: var(--main-bg-color);
+}
+
+.hero_img{
+    width: 400px;
+    height: 400px;
+}
+
+.feature-text {
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.features img {
+    object-fit: cover;
+    height: auto;
+}
+
+.features .row .col-6 img {
+    height: 100%;
+}
+.benefits .card {
+    border: 2px solid var(--second-font-color);
+    background-color: transparent;
+    color: var(--second-font-color);
+}
+
+.cta {
+    background-color: var(--second-bg-color);
+    padding: 80px 0;
+}
+
+.footer {
+    background-color: var(--main-bg-color);
+    padding: 40px 0;
+}
+
+.footer a {
+    color: var(--main-font-color);
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

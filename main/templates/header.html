@@ -1,0 +1,67 @@
+{% load static %}
+{% load i18n %}  {# Завантажуємо підтримку мов #}
+<header class="p-4 bg-custom">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+        <div class="container">
+            <!-- Логотип -->
+            <a class="navbar-brand" href="{% url 'main:home' %}">
+                <img src="#" alt="GoRide" height="40">
+            </a>
+    
+            <!-- Кнопка для колапсу меню -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Меню -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Rentals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <form method="post" action="#" class="mx-3">
+                        {% csrf_token %}
+                        <select name="language" class="form-select form-select-sm">
+                            <option value="en" selected>EN</option>
+                            <option value="ga">GA</option>
+                        </select>
+                    </form>
+                    {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ user.username }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item" href="#">{% trans "Profile" %}</a></li>
+                            <li><a class="dropdown-item" href="#">{% trans "Change Password" %}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form id="logout-form" method="post" action="{% url 'logout' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item text-danger">{% trans "Logout" %}</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-light me-2">{% trans "Login" %}</a>
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-light">{% trans "Sign Up" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
