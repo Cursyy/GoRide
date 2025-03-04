@@ -3,6 +3,7 @@ html{
     --main-font-color: #fff;
     --second-font-color: #000;
     --second-bg-color: #000;
+    --accent-color: #ffa726;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
@@ -10,6 +11,7 @@ html{
 body{
     margin: 0;
     padding: 0;
+    background-color: var(--main-font-color);
 }
 
 *{
@@ -39,27 +41,27 @@ a{
 /* header */
 
 .bg-custom {
-    background-color: #0d5446; /* Темно-зелений фон */
+    background-color: var(--main-bg-color); /* Темно-зелений фон */
 }
 
 .navbar-nav .nav-link {
-    color: white !important;
+    color: var(--main-font-color) !important;
     font-weight: 500;
     margin-right: 15px;
 }
 
 .navbar-nav .nav-link:hover {
-    color: #ffa726 !important; /* Помаранчевий ховер */
+    color: var(--accent-color) !important; /* Помаранчевий ховер */
 }
 
 .btn-outline-light:hover {
-    background-color: white !important;
-    color: #0d5446 !important;
+    background-color: var(--main-font-color) !important;
+    color: var(--main-bg-color) !important;
 }
 
 .btn-light:hover {
-    background-color: #ffa726 !important;
-    color: white !important;
+    background-color: var(--accent-color) !important;
+    color: var(--main-font-color) !important;
 }
 
 .dropdown-menu {
@@ -67,14 +69,65 @@ a{
 }
 
 .form-select-sm {
-    background-color: #0d5446;
-    color: white;
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
     border: none;
 }
 
 .form-select-sm:focus {
-    background-color: #0d5446;
-    color: white;
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
 }
 
 /* header */
+
+.hero {
+    background-color: var(--main-bg-color);
+}
+
+.hero_img{
+    width: 400px;
+    height: 400px;
+}
+
+.feature-text {
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.features img {
+    object-fit: cover;
+    height: auto;
+}
+
+.features .row .col-6 img {
+    height: 100%;
+}
+.benefits .card {
+    border: 2px solid var(--second-font-color);
+    background-color: transparent;
+    color: var(--second-font-color);
+}
+
+.cta {
+    background-color: var(--second-bg-color);
+    padding: 80px 0;
+}
+
+.footer {
+    background-color: var(--main-bg-color);
+    padding: 40px 0;
+}
+
+.footer a {
+    color: var(--main-font-color);
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
