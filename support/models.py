@@ -12,7 +12,9 @@ class Chat(models.Model):
 
 
 class Message(models.Model):
-    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="messages")
+    chat = models.ForeignKey(
+        Chat, on_delete=models.CASCADE, related_name="chat_messages"
+    )
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
