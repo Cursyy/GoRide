@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 
-{%block title%} Available Transport {%endblock%}
+{% block title %} Available Transport {% endblock %}
 
-{%block content%}
-    <h2>Available Transport</h2>
-    <form method="get">
+{% block content %}
+<h2>Available Transport</h2>
+<form method="get" class="filter-form">
+    <div class="filter-item">
         <label for="type">Type:</label>
         <select name="type">
             <option value="">All</option>
@@ -13,20 +14,48 @@
             <option value="E-Scooter">E-Scooter</option>
             <option value="Bike">Bike</option>
         </select>
+    </div>
 
+    <div class="filter-item">
         <label for="min_battery">Minimum Battery:</label>
         <input type="number" name="min_battery" min="0" max="100">
+    </div>
 
-        <button type="submit">Filter</button>
-    </form>
+    <button type="submit" class="filter-button">Filter</button>
+</form>
 
-    <ul>
-        {%for vehicle in vehicles%}
-        <li>
-            {{vehicle.type}} - Battery: {{vehicle.battery_percentage}}%- Price: {{vehicle.price_per_hour}}
-        </li>
-        {%empty%}
-        <li>No vehicles found</li>
-        {%endfor%}
-    </ul>
-{%endblock%}
+
+<div class="vehicle-list">
+    {% for vehicle in vehicles %}
+    <div class="vehicle-card">
+        <div class="vehicle-image">
+            {% if vehicle.type == "E-Bike" %}
+            <img src="{% static 'images/e-bike.jpg' %}" alt="E-Bike image" />
+        {% elif vehicle.type == "E-Scooter" %}
+            <img src="{% static 'images/e-scooter.jpg' %}" alt="E-Scooter image" />
+        {% elif vehicle.type == "Bike" %}
+            <img src="{% static 'images/bike.webp' %}" alt="Bike image" />
+        {% else %}
+            <img src="{% static 'placeholder.jpg' %}" alt="Default image" />
+        {% endif %}
+        </div>
+        <div class="vehicle-details">
+            <h3>{{ vehicle.type }}</h3>
+            {%if vehicle.type == "Bike" %}
+            <p></p>
+            {%else%}
+                <p>Battery: {{ vehicle.battery_percentage }}%</p>
+            {% endif %}
+            <p>Status: {% if vehicle.status %}Available{% else %}Not Available{% endif %}</p>
+            <a href="https://www.google.com/maps?q={{ vehicle.latitude }},{{ vehicle.longitude }}" target="_blank">Show on Map</a>
+        </div>
+        <div class="vehicle-price">
+            <p>Price per hour: €{{ vehicle.price_per_hour }}</p>
+            <button class="rent-button">Rent</button>
+        </div>
+    </div>
+    {% empty %}
+    <p>No vehicles found</p>
+    {% endfor %}
+</div>
+{% endblock %}
