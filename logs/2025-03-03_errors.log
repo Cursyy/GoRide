@@ -180,3 +180,24 @@ django.db.utils.OperationalError: no such column: find_transport_vehicle.battery
 ```[2025-03-03 22:43] Can't login with created user credentials. Username: 12345``` [2025-03-03 22:51:02,457] [WARNING] [django.request] [Not Found: /favicon.ico] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
 [2025-03-03 22:51:08,977] [WARNING] [django.request] [Not Found: /favicon.ico] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
 [2025-03-03 22:51:14,966] [WARNING] [django.request] [Not Found: /favicon.ico] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
+[2025-03-03 22:57:52,657] [WARNING] [django.request] [Not Found: /support/] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
+[2025-03-03 22:58:13,715] [ERROR] [django.request] [Internal Server Error: /support/chat/] [log_response()] [248] [C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\utils\log.py]
+Traceback (most recent call last):
+  File "C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\support\views.py", line 24, in user_chat_view
+    return render(
+           ^^^^^^^
+  File "C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Olexandr\OneDrive - Technological University Dublin\year 2\semester 2\GoRide\env\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: support/user_chat.html
