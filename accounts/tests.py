@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.core import mail
 
 class AccountsTestCase(TestCase):
     def setUp(self):
@@ -53,3 +54,12 @@ class AccountsTestCase(TestCase):
         self.user.refresh_from_db()
         self.assertEqual(self.user.username, "updateduser")
         self.assertEqual(self.user.email, "updated@example.com")
+    
+    def test_password_reset_email_sent(self):
+        response = self.client.post(reverse("password_reset"), {"email": self.user.email})
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("password_reset_done"))
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("Password reset on", mail.outbox[0].subject)
+        self.assertIn(self.user.email, mail.outbox[0].to)
