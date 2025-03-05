@@ -41,9 +41,7 @@
         </div>
         <div class="vehicle-details">
             <h3>{{ vehicle.type }}</h3>
-            {%if vehicle.type == "Bike" %}
-            <p></p>
-            {%else%}
+            {% if vehicle.battery_percentage is not None %}
                 <p>Battery: {{ vehicle.battery_percentage }}%</p>
             {% endif %}
             <p>Status: {% if vehicle.status %}Available{% else %}Not Available{% endif %}</p>
