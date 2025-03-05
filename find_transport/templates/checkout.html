@@ -1,0 +1,10 @@
+<h1>Checkout: {{ vehicle.type}}</h1>
+<p>Price per hour: ${{ vehicle.price_per_hour }}</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Proceed to Payment</button>
+</form>
+
+<script>
+  

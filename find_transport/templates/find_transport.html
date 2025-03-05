@@ -51,7 +51,8 @@
         </div>
         <div class="vehicle-price">
             <p>Price per hour: €{{ vehicle.price_per_hour }}</p>
-            <button class="rent-button">Rent</button>
+           
+            <button class="rent-button" href="{% url 'checkout' %}">Rent</button>
         </div>
     </div>
     {% empty %}

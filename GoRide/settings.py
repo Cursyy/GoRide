@@ -181,3 +181,7 @@ LOGGING = {
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+STRIPE_SECRET_KEY = ''
+STRIPE_PUBLISHABLE_KEY =''
+

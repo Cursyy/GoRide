@@ -1,0 +1,26 @@
+<h1>Complete Your Payment</h1>
+<form id="payment-form">
+    <div id="payment-element"></div>
+    <button id="submit">Pay Now</button>
+</form>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+    const elements = stripe.elements();
+    const paymentElement = elements.create('payment');
+    paymentElement.mount('#payment-element');
+
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const {error} = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: '',
+            },
+        });
+        if (error) {
+            alert(error.message);
+        }
+    });
+</script>

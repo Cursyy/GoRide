@@ -18,3 +18,16 @@ class Vehicle(models.Model):
 
     def __str__(self):
         return super().__str__()
+
+class Booking(models.Model):
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    total_price =models.FloatField()
+    hours = models.PositiveIntegerField()
+    ordered_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.total_price = self.hours * self.vehicle.price_per_hour
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"renting  {self.vehicle.type}"    
