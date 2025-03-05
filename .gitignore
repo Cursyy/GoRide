@@ -1,6 +1,21 @@
+# Virtual environment
 env/
+
+# SQLite database
 db.sqlite3
-**/migrations/*_initial.py
+
+# Django migrations
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# PyCache (кеші Python)
 **__pycache__/
+
+# Logs
 *.log
-/media/
+
+# Media uploads (користувацькі файли)
+media/
+
+# Mac OS system files
+.DS_Store
