@@ -1,6 +1,6 @@
 [
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 1,
             "fields": {
                 "latitude": 53.31010630807945,
@@ -9,7 +9,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 2,
             "fields": {
                 "latitude": 53.3797988636108,
@@ -18,7 +18,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 3,
             "fields": {
                 "latitude": 53.37960241338292,
@@ -27,7 +27,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 4,
             "fields": {
                 "latitude": 53.32236071990992,
@@ -36,7 +36,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 5,
             "fields": {
                 "latitude": 53.38004466497353,
@@ -45,7 +45,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 6,
             "fields": {
                 "latitude": 53.38277123031093,
@@ -54,7 +54,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 7,
             "fields": {
                 "latitude": 53.36063036399801,
@@ -63,7 +63,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 8,
             "fields": {
                 "latitude": 53.33709663846439,
@@ -72,7 +72,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 9,
             "fields": {
                 "latitude": 53.31881056173116,
@@ -81,7 +81,7 @@
             }
         },
         {
-            "model": "map.evstation",
+            "model": "find_transport.evstation",
             "pk": 10,
             "fields": {
                 "latitude": 53.306002990409745,
@@ -91,7 +91,7 @@
         },
     
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
             "pk": 11,
             "fields": {
                 "latitude": 53.306002990409745,
@@ -100,7 +100,7 @@
             }
     },
     {   
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 12,
         "fields": {
             "latitude": 53.30480419102189,
@@ -109,7 +109,7 @@
         }
     },
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 13,
         "fields": {
             "latitude": 53.3208189844318,
@@ -118,7 +118,7 @@
         }
     },
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 14,
         "fields": {
             "latitude": 53.33833948672929,
@@ -127,7 +127,7 @@
         }
     },
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 15,
         "fields": {
             "latitude": 53.32928461598305,
@@ -136,7 +136,7 @@
         }
     },
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 16,
         "fields": {
             "latitude": 53.30977058819898,
@@ -145,7 +145,7 @@
         }
     },
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 17,
         "fields": {
             "latitude": 53.3548639133794,
@@ -154,7 +154,7 @@
         }
     },
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 18,
         "fields": {
             "latitude": 53.32840401921747,
@@ -163,7 +163,7 @@
         }
     },
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 19,
         "fields": {
             "latitude": 53.307855647490555,
@@ -172,7 +172,7 @@
         }
     },
     {
-        "model": "map.evstation",
+        "model": "find_transport.evstation",
         "pk": 20,
         "fields": {
             "latitude": 53.3566116310352,

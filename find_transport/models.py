@@ -36,3 +36,12 @@ class Vehicle(models.Model):
 
     def __str__(self):
         return super().__str__()
+
+
+class EVStation(models.Model):
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    max_spaces = models.IntegerField()
+
+    def __str__(self):
+        return super().__str__() + f" ({self.latitude}, {self.longitude})"

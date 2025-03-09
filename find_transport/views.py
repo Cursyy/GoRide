@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Vehicle
+from .models import Vehicle, EVStation
 from django.http import JsonResponse
 
 
@@ -16,5 +16,7 @@ def find_transport(request):
             vehicles = vehicles.filter(battery_percentage__gte=min_battery)
         except ValueError:
             return JsonResponse({"error": "Invalid battery percentage"}, status=400)
-
-    return render(request, "find_transport.html", {"vehicles": vehicles})
+    stations = list(EVStation.objects.values("latitude", "longitude", "max_spaces"))
+    return render(
+        request, "find_transport.html", {"vehicles": vehicles, "stations": stations}
+    )

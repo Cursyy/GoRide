@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "main",
     "support",
     "find_transport",
-    "map",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",
@@ -71,7 +70,7 @@ ROOT_URLCONF = "GoRide.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
