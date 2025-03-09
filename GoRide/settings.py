@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "main",
     "support",
     "find_transport",
+    "map",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",
@@ -149,7 +150,6 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 LOGIN_REDIRECT_URL = "main:home"
 LOGOUT_REDIRECT_URL = "main:home"
-
 
 
 LOG_DIR = os.path.join(BASE_DIR, "logs")
