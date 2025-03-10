@@ -39,9 +39,11 @@ class Vehicle(models.Model):
 
 
 class EVStation(models.Model):
+    vehicles = models.ManyToManyField(Vehicle, related_name="stations", blank=True)
+    id = models.AutoField(primary_key=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
     max_spaces = models.IntegerField()
 
     def __str__(self):
-        return super().__str__() + f" ({self.latitude}, {self.longitude})"
+        return f"EVStation {self.id} at ({self.latitude}, {self.longitude})"

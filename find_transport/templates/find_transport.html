@@ -37,8 +37,8 @@
     let stations = JSON.parse(document.getElementById('EV_stations_json').textContent);
     console.log(stations);
     stations.forEach(station => {
-        L.marker([station.latitude, station.longitude])
-        .addTo(map);
+        L.marker([station.latitude, station.longitude]).bindPopup(`<b>${station.name}</b><br>${station.address}`).openPopup().addTo(map);
+       // .addTo(map);
         
     });
 </script>
