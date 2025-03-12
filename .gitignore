@@ -19,3 +19,6 @@ media/
 
 # Mac OS system files
 .DS_Store
+
+#Cache files
+cache
