@@ -4,7 +4,7 @@ from .models import Vehicle, EVStation
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = ("type", "battery_percentage", "status")
+    list_display = ("type", "battery_percentage", "status", "station")
     list_filter = ["type", "status"]
     list_editable = ["status"]
     list_per_page = 10
