@@ -10,6 +10,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("support/", include("support.urls")),
     path("find_transport/", include("find_transport.urls")),
+    path('payments/', include('payments.urls')),
 ]
 
 
