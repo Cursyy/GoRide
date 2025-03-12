@@ -19,6 +19,7 @@ class Vehicle(models.Model):
         null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
     price_per_hour = models.FloatField()
+    quantity = models.IntegerField(default=1)
 
     def clean(self):
         if self.type == "Bike":

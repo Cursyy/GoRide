@@ -49,7 +49,14 @@
         </div>
         <div class="vehicle-price">
             <p>Price per hour: €{{ vehicle.price_per_hour }}</p>
-            <button class="rent-button">Rent</button>
+            <form method="get" action="{% url 'stripe_payment' vehicle.id %}">
+                <input type="number" name="hours" min="1" value="1" class="hours-input">
+                <button type="submit" class="rent-button">Pay with Stripe</button>
+            </form>
+            <form method="get" action="{% url 'paypal_payment' vehicle.id %}">
+                <input type="number" name="hours" min="1" value="1" class="hours-input">
+                <button type="submit" class="rent-button">Pay with PayPal</button>
+            </form>
         </div>
     </div>
     {% empty %}
