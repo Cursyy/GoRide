@@ -48,9 +48,11 @@ INSTALLED_APPS = [
     "main",
     "support",
     "find_transport",
+    "payments",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",
+    "paypal.standard.ipn",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -195,3 +197,9 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+PAYPAL_TEST = True  
+PAYPAL_RECEIVER_EMAIL = 'sb-yfvxa37272511@business.example.com'
+
+STRIPE_PUBLIC_KEY = 'pk_test_51R0WIqROGR3zD47VtuGDVitvNeNBD6LmTg86TjFPmBXpe7Sfqgw3NcsIoL92driG9mGERBFg1LyYVNtqgm4yi42s00iy3HzKXl'
+STRIPE_SECRET_KEY = 'sk_test_51R0WIqROGR3zD47VMbe3QkWi3V2Cd7GNs32f2jtYoeB1BbMJdNTfeDSJ6hrKdudlRYBVokFzRFj2TqsaQV3Dehey00V8dbL1mC'
