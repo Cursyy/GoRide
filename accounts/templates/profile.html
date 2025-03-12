@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Profile{% endblock %}
+{% block title %}{% trans "Profile" %} {% endblock %}
 {% block content %}
 <div class="container p-4">
-    <h1 class="text-center my_title">My Profile</h1>
+    <h1 class="text-center my_title">{% trans "My Profile" %}</h1>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="profile-card p-4 text-center my_custom_div rounded">
                 <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/default_avatar.png{% endif %}"
      alt="Profile Picture" class="rounded-circle border border-light mb-3" width="120" height="120">
                 <h2 class="my_title">{{ user.username }}</h2>
-                <p>Email: <span class="text-muted">{{ user.email }}</span></p>
-                <p>Phone: <span class="text-muted">{{ user.phone_num|default:"N/A" }}</span></p>
-                <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary mt-3">Edit Profile</a>
+                <p>{% trans "Email" %}: <span class="text-muted">{{ user.email }}</span></p>
+                <p>{% trans "Phone" %}: <span class="text-muted">{{ user.phone_num|default:"N/A" }}</span></p>
+                <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary mt-3">{% trans "Edit Profile" %}</a>
             </div>
         </div>
     </div>
