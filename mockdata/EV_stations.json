@@ -1,0 +1,183 @@
+[
+        {
+            "model": "map.evstation",
+            "pk": 1,
+            "fields": {
+                "latitude": 53.31010630807945,
+                "longitude": -6.207245874199637,
+                "max_spaces": 13
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 2,
+            "fields": {
+                "latitude": 53.3797988636108,
+                "longitude": -6.222391525972089,
+                "max_spaces": 19
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 3,
+            "fields": {
+                "latitude": 53.37960241338292,
+                "longitude": -6.250917755813495,
+                "max_spaces": 16
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 4,
+            "fields": {
+                "latitude": 53.32236071990992,
+                "longitude": -6.226528158712815,
+                "max_spaces": 13
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 5,
+            "fields": {
+                "latitude": 53.38004466497353,
+                "longitude": -6.200647616121284,
+                "max_spaces": 9
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 6,
+            "fields": {
+                "latitude": 53.38277123031093,
+                "longitude": -6.258570421864161,
+                "max_spaces": 16
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 7,
+            "fields": {
+                "latitude": 53.36063036399801,
+                "longitude": -6.290363641293464,
+                "max_spaces": 15
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 8,
+            "fields": {
+                "latitude": 53.33709663846439,
+                "longitude": -6.233582473691984,
+                "max_spaces": 17
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 9,
+            "fields": {
+                "latitude": 53.31881056173116,
+                "longitude": -6.2985042930634565,
+                "max_spaces": 5
+            }
+        },
+        {
+            "model": "map.evstation",
+            "pk": 10,
+            "fields": {
+                "latitude": 53.306002990409745,
+                "longitude": -6.268110448344836,
+                "max_spaces": 6
+            }
+        },
+    
+    {
+        "model": "map.evstation",
+            "pk": 11,
+            "fields": {
+                "latitude": 53.306002990409745,
+                "longitude": -6.268110448344836,
+                "max_spaces": 6
+            }
+    },
+    {   
+        "model": "map.evstation",
+        "pk": 12,
+        "fields": {
+            "latitude": 53.30480419102189,
+            "longitude": -6.203541719168106,
+            "max_spaces": 14
+        }
+    },
+    {
+        "model": "map.evstation",
+        "pk": 13,
+        "fields": {
+            "latitude": 53.3208189844318,
+            "longitude": -6.217457173980124,
+            "max_spaces": 17
+        }
+    },
+    {
+        "model": "map.evstation",
+        "pk": 14,
+        "fields": {
+            "latitude": 53.33833948672929,
+            "longitude": -6.2990109445410996,
+            "max_spaces": 15
+        }
+    },
+    {
+        "model": "map.evstation",
+        "pk": 15,
+        "fields": {
+            "latitude": 53.32928461598305,
+            "longitude": -6.260037708408168,
+            "max_spaces": 6
+        }
+    },
+    {
+        "model": "map.evstation",
+        "pk": 16,
+        "fields": {
+            "latitude": 53.30977058819898,
+            "longitude": -6.275282083652395,
+            "max_spaces": 19
+        }
+    },
+    {
+        "model": "map.evstation",
+        "pk": 17,
+        "fields": {
+            "latitude": 53.3548639133794,
+            "longitude": -6.211875932999251,
+            "max_spaces": 19
+        }
+    },
+    {
+        "model": "map.evstation",
+        "pk": 18,
+        "fields": {
+            "latitude": 53.32840401921747,
+            "longitude": -6.220295646308139,
+            "max_spaces": 15
+        }
+    },
+    {
+        "model": "map.evstation",
+        "pk": 19,
+        "fields": {
+            "latitude": 53.307855647490555,
+            "longitude": -6.211786556965216,
+            "max_spaces": 5
+        }
+    },
+    {
+        "model": "map.evstation",
+        "pk": 20,
+        "fields": {
+            "latitude": 53.3566116310352,
+            "longitude": -6.247412127795984,
+            "max_spaces": 3
+        }
+    }
+]

@@ -24,6 +24,51 @@
     <button type="submit" class="filter-button">Filter</button>
 </form>
 
+<div id="map"></div>
+<h1>Stations: {{ stations|length }} </h1>
+{{ stations|json_script:"EV_stations_json" }}
+<script>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+    let map;
+
+    
+    function initializeMap(){
+    map = L.map('map').setView([53.33833948672929, -6.2990109445410996], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    }
+    function showPosition(position) {
+        let userLat = position.coords.latitude;
+        let userLon = position.coords.longitude;
+        if(map){
+        map.setView([userLat,userLon],15)
+        setTimeout(() => {
+            L.marker([userLat, userLon]).bindPopup("You are here").openPopup().addTo(map);
+        }, 500);
+    }else{
+        console.error("Map is not init yet");
+    }
+
+      } 
+      function showError(error) {
+        console.log("Error getting location:", error.message);
+    }
+    initializeMap();
+    let stations = JSON.parse(document.getElementById('EV_stations_json').textContent);
+    console.log(stations);
+    stations.forEach(station => {
+        L.marker([station.latitude, station.longitude]).bindPopup(`<b>Max spaces:${station.max_spaces}</b>
+        <br>Free spaces ${station.free_spaces}<br>${station.address}`).openPopup().addTo(map);
+        
+    });
+
+</script>
 
 <div class="vehicle-list">
     {% for vehicle in vehicles %}
