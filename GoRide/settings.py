@@ -70,7 +70,7 @@ ROOT_URLCONF = "GoRide.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -149,7 +149,6 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 LOGIN_REDIRECT_URL = "main:home"
 LOGOUT_REDIRECT_URL = "main:home"
-
 
 
 LOG_DIR = os.path.join(BASE_DIR, "logs")

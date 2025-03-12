@@ -400,3 +400,6 @@ form input[type="file"] {
 }
 
 /* profile */
+
+/*map*/
+#map { height: 400px;}
