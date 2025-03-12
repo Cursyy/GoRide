@@ -28,6 +28,7 @@
 <h1>Stations: {{ stations|length }} </h1>
 {{ stations|json_script:"EV_stations_json" }}
 <script>
+
     var map = L.map('map').setView([53.33833948672929, -6.2990109445410996], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -37,8 +38,8 @@
     let stations = JSON.parse(document.getElementById('EV_stations_json').textContent);
     console.log(stations);
     stations.forEach(station => {
-        L.marker([station.latitude, station.longitude]).bindPopup(`<b>${station.name}</b><br>${station.address}`).openPopup().addTo(map);
-       // .addTo(map);
+        L.marker([station.latitude, station.longitude]).bindPopup(`<b>Max spaces:${station.max_spaces}</b>
+        <br>Free spaces ${station.free_spaces}<br>${station.address}`).openPopup().addTo(map);
         
     });
 </script>
