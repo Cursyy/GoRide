@@ -1,28 +1,31 @@
 {% extends "auth_base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load i18n %}
+
 {% block title %}
-    Login
+    {% trans "Login" %}
 {% endblock %}
+
 {% block content %}
     <div class="container p-4">
-        <h1 class="my_title text-center">Login or Create a New Account</h1>        
+        <h1 class="my_title text-center">{% trans "Login or Create a New Account" %}</h1>        
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6  mb-md-4 mb-lg-0">
                 <div class="my_custom_div p-4 rounded text-center">
-                    <h2 class="my_title">New Customer?</h2>
-                    <a href="{% url 'accounts:signup' %}" class="btn btn-secondary">Create New Account</a>
+                    <h2 class="my_title">{% trans "New Customer?" %}</h2>
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-secondary">{% trans "Create New Account" %}</a>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="w-100 my_custom_div p-4 rounded">
-                    <h2 class="my_title">Registered Customers Only</h2>
+                    <h2 class="my_title">{% trans "Registered Customers Only" %}</h2>
                     <form method="post">
                         {% csrf_token %}
                         <p>{{ form | crispy }}</p>
-                        <button type="submit" class="btn btn-secondary">Login</button>
+                        <button type="submit" class="btn btn-secondary">{% trans "Login" %}</button>
                     </form>
-                    <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+                    <p><a href="{% url 'password_reset' %}">{% trans "Forgot your password?" %}</a></p>
                 </div>
             </div>
         </div>

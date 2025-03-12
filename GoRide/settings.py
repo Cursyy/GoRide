@@ -63,6 +63,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = "GoRide.urls"
@@ -120,8 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGES = (
-   ('en', ('English')),
-    ('ga', ('Irish')),
+    ('en', ('English')),
+    ('ga', ('Gaeilge')),
+    ('uk', ('Українська'))
 )
 
 LANGUAGE_CODE = 'en-us'

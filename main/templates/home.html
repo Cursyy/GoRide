@@ -1,92 +1,89 @@
 {% extends "base.html" %}
-{% block title %}Main page{% endblock title %} 
+{% load i18n %}
+
+{% block title %}{% trans "Main page" %}{% endblock title %} 
+
 {% block content %}
-<!-- Hero Section -->
 <section class="hero d-flex align-items-center py-5">
     <div class="container text-white">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <h1>Modern electric bikes and scooters for the sustainable urban explorer</h1>
-                <p>GoRide offers a convenient, eco-friendly fleet of electric bikes and scooters available 24 hours to easily zip around the city.</p>
-                <a href="{% url 'find_transport:find_transport' %}" class="btn btn-light">Rent Now</a>
+                <h1>{% trans "Modern electric bikes and scooters for the sustainable urban explorer" %}</h1>
+                <p>{% trans "GoRide offers a convenient, eco-friendly fleet of electric bikes and scooters available 24 hours to easily zip around the city." %}</p>
+                <a href="{% url 'find_transport:find_transport' %}" class="btn btn-light">{% trans "Rent Now" %}</a>
             </div>
             <div class="col-md-6 d-flex justify-content-end align-items-center">
-                <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo16852728301866aec2df5b1a5-NJacv.jpeg" alt="City Transport" class="img-fluid rounded hero_img">
+                <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo16852728301866aec2df5b1a5-NJacv.jpeg" alt="{% trans 'City Transport' %}" class="img-fluid rounded hero_img">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
 <section class="features container py-5">
     <div class="row align-items-center h-100">
         <div class="col-lg-6 h-100">
             <div class="feature-text p-5 rounded">
-                <h5 class="text-uppercase">Sustainable commuting</h5>
-                <h2 class="fw-bold">Transforming urban transport</h2>
+                <h5 class="text-uppercase">{% trans "Sustainable commuting" %}</h5>
+                <h2 class="fw-bold">{% trans "Transforming urban transport" %}</h2>
                 <p>
-                    GoRide provides eco-friendly electric scooter and bike rentals for convenient, smooth urban commuting.
-                    Founded in 2021 by green mobility advocates, our mission is to transform urban transportation through
-                    innovative zero-emission mobility solutions.
+                    {% trans "GoRide provides eco-friendly electric scooter and bike rentals for convenient, smooth urban commuting. Founded in 2021 by green mobility advocates, our mission is to transform urban transportation through innovative zero-emission mobility solutions." %}
                 </p>
-                <a href="#" class="btn btn-light mt-3">Our Services</a>
+                <a href="#" class="btn btn-light mt-3">{% trans "Our Services" %}</a>
             </div>
         </div>
         <div class="col-lg-6 d-flex flex-column gap-4">
             <div class="row">
                 <div class="col-12">
                     <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo153001470898955a898ad9552-jqd2o.jpeg" 
-                         alt="Urban Scene" class="img-fluid rounded w-100 shadow">
+                         alt="{% trans 'Urban Scene' %}" class="img-fluid rounded w-100 shadow">
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo15718471404711d7766e825ea-A2Tes.jpeg" 
-                         alt="Retro Poster" class="img-fluid rounded w-100 shadow">
+                         alt="{% trans 'Retro Poster' %}" class="img-fluid rounded w-100 shadow">
                 </div>
                 <div class="col-6">
                     <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo15874857158175e8c6fa2a903-XLtmj.jpeg" 
-                         alt="Bike Parking" class="img-fluid rounded w-100 shadow">
+                         alt="{% trans 'Bike Parking' %}" class="img-fluid rounded w-100 shadow">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Benefits Section -->
 <section class="benefits text-center py-5">
     <div class="container">
-        <h2>Exceptional Bike and Scooter Rentals</h2>
-        <p>GoRide offers on-demand access to our shared fleet of electric bikes and scooters.</p>
+        <h2>{% trans "Exceptional Bike and Scooter Rentals" %}</h2>
+        <p>{% trans "GoRide offers on-demand access to our shared fleet of electric bikes and scooters." %}</p>
         <div class="row mt-4">
             <div class="col-md-4">
                 <div class="card p-4">
-                    <h3>Easy Rentals</h3>
-                    <p>Locate and unlock vehicles with the GoRide app.</p>
+                    <h3>{% trans "Easy Rentals" %}</h3>
+                    <p>{% trans "Locate and unlock vehicles with the GoRide app." %}</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card p-4">
-                    <h3>Affordable Pricing</h3>
-                    <p>Pay by the minute or choose a membership.</p>
+                    <h3>{% trans "Affordable Pricing" %}</h3>
+                    <p>{% trans "Pay by the minute or choose a membership." %}</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card p-4">
-                    <h3>Flexible Parking</h3>
-                    <p>Conveniently park anywhere in designated areas.</p>
+                    <h3>{% trans "Flexible Parking" %}</h3>
+                    <p>{% trans "Conveniently park anywhere in designated areas." %}</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Call to Action -->
 <section class="cta text-center text-white py-5">
     <div class="container">
-        <h2>Download the GoRide app and start riding</h2>
-        <p>With just a few taps, you can locate, unlock, and ride.</p>
-        <a href="#" class="btn btn-light">Get Started</a>
+        <h2>{% trans "Download the GoRide app and start riding" %}</h2>
+        <p>{% trans "With just a few taps, you can locate, unlock, and ride." %}</p>
+        <a href="#" class="btn btn-light">{% trans "Get Started" %}</a>
     </div>
 </section>
 {% endblock content %}

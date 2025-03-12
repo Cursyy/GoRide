@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <footer class="footer py-4">
     <div class="container text-white">
         <div class="row">
@@ -6,9 +7,9 @@
                 <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo169467862515672a1a050ecfd-18xAH.jpeg" alt="Bike Rentals" class="img-fluid">
             </div>
             <div class="col-md-6 text-end">
-                <a href="#">About</a>
-                <a href="#">Careers</a>
-                <a href="#">Locations</a>
+                <a href="#">{% trans "About" %}</a>
+                <a href="#">{% trans "Careers" %}</a>
+                <a href="#">{% trans "Locations" %}</a>
             </div>
         </div>
     </div>
