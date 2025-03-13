@@ -33,7 +33,7 @@ msgstr "Ríomhphost"
 
 #: accounts/templates/profile.html:13
 msgid "Phone"
-msgstr "Guthán"
+msgstr "Fón"
 
 #: accounts/templates/profile.html:14 accounts/templates/profile_edit.html:4
 #: accounts/templates/profile_edit.html:8
@@ -46,7 +46,7 @@ msgstr "Ainm Úsáideora"
 
 #: accounts/templates/profile_edit.html:23
 msgid "Phone Number"
-msgstr "Uimhir Ghutháin"
+msgstr "Uimhir Fóin"
 
 #: accounts/templates/profile_edit.html:27
 msgid "Profile Picture"
@@ -65,7 +65,7 @@ msgstr "Logáil Isteach"
 
 #: accounts/templates/registration/login.html:12
 msgid "Login or Create a New Account"
-msgstr "Logáil isteach nó Cruthaigh Cuntas Nua"
+msgstr "Logáil Isteach nó Cruthaigh Cuntas Nua"
 
 #: accounts/templates/registration/login.html:16
 msgid "New Customer?"
@@ -77,11 +77,11 @@ msgstr "Cruthaigh Cuntas Nua"
 
 #: accounts/templates/registration/login.html:22
 msgid "Registered Customers Only"
-msgstr "Do Chustaiméirí Cláraithe Amháin"
+msgstr "Custaiméirí Cláraithe Amháin"
 
 #: accounts/templates/registration/login.html:28
 msgid "Forgot your password?"
-msgstr "Dearmad déanta ar do phasfhocal?"
+msgstr "Dearmad do phasfhocal?"
 
 #: accounts/templates/registration/password_change_done.html:5
 msgid "Password Changed"
@@ -106,34 +106,97 @@ msgstr "Fill ar an Leathanach Baile"
 msgid "Change Password"
 msgstr "Athraigh Pasfhocal"
 
+#: accounts/templates/registration/password_change_form.html:12
+msgid "Change Your Password"
+msgstr "Athraigh Do Phasfhocal"
+
+#: accounts/templates/registration/password_change_form.html:16
+msgid "Secure Your Account"
+msgstr "Déan Do Chuntas a Dhaingniú"
+
+#: accounts/templates/registration/password_change_form.html:17
+msgid "Enter your current password and choose a new one."
+msgstr "Cuir isteach do phasfhocal reatha agus roghnaigh ceann nua."
+
 #: accounts/templates/registration/password_reset_complete.html:5
 msgid "Password Reset Complete"
-msgstr "Athshocrú Pasfhocail Críochnaithe"
+msgstr "Athshocrú Pasfhocal Críochnaithe"
 
 #: accounts/templates/registration/password_reset_complete.html:10
 msgid "Password Reset Successful"
-msgstr "Athshocrú Pasfhocail go Rathúil"
+msgstr "Athshocrú Pasfhocal Rathúil"
 
 #: accounts/templates/registration/password_reset_complete.html:11
 msgid "Your password has been reset successfully."
-msgstr "Athshocraíodh do phasfhocal go rathúil."
+msgstr "Tá do phasfhocal athshocraithe go rathúil."
 
 #: accounts/templates/registration/password_reset_confirm.html:6
 #: accounts/templates/registration/password_reset_confirm.html:11
 msgid "Set a New Password"
 msgstr "Socraigh Pasfhocal Nua"
 
+#: accounts/templates/registration/password_reset_confirm.html:15
+msgid "Create a New Password"
+msgstr "Cruthaigh Pasfhocal Nua"
+
+#: accounts/templates/registration/password_reset_confirm.html:16
+msgid "Enter your new password below."
+msgstr "Cuir isteach do phasfhocal nua thíos."
+
+#: accounts/templates/registration/password_reset_done.html:3
+#: accounts/templates/registration/password_reset_done.html:8
+msgid "Check Your Email"
+msgstr "Seiceáil Do Ríomhphost"
+
+#: accounts/templates/registration/password_reset_done.html:9
+msgid ""
+"If an account exists with the email you entered, you will receive a password "
+"reset link."
+msgstr ""
+"Má tá cuntas ann leis an ríomhphost a chuir tú isteach, gheobhaidh tú nasc "
+"athshocrú pasfhocal."
+
+#: accounts/templates/registration/password_reset_done.html:10
+msgid "Back to Login"
+msgstr "Ar Ais go Logáil Isteach"
+
+#: accounts/templates/registration/password_reset_form.html:7
+msgid "Reset Password"
+msgstr "Athshocraigh Pasfhocal"
+
 #: accounts/templates/registration/password_reset_form.html:12
 msgid "Forgot Your Password?"
-msgstr "Dearmad déanta ar do phasfhocal?"
+msgstr "Dearmad Do Phasfhocal?"
 
 #: accounts/templates/registration/password_reset_form.html:16
 msgid "Reset Your Password"
 msgstr "Athshocraigh Do Phasfhocal"
 
+#: accounts/templates/registration/password_reset_form.html:17
+msgid "Enter your email, and we’ll send you a link to reset your password."
+msgstr "Cuir isteach do ríomhphost, agus seolfaimid nasc chugat chun do phasfhocal a athshocrú."
+
 #: accounts/templates/registration/password_reset_form.html:21
 msgid "Send Reset Link"
-msgstr "Seol Nasc Athshocraithe"
+msgstr "Seol Nasc Athshocrú"
+
+#: accounts/templates/registration/signup.html:7
+#: accounts/templates/registration/signup.html:12
+#: accounts/templates/registration/signup.html:22
+msgid "Create a New Account"
+msgstr "Cruthaigh Cuntas Nua"
+
+#: accounts/templates/registration/signup.html:16
+msgid "Already have an account?"
+msgstr "An bhfuil cuntas agat cheana?"
+
+#: accounts/templates/registration/signup.html:23
+msgid "Enter the following information to create a new account."
+msgstr "Cuir isteach an fhaisnéis seo a leanas chun cuntas nua a chruthú."
+
+#: accounts/templates/registration/signup.html:27
+msgid "Register Account"
+msgstr "Cláraigh Cuntas"
 
 #: find_transport/templates/find_transport.html:5
 #: find_transport/templates/find_transport.html:8
@@ -146,7 +209,7 @@ msgstr "Cineál:"
 
 #: find_transport/templates/find_transport.html:13
 msgid "All"
-msgstr "Gach ceann"
+msgstr "Gach"
 
 #: find_transport/templates/find_transport.html:14
 msgid "E-Bike"
@@ -162,11 +225,111 @@ msgstr "Rothar"
 
 #: find_transport/templates/find_transport.html:21
 msgid "Minimum Battery:"
-msgstr "Ceallraí Íosta:"
+msgstr "Íosmhéid Ceallraí:"
 
 #: find_transport/templates/find_transport.html:25
 msgid "Filter"
-msgstr "Scag"
+msgstr "Scagaire"
+
+#: find_transport/templates/find_transport.html:34
+msgid "Geolocation is not supported by this browser."
+msgstr "Ní thacaíonn an brabhsálaí seo le geoshuíomh."
+
+#: find_transport/templates/find_transport.html:52
+msgid "You are here"
+msgstr "Tá tú anseo"
+
+#: find_transport/templates/find_transport.html:55
+msgid "Map is not initialized yet"
+msgstr "Níl an léarscáil tosaigh fós"
+
+#: find_transport/templates/find_transport.html:60
+msgid "Error getting location:"
+msgstr "Earráid ag fáil suíomh:"
+
+#: find_transport/templates/find_transport.html:67
+msgid "Max spaces:"
+msgstr "Uasmhéid spásanna:"
+
+#: find_transport/templates/find_transport.html:68
+msgid "Free spaces:"
+msgstr "Spásanna saor in aisce:"
+
+#: find_transport/templates/find_transport.html:77
+msgid "E-Bike image"
+msgstr "Íomhá Rothar Leictreach"
+
+#: find_transport/templates/find_transport.html:79
+msgid "E-Scooter image"
+msgstr "Íomhá Scútar Leictreach"
+
+#: find_transport/templates/find_transport.html:81
+msgid "Bike image"
+msgstr "Íomhá Rothar"
+
+#: find_transport/templates/find_transport.html:83
+msgid "Default image"
+msgstr "Íomhá Réamhshocraithe"
+
+#: find_transport/templates/find_transport.html:89
+msgid "Battery:"
+msgstr "Ceallraí:"
+
+#: find_transport/templates/find_transport.html:91
+msgid "Status:"
+msgstr "Stádas:"
+
+#: find_transport/templates/find_transport.html:91
+msgid "Available"
+msgstr "Ar Fáil"
+
+#: find_transport/templates/find_transport.html:91
+msgid "Not Available"
+msgstr "Níl Ar Fáil"
+
+#: find_transport/templates/find_transport.html:92
+msgid "Show on Map"
+msgstr "Taispeáin ar an Léarscáil"
+
+#: find_transport/templates/find_transport.html:95
+msgid "Price per hour:"
+msgstr "Praghas in aghaidh na huaire:"
+
+#: find_transport/templates/find_transport.html:107
+msgid "No vehicles found"
+msgstr "Níor aimsíodh feithiclí"
+
+#: main/templates/footer.html:10 main/templates/header.html:19
+msgid "About"
+msgstr "Faoi"
+
+#: main/templates/footer.html:11
+msgid "Careers"
+msgstr "Gairmeacha"
+
+#: main/templates/footer.html:12
+msgid "Locations"
+msgstr "Suíomhanna"
+
+#: main/templates/header.html:16
+msgid "Home"
+msgstr "Baile"
+
+#: main/templates/header.html:22
+msgid "Rentals"
+msgstr "Cíosanna"
+
+#: main/templates/header.html:25
+msgid "Contact"
+msgstr "Teagmháil"
+
+#: main/templates/header.html:58
+msgid "Logout"
+msgstr "Logáil Amach"
+
+#: main/templates/header.html:65
+msgid "Sign Up"
+msgstr "Cláraigh"
 
 #: main/templates/home.html:4
 msgid "Main page"
@@ -180,7 +343,8 @@ msgstr "Rothair agus scútair leictreacha nua-aimseartha don taiscéalaí uirbea
 msgid ""
 "GoRide offers a convenient, eco-friendly fleet of electric bikes and "
 "scooters available 24 hours to easily zip around the city."
-msgstr "Cuireann GoRide cabhlach rothar agus scútar leictreach atá cairdiúil don chomhshaol ar fáil 24 uair an chloig le taisteal go héasca timpeall na cathrach."
+msgstr ""
+"Tairgeann GoRide flít áisiúil, cairdiúil don chomhshaol de rothair agus scútair leictreacha atá ar fáil 24 uair an chloig chun dul timpeall na cathrach go héasca."
 
 #: main/templates/home.html:13
 msgid "Rent Now"
@@ -188,19 +352,140 @@ msgstr "Cíos Anois"
 
 #: main/templates/home.html:16
 msgid "City Transport"
-msgstr "Iompar na Cathrach"
+msgstr "Iompar Cathrach"
 
 #: main/templates/home.html:26
 msgid "Sustainable commuting"
-msgstr "Taisteal inbhuanaithe"
+msgstr "Comaitéireacht inbhuanaithe"
+
+#: main/templates/home.html:27
+msgid "Transforming urban transport"
+msgstr "Ag athrú iompar uirbeach"
+
+#: main/templates/home.html:29
+msgid ""
+"GoRide provides eco-friendly electric scooter and bike rentals for "
+"convenient, smooth urban commuting. Founded in 2021 by green mobility "
+"advocates, our mission is to transform urban transportation through "
+"innovative zero-emission mobility solutions."
+msgstr ""
+"Soláthraíonn GoRide cíosanna scútair agus rothair leictreacha atá cairdiúil don chomhshaol le haghaidh comaitéireacht uirbeach áisiúil agus réidh. Bunaíodh in 2021 é ag abhcóidí soghluaisteachta glasa, is é ár misean iompar uirbeach a athrú trí réitigh nuálaíocha soghluaisteachta nialas-astaíochta."
+
+#: main/templates/home.html:31
+msgid "Our Services"
+msgstr "Ár Seirbhísí"
+
+#: main/templates/home.html:38
+msgid "Urban Scene"
+msgstr "Radharc Uirbeach"
+
+#: main/templates/home.html:44
+msgid "Retro Poster"
+msgstr "Póstaer Retro"
+
+#: main/templates/home.html:48
+msgid "Bike Parking"
+msgstr "Páirceáil Rothar"
 
 #: main/templates/home.html:57
 msgid "Exceptional Bike and Scooter Rentals"
-msgstr "Cíos Rothar agus Scútar den Scoth"
+msgstr "Cíosanna Rothar agus Scútar Eisceachtúla"
+
+#: main/templates/home.html:58
+msgid ""
+"GoRide offers on-demand access to our shared fleet of electric bikes and "
+"scooters."
+msgstr ""
+"Tairgeann GoRide rochtain ar éileamh ar ár bhflít roinnte de rothair agus scútair leictreacha."
+
+#: main/templates/home.html:62
+msgid "Easy Rentals"
+msgstr "Cíosanna Éasca"
+
+#: main/templates/home.html:63
+msgid "Locate and unlock vehicles with the GoRide app."
+msgstr "Aimsigh agus díghlasáil feithiclí leis an aip GoRide."
+
+#: main/templates/home.html:68
+msgid "Affordable Pricing"
+msgstr "Praghsáil Inacmhainne"
+
+#: main/templates/home.html:69
+msgid "Pay by the minute or choose a membership."
+msgstr "Íoc de réir an nóiméid nó roghnaigh ballraíocht."
+
+#: main/templates/home.html:74
+msgid "Flexible Parking"
+msgstr "Páirceáil Solúbtha"
+
+#: main/templates/home.html:75
+msgid "Conveniently park anywhere in designated areas."
+msgstr "Páirceáil go háisiúil áit ar bith i gceantair ainmnithe."
+
+#: main/templates/home.html:84
+msgid "Download the GoRide app and start riding"
+msgstr "Íoslódáil an aip GoRide agus tosaigh ag marcaíocht"
+
+#: main/templates/home.html:85
+msgid "With just a few taps, you can locate, unlock, and ride."
+msgstr "Le cúpla sconna, is féidir leat feithiclí a aimsiú, a dhíghlasáil, agus marcaíocht a dhéanamh."
 
 #: main/templates/home.html:86
 msgid "Get Started"
 msgstr "Tosaigh"
+
+#: payments/templates/payments/payment.html:3
+msgid "Payment for"
+msgstr "Íocaíocht le haghaidh"
+
+#: payments/templates/payments/payment.html:7
+msgid "Pay"
+msgstr "Íoc"
+
+#: payments/templates/payments/payment_success.html:3
+msgid "Payment Successful"
+msgstr "Íocaíocht Rathúil"
+
+#: payments/templates/payments/payment_success.html:4
+msgid "Thank you for your payment!"
+msgstr "Go raibh maith agat as d'íocaíocht!"
+
+#: payments/templates/payments/payment_success.html:5
+msgid "Return to Transport"
+msgstr "Fill ar Iompar"
+
+#: payments/templates/payments/stripe_payment.html:3
+msgid "Stripe Payment for"
+msgstr "Íocaíocht Stripe le haghaidh"
+
+#: payments/templates/payments/stripe_payment.html:4
+msgid "Total Amount:"
+msgstr "Méid Iomlán:"
+
+#: payments/templates/payments/stripe_payment.html:11
+msgid "Pay with Stripe"
+msgstr "Íoc le Stripe"
+
+#: support/templates/support/admin_chat_detail.html:5
+#: support/templates/support/admin_chat_list.html:6
+msgid "Chat with"
+msgstr "Comhrá le"
+
+#: support/templates/support/admin_chat_detail.html:13
+msgid "Reply to the chat:"
+msgstr "Freagair an comhrá:"
+
+#: support/templates/support/admin_chat_detail.html:17
+msgid "Send Reply"
+msgstr "Seol Freagra"
+
+#: support/templates/support/admin_chat_detail.html:20
+msgid "Back to chat list"
+msgstr "Ar ais go liosta comhrá"
+
+#: support/templates/support/admin_chat_list.html:3
+msgid "Active Chats"
+msgstr "Comhráite Gníomhacha"
 
 #: support/templates/support/user_chat.html:6
 msgid "Chat with Support"
@@ -208,7 +493,7 @@ msgstr "Comhrá le Tacaíocht"
 
 #: support/templates/support/user_chat.html:10
 msgid "Chat History"
-msgstr "Stair an Chomhrá"
+msgstr "Stair Comhrá"
 
 #: support/templates/support/user_chat.html:23
 msgid "No messages yet. Start the conversation!"
