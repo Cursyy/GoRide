@@ -25,7 +25,7 @@
 </form>
 
 <div id="map"></div>
-<h1>Stations: {{ stations|length }} </h1>
+{% comment %} <h1>Stations: {{ stations|length }} </h1> {% endcomment %}
 {{ stations|json_script:"EV_stations_json" }}
 <script>
     if (navigator.geolocation) {
@@ -89,7 +89,7 @@
             {% if vehicle.battery_percentage is not None %}
                 <p>Battery: {{ vehicle.battery_percentage }}%</p>
             {% endif %}
-            <p>Status: {% if vehicle.status %}Available{% else %}Not Available{% endif %}</p>
+            {% comment %} <p>Status: {% if vehicle.status %}Available{% else %}Not Available{% endif %}</p> {% endcomment %}
             <a href="https://www.google.com/maps?q={{ vehicle.latitude }},{{ vehicle.longitude }}" target="_blank">Show on Map</a>
         </div>
         <div class="vehicle-price">
