@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-12 15:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: accounts/templates/profile.html:2 main/templates/header.html:52
+msgid "Profile"
+msgstr "Профіль"
+
+#: accounts/templates/profile.html:5
+msgid "My Profile"
+msgstr "Мій профіль"
+
+#: accounts/templates/profile.html:12 accounts/templates/profile_edit.html:19
+msgid "Email"
+msgstr "Електронна пошта"
+
+#: accounts/templates/profile.html:13
+msgid "Phone"
+msgstr "Телефон"
+
+#: accounts/templates/profile.html:14 accounts/templates/profile_edit.html:4
+#: accounts/templates/profile_edit.html:8
+msgid "Edit Profile"
+msgstr "Редагувати профіль"
+
+#: accounts/templates/profile_edit.html:15
+msgid "Username"
+msgstr "Ім'я користувача"
+
+#: accounts/templates/profile_edit.html:23
+msgid "Phone Number"
+msgstr "Номер телефону"
+
+#: accounts/templates/profile_edit.html:27
+msgid "Profile Picture"
+msgstr "Фото профілю"
+
+#: accounts/templates/profile_edit.html:30
+msgid "Save Changes"
+msgstr "Зберегти зміни"
+
+#: accounts/templates/registration/login.html:7
+#: accounts/templates/registration/login.html:26
+#: accounts/templates/registration/password_reset_complete.html:12
+#: accounts/templates/registration/signup.html:17 main/templates/header.html:64
+msgid "Login"
+msgstr "Увійти"
+
+#: accounts/templates/registration/login.html:12
+msgid "Login or Create a New Account"
+msgstr "Увійдіть або створіть новий акаунт"
+
+#: accounts/templates/registration/login.html:16
+msgid "New Customer?"
+msgstr "Новий користувач?"
+
+#: accounts/templates/registration/login.html:17
+msgid "Create New Account"
+msgstr "Створити акаунт"
+
+#: accounts/templates/registration/login.html:22
+msgid "Registered Customers Only"
+msgstr "Тільки для зареєстрованих користувачів"
+
+#: accounts/templates/registration/login.html:28
+msgid "Forgot your password?"
+msgstr "Забули пароль?"
+
+#: accounts/templates/registration/password_change_done.html:5
+msgid "Password Changed"
+msgstr "Пароль змінено"
+
+#: accounts/templates/registration/password_change_done.html:10
+msgid "Password Changed Successfully"
+msgstr "Пароль успішно змінено"
+
+#: accounts/templates/registration/password_change_done.html:14
+msgid "Your password has been updated successfully."
+msgstr "Ваш пароль було успішно оновлено."
+
+#: accounts/templates/registration/password_change_done.html:15
+msgid "Return to Homepage"
+msgstr "Повернутися на головну"
+
+#: accounts/templates/registration/password_change_form.html:7
+#: accounts/templates/registration/password_change_form.html:21
+#: accounts/templates/registration/password_reset_confirm.html:20
+#: main/templates/header.html:53
+msgid "Change Password"
+msgstr "Змінити пароль"
+
+#: accounts/templates/registration/password_reset_complete.html:5
+msgid "Password Reset Complete"
+msgstr "Скидання пароля завершено"
+
+#: accounts/templates/registration/password_reset_complete.html:10
+msgid "Password Reset Successful"
+msgstr "Пароль успішно скинуто"
+
+#: accounts/templates/registration/password_reset_complete.html:11
+msgid "Your password has been reset successfully."
+msgstr "Ваш пароль було успішно скинуто."
+
+#: accounts/templates/registration/password_reset_confirm.html:6
+#: accounts/templates/registration/password_reset_confirm.html:11
+msgid "Set a New Password"
+msgstr "Встановіть новий пароль"
+
+#: accounts/templates/registration/password_reset_form.html:12
+msgid "Forgot Your Password?"
+msgstr "Забули свій пароль?"
+
+#: accounts/templates/registration/password_reset_form.html:16
+msgid "Reset Your Password"
+msgstr "Скинути пароль"
+
+#: accounts/templates/registration/password_reset_form.html:21
+msgid "Send Reset Link"
+msgstr "Надіслати посилання для скидання"
+
+#: find_transport/templates/find_transport.html:5
+#: find_transport/templates/find_transport.html:8
+msgid "Available Transport"
+msgstr "Доступний транспорт"
+
+#: find_transport/templates/find_transport.html:11
+msgid "Type:"
+msgstr "Тип:"
+
+#: find_transport/templates/find_transport.html:13
+msgid "All"
+msgstr "Усі"
+
+#: find_transport/templates/find_transport.html:14
+msgid "E-Bike"
+msgstr "Електровелосипед"
+
+#: find_transport/templates/find_transport.html:15
+msgid "E-Scooter"
+msgstr "Електроскутер"
+
+#: find_transport/templates/find_transport.html:16
+msgid "Bike"
+msgstr "Велосипед"
+
+#: find_transport/templates/find_transport.html:21
+msgid "Minimum Battery:"
+msgstr "Мінімальний заряд батареї:"
+
+#: find_transport/templates/find_transport.html:25
+msgid "Filter"
+msgstr "Фільтр"
+
+#: main/templates/home.html:4
+msgid "Main page"
+msgstr "Головна сторінка"
+
+#: main/templates/home.html:11
+msgid "Modern electric bikes and scooters for the sustainable urban explorer"
+msgstr "Сучасні електровелосипеди та скутери для сталого міського мандрівника"
+
+#: main/templates/home.html:12
+msgid ""
+"GoRide offers a convenient, eco-friendly fleet of electric bikes and "
+"scooters available 24 hours to easily zip around the city."
+msgstr "GoRide пропонує зручний, екологічний парк електровелосипедів і скутерів, доступних 24 години для легкого пересування містом."
+
+#: main/templates/home.html:13
+msgid "Rent Now"
+msgstr "Орендувати зараз"
+
+#: main/templates/home.html:16
+msgid "City Transport"
+msgstr "Міський транспорт"
+
+#: main/templates/home.html:26
+msgid "Sustainable commuting"
+msgstr "Сталий транспорт"
+
+#: main/templates/home.html:57
+msgid "Exceptional Bike and Scooter Rentals"
+msgstr "Чудова оренда велосипедів і скутерів"
+
+#: main/templates/home.html:86
+msgid "Get Started"
+msgstr "Почати"
+
+#: support/templates/support/user_chat.html:6
+msgid "Chat with Support"
+msgstr "Чат із підтримкою"
+
+#: support/templates/support/user_chat.html:10
+msgid "Chat History"
+msgstr "Історія чату"
+
+#: support/templates/support/user_chat.html:23
+msgid "No messages yet. Start the conversation!"
+msgstr "Поки що немає повідомлень. Почніть розмову!"
+
+#: support/templates/support/user_chat.html:32
+msgid "Send"
+msgstr "Надіслати"
