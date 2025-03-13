@@ -17,6 +17,7 @@ urlpatterns += i18n_patterns(
     path("support/", include("support.urls")),
     path("find_transport/", include("find_transport.urls")),
     path('payments/', include('payments.urls')),
+    path('subscriptions/', include('subscriptions.urls')),
 )
 
 
