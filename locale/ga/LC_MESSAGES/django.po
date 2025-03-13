@@ -1,0 +1,219 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-12 15:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : "
+"4);\n"
+
+#: accounts/templates/profile.html:2 main/templates/header.html:52
+msgid "Profile"
+msgstr "Próifíl"
+
+#: accounts/templates/profile.html:5
+msgid "My Profile"
+msgstr "Mo Phróifíl"
+
+#: accounts/templates/profile.html:12 accounts/templates/profile_edit.html:19
+msgid "Email"
+msgstr "Ríomhphost"
+
+#: accounts/templates/profile.html:13
+msgid "Phone"
+msgstr "Guthán"
+
+#: accounts/templates/profile.html:14 accounts/templates/profile_edit.html:4
+#: accounts/templates/profile_edit.html:8
+msgid "Edit Profile"
+msgstr "Cuir Próifíl in Eagar"
+
+#: accounts/templates/profile_edit.html:15
+msgid "Username"
+msgstr "Ainm Úsáideora"
+
+#: accounts/templates/profile_edit.html:23
+msgid "Phone Number"
+msgstr "Uimhir Ghutháin"
+
+#: accounts/templates/profile_edit.html:27
+msgid "Profile Picture"
+msgstr "Pictiúr Próifíle"
+
+#: accounts/templates/profile_edit.html:30
+msgid "Save Changes"
+msgstr "Sábháil Athruithe"
+
+#: accounts/templates/registration/login.html:7
+#: accounts/templates/registration/login.html:26
+#: accounts/templates/registration/password_reset_complete.html:12
+#: accounts/templates/registration/signup.html:17 main/templates/header.html:64
+msgid "Login"
+msgstr "Logáil Isteach"
+
+#: accounts/templates/registration/login.html:12
+msgid "Login or Create a New Account"
+msgstr "Logáil isteach nó Cruthaigh Cuntas Nua"
+
+#: accounts/templates/registration/login.html:16
+msgid "New Customer?"
+msgstr "Custaiméir Nua?"
+
+#: accounts/templates/registration/login.html:17
+msgid "Create New Account"
+msgstr "Cruthaigh Cuntas Nua"
+
+#: accounts/templates/registration/login.html:22
+msgid "Registered Customers Only"
+msgstr "Do Chustaiméirí Cláraithe Amháin"
+
+#: accounts/templates/registration/login.html:28
+msgid "Forgot your password?"
+msgstr "Dearmad déanta ar do phasfhocal?"
+
+#: accounts/templates/registration/password_change_done.html:5
+msgid "Password Changed"
+msgstr "Pasfhocal Athraithe"
+
+#: accounts/templates/registration/password_change_done.html:10
+msgid "Password Changed Successfully"
+msgstr "Pasfhocal Athraithe go Rathúil"
+
+#: accounts/templates/registration/password_change_done.html:14
+msgid "Your password has been updated successfully."
+msgstr "Tá do phasfhocal nuashonraithe go rathúil."
+
+#: accounts/templates/registration/password_change_done.html:15
+msgid "Return to Homepage"
+msgstr "Fill ar an Leathanach Baile"
+
+#: accounts/templates/registration/password_change_form.html:7
+#: accounts/templates/registration/password_change_form.html:21
+#: accounts/templates/registration/password_reset_confirm.html:20
+#: main/templates/header.html:53
+msgid "Change Password"
+msgstr "Athraigh Pasfhocal"
+
+#: accounts/templates/registration/password_reset_complete.html:5
+msgid "Password Reset Complete"
+msgstr "Athshocrú Pasfhocail Críochnaithe"
+
+#: accounts/templates/registration/password_reset_complete.html:10
+msgid "Password Reset Successful"
+msgstr "Athshocrú Pasfhocail go Rathúil"
+
+#: accounts/templates/registration/password_reset_complete.html:11
+msgid "Your password has been reset successfully."
+msgstr "Athshocraíodh do phasfhocal go rathúil."
+
+#: accounts/templates/registration/password_reset_confirm.html:6
+#: accounts/templates/registration/password_reset_confirm.html:11
+msgid "Set a New Password"
+msgstr "Socraigh Pasfhocal Nua"
+
+#: accounts/templates/registration/password_reset_form.html:12
+msgid "Forgot Your Password?"
+msgstr "Dearmad déanta ar do phasfhocal?"
+
+#: accounts/templates/registration/password_reset_form.html:16
+msgid "Reset Your Password"
+msgstr "Athshocraigh Do Phasfhocal"
+
+#: accounts/templates/registration/password_reset_form.html:21
+msgid "Send Reset Link"
+msgstr "Seol Nasc Athshocraithe"
+
+#: find_transport/templates/find_transport.html:5
+#: find_transport/templates/find_transport.html:8
+msgid "Available Transport"
+msgstr "Iompar Ar Fáil"
+
+#: find_transport/templates/find_transport.html:11
+msgid "Type:"
+msgstr "Cineál:"
+
+#: find_transport/templates/find_transport.html:13
+msgid "All"
+msgstr "Gach ceann"
+
+#: find_transport/templates/find_transport.html:14
+msgid "E-Bike"
+msgstr "Rothar Leictreach"
+
+#: find_transport/templates/find_transport.html:15
+msgid "E-Scooter"
+msgstr "Scútar Leictreach"
+
+#: find_transport/templates/find_transport.html:16
+msgid "Bike"
+msgstr "Rothar"
+
+#: find_transport/templates/find_transport.html:21
+msgid "Minimum Battery:"
+msgstr "Ceallraí Íosta:"
+
+#: find_transport/templates/find_transport.html:25
+msgid "Filter"
+msgstr "Scag"
+
+#: main/templates/home.html:4
+msgid "Main page"
+msgstr "Príomhleathanach"
+
+#: main/templates/home.html:11
+msgid "Modern electric bikes and scooters for the sustainable urban explorer"
+msgstr "Rothair agus scútair leictreacha nua-aimseartha don taiscéalaí uirbeach inbhuanaithe"
+
+#: main/templates/home.html:12
+msgid ""
+"GoRide offers a convenient, eco-friendly fleet of electric bikes and "
+"scooters available 24 hours to easily zip around the city."
+msgstr "Cuireann GoRide cabhlach rothar agus scútar leictreach atá cairdiúil don chomhshaol ar fáil 24 uair an chloig le taisteal go héasca timpeall na cathrach."
+
+#: main/templates/home.html:13
+msgid "Rent Now"
+msgstr "Cíos Anois"
+
+#: main/templates/home.html:16
+msgid "City Transport"
+msgstr "Iompar na Cathrach"
+
+#: main/templates/home.html:26
+msgid "Sustainable commuting"
+msgstr "Taisteal inbhuanaithe"
+
+#: main/templates/home.html:57
+msgid "Exceptional Bike and Scooter Rentals"
+msgstr "Cíos Rothar agus Scútar den Scoth"
+
+#: main/templates/home.html:86
+msgid "Get Started"
+msgstr "Tosaigh"
+
+#: support/templates/support/user_chat.html:6
+msgid "Chat with Support"
+msgstr "Comhrá le Tacaíocht"
+
+#: support/templates/support/user_chat.html:10
+msgid "Chat History"
+msgstr "Stair an Chomhrá"
+
+#: support/templates/support/user_chat.html:23
+msgid "No messages yet. Start the conversation!"
+msgstr "Níl aon teachtaireachtaí fós. Tosaigh an comhrá!"
+
+#: support/templates/support/user_chat.html:32
+msgid "Send"
+msgstr "Seol"

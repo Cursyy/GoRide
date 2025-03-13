@@ -1,30 +1,33 @@
 {% extends "base.html" %}
-{% block title %}Edit Profile{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Edit Profile" %}{% endblock %}
+
 {% block content %}
 <div class="container p-4">
-    <h1 class="text-center my_title">Edit Profile</h1>
+    <h1 class="text-center my_title">{% trans "Edit Profile" %}</h1>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="w-100 my_custom_div p-4 rounded">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label class="my_label">Username</label>
+                        <label class="my_label">{% trans "Username" %}</label>
                         {{ form.username }}
                     </div>
                     <div class="form-group mt-3">
-                        <label class="my_label">Email</label>
+                        <label class="my_label">{% trans "Email" %}</label>
                         {{ form.email }}
                     </div>
                     <div class="form-group mt-3">
-                        <label class="my_label">Phone Number</label>
+                        <label class="my_label">{% trans "Phone Number" %}</label>
                         {{ form.phone_num }}
                     </div>
                     <div class="form-group mt-3">
-                        <label class="my_label">Profile Picture</label>
+                        <label class="my_label">{% trans "Profile Picture" %}</label>
                         {{ form.profile_pic }}
                     </div>
-                    <button type="submit" class="btn btn-secondary mt-4 w-100">Save Changes</button>
+                    <button type="submit" class="btn btn-secondary mt-4 w-100">{% trans "Save Changes" %}</button>
                 </form>
             </div>
         </div>

@@ -1,43 +1,47 @@
 {% load static %}
-{% load i18n %}  {# Завантажуємо підтримку мов #}
+{% load i18n %}
 <header class="p-4 bg-custom">
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
         <div class="container">
-            <!-- Логотип -->
             <a class="navbar-brand" href="{% url 'main:home' %}">
                 <img src="#" alt="GoRide" height="40">
             </a>
-    
-            <!-- Кнопка для колапсу меню -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
-            <!-- Меню -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'main:home' %}">Home</a>
+                        <a class="nav-link" href="{% url 'main:home' %}">{% trans "Home" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">{% trans "About" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'find_transport:find_transport' %}">Rentals</a>
+                        <a class="nav-link" href="{% url 'find_transport:find_transport' %}">{% trans "Rentals" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">{% trans "Contact" %}</a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
-                    <form method="post" action="#" class="mx-3">
-                        {% csrf_token %}
-                        <select name="language" class="form-select form-select-sm">
-                            <option value="en" selected>EN</option>
-                            <option value="ga">GA</option>
-                        </select>
-                    </form>
+                    <div>
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        <form action="{% url 'set_language' %}" method="POST" class="d-flex align-items-center">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <select name="language" class="form-select me-2" onchange="this.form.submit()">
+                                {% for language in languages %}
+                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                    {{ language.name_local }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </div>
                     {% if user.is_authenticated %}
                     <div class="dropdown">
                         <button class="btn btn-outline-light dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown"
