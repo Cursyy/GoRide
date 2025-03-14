@@ -51,7 +51,7 @@
         let map;
 
         function initializeMap() {
-            map = L.map('map').setView([53.347854,-6.259504]);
+            map = L.map('map').setView([53.347854,-6.259504],15);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">{% trans 'OpenStreetMap' %}</a>'
@@ -91,10 +91,15 @@
                 iconAnchor: [22, 38],
                 popupAnchor: [-3, -38]
             });
-            L.marker([station.latitude, station.longitude], {icon: stationIcon})
+            let marker = L.marker([station.latitude, station.longitude], {icon: stationIcon})
                 .bindPopup(`<b>{% trans 'Max spaces:' %}</b> ${station.max_spaces}<br><b>{% trans 'Free spaces:' %}</b> ${station.free_spaces}<br>${station.address}`)
                 .openPopup()
                 .addTo(map);
+            marker.on('click',function(){
+                loadVehicles(station.id)
+        });
+        
+            
         });
 
         
@@ -115,18 +120,19 @@
         document.getElementById("type-filter").addEventListener("change", loadVehicles);
     });
 
-    async function loadVehicles() {
+    async function loadVehicles(stationId = null) {
         const response = await fetch('api/vehicles');
         let vehicles = await response.json();
 
         const typeFilter = document.getElementById("type-filter").value;
         const batteryFilter = parseInt(document.getElementById("battery-filter").value);
-
         vehicles = vehicles.filter(v => 
             (typeFilter === "" || v.type === typeFilter) &&
             (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
         );
-
+         if(stationId){
+            vehicles = vehicles.filter(v=>v.station_id === stationId);
+        }
         const container = document.getElementById("vehicle-container");
         container.innerHTML = ""; 
 

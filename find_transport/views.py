@@ -54,7 +54,11 @@ def get_vehicles(request):
         except ValueError:
             return JsonResponse({"error": "Invalid battery percentage"}, status=400)
     return JsonResponse(
-        list(vehicles.values("id", "type", "battery_percentage", "price_per_hour")),
+        list(
+            vehicles.values(
+                "id", "type", "battery_percentage", "price_per_hour", "station_id"
+            )
+        ),
         safe=False,
     )
 
@@ -65,6 +69,7 @@ def get_station(request):
         station_vehicle_count = Vehicle.objects.filter(station=station).count()
         stations_data.append(
             {
+                "id": station.id,
                 "latitude": station.latitude,
                 "longitude": station.longitude,
                 "max_spaces": station.max_spaces,
