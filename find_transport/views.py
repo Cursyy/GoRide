@@ -25,10 +25,9 @@ def get_address(lat, lon):
     if response.status_code == 200:
         data = response.json()
         content = (
-            data.get("address", {}).get("road", "Address not found")
+            data.get("address", {}).get("road")
             + ", "
-            + data.get("address", {}).get("postcode", "Address not found"),
-            "Address not found",
+            + data.get("address", {}).get("postcode"),
         )
         save_to_cache(lat, lon, content)
         print(f"Response from API: {content}")
@@ -39,10 +38,13 @@ def get_address(lat, lon):
 
 
 def find_transport(request):
-    vehicles = Vehicle.objects.filter(status=True)
+    return render(request, "find_transport.html")
+
+
+def get_vehicles(request):
     vehicle_type = request.GET.get("type")
     min_battery = request.GET.get("min_battery")
-
+    vehicles = Vehicle.objects.all()
     if vehicle_type:
         vehicles = vehicles.filter(type=vehicle_type)
     if min_battery:
@@ -51,11 +53,23 @@ def find_transport(request):
             vehicles = vehicles.filter(battery_percentage__gte=min_battery)
         except ValueError:
             return JsonResponse({"error": "Invalid battery percentage"}, status=400)
+    return JsonResponse(
+        list(
+            vehicles.values(
+                "id", "type", "battery_percentage", "price_per_hour", "station_id"
+            )
+        ),
+        safe=False,
+    )
+
+
+def get_station(request):
     stations_data = []
     for station in EVStation.objects.all():
         station_vehicle_count = Vehicle.objects.filter(station=station).count()
         stations_data.append(
             {
+                "id": station.id,
                 "latitude": station.latitude,
                 "longitude": station.longitude,
                 "max_spaces": station.max_spaces,
@@ -63,9 +77,4 @@ def find_transport(request):
                 "address": get_address(station.latitude, station.longitude),
             }
         )
-
-    return render(
-        request,
-        "find_transport.html",
-        {"vehicles": vehicles, "stations": stations_data},
-    )
+    return JsonResponse(list(stations_data), safe=False)

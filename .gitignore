@@ -22,3 +22,6 @@ media/
 
 #Cache files
 cache
+
+#fixtures
+*.json
