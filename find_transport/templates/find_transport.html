@@ -2,109 +2,169 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %} {% trans "Available Transport" %} {% endblock %}
+{% block title %} 
+    {% trans "Available Transport" %} 
+{% endblock %}
 
 {% block content %}
-<h2>{% trans "Available Transport" %}</h2>
-<form method="get" class="filter-form">
-    <div class="filter-item">
-        <label for="type">{% trans "Type:" %}</label>
-        <select name="type">
-            <option value="">{% trans "All" %}</option>
-            <option value="E-Bike">{% trans "E-Bike" %}</option>
-            <option value="E-Scooter">{% trans "E-Scooter" %}</option>
-            <option value="Bike">{% trans "Bike" %}</option>
-        </select>
-    </div>
+<h2>{% trans "Available Transport" %}</h2>{% trans '
 
-    <div class="filter-item">
-        <label for="min_battery">{% trans "Minimum Battery:" %}</label>
-        <input type="number" name="min_battery" min="0" max="100">
-    </div>
+' %}<!-- Форма фільтрації -->{% trans '
+' %}<form method="get" class="filter-form">{% trans '
+    ' %}<div class="filter-item">{% trans '
+        ' %}<label for="type">{% trans "Type:" %}</label>{% trans '
+        ' %}<select name="type" id="type-filter">{% trans '
+            ' %}<option value="">{% trans "All" %}</option>{% trans '
+            ' %}<option value="E-Bike">{% trans "E-Bike" %}</option>{% trans '
+            ' %}<option value="E-Scooter">{% trans "E-Scooter" %}</option>{% trans '
+            ' %}<option value="Bike">{% trans "Bike" %}</option>{% trans '
+        ' %}</select>{% trans '
+    ' %}</div>{% trans '
 
-    <button type="submit" class="filter-button">{% trans "Filter" %}</button>
-</form>
+    ' %}<div class="filter-item">{% trans '
+        ' %}<label for="min_battery">{% trans "Minimum Battery:" %}</label>{% trans '
+        ' %}<input type="number" name="min_battery" id="battery-filter" min="0" max="100" value="0">{% trans '
+    ' %}</div>{% trans '
+' %}</form>{% trans '
 
-<div id="map"></div>
-{{ stations|json_script:"EV_stations_json" }}
-<script>
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-        console.log("{% trans 'Geolocation is not supported by this browser.' %}");
-    }
-    let map;
+' %}<!-- Карта -->{% trans '
+' %}<div id="map"></div>{% trans '
 
-    function initializeMap(){
-        map = L.map('map').setView([53.33833948672929, -6.2990109445410996], 13);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-    }
-    
-    function showPosition(position) {
-        let userLat = position.coords.latitude;
-        let userLon = position.coords.longitude;
-        if(map){
-            map.setView([userLat, userLon], 15)
-            setTimeout(() => {
-                L.marker([userLat, userLon]).bindPopup("{% trans 'You are here' %}").openPopup().addTo(map);
-            }, 500);
-        } else {
-            console.error("{% trans 'Map is not initialized yet' %}");
-        }
-    } 
+' %}<!-- Виведення даних станцій -->{% trans '
 
-    function showError(error) {
-        console.log("{% trans 'Error getting location:' %}", error.message);
-    }
-
-    initializeMap();
-    let stations = JSON.parse(document.getElementById('EV_stations_json').textContent);
-    console.log(stations);
-    stations.forEach(station => {
-        L.marker([station.latitude, station.longitude]).bindPopup(`<b>{% trans 'Max spaces:' %} ${station.max_spaces}</b>
-        <br>{% trans 'Free spaces:' %} ${station.free_spaces}<br>${station.address}`).openPopup().addTo(map);
+' %}<script>
+    document.addEventListener("DOMContentLoaded", function() {
+       
+        loadStations();
     });
-</script>
 
-<div class="vehicle-list">
-    {% for vehicle in vehicles %}
-    <div class="vehicle-card">
-        <div class="vehicle-image">
-            {% if vehicle.type == "E-Bike" %}
-                <img src="{% static 'images/e-bike.jpg' %}" alt="{% trans 'E-Bike image' %}" />
-            {% elif vehicle.type == "E-Scooter" %}
-                <img src="{% static 'images/e-scooter.jpg' %}" alt="{% trans 'E-Scooter image' %}" />
-            {% elif vehicle.type == "Bike" %}
-                <img src="{% static 'images/bike.webp' %}" alt="{% trans 'Bike image' %}" />
-            {% else %}
-                <img src="{% static 'placeholder.jpg' %}" alt="{% trans 'Default image' %}" />
-            {% endif %}
-        </div>
-        <div class="vehicle-details">
-            <h3>{{ vehicle.type }}</h3>
-            {% if vehicle.battery_percentage is not None %}
-                <p>{% trans "Battery:" %} {{ vehicle.battery_percentage }}%</p>
-            {% endif %}
-            <p>{% trans "Status:" %} {% if vehicle.status %}{% trans "Available" %}{% else %}{% trans "Not Available" %}{% endif %}</p>
-            <a href="https://www.google.com/maps?q={{ vehicle.latitude }},{{ vehicle.longitude }}" target="_blank">{% trans "Show on Map" %}</a>
-        </div>
-        <div class="vehicle-price">
-            <p>{% trans "Price per hour:" %} €{{ vehicle.price_per_hour }}</p>
-            <form method="get" action="{% url 'stripe_payment' vehicle.id %}">
-                <input type="number" name="hours" min="1" value="1" class="hours-input">
-                <button type="submit" class="rent-button">Pay with Stripe</button>
-            </form>
-            <form method="get" action="{% url 'paypal_payment' vehicle.id %}">
-                <input type="number" name="hours" min="1" value="1" class="hours-input">
-                <button type="submit" class="rent-button">Pay with PayPal</button>
-            </form>
-        </div>
-    </div>
-    {% empty %}
-    <p>{% trans "No vehicles found" %}</p>
-    {% endfor %}
-</div>
+    async function loadStations() {
+        const response = await fetch('api/stations');
+        let stations = await response.json();
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+
+        let map;
+
+        function initializeMap() {
+            map = L.map('map').setView([53.347854,-6.259504]);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">{% trans 'OpenStreetMap' %}</a>'
+            }).addTo(map);
+        }
+        initializeMap();
+        function showPosition(position) {
+            let userLat = position.coords.latitude;
+            let userLon = position.coords.longitude;
+            if (map) {
+                map.setView([userLat, userLon], 15);
+                setTimeout(() => {
+                    let userIcon = L.icon({
+                        iconUrl: '{% static "images/you_are_here.png" %}',
+                        iconSize: [38, 50],
+                        iconAnchor: [22, 38],
+                        popupAnchor: [-3, -38]
+                    });
+                    L.marker([userLat, userLon], {icon: userIcon})
+                        .bindPopup("You are here")
+                        .openPopup()
+                        .addTo(map);
+                },500);
+            } else {
+                console.error("Map is not initialized yet");
+            }
+        }
+
+        function showError(error) {
+            console.log("Error getting location:", error.message);
+        }
+
+        stations.forEach(station => {
+            let stationIcon = L.icon({
+                iconUrl: '{% static "images/map-marker-2-64.png" %}',
+                iconSize: [32, 32],
+                iconAnchor: [22, 38],
+                popupAnchor: [-3, -38]
+            });
+            L.marker([station.latitude, station.longitude], {icon: stationIcon})
+                .bindPopup(`<b>{% trans 'Max spaces:' %}</b> ${station.max_spaces}<br><b>{% trans 'Free spaces:' %}</b> ${station.free_spaces}<br>${station.address}`)
+                .openPopup()
+                .addTo(map);
+        });
+
+        
+    }
+</script>{% trans '
+
+' %}<div id="vehicle-container"></div>{% trans '
+
+' %}<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        loadVehicles();
+
+        document.getElementById("battery-filter").addEventListener("input", function() {
+            document.getElementById("battery-value").innerText = this.value;
+            loadVehicles();
+        });
+
+        document.getElementById("type-filter").addEventListener("change", loadVehicles);
+    });
+
+    async function loadVehicles() {
+        const response = await fetch('api/vehicles');
+        let vehicles = await response.json();
+
+        const typeFilter = document.getElementById("type-filter").value;
+        const batteryFilter = parseInt(document.getElementById("battery-filter").value);
+
+        vehicles = vehicles.filter(v => 
+            (typeFilter === "" || v.type === typeFilter) &&
+            (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
+        );
+
+        const container = document.getElementById("vehicle-container");
+        container.innerHTML = ""; 
+
+        vehicles.forEach(vehicle => {
+            const vehicleCard = document.createElement('div');
+            vehicleCard.classList.add('vehicle-card');
+
+            let imgSrc;
+            switch(vehicle.type) {
+                case "Bike": imgSrc = '{% static "images/bike.webp" %}'; break;
+                case "E-Bike": imgSrc = '{% static "images/e-bike.jpg" %}'; break;
+                case "E-Scooter": imgSrc = '{% static "images/e-scooter.jpg" %}'; break;
+                default: imgSrc = '{% static "images/placeholder.jpg" %}';
+            }
+
+            vehicleCard.innerHTML = `
+                <div class="vehicle-image">{% trans '
+                    ' %}<img src="${imgSrc}" alt="${vehicle.type} image"/>{% trans '
+                ' %}</div>{% trans '
+                ' %}<div class="vehicle-details">{% trans '
+                    ' %}<h3>${vehicle.type}</h3>
+                    ${vehicle.battery_percentage !== null ? `<p>Battery: ${vehicle.battery_percentage}%</p>` : ""}
+                    <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" target="_blank">{% trans 'Show on Map' %}</a>{% trans '
+                ' %}</div>{% trans '
+                ' %}<div class="vehicle-price">{% trans '
+                    ' %}<p>{% trans 'Price per hour:' %} €${vehicle.price_per_hour}</p>{% trans '
+                    ' %}<form method="get" action="/stripe_payment/${vehicle.id}/">{% trans '
+                        ' %}<input type="number" name="hours" min="1" value="1" class="hours-input">{% trans '
+                        ' %}<button type="submit" class="rent-button">{% trans 'Pay with Stripe' %}</button>{% trans '
+                    ' %}</form>{% trans '
+                    ' %}<form method="get" action="/paypal_payment/${vehicle.id}/">{% trans '
+                        ' %}<input type="number" name="hours" min="1" value="1" class="hours-input">{% trans '
+                        ' %}<button type="submit" class="rent-button">{% trans 'Pay with PayPal' %}</button>{% trans '
+                    ' %}</form>{% trans '
+                ' %}</div>
+            `;
+            container.appendChild(vehicleCard);
+        });
+    }
+</script>
 {% endblock %}
