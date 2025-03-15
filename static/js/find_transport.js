@@ -1,13 +1,25 @@
+let currentStation = null;
+let userLat = null;
+let userLon = null;
+let activeRequest = null;
+let routeLayer = null;
+let map = null;
+
 document.addEventListener("DOMContentLoaded", function() {
     loadStations();
     loadVehicles();
 
-    document.getElementById("battery-filter").addEventListener("input", function() {
+    const batteryFilter = document.getElementById("battery-filter");
+    const typeFilter = document.getElementById("type-filter");
+    
+    console.log(currentStation)
+    batteryFilter.addEventListener("input", function() {
         document.getElementById("battery-value").innerText = this.value;
-        loadVehicles();
+        loadVehicles(currentStation);
     });
 
-    document.getElementById("type-filter").addEventListener("change", loadVehicles);
+    typeFilter.addEventListener("change",function(){ loadVehicles(currentStation)});
+
 });
 
 async function loadStations() {
@@ -20,10 +32,9 @@ async function loadStations() {
         console.log("Geolocation is not supported by this browser.");
     }
 
-    let map;
 
     function initializeMap() {
-        map = L.map('map').setView([53.347854,-6.259504], 15);
+        map = L.map('map').setView([53.347854,-6.259504], 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -32,12 +43,11 @@ async function loadStations() {
     initializeMap();
 
     function showPosition(position) {
-        let userLat = position.coords.latitude;
-        let userLon = position.coords.longitude;
+        userLat = position.coords.latitude;
+        userLon = position.coords.longitude;
         if (map) {
             map.setView([userLat, userLon], 15);
-            setTimeout(() => {
-                let userIcon = L.icon({
+            let userIcon = L.icon({
                     iconUrl: '/static/images/you_are_here.png',
                     iconSize: [38, 50],
                     iconAnchor: [22, 38],
@@ -47,7 +57,7 @@ async function loadStations() {
                     .bindPopup("You are here")
                     .openPopup()
                     .addTo(map);
-            }, 500);
+
         } else {
             console.error("Map is not initialized yet");
         }
@@ -69,7 +79,9 @@ async function loadStations() {
             .openPopup()
             .addTo(map);
         marker.on('click', function() {
+            currentStation = station.id;
             loadVehicles(station.id);
+            createButton(station.id);
         });
     });
 }
@@ -77,7 +89,6 @@ async function loadStations() {
 async function loadVehicles(stationId = null) {
     const response = await fetch('api/vehicles');
     let vehicles = await response.json();
-
     const typeFilter = document.getElementById("type-filter").value;
     const batteryFilter = parseInt(document.getElementById("battery-filter").value);
     vehicles = vehicles.filter(v =>
@@ -85,7 +96,9 @@ async function loadVehicles(stationId = null) {
         (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
     );
     if (stationId) {
-        vehicles = vehicles.filter(v => v.station_id === stationId);
+        vehicles = vehicles.filter(v => (v.station_id === stationId)&&
+        (typeFilter === "" || v.type === typeFilter) &&
+        (v.battery_percentage === null || v.battery_percentage >= batteryFilter));
     }
     const container = document.getElementById("vehicle-container");
     container.innerHTML = "";
@@ -130,4 +143,94 @@ async function loadVehicles(stationId = null) {
         `;
         container.appendChild(vehicleCard);
     });
+}
+
+function createButton(){
+    let button = document.getElementById("get-direction-button");
+
+    if (!button) {
+        button = document.createElement("button");
+        button.id = "get-direction-button";
+        button.textContent = "Get Direction";
+
+        button.style.position = "absolute";
+        button.style.top = "300px";
+        button.style.left = "50px";
+        button.style.zIndex = "1000";
+
+        document.body.appendChild(button);
+    }
+
+
+    button.onclick = null;
+
+    button.addEventListener("click", function() {
+        console.log(currentStation)
+        getDirection(currentStation);
+    });
+}
+
+async function getDirection(stationId=null){
+try{
+    const response = await fetch(`api/stations?id=${stationId}`);
+    if(!response.ok){
+        console.error("Error fetching station",response.status)
+        return;
+    }
+
+    const data = await response.json();
+    const station = data.station
+    if (!station || !station.latitude || !station.longitude) {
+        console.error("Invalid station data:", station);
+        return;
+    }
+
+    if(activeRequest){
+        activeRequest.abort();
+    }
+    activeRequest = new XMLHttpRequest();
+    const start = `${userLon},${userLat}`;
+    const end = `${station.longitude},${station.latitude}`;
+    const api_key = '';
+    activeRequest.open('GET', `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${api_key}&start=${start}&end=${end}`);
+
+    activeRequest.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
+    activeRequest.onreadystatechange = function () {
+    if (this.readyState === 4) {
+        if (this.status === 200){
+    
+            const routeData = JSON.parse(this.responseText);
+            const cordinates = routeData.features[0].geometry.coordinates;
+        
+            drawRouteOnMap(cordinates,userLat,userLon);
+        }else{
+            console.error("Error in route request,",this.responseText);
+        }
+        activeRequest=null;
+        }
+    };
+
+    activeRequest.send();
+
+    } catch (error) {
+        console.error("Error in getDirection:", error);
+    }
+}
+function drawRouteOnMap(coordinates, userLat, userLon) {
+    if (routeLayer) {
+        map.removeLayer(routeLayer);
+    }
+
+    const latLngs = coordinates.map(coord => [coord[1], coord[0]]); // Correct order: [lat, lng]
+
+    // Create new polyline
+    routeLayer = L.polyline(latLngs, { color: 'blue' });
+
+    // Check if map is initialized
+    if (map) {
+        routeLayer.addTo(map);  // Add polyline to map
+        map.fitBounds(routeLayer.getBounds());  // Adjust the view to fit the route
+    } else {
+        console.error("Map is not initialized");
+    }
 }
