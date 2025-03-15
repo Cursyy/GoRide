@@ -1,6 +1,7 @@
 let currentStation = null;
 let userLat = null;
 let userLon = null;
+let activeRequest = null;
 document.addEventListener("DOMContentLoaded", function() {
     loadStations();
     loadVehicles();
@@ -168,23 +169,40 @@ function createButton(){
 }
 
 async function getDirection(stationId=null){
-
+try{
     const response = await fetch(`api/stations?id=${stationId}`);
-    let station = await response.json();
-    console.log(station)
-    var request = new XMLHttpRequest();
+    if(!response.ok){
+        console.error("Error fetching station",response.status)
+        return;
+    }
 
-    request.open('GET', `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248fc631c4ebfff476ba2813120ea71d4e2&start=${userLon},${userLat}&end=${station.station.longitude},${station.station.latitude}`);
+    const data = await response.json();
+    const station = data.station
+    if (!station || !station.latitude || !station.longitude) {
+        console.error("Invalid station data:", station);
+        return;
+    }
 
-    request.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
+    if(activeRequest){
+        activeRequest.abort();
+    }
+    activeRequest = new XMLHttpRequest();
 
-    request.onreadystatechange = function () {
+    activeRequest.open('GET', `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248fc631c4ebfff476ba2813120ea71d4e2&start=${userLon},${userLat}&end=${station.longitude},${station.latitude}`);
+
+    activeRequest.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
+
+    activeRequest.onreadystatechange = function () {
     if (this.readyState === 4) {
         console.log('Status:', this.status);
         console.log('Headers:', this.getAllResponseHeaders());
         console.log('Body:', this.responseText);
+        activeRequest=null;
     }
     };
 
-    request.send();
+    activeRequest.send();
+    } catch (error) {
+        console.error("Error in getDirection:", error);
+    }
 }
