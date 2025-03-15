@@ -3,6 +3,8 @@ from .models import Vehicle, EVStation
 from django.http import JsonResponse
 import requests
 from cache_manager import load_from_cache, save_to_cache
+from django.db.models import Count
+from django.forms.models import model_to_dict
 
 
 def get_address(lat, lon):
@@ -64,17 +66,29 @@ def get_vehicles(request):
 
 
 def get_station(request):
-    stations_data = []
-    for station in EVStation.objects.all():
-        station_vehicle_count = Vehicle.objects.filter(station=station).count()
-        stations_data.append(
-            {
-                "id": station.id,
-                "latitude": station.latitude,
-                "longitude": station.longitude,
-                "max_spaces": station.max_spaces,
-                "free_spaces": station.max_spaces - station_vehicle_count,
-                "address": get_address(station.latitude, station.longitude),
-            }
-        )
-    return JsonResponse(list(stations_data), safe=False)
+    station_id = request.GET.get("id")
+
+    if station_id and not station_id.isdigit():
+        return JsonResponse({"error": "Invalid ID"}, status=400)
+
+    if station_id:
+        station = EVStation.objects.filter(id=station_id).first()
+        if station:
+            return JsonResponse({"station": model_to_dict(station)})
+        return JsonResponse({"error": "Station not found"}, status=404)
+
+    # Підрахунок машин на всіх станціях одночасно
+    stations = EVStation.objects.annotate(vehicle_count=Count("vehicle"))
+
+    stations_data = [
+        {
+            "id": station.id,
+            "latitude": station.latitude,
+            "longitude": station.longitude,
+            "max_spaces": station.max_spaces,
+            "free_spaces": station.max_spaces - station.vehicle_count,
+            "address": get_address(station.latitude, station.longitude),
+        }
+        for station in stations
+    ]
+    return JsonResponse(stations_data, safe=False)

@@ -1,10 +1,13 @@
+let currentStation = null;
+let userLat = null;
+let userLon = null;
 document.addEventListener("DOMContentLoaded", function() {
     loadStations();
     loadVehicles();
 
     const batteryFilter = document.getElementById("battery-filter");
     const typeFilter = document.getElementById("type-filter");
-    let currentStation = null;
+    
     console.log(currentStation)
     batteryFilter.addEventListener("input", function() {
         document.getElementById("battery-value").innerText = this.value;
@@ -12,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     typeFilter.addEventListener("change",function(){ loadVehicles(currentStation)});
+
 });
 
 async function loadStations() {
@@ -36,12 +40,11 @@ async function loadStations() {
     initializeMap();
 
     function showPosition(position) {
-        let userLat = position.coords.latitude;
-        let userLon = position.coords.longitude;
+        userLat = position.coords.latitude;
+        userLon = position.coords.longitude;
         if (map) {
             map.setView([userLat, userLon], 15);
-            setTimeout(() => {
-                let userIcon = L.icon({
+            let userIcon = L.icon({
                     iconUrl: '/static/images/you_are_here.png',
                     iconSize: [38, 50],
                     iconAnchor: [22, 38],
@@ -51,7 +54,7 @@ async function loadStations() {
                     .bindPopup("You are here")
                     .openPopup()
                     .addTo(map);
-            });
+
         } else {
             console.error("Map is not initialized yet");
         }
@@ -73,7 +76,9 @@ async function loadStations() {
             .openPopup()
             .addTo(map);
         marker.on('click', function() {
+            currentStation = station.id;
             loadVehicles(station.id);
+            createButton(station.id);
         });
     });
 }
@@ -135,4 +140,51 @@ async function loadVehicles(stationId = null) {
         `;
         container.appendChild(vehicleCard);
     });
+}
+
+function createButton(){
+    let button = document.getElementById("get-direction-button");
+
+    if (!button) {
+        button = document.createElement("button");
+        button.id = "get-direction-button";
+        button.textContent = "Get Direction";
+
+        button.style.position = "absolute";
+        button.style.top = "300px";
+        button.style.left = "50px";
+        button.style.zIndex = "1000";
+
+        document.body.appendChild(button);
+    }
+
+
+    button.onclick = null;
+
+    button.addEventListener("click", function() {
+        console.log(currentStation)
+        getDirection(currentStation);
+    });
+}
+
+async function getDirection(stationId=null){
+
+    const response = await fetch(`api/stations?id=${stationId}`);
+    let station = await response.json();
+    console.log(station)
+    var request = new XMLHttpRequest();
+
+    request.open('GET', `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248fc631c4ebfff476ba2813120ea71d4e2&start=${userLon},${userLat}&end=${station.station.longitude},${station.station.latitude}`);
+
+    request.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
+
+    request.onreadystatechange = function () {
+    if (this.readyState === 4) {
+        console.log('Status:', this.status);
+        console.log('Headers:', this.getAllResponseHeaders());
+        console.log('Body:', this.responseText);
+    }
+    };
+
+    request.send();
 }
