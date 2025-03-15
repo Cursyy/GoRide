@@ -25,3 +25,6 @@ cache
 
 #fixtures
 *.json
+
+
+.env

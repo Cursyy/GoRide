@@ -191,7 +191,7 @@ try{
     activeRequest = new XMLHttpRequest();
     const start = `${userLon},${userLat}`;
     const end = `${station.longitude},${station.latitude}`;
-    const api_key = '5b3ce3597851110001cf6248fc631c4ebfff476ba2813120ea71d4e2';
+    const api_key = '';
     activeRequest.open('GET', `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${api_key}&start=${start}&end=${end}`);
 
     activeRequest.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
