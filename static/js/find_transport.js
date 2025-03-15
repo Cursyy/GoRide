@@ -2,12 +2,16 @@ document.addEventListener("DOMContentLoaded", function() {
     loadStations();
     loadVehicles();
 
-    document.getElementById("battery-filter").addEventListener("input", function() {
+    const batteryFilter = document.getElementById("battery-filter");
+    const typeFilter = document.getElementById("type-filter");
+    let currentStation = null;
+    console.log(currentStation)
+    batteryFilter.addEventListener("input", function() {
         document.getElementById("battery-value").innerText = this.value;
-        loadVehicles();
+        loadVehicles(currentStation);
     });
 
-    document.getElementById("type-filter").addEventListener("change", loadVehicles);
+    typeFilter.addEventListener("change",function(){ loadVehicles(currentStation)});
 });
 
 async function loadStations() {
@@ -23,7 +27,7 @@ async function loadStations() {
     let map;
 
     function initializeMap() {
-        map = L.map('map').setView([53.347854,-6.259504], 15);
+        map = L.map('map').setView([53.347854,-6.259504], 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -47,7 +51,7 @@ async function loadStations() {
                     .bindPopup("You are here")
                     .openPopup()
                     .addTo(map);
-            }, 500);
+            });
         } else {
             console.error("Map is not initialized yet");
         }
@@ -77,7 +81,6 @@ async function loadStations() {
 async function loadVehicles(stationId = null) {
     const response = await fetch('api/vehicles');
     let vehicles = await response.json();
-
     const typeFilter = document.getElementById("type-filter").value;
     const batteryFilter = parseInt(document.getElementById("battery-filter").value);
     vehicles = vehicles.filter(v =>
@@ -85,7 +88,9 @@ async function loadVehicles(stationId = null) {
         (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
     );
     if (stationId) {
-        vehicles = vehicles.filter(v => v.station_id === stationId);
+        vehicles = vehicles.filter(v => (v.station_id === stationId)&&
+        (typeFilter === "" || v.type === typeFilter) &&
+        (v.battery_percentage === null || v.battery_percentage >= batteryFilter));
     }
     const container = document.getElementById("vehicle-container");
     container.innerHTML = "";
