@@ -7,11 +7,23 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="profile-card p-4 text-center my_custom_div rounded">
-                <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/default_avatar.png{% endif %}"
-     alt="Profile Picture" class="rounded-circle border border-light mb-3" width="120" height="120">
+                <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/images/profile-user.png{% endif %}"
+     alt="Profile Picture" class="rounded-circle border border-dark mb-3" width="120" height="120">
                 <h2 class="my_title">{{ user.username }}</h2>
-                <p>{% trans "Email" %}: <span class="text-muted">{{ user.email }}</span></p>
-                <p>{% trans "Phone" %}: <span class="text-muted">{{ user.phone_num|default:"N/A" }}</span></p>
+                <div class="info-block text-start">
+                    <p>{% trans "Email" %}: <span class="text-muted">{{ user.email }}</span></p>
+                    <p>{% trans "Phone" %}: <span class="text-muted">{{ user.phone_num|default:"N/A" }}</span></p>
+                    {% if user_subscription and user_subscription.is_active %}
+                        <p>{% trans "Your Subscription" %}: <strong>{{ user_subscription.plan.type }}</strong></p>
+                        <p>📅 {% trans "Start date" %}: {{ user_subscription.start_date|date:"d.m.Y" }}</p>
+                        <p>📆 {% trans "End date" %}: {{ user_subscription.end_date|date:"d.m.Y" }}</p>
+                    {% else %}
+                        <p class="d-flex justify-content-between align-items-center">
+                            <span>{% trans "You have no any subscriptions" %}</span>
+                            <a href="{% url 'subscriptions:subscription_plans' %}" class="btn btn-light">{% trans "Choose plan" %}</a>
+                        </p>
+                    {% endif %}
+                </div>
                 <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary mt-3">{% trans "Edit Profile" %}</a>
             </div>
         </div>

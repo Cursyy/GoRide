@@ -42,5 +42,5 @@ class UserSubscription(models.Model):
         if self.plan:
             self.start_date = now()
             self.end_date = now() + timedelta(days=self.plan.duration_days)
-            self.remaining_rides = self.plan.max_rides
+            self.remaining_rides = self.plan.max_ride_hours
             self.save()
