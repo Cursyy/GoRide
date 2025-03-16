@@ -1,13 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
+{% load i18n %}
 {% block content %}
-<h2>Stripe Payment for {{ vehicle.type }}</h2>
-<p>Total Amount: €{{ total_amount }}</p>
+<h2>{% trans "Stripe Payment for" %} {{ vehicle.type }}</h2>
+<p>{% trans "Total Amount:" %} €{{ total_amount }}</p>
 {% if error %}
     <p style="color: red;">{{ error }}</p>
 {% endif %}
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="stripe-button">Pay with Stripe</button>
+    <button type="submit" class="stripe-button">{% trans "Pay with Stripe" %}</button>
 </form>
 {% endblock %}

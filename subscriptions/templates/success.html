@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %} {% trans "Subscription Successful" %} {% endblock %}
+
+{% block content %}
+<h2 class="text-center">{% trans "Subscription Successful!" %}</h2>
+<p class="text-center">{% trans "Your subscription has been activated." %}</p>
+<div class="text-center">
+    <a href="{% url 'subscriptions:subscription_plans' %}" class="btn btn-success">{% trans "Return to Plans" %}</a>
+</div>
+{% endblock %}

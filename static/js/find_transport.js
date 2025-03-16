@@ -106,6 +106,7 @@ async function loadVehicles(stationId = null) {
     vehicles.forEach(vehicle => {
         const vehicleCard = document.createElement('div');
         vehicleCard.classList.add('vehicle-card');
+        vehicleCard.classList.add('w-100');
 
         let imgSrc;
         switch (vehicle.type) {
@@ -131,11 +132,11 @@ async function loadVehicles(stationId = null) {
             </div>
             <div class="vehicle-price">
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
-                <form method="get" action="/stripe_payment/${vehicle.id}/">
+                <form method="get" action="/payments/payment/${vehicle.id}/stripe/" class="d-flex">
                     <input type="number" name="hours" min="1" value="1" class="hours-input">
                     <button type="submit" class="rent-button">Pay with Stripe</button>
                 </form>
-                <form method="get" action="/paypal_payment/${vehicle.id}/">
+                <form method="get" action="/payments/payment/${vehicle.id}/paypal/" class="d-flex"">
                     <input type="number" name="hours" min="1" value="1" class="hours-input">
                     <button type="submit" class="rent-button">Pay with PayPal</button>
                 </form>

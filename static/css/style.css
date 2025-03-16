@@ -184,8 +184,9 @@ form input[type="file"] {
     padding: 15px;
     font-size: 18px;
     border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
     z-index: 1000;
+    transition: all .5s ease;
   }
 
   .chat-button:hover {
@@ -294,10 +295,28 @@ form input[type="file"] {
 
 /* Vehicle price styles */
 .vehicle-price {
-    width: 150px;
+    width: 30%;
     padding: 10px;
     text-align: center;
     background-color: #f8f8f8;
+}
+
+.vehicle-price form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.vehicle-price input,button{
+    width: 45%;
+}
+
+.vehicle-price input{
+    color: #0E6655;
+    border: 1px solid #0E6655;
+    margin: 0;
 }
 
 .vehicle-price p {
@@ -308,7 +327,7 @@ form input[type="file"] {
 
 /* Rent button styles */
 .rent-button {
-    padding: 10px 20px;
+    padding: 10px;
     background-color: #0E6655;
     color: white;
     border: none;
@@ -423,3 +442,16 @@ form input[type="file"] {
 #get-direction-button:hover {
     background-color: rgba(0, 123, 255, 1);
 }
+
+/* subscriptions */
+
+.subscriptions .card-body{
+    display: flex;
+    flex-direction: column;
+}
+.subscriptions .card-body > a{
+    align-self: flex-end;
+    background-color: var(--main-bg-color);
+    border: none;
+}
+/* subscriptions */
