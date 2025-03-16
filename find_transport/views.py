@@ -3,6 +3,8 @@ from .models import Vehicle, EVStation
 from django.http import JsonResponse
 import requests
 from cache_manager import load_from_cache, save_to_cache
+from django.db.models import Count
+from django.forms.models import model_to_dict
 
 
 def get_address(lat, lon):
@@ -25,10 +27,9 @@ def get_address(lat, lon):
     if response.status_code == 200:
         data = response.json()
         content = (
-            data.get("address", {}).get("road", "Address not found")
+            data.get("address", {}).get("road")
             + ", "
-            + data.get("address", {}).get("postcode", "Address not found"),
-            "Address not found",
+            + data.get("address", {}).get("postcode"),
         )
         save_to_cache(lat, lon, content)
         print(f"Response from API: {content}")
@@ -39,10 +40,13 @@ def get_address(lat, lon):
 
 
 def find_transport(request):
-    vehicles = Vehicle.objects.filter(status=True)
+    return render(request, "find_transport.html")
+
+
+def get_vehicles(request):
     vehicle_type = request.GET.get("type")
     min_battery = request.GET.get("min_battery")
-
+    vehicles = Vehicle.objects.all()
     if vehicle_type:
         vehicles = vehicles.filter(type=vehicle_type)
     if min_battery:
@@ -51,21 +55,40 @@ def find_transport(request):
             vehicles = vehicles.filter(battery_percentage__gte=min_battery)
         except ValueError:
             return JsonResponse({"error": "Invalid battery percentage"}, status=400)
-    stations_data = []
-    for station in EVStation.objects.all():
-        station_vehicle_count = Vehicle.objects.filter(station=station).count()
-        stations_data.append(
-            {
-                "latitude": station.latitude,
-                "longitude": station.longitude,
-                "max_spaces": station.max_spaces,
-                "free_spaces": station.max_spaces - station_vehicle_count,
-                "address": get_address(station.latitude, station.longitude),
-            }
-        )
-
-    return render(
-        request,
-        "find_transport.html",
-        {"vehicles": vehicles, "stations": stations_data},
+    return JsonResponse(
+        list(
+            vehicles.values(
+                "id", "type", "battery_percentage", "price_per_hour", "station_id"
+            )
+        ),
+        safe=False,
     )
+
+
+def get_station(request):
+    station_id = request.GET.get("id")
+
+    if station_id and not station_id.isdigit():
+        return JsonResponse({"error": "Invalid ID"}, status=400)
+
+    if station_id:
+        station = EVStation.objects.filter(id=station_id).first()
+        if station:
+            return JsonResponse({"station": model_to_dict(station)})
+        return JsonResponse({"error": "Station not found"}, status=404)
+
+    # Підрахунок машин на всіх станціях одночасно
+    stations = EVStation.objects.annotate(vehicle_count=Count("vehicle"))
+
+    stations_data = [
+        {
+            "id": station.id,
+            "latitude": station.latitude,
+            "longitude": station.longitude,
+            "max_spaces": station.max_spaces,
+            "free_spaces": station.max_spaces - station.vehicle_count,
+            "address": get_address(station.latitude, station.longitude),
+        }
+        for station in stations
+    ]
+    return JsonResponse(stations_data, safe=False)

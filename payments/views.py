@@ -1,19 +1,21 @@
 from payments.forms import PaymentForm
+from paypal.standard.forms import PayPalPaymentsForm
 from django.utils import timezone
 import stripe
 from django.conf import settings
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.shortcuts import render, redirect , get_object_or_404
+from django.urls import reverse 
 from .models import Payment
 from find_transport.models import Vehicle
-from django.urls import reverse
+
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 
 def payment_view(request, vehicle_id):
-    vehicle = Vehicle.objects.get(id=vehicle_id)
+    vehicle = get_object_or_404(Vehicle, id=vehicle_id)
     hours = int(request.GET.get('hours', 1))
     total_amount = vehicle.price_per_hour * hours
 
@@ -36,7 +38,7 @@ def payment_success(request):
 
 def stripe_payment(request, vehicle_id):
  
-    vehicle = Vehicle.objects.get(id=vehicle_id)
+    vehicle = get_object_or_404(Vehicle, id=vehicle_id)
     hours = int(request.GET.get('hours', 1))
     total_amount = int(vehicle.price_per_hour * hours * 100)  
     description = f'Rent for {vehicle.type}'
@@ -87,13 +89,33 @@ def stripe_payment(request, vehicle_id):
         'total_amount': total_amount / 100,  
         })
 
-def paypal_payment(request, vehicle_id):
 
-    vehicle = Vehicle.objects.get(id=vehicle_id)
+
+def paypal_payment(request, vehicle_id):
+    vehicle = get_object_or_404(Vehicle, id=vehicle_id)
     hours = int(request.GET.get('hours', 1))
     total_amount = vehicle.price_per_hour * hours
+
+    # Get the host from the request
+    host = request.get_host()
+
+    # PayPal payment details
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': total_amount,
+        'item_name': f'Rent for {vehicle.type}',
+        'invoice': f'invoice-{vehicle.id}-{timezone.now().timestamp()}',
+        'currency_code': 'EUR',
+        'notify_url': f'http://{host}{reverse("paypal-ipn")}',
+        'return_url': request.build_absolute_uri(reverse('payment_success')),
+        'cancel_return': request.build_absolute_uri(reverse('find_transport:find_transport')),
+    }
+
+    # Create the PayPal form
+    paypal_form = PayPalPaymentsForm(initial=paypal_dict)
 
     return render(request, 'payments/paypal_payment.html', {
         'vehicle': vehicle,
         'total_amount': total_amount,
+        'form': paypal_form,
     })

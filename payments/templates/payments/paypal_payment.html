@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <h1>PayPal Payment</h1>
+    <p>You are renting {{ vehicle.type }} for {{ hours }} hour(s).</p>
+    <p>Total Amount: €{{ total_amount }}</p>
+        {% csrf_token %}
+        {{ form.render }}
+     
+</div>
+{% endblock %}

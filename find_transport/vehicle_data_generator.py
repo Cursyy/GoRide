@@ -19,7 +19,8 @@ for i in range(100):
     type = random.choice(["E-Bike", "Bike", "E-Scooter"])
     status = random.choice(["True", "False"])
     battery_percentage = random.randint(0, 100) if type != "Bike" else None
-    price_per_hour = random.uniform(0.5, 2.0)
+    price_per_hour = random.choice([1, 2, 1.5])
+    station_id = random.randint(0, 20)
 
     obj = {
         "id": i + 1,
@@ -29,6 +30,7 @@ for i in range(100):
         "status": status,
         "battery_percentage": battery_percentage,
         "price_per_hour": price_per_hour,
+        "station_id": station_id,
     }
     objects.append(obj)
 
