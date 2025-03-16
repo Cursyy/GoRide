@@ -7,27 +7,29 @@
 {% endblock %}
 
 {% block content %}
-<h2>{% trans "Available Transport" %}</h2>
-
-<form method="get" class="filter-form">
-    <div class="filter-item">
-        <label for="type">{% trans "Type:" %}</label>
-        <select name="type" id="type-filter">
-            <option value="">{% trans "All" %}</option>
-            <option value="E-Bike">{% trans "E-Bike" %}</option>
-            <option value="E-Scooter">{% trans "E-Scooter" %}</option>
-            <option value="Bike">{% trans "Bike" %}</option>
-        </select>
-    </div>
-
-    <div class="filter-item">
-        <label for="min_battery">{% trans "Minimum Battery:" %}</label>
-        <input type="number" name="min_battery" id="battery-filter" min="0" max="100" value="0">
-    </div>
-</form>
-
-<div id="map"></div>
-<div id="vehicle-container"></div>
+<section class="container">
+    <h2 class="my-4">{% trans "Available Transport" %}</h2>
+    <form method="get" class="filter-form w-100">
+        <div class="filter-item">
+            <label for="type">{% trans "Type:" %}</label>
+            <select name="type" id="type-filter">
+                <option value="">{% trans "All" %}</option>
+                <option value="E-Bike">{% trans "E-Bike" %}</option>
+                <option value="E-Scooter">{% trans "E-Scooter" %}</option>
+                <option value="Bike">{% trans "Bike" %}</option>
+            </select>
+        </div>
+    
+        <div class="filter-item">
+            <label for="min_battery">{% trans "Minimum Battery:" %}</label>
+            <input type="number" name="min_battery" id="battery-filter" min="0" max="100" value="0">
+        </div>
+    </form>
+    
+    <div id="map" class="my-4"></div>
+    
+    <div id="vehicle-container"></div>
+</section>
 
 <script src="{% static 'js/find_transport.js' %}"></script>
 

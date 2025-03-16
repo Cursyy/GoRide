@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.translation import gettext_lazy as _
 
 
 class EVStation(models.Model):
@@ -15,9 +16,9 @@ class EVStation(models.Model):
 
 class Vehicle(models.Model):
     TYPE_VEHICLE = [
-        ("Bike", "Bike"),
-        ("E-Bike", "E-Bike"),
-        ("E-Scooter", "E-Scooter"),
+        ("Bike", _("Bike")),
+        ("E-Bike", _("E-Bike")),
+        ("E-Scooter", _("E-Scooter")),
     ]
 
     id = models.AutoField(primary_key=True)

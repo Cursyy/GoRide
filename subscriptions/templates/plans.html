@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans "Choose a Subscription Plan" %} {% endblock %}
+
+{% block content %}
+<section class="subscriptions">
+    <h2 class="text-center my-5">{% trans "Choose a Subscription Plan" %}</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for plan in plans %}
+            <div class="col-md-4">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">{% trans plan.type %}</h4>
+                        <p class="card-text"><strong>{% trans "Price:" %}</strong> {{ plan.price }} €</p>
+                        <p class="card-text">
+                            <strong>{% trans "Ride Limit:" %}</strong>
+                            {% if plan.max_ride_hours %}{{ plan.max_ride_hours }}{% else %}{% trans "Unlimited" %}{% endif %}
+                        </p>
+                        <p class="card-text">
+                            <strong>{% trans "Transport type: "%}</strong>
+                            {% if plan.type == "Athlete" %}
+                            {% trans "Bike only" %}
+                            {% else %}
+                            {% trans "All types available" %}
+                            {% endif %}
+                        </p>
+                        <a href="{% url 'subscriptions:subscribe_user' plan.id %}" class="btn btn-primary">{% trans "Subscribe" %}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
