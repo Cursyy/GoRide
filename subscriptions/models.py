@@ -1,23 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils.timezone import now
 from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+from find_transport.models import Vehicle
 
 class SubscriptionPlan(models.Model):
-    DURATION_CHOICES = [
-        (1, _('Daily Subscription')),
-        (7, _('Weekly Subscription')),
-        (30, _('Monthly Subscription')),
+    TYPE_CHOICES = [
+        ("Daily", _('Daily Subscription')),
+        ("Weekly", _('Weekly Subscription')),
+        ("Monthly", _('Monthly Subscription')),
+        ("Student", _('Student')),
+        ("Athlete", _('Athlete')),
     ]
-
-    duration_days = models.IntegerField(choices=DURATION_CHOICES, unique=True)
+    type = models.CharField(max_length=10, choices=TYPE_CHOICES, unique=True, null=True, blank=True)
+    duration_days = models.IntegerField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    max_rides = models.IntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return self.get_duration_days_display()
+    max_ride_hours = models.IntegerField(null=True, blank=True)
 
 class UserSubscription(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -28,6 +27,16 @@ class UserSubscription(models.Model):
 
     def is_active(self):
         return self.end_date >= now()
+    
+    def can_use_vehicle(self):
+        if self.plan and self.plan.type == "Athlete" and Vehicle.type != "Bike":
+            return False
+        return True
+    
+    def has_time(self):
+        if self.plan and self.plan.remaining_rides > 0:
+            return True
+        return False
 
     def renew(self):
         if self.plan:

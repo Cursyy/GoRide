@@ -442,3 +442,16 @@ form input[type="file"] {
 #get-direction-button:hover {
     background-color: rgba(0, 123, 255, 1);
 }
+
+/* subscriptions */
+
+.subscriptions .card-body{
+    display: flex;
+    flex-direction: column;
+}
+.subscriptions .card-body > a{
+    align-self: flex-end;
+    background-color: var(--main-bg-color);
+    border: none;
+}
+/* subscriptions */

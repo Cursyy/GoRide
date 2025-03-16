@@ -210,14 +210,17 @@ msgid "All"
 msgstr "Всі"
 
 #: find_transport/templates/find_transport.html:14
+#: find_transport/models.py:20
 msgid "E-Bike"
 msgstr "Електровелосипед"
 
 #: find_transport/templates/find_transport.html:15
+#: find_transport/models.py:21
 msgid "E-Scooter"
 msgstr "Електросамокат"
 
 #: find_transport/templates/find_transport.html:16
+#: find_transport/models.py:19
 msgid "Bike"
 msgstr "Велосипед"
 

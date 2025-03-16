@@ -17,10 +17,10 @@ def subscribe_user(request, plan_id):
     subscription.plan = plan
     subscription.start_date = now()
     subscription.end_date = now() + timedelta(days=plan.duration_days)
-    subscription.remaining_rides = plan.max_rides
+    subscription.remaining_rides = plan.max_ride_hours
     subscription.save()
 
-    return redirect('subscription_success')
+    return redirect('subscriptions:subscription_success')
 
 @login_required
 def subscription_success(request):
