@@ -1,1207 +1,1302 @@
 [
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 1,
-        "latitude": 53.338439315963846,
-        "longitude": -6.263568536367589,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 1,
+        "latitude": 53.31373968834498,
+        "longitude": -6.285707823235164,
         "type": "Bike",
-        "status": "False",
+        "status": "True",
         "battery_percentage": null,
-        "price_per_hour": 1.2995645778953016
-        }
-            
-    },
+        "price_per_hour": 2,
+        "station_id": 17
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 2,
-        "latitude": 53.39494850817121,
-        "longitude": -6.274677841136953,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 11,
-        "price_per_hour": 1.380650812389205
-        }
-            
-    },
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 2,
+        "latitude": 53.379071562735334,
+        "longitude": -6.228726232009119,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 94,
+        "price_per_hour": 1,
+        "station_id": 7
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 3,
-        "latitude": 53.331514670623555,
-        "longitude": -6.207052273184652,
-        "type": "E-Bike",
-        "status": "True",
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 3,
+        "latitude": 53.31294433725971,
+        "longitude": -6.214640234689243,
+        "type": "E-Scooter",
+        "status": "False",
         "battery_percentage": 51,
-        "price_per_hour": 0.517050635567879
-        }
-            
-    },
+        "price_per_hour": 1,
+        "station_id": 5
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 4,
-        "latitude": 53.37874022262815,
-        "longitude": -6.289527521338416,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 0,
-        "price_per_hour": 1.2571325592247646
-        }
-            
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 5,
-        "latitude": 53.33112125346042,
-        "longitude": -6.2465203605173905,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 27,
-        "price_per_hour": 0.7889786792561866
-        }
-            
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 6,
-        "latitude": 53.347349205420336,
-        "longitude": -6.282204411594161,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 0.5205379126136865
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 7,
-        "latitude": 53.38099800510527,
-        "longitude": -6.283375919572791,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.696837293455759
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 8,
-        "latitude": 53.33832718921585,
-        "longitude": -6.289137207598388,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 4,
+        "latitude": 53.32275602624513,
+        "longitude": -6.273614200093774,
         "type": "E-Scooter",
         "status": "False",
-        "battery_percentage": 92,
-        "price_per_hour": 0.7975495411663105
-            }
-    },
+        "battery_percentage": 82,
+        "price_per_hour": 1.5,
+        "station_id": 3
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 9,
-        "latitude": 53.32799503076398,
-        "longitude": -6.226541165551427,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 5,
+        "latitude": 53.37051590602997,
+        "longitude": -6.20183234955425,
         "type": "E-Scooter",
-        "status": "True",
-        "battery_percentage": 65,
-        "price_per_hour": 0.5054934770386267
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 10,
-        "latitude": 53.38553441866387,
-        "longitude": -6.29022051636026,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 0.6375446876556172
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 11,
-        "latitude": 53.345064643363074,
-        "longitude": -6.269126556098892,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 0.9790686964760206
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 12,
-        "latitude": 53.31167810729045,
-        "longitude": -6.2440309055098755,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.9857587934688332
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 13,
-        "latitude": 53.3715662122076,
-        "longitude": -6.230902820606378,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.484931113545835
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 14,
-        "latitude": 53.38472738049302,
-        "longitude": -6.214803098023491,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 21,
-        "price_per_hour": 1.1397226892589205
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 15,
-        "latitude": 53.339917886683295,
-        "longitude": -6.258607315606406,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.6993247238725508
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 16,
-        "latitude": 53.308805313492336,
-        "longitude": -6.211326587784655,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 41,
-        "price_per_hour": 1.2086122251495721
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 17,
-        "latitude": 53.319223306557774,
-        "longitude": -6.225907818137375,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 36,
-        "price_per_hour": 0.5707846487974089
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 18,
-        "latitude": 53.380053568085145,
-        "longitude": -6.202227758356871,
-        "type": "E-Scooter",
-        "status": "True",
-        "battery_percentage": 33,
-        "price_per_hour": 1.7230531662505577
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 19,
-        "latitude": 53.398040525237874,
-        "longitude": -6.286776917266387,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 0.636294949256744
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 20,
-        "latitude": 53.37069187402203,
-        "longitude": -6.283648497348539,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.4599617134713312
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 21,
-        "latitude": 53.360030348658555,
-        "longitude": -6.219428218182092,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.4207465500314285
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 22,
-        "latitude": 53.33352207621149,
-        "longitude": -6.286918660142946,
-        "type": "E-Bike",
         "status": "True",
         "battery_percentage": 23,
-        "price_per_hour": 0.7710049307681023
-            }
-    },
+        "price_per_hour": 2,
+        "station_id": 1
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 23,
-        "latitude": 53.39851042758827,
-        "longitude": -6.221238880719493,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 87,
-        "price_per_hour": 1.7146329807889351
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 24,
-        "latitude": 53.387922989593044,
-        "longitude": -6.247089583836501,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 71,
-        "price_per_hour": 1.0228860899871017
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 25,
-        "latitude": 53.375418368999945,
-        "longitude": -6.238479970951028,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.7400327662128579
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 26,
-        "latitude": 53.31222775110242,
-        "longitude": -6.27945687433851,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 50,
-        "price_per_hour": 0.7911984596455777
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 27,
-        "latitude": 53.39234265958479,
-        "longitude": -6.262751338071949,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.7338253260395868
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 28,
-        "latitude": 53.31641887626395,
-        "longitude": -6.214881272344263,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 3,
-        "price_per_hour": 0.8626347824756777
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 29,
-        "latitude": 53.36999421833182,
-        "longitude": -6.288253168954885,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 6,
+        "latitude": 53.30072475798464,
+        "longitude": -6.2940444034575584,
         "type": "Bike",
         "status": "False",
         "battery_percentage": null,
-        "price_per_hour": 1.739982240980462
-            }
-    },
+        "price_per_hour": 1,
+        "station_id": 18
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 30,
-        "latitude": 53.389970645277295,
-        "longitude": -6.274864725433854,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 76,
-        "price_per_hour": 1.6401908414439283
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 31,
-        "latitude": 53.33438015306805,
-        "longitude": -6.270317117284534,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 7,
+        "latitude": 53.358115665341074,
+        "longitude": -6.254104526432942,
         "type": "Bike",
         "status": "False",
         "battery_percentage": null,
-        "price_per_hour": 0.8351285129898386
-            }
-    },
+        "price_per_hour": 1,
+        "station_id": 20
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 32,
-        "latitude": 53.35712722218399,
-        "longitude": -6.227968247262906,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 83,
-        "price_per_hour": 1.4968776573159248
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 33,
-        "latitude": 53.36644515571607,
-        "longitude": -6.2255122092191275,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 7,
-        "price_per_hour": 1.933621673507189
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 34,
-        "latitude": 53.34753006470176,
-        "longitude": -6.273930092048496,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 12,
-        "price_per_hour": 0.7296066156255977
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 35,
-        "latitude": 53.319392540813155,
-        "longitude": -6.24576667434342,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 8,
+        "latitude": 53.3121790711329,
+        "longitude": -6.2064724784636285,
         "type": "Bike",
         "status": "True",
         "battery_percentage": null,
-        "price_per_hour": 0.7249284516631247
-            }
-    },
+        "price_per_hour": 1,
+        "station_id": 17
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 36,
-        "latitude": 53.31399249431339,
-        "longitude": -6.285121335086953,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.2945582553399027
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 37,
-        "latitude": 53.32216889925475,
-        "longitude": -6.223449727842409,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.3046274749013886
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 38,
-        "latitude": 53.39788629116045,
-        "longitude": -6.229640645610605,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 55,
-        "price_per_hour": 1.633683077025942
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 39,
-        "latitude": 53.31877759975479,
-        "longitude": -6.219198937744593,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 68,
-        "price_per_hour": 1.1049910367297109
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 40,
-        "latitude": 53.31424917132346,
-        "longitude": -6.2436618692141845,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.6473475469635215
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 41,
-        "latitude": 53.30580493286979,
-        "longitude": -6.28517498191457,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.112936492789725
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 42,
-        "latitude": 53.350460954771044,
-        "longitude": -6.298093931655416,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 9,
+        "latitude": 53.3509067623348,
+        "longitude": -6.2418059569172275,
         "type": "E-Scooter",
         "status": "True",
-        "battery_percentage": 12,
-        "price_per_hour": 1.591314357670433
-            }
-    },
+        "battery_percentage": 85,
+        "price_per_hour": 1,
+        "station_id": 17
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 43,
-        "latitude": 53.35938578392079,
-        "longitude": -6.256094797090345,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 8,
-        "price_per_hour": 0.9303572210990112
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 44,
-        "latitude": 53.392419904639105,
-        "longitude": -6.2419193936228785,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.6874263761429813
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 45,
-        "latitude": 53.377730460234815,
-        "longitude": -6.244548140395394,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 7,
-        "price_per_hour": 0.9148317104856636
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 46,
-        "latitude": 53.35957046152607,
-        "longitude": -6.237648403857535,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 27,
-        "price_per_hour": 0.8679656439719916
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 47,
-        "latitude": 53.36010184994308,
-        "longitude": -6.249701770557884,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 0.6450004547950088
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 48,
-        "latitude": 53.366912417180686,
-        "longitude": -6.220049183568777,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 40,
-        "price_per_hour": 1.7634412281617322
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 49,
-        "latitude": 53.37143572026285,
-        "longitude": -6.24810366755131,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 0.5906803850377886
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 50,
-        "latitude": 53.3513398840512,
-        "longitude": -6.233171010338728,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.2108821298566044
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 51,
-        "latitude": 53.34684556787586,
-        "longitude": -6.253295419067394,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 0.8525942654852909
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 52,
-        "latitude": 53.30495858818694,
-        "longitude": -6.270957222949592,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.1833794105213624
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 53,
-        "latitude": 53.326352343140584,
-        "longitude": -6.235896873714567,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 53,
-        "price_per_hour": 1.3583895277477864
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 54,
-        "latitude": 53.34853290607291,
-        "longitude": -6.261418888704241,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.356904173451652
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 55,
-        "latitude": 53.39188942400078,
-        "longitude": -6.291711820431454,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 48,
-        "price_per_hour": 0.9474808495722602
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 56,
-        "latitude": 53.34271140489365,
-        "longitude": -6.24322183549478,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 8,
-        "price_per_hour": 0.8687448981113999
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 57,
-        "latitude": 53.36341776498331,
-        "longitude": -6.2424548067625185,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.4875546242562703
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 58,
-        "latitude": 53.35477972290809,
-        "longitude": -6.225084324154422,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 24,
-        "price_per_hour": 1.8860784449667962
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 59,
-        "latitude": 53.39396115889414,
-        "longitude": -6.229615185704558,
-        "type": "E-Scooter",
-        "status": "True",
-        "battery_percentage": 12,
-        "price_per_hour": 0.524549499092017
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 60,
-        "latitude": 53.39694631160648,
-        "longitude": -6.213069908623554,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 75,
-        "price_per_hour": 1.3785280010193586
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 61,
-        "latitude": 53.32935193292365,
-        "longitude": -6.283730938933021,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 43,
-        "price_per_hour": 1.7719485583237415
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 62,
-        "latitude": 53.3222173248621,
-        "longitude": -6.289872559773603,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.197551520320173
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 63,
-        "latitude": 53.354744429838675,
-        "longitude": -6.239637788295953,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 88,
-        "price_per_hour": 1.954846201955117
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 64,
-        "latitude": 53.38698220021571,
-        "longitude": -6.292020941888128,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 87,
-        "price_per_hour": 1.15088076647243
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 65,
-        "latitude": 53.32331974806578,
-        "longitude": -6.249938882746201,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 15,
-        "price_per_hour": 0.9025869932576112
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 66,
-        "latitude": 53.309713613090345,
-        "longitude": -6.2760890092064825,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 92,
-        "price_per_hour": 0.7467097832077252
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 67,
-        "latitude": 53.37473920493557,
-        "longitude": -6.236993308384454,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 87,
-        "price_per_hour": 1.950195301428157
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 68,
-        "latitude": 53.34702410172428,
-        "longitude": -6.247663791639821,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 0.9612203586537447
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 69,
-        "latitude": 53.37097219846524,
-        "longitude": -6.257851158747076,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 0.6565123472796481
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 70,
-        "latitude": 53.387192383148246,
-        "longitude": -6.2975008128213865,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 0.6920177858131125
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 71,
-        "latitude": 53.34350886784332,
-        "longitude": -6.232335186081826,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 18,
-        "price_per_hour": 1.324028272632063
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 72,
-        "latitude": 53.307712999215,
-        "longitude": -6.258261622463042,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 0.8060228744897583
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 73,
-        "latitude": 53.343128533958605,
-        "longitude": -6.278228774831737,
-        "type": "E-Bike",
-        "status": "True",
-        "battery_percentage": 63,
-        "price_per_hour": 1.1046825236206463
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 74,
-        "latitude": 53.37223994539325,
-        "longitude": -6.22323065141213,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 40,
-        "price_per_hour": 1.7010643825059686
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 75,
-        "latitude": 53.31169134171498,
-        "longitude": -6.2966712951020725,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 0.6172841839739016
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 76,
-        "latitude": 53.3938595496425,
-        "longitude": -6.255899370687067,
-        "type": "E-Scooter",
-        "status": "True",
-        "battery_percentage": 59,
-        "price_per_hour": 1.4206103688329197
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 77,
-        "latitude": 53.314239504260016,
-        "longitude": -6.247655808757265,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 0.5995835027272551
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 78,
-        "latitude": 53.355188638819726,
-        "longitude": -6.2327881446515505,
-        "type": "Bike",
-        "status": "False",
-        "battery_percentage": null,
-        "price_per_hour": 1.0561000381058863
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 79,
-        "latitude": 53.3302618722018,
-        "longitude": -6.2700192362225975,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 0.730945653499254
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 80,
-        "latitude": 53.37085137144858,
-        "longitude": -6.21192458525064,
-        "type": "E-Scooter",
-        "status": "False",
-        "battery_percentage": 34,
-        "price_per_hour": 1.8572853328411552
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 81,
-        "latitude": 53.34481402898352,
-        "longitude": -6.249143159136388,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 0.7980984180798366
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 82,
-        "latitude": 53.336142387435864,
-        "longitude": -6.264505708750432,
-        "type": "E-Scooter",
-        "status": "True",
-        "battery_percentage": 0,
-        "price_per_hour": 0.7853042839258906
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 83,
-        "latitude": 53.33215457851881,
-        "longitude": -6.289763506412206,
-        "type": "E-Scooter",
-        "status": "True",
-        "battery_percentage": 40,
-        "price_per_hour": 0.7811443312709475
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 84,
-        "latitude": 53.36249138860513,
-        "longitude": -6.270952749290949,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 10,
+        "latitude": 53.30073449339503,
+        "longitude": -6.247318065610822,
         "type": "E-Bike",
         "status": "True",
         "battery_percentage": 64,
-        "price_per_hour": 0.8593867713395043
-            }
-    },
+        "price_per_hour": 1,
+        "station_id": 20
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 85,
-        "latitude": 53.30754708567026,
-        "longitude": -6.2135585954366235,
-        "type": "E-Scooter",
-        "status": "True",
-        "battery_percentage": 71,
-        "price_per_hour": 1.6738978373543345
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 86,
-        "latitude": 53.33893034390522,
-        "longitude": -6.211873439454947,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 75,
-        "price_per_hour": 1.495875776692793
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 87,
-        "latitude": 53.37543025965834,
-        "longitude": -6.295265535335542,
-        "type": "E-Bike",
-        "status": "False",
-        "battery_percentage": 2,
-        "price_per_hour": 1.9633554957014363
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 88,
-        "latitude": 53.3357964575481,
-        "longitude": -6.202557499281233,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 11,
+        "latitude": 53.36928513353008,
+        "longitude": -6.261458282165023,
         "type": "Bike",
         "status": "True",
         "battery_percentage": null,
-        "price_per_hour": 0.5918245649817436
-            }
-    },
+        "price_per_hour": 1,
+        "station_id": 8
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 89,
-        "latitude": 53.35266035132139,
-        "longitude": -6.299087612776286,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 12,
+        "latitude": 53.35567118709876,
+        "longitude": -6.204701365969674,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 13,
+        "latitude": 53.30221069411903,
+        "longitude": -6.264434340375766,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 90,
+        "price_per_hour": 1.5,
+        "station_id": 20
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 14,
+        "latitude": 53.36232538158836,
+        "longitude": -6.2570693243029964,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 82,
+        "price_per_hour": 2,
+        "station_id": 20
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 15,
+        "latitude": 53.36329455270021,
+        "longitude": -6.207187595264777,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 22,
+        "price_per_hour": 1,
+        "station_id": 2
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 16,
+        "latitude": 53.397008250407104,
+        "longitude": -6.270246950658469,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 62,
+        "price_per_hour": 1,
+        "station_id": 12
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 17,
+        "latitude": 53.3366074664929,
+        "longitude": -6.2588374648607585,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 31,
+        "price_per_hour": 1,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 18,
+        "latitude": 53.3687625659754,
+        "longitude": -6.287333562166287,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 72,
+        "price_per_hour": 1,
+        "station_id": 20
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 19,
+        "latitude": 53.32751618114697,
+        "longitude": -6.206424874197987,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 90,
+        "price_per_hour": 2,
+        "station_id": 3
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 20,
+        "latitude": 53.332304049908245,
+        "longitude": -6.267310971217362,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 52,
+        "price_per_hour": 2,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 21,
+        "latitude": 53.327803566498936,
+        "longitude": -6.2740450063670234,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 6
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 22,
+        "latitude": 53.37647593645125,
+        "longitude": -6.269226895018882,
         "type": "E-Bike",
         "status": "False",
-        "battery_percentage": 25,
-        "price_per_hour": 1.4915206359758262
-            }
-    },
+        "battery_percentage": 0,
+        "price_per_hour": 2,
+        "station_id": 20
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 90,
-        "latitude": 53.32332809661767,
-        "longitude": -6.202821098526193,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 23,
+        "latitude": 53.31446646905944,
+        "longitude": -6.23119013880866,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 55,
+        "price_per_hour": 2,
+        "station_id": 7
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 24,
+        "latitude": 53.35704221222257,
+        "longitude": -6.202866871997522,
         "type": "E-Scooter",
         "status": "False",
         "battery_percentage": 86,
-        "price_per_hour": 1.4525848316903736
-            }
-    },
+        "price_per_hour": 2,
+        "station_id": 17
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 91,
-        "latitude": 53.34473342119485,
-        "longitude": -6.295743471306819,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 25,
+        "latitude": 53.31178196274709,
+        "longitude": -6.249437567092013,
         "type": "E-Scooter",
         "status": "True",
-        "battery_percentage": 77,
-        "price_per_hour": 1.116381373741994
-            }
-    },
+        "battery_percentage": 81,
+        "price_per_hour": 2,
+        "station_id": 1
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 92,
-        "latitude": 53.338117039745654,
-        "longitude": -6.219416346312996,
-        "type": "E-Scooter",
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 26,
+        "latitude": 53.321824146153936,
+        "longitude": -6.234368884418443,
+        "type": "Bike",
         "status": "True",
-        "battery_percentage": 33,
-        "price_per_hour": 1.5170178474198357
-            }
-    },
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 15
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 93,
-        "latitude": 53.331470744271456,
-        "longitude": -6.299742405108959,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 27,
+        "latitude": 53.311494993576794,
+        "longitude": -6.2861746833984276,
         "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 68,
+        "price_per_hour": 1,
+        "station_id": 14
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 28,
+        "latitude": 53.33328201850481,
+        "longitude": -6.299256529861142,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 13
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 29,
+        "latitude": 53.340462162440325,
+        "longitude": -6.2213335321521726,
+        "type": "Bike",
         "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 14
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 30,
+        "latitude": 53.37613080982822,
+        "longitude": -6.200235473917155,
+        "type": "E-Bike",
+        "status": "True",
+        "battery_percentage": 74,
+        "price_per_hour": 1.5,
+        "station_id": 3
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 31,
+        "latitude": 53.30292229522531,
+        "longitude": -6.204056740084085,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 16
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 32,
+        "latitude": 53.311574655878985,
+        "longitude": -6.201585416944256,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 36,
+        "price_per_hour": 1,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 33,
+        "latitude": 53.384158130570114,
+        "longitude": -6.216833735673903,
+        "type": "E-Bike",
+        "status": "False",
         "battery_percentage": 56,
-        "price_per_hour": 1.5293608849687823
-            }
-    },
+        "price_per_hour": 1,
+        "station_id": 13
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 94,
-        "latitude": 53.31017715808096,
-        "longitude": -6.223156058959479,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 34,
+        "latitude": 53.310248593780244,
+        "longitude": -6.271386851991306,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 17
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 35,
+        "latitude": 53.37653951896576,
+        "longitude": -6.228054497991168,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 19,
+        "price_per_hour": 1.5,
+        "station_id": 2
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 36,
+        "latitude": 53.31318760137789,
+        "longitude": -6.224421494943914,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 100,
+        "price_per_hour": 1.5,
+        "station_id": 13
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 37,
+        "latitude": 53.32787248037838,
+        "longitude": -6.202266306882755,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 75,
+        "price_per_hour": 2,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 38,
+        "latitude": 53.33348199469596,
+        "longitude": -6.243781537718969,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 17
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 39,
+        "latitude": 53.38442038754912,
+        "longitude": -6.202684326823792,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 5
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 40,
+        "latitude": 53.36462796115527,
+        "longitude": -6.232978215987074,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 3,
+        "price_per_hour": 1,
+        "station_id": 19
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 41,
+        "latitude": 53.33818686293636,
+        "longitude": -6.2226775032382164,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 93,
+        "price_per_hour": 1,
+        "station_id": 7
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 42,
+        "latitude": 53.35387668786366,
+        "longitude": -6.239933758228899,
         "type": "E-Scooter",
         "status": "True",
-        "battery_percentage": 26,
-        "price_per_hour": 0.6837125615135005
-            }
-    },
+        "battery_percentage": 19,
+        "price_per_hour": 2,
+        "station_id": 9
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 95,
-        "latitude": 53.384553782860934,
-        "longitude": -6.2686100798421975,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 43,
+        "latitude": 53.34027619769427,
+        "longitude": -6.258448900454201,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 5
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 44,
+        "latitude": 53.30506880936755,
+        "longitude": -6.257536107663106,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 38,
+        "price_per_hour": 1,
+        "station_id": 16
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 45,
+        "latitude": 53.30400486652414,
+        "longitude": -6.2742492140828565,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 84,
+        "price_per_hour": 2,
+        "station_id": 3
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 46,
+        "latitude": 53.33269239469985,
+        "longitude": -6.290253219221591,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 24,
+        "price_per_hour": 1.5,
+        "station_id": 17
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 47,
+        "latitude": 53.32244173577883,
+        "longitude": -6.223895284374566,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 20,
+        "price_per_hour": 1,
+        "station_id": 19
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 48,
+        "latitude": 53.33978515152445,
+        "longitude": -6.2209820313475905,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 6
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 49,
+        "latitude": 53.36443771482964,
+        "longitude": -6.262124447299888,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 13
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 50,
+        "latitude": 53.328884748121325,
+        "longitude": -6.233964806595496,
         "type": "E-Bike",
         "status": "False",
-        "battery_percentage": 7,
-        "price_per_hour": 0.7353609947817641
-            }
-    },
+        "battery_percentage": 92,
+        "price_per_hour": 1,
+        "station_id": 10
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 96,
-        "latitude": 53.397438208987275,
-        "longitude": -6.27577764942161,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.2722724394420908
-            }
-    },
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 51,
+        "latitude": 53.3527547292031,
+        "longitude": -6.207327961704552,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 99,
+        "price_per_hour": 1,
+        "station_id": 16
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 97,
-        "latitude": 53.39932901883111,
-        "longitude": -6.234159902879888,
-        "type": "Bike",
-        "status": "True",
-        "battery_percentage": null,
-        "price_per_hour": 1.5358540403804586
-            }
-    },
-    {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 98,
-        "latitude": 53.32161115846168,
-        "longitude": -6.236979268230905,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 52,
+        "latitude": 53.35460123399624,
+        "longitude": -6.224420467580764,
         "type": "E-Bike",
         "status": "False",
-        "battery_percentage": 40,
-        "price_per_hour": 1.1791805491854672
-            }
-    },
+        "battery_percentage": 73,
+        "price_per_hour": 2,
+        "station_id": 9
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 99,
-        "latitude": 53.36657385039541,
-        "longitude": -6.257148779329864,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 53,
+        "latitude": 53.32874899078192,
+        "longitude": -6.275979274628638,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 2,
+        "station_id": 7
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 54,
+        "latitude": 53.33155505390845,
+        "longitude": -6.262347586691973,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 16
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 55,
+        "latitude": 53.32394165477629,
+        "longitude": -6.2940421921408,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 83,
+        "price_per_hour": 2,
+        "station_id": 18
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 56,
+        "latitude": 53.3597369603678,
+        "longitude": -6.207443209467972,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 45,
+        "price_per_hour": 1.5,
+        "station_id": 18
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 57,
+        "latitude": 53.39310355649879,
+        "longitude": -6.243267054335498,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 63,
+        "price_per_hour": 2,
+        "station_id": 17
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 58,
+        "latitude": 53.373056952208934,
+        "longitude": -6.26550661029235,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 100,
+        "price_per_hour": 1,
+        "station_id": 8
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 59,
+        "latitude": 53.34792517765983,
+        "longitude": -6.2204422468944855,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 19,
+        "price_per_hour": 2,
+        "station_id": 18
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 60,
+        "latitude": 53.39072170188602,
+        "longitude": -6.282749183856658,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 2,
+        "station_id": 17
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 61,
+        "latitude": 53.39821765708844,
+        "longitude": -6.209846754976194,
         "type": "Bike",
         "status": "True",
         "battery_percentage": null,
-        "price_per_hour": 1.521951057208772
-            }
-    },
+        "price_per_hour": 2,
+        "station_id": 9
+    }
+        },
     {
-        "model":"find_transport.vehicle",
-        "fields":{
-        "id": 100,
-        "latitude": 53.317788669877174,
-        "longitude": -6.229713401260187,
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 62,
+        "latitude": 53.34184915960197,
+        "longitude": -6.2295061601555455,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 57,
+        "price_per_hour": 1,
+        "station_id": 12
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 63,
+        "latitude": 53.36879267514735,
+        "longitude": -6.279411414386491,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 76,
+        "price_per_hour": 1,
+        "station_id": 4
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 64,
+        "latitude": 53.375105424886996,
+        "longitude": -6.247462338568495,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 2,
+        "station_id": 14
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 65,
+        "latitude": 53.34460473081511,
+        "longitude": -6.220393582416098,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 2,
+        "station_id": 14
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 66,
+        "latitude": 53.36936096161331,
+        "longitude": -6.222786572273139,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 2,
+        "station_id": 6
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 67,
+        "latitude": 53.303854271354176,
+        "longitude": -6.285277460375511,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 2
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 68,
+        "latitude": 53.359203623602625,
+        "longitude": -6.258561480341703,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 39,
+        "price_per_hour": 2,
+        "station_id": 11
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 69,
+        "latitude": 53.38794751040315,
+        "longitude": -6.21761651168068,
+        "type": "E-Bike",
+        "status": "True",
+        "battery_percentage": 6,
+        "price_per_hour": 1,
+        "station_id": 13
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 70,
+        "latitude": 53.300266121834554,
+        "longitude": -6.2679028008597575,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 11
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 71,
+        "latitude": 53.32907629785631,
+        "longitude": -6.2428584400301155,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 89,
+        "price_per_hour": 1.5,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 72,
+        "latitude": 53.31670905516063,
+        "longitude": -6.247860949736927,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 13
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 73,
+        "latitude": 53.36519365192066,
+        "longitude": -6.255303653151061,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 90,
+        "price_per_hour": 1.5,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 74,
+        "latitude": 53.307353881071535,
+        "longitude": -6.210432529016385,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 86,
+        "price_per_hour": 2,
+        "station_id": 14
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 75,
+        "latitude": 53.33863792571317,
+        "longitude": -6.222594825364348,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 65,
+        "price_per_hour": 2,
+        "station_id": 3
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 76,
+        "latitude": 53.30706947541068,
+        "longitude": -6.245319459260163,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 69,
+        "price_per_hour": 2,
+        "station_id": 3
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 77,
+        "latitude": 53.334256700044904,
+        "longitude": -6.276217547705296,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 78,
+        "latitude": 53.303872326325106,
+        "longitude": -6.2339644183676,
+        "type": "E-Bike",
+        "status": "True",
+        "battery_percentage": 98,
+        "price_per_hour": 2,
+        "station_id": 2
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 79,
+        "latitude": 53.39080727619743,
+        "longitude": -6.216268601959175,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 54,
+        "price_per_hour": 2,
+        "station_id": 9
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 80,
+        "latitude": 53.376189737487536,
+        "longitude": -6.252488017056757,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 5
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 81,
+        "latitude": 53.38510076040982,
+        "longitude": -6.270913438333944,
         "type": "E-Bike",
         "status": "False",
         "battery_percentage": 38,
-        "price_per_hour": 1.245389368717426
+        "price_per_hour": 2,
+        "station_id": 7
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 82,
+        "latitude": 53.36101612206978,
+        "longitude": -6.2359079981146825,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 10,
+        "price_per_hour": 2,
+        "station_id": 15
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 83,
+        "latitude": 53.34123887532721,
+        "longitude": -6.242419110263236,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 34,
+        "price_per_hour": 1.5,
+        "station_id": 3
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 84,
+        "latitude": 53.35486582164165,
+        "longitude": -6.275563704714219,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 52,
+        "price_per_hour": 2,
+        "station_id": 16
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 85,
+        "latitude": 53.30106152852508,
+        "longitude": -6.223396222803962,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 93,
+        "price_per_hour": 1.5,
+        "station_id": 6
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 86,
+        "latitude": 53.34598811905846,
+        "longitude": -6.242476605047522,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 97,
+        "price_per_hour": 1,
+        "station_id": 13
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 87,
+        "latitude": 53.31221651658249,
+        "longitude": -6.23027437031027,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 88,
+        "latitude": 53.30637854315194,
+        "longitude": -6.234113090907341,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 2,
+        "station_id": 2
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 89,
+        "latitude": 53.39731609401425,
+        "longitude": -6.21541317077982,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 20,
+        "price_per_hour": 2,
+        "station_id": 13
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 90,
+        "latitude": 53.3224324586126,
+        "longitude": -6.233590957685065,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 5,
+        "price_per_hour": 2,
+        "station_id": 16
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 91,
+        "latitude": 53.32893101659117,
+        "longitude": -6.270198007391694,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 40,
+        "price_per_hour": 1.5,
+        "station_id": 17
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 92,
+        "latitude": 53.32496863618426,
+        "longitude": -6.278698835595435,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 10,
+        "price_per_hour": 1,
+        "station_id": 8
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 93,
+        "latitude": 53.392161104321396,
+        "longitude": -6.253460446558629,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 3
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 94,
+        "latitude": 53.377787375724466,
+        "longitude": -6.258440098826972,
+        "type": "Bike",
+        "status": "True",
+        "battery_percentage": null,
+        "price_per_hour": 1.5,
+        "station_id": 19
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 95,
+        "latitude": 53.395801134070055,
+        "longitude": -6.259625566355496,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 30,
+        "price_per_hour": 2,
+        "station_id": 4
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 96,
+        "latitude": 53.3206610836766,
+        "longitude": -6.233138439094004,
+        "type": "Bike",
+        "status": "False",
+        "battery_percentage": null,
+        "price_per_hour": 1,
+        "station_id": 16
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 97,
+        "latitude": 53.352437345387784,
+        "longitude": -6.21181486917077,
+        "type": "E-Bike",
+        "status": "True",
+        "battery_percentage": 96,
+        "price_per_hour": 2,
+        "station_id": 1
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 98,
+        "latitude": 53.38449228757922,
+        "longitude": -6.268488491066608,
+        "type": "E-Bike",
+        "status": "False",
+        "battery_percentage": 61,
+        "price_per_hour": 1.5,
+        "station_id": 5
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 99,
+        "latitude": 53.34352054332774,
+        "longitude": -6.211164009197549,
+        "type": "E-Scooter",
+        "status": "False",
+        "battery_percentage": 72,
+        "price_per_hour": 1.5,
+        "station_id": 7
+    }
+        },
+    {
+        "model": "find_transport.vehicle",
+            "fields": {
+"id": 100,
+        "latitude": 53.373267638020515,
+        "longitude": -6.267226995344394,
+        "type": "E-Scooter",
+        "status": "True",
+        "battery_percentage": 3,
+        "price_per_hour": 1.5,
+        "station_id": 2
     }
     }
 ]

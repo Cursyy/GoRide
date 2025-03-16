@@ -403,3 +403,23 @@ form input[type="file"] {
 
 /*map*/
 #map { height: 400px;}
+
+/*get direction button*/
+#get-direction-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: rgba(0, 123, 255, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#get-direction-button:hover {
+    background-color: rgba(0, 123, 255, 1);
+}
