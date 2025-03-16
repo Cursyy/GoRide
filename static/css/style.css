@@ -455,3 +455,10 @@ form input[type="file"] {
     border: none;
 }
 /* subscriptions */
+
+/* paypal button style*/
+.paypalbutton{
+    width: 200px; 
+    height: auto; /
+}
+
