@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "find_transport",
     "payments",
     "subscriptions",
-    # "vouchers",
+    "vouchers",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",

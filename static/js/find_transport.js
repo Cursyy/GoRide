@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const batteryFilter = document.getElementById("battery-filter");
     const typeFilter = document.getElementById("type-filter");
-    
+
+
     console.log(currentStation)
     batteryFilter.addEventListener("input", function() {
         document.getElementById("battery-value").innerText = this.value;
@@ -20,7 +21,67 @@ document.addEventListener("DOMContentLoaded", function() {
 
     typeFilter.addEventListener("change",function(){ loadVehicles(currentStation)});
 
+    
+
 });
+document.addEventListener("submit", async function(event) {
+    if (!event.target.matches(".voucher-form")) return;
+
+    event.preventDefault();
+
+    console.log("Form submitted!");
+
+    const form = event.target;
+    const vehicleId = form.getAttribute("data-vehicle-id");
+    const voucherCode = form.querySelector("input[name='voucher']").value;
+    const voucherType = form.querySelector("input[name='voucher_type']").value;
+
+    console.log({
+        vehicle_id: vehicleId,
+        code: voucherCode,
+        type: voucherType
+    });
+
+    try {
+        const response = await fetch(`api/voucher`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify({
+                vehicle_id: vehicleId,
+                code: voucherCode,
+                type: voucherType
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(`Voucher applied successfully. New price: €${data.price}`);
+        } else {
+            alert(`Error: ${data.error}`);
+        }
+    } catch (error) {
+        console.error("Error applying voucher:", error);
+        alert("Something went wrong. Please try again.");
+    }
+});
+function getCookie(name){
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
 async function loadStations() {
     const response = await fetch('api/stations');
@@ -134,6 +195,12 @@ async function loadVehicles(stationId = null) {
                 </div>
             </div>
             <div class="vehicle-price col-12 col-lg-4">
+        <form class="voucher-form" data-vehicle-id="${vehicle.id}">
+            <label for="voucher-${vehicle.id}">Voucher code:</label>
+            <input type="text" id="voucher-${vehicle.id}" name="voucher" placeholder="Enter voucher code">
+            <input type="hidden" name="voucher_type" value="vehicle">
+            <button type="submit">Apply</button>
+        </form>
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
                 <form method="get" action="/payments/payment/${vehicle.id}/stripe/" class="d-flex">
                     <input type="number" name="hours" min="1" value="1" class="hours-input">
