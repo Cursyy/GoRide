@@ -173,6 +173,7 @@ form input[type="file"] {
     color: var(--main-bg-color);
 }
 
+
 /*support button*/
 .chat-button {
     position: fixed;
@@ -295,10 +296,9 @@ form input[type="file"] {
 
 /* Vehicle price styles */
 .vehicle-price {
-    width: 30%;
     padding: 10px;
     text-align: center;
-    background-color: #f8f8f8;
+    background-color: var(--main-font-color);
 }
 
 .vehicle-price form{

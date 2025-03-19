@@ -321,8 +321,8 @@ msgid "Rentals"
 msgstr "Оренда"
 
 #: main/templates/header.html:25
-msgid "Contact"
-msgstr "Контакти"
+msgid "Plans"
+msgstr "Плани"
 
 #: main/templates/header.html:58
 msgid "Logout"

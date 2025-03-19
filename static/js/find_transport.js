@@ -107,6 +107,7 @@ async function loadVehicles(stationId = null) {
         const vehicleCard = document.createElement('div');
         vehicleCard.classList.add('vehicle-card');
         vehicleCard.classList.add('w-100');
+        vehicleCard.classList.add('row');
 
         let imgSrc;
         switch (vehicle.type) {
@@ -124,13 +125,15 @@ async function loadVehicles(stationId = null) {
         }
 
         vehicleCard.innerHTML = `
-            <div class="vehicle-image"><img src="${imgSrc}" alt="${vehicle.type} image"/></div>
-            <div class="vehicle-details">
-                <h3>${vehicle.type}</h3>
-                ${vehicle.battery_percentage !== null ? `<p>Battery: ${vehicle.battery_percentage}%</p>` : ""}
-                <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" target="_blank">Show on Map</a>
+            <div class="left-part col-12 col-lg-8">
+                <div class="vehicle-image"><img src="${imgSrc}" alt="${vehicle.type} image"/></div>
+                <div class="vehicle-details">
+                    <h3>${vehicle.type}</h3>
+                    ${vehicle.battery_percentage !== null ? `<p>Battery: ${vehicle.battery_percentage}%</p>` : ""}
+                    <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" target="_blank">Show on Map</a>
+                </div>
             </div>
-            <div class="vehicle-price">
+            <div class="vehicle-price col-12 col-lg-4">
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
                 <form method="get" action="/payments/payment/${vehicle.id}/stripe/" class="d-flex">
                     <input type="number" name="hours" min="1" value="1" class="hours-input">
