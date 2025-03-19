@@ -320,8 +320,8 @@ msgid "Rentals"
 msgstr "Cíosanna"
 
 #: main/templates/header.html:25
-msgid "Contact"
-msgstr "Teagmháil"
+msgid "Plans"
+msgstr "Síntiúis"
 
 #: main/templates/header.html:58
 msgid "Logout"

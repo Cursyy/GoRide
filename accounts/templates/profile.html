@@ -7,11 +7,27 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="profile-card p-4 text-center my_custom_div rounded">
-                <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/default_avatar.png{% endif %}"
-     alt="Profile Picture" class="rounded-circle border border-light mb-3" width="120" height="120">
-                <h2 class="my_title">{{ user.username }}</h2>
-                <p>{% trans "Email" %}: <span class="text-muted">{{ user.email }}</span></p>
-                <p>{% trans "Phone" %}: <span class="text-muted">{{ user.phone_num|default:"N/A" }}</span></p>
+                <div class="profile-title">
+                    <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/images/default-avatar.png{% endif %}"
+                        alt="Profile Picture" class="rounded-circle border border-light mb-3" width="120" height="120">
+                    <h2 class="my_title">{{ user.username }}</h2>
+                </div>
+                <div class="user-information text-start">
+                    <p>{% trans "Email" %}: <span class="text-muted">{{ user.email }}</span></p>
+                    <p>{% trans "Phone" %}: <span class="text-muted">{{ user.phone_num|default:"N/A" }}</span></p>
+                </div>
+                <div class="user-subscription text-start">
+                    {% if subscription and subscription.is_active %}
+                        <p><span class="w-25">{% trans "Subscription"%}:</span> <span class="text-muted">{{ subscription.plan.type}}</span></p>
+                        <p><span class="w-25">{% trans "Start date" %}: </span> <span class="text-muted">{{subscription.start_date}}</span></p>
+                        <p><span class="w-25">{% trans "End date" %}:   </span> <span class="text-muted">{{subscription.end_date}}</span></p>
+                    {% else %}
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="m-0">{% trans "Subscription" %}: <span class="text-muted">you have no active subscrriptions</span></p>
+                        <a href="{% url 'subscriptions:subscription_plans' %}" class="btn btn-secondary">Choose plan</a>
+                    </div>
+                    {% endif %}
+                </div>
                 <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary mt-3">{% trans "Edit Profile" %}</a>
             </div>
         </div>

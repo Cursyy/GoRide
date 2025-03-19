@@ -3,6 +3,7 @@ from django.utils.timezone import now, timedelta
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
 from .models import SubscriptionPlan, UserSubscription
+from django.contrib import messages
 
 @login_required
 def subscription_plans(request):
@@ -14,12 +15,11 @@ def subscribe_user(request, plan_id):
     plan = get_object_or_404(SubscriptionPlan, id=plan_id)
     subscription, created = UserSubscription.objects.get_or_create(user=request.user)
 
-    subscription.plan = plan
-    subscription.start_date = now()
-    subscription.end_date = now() + timedelta(days=plan.duration_days)
-    subscription.remaining_rides = plan.max_ride_hours
-    subscription.save()
+    if subscription.is_active():
+        messages.error(request, _("You already have an active subscription."))
+        return redirect('subscriptions:subscription_plans')
 
+    subscription.activate(plan)
     return redirect('subscriptions:subscription_success')
 
 @login_required
