@@ -426,10 +426,10 @@ form input[type="file"] {
 /*get direction button*/
 #get-direction-button {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 330px;
+    left:320px;
     padding: 10px 20px;
-    background-color: rgba(0, 123, 255, 0.7);
+    background-color: #0E6655;
     color: white;
     border: none;
     border-radius: 5px;
@@ -437,10 +437,11 @@ form input[type="file"] {
     cursor: pointer;
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 8%;
 }
 
 #get-direction-button:hover {
-    background-color: rgba(0, 123, 255, 1);
+    background-color: #14493e;
 }
 
 /* subscriptions */

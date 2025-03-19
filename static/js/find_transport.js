@@ -1,7 +1,7 @@
 let currentStation = null;
 let userLat = null;
 let userLon = null;
-let activeRequest = null;
+let activeController = null;
 let routeLayer = null;
 let map = null;
 
@@ -157,11 +157,6 @@ function createButton(){
         button.id = "get-direction-button";
         button.textContent = "Get Direction";
 
-        button.style.position = "absolute";
-        button.style.top = "300px";
-        button.style.left = "50px";
-        button.style.zIndex = "1000";
-
         document.body.appendChild(button);
     }
 
@@ -174,50 +169,51 @@ function createButton(){
     });
 }
 
-async function getDirection(stationId=null){
-try{
-    const response = await fetch(`api/stations?id=${stationId}`);
-    if(!response.ok){
-        console.error("Error fetching station",response.status)
-        return;
-    }
-
-    const data = await response.json();
-    const station = data.station
-    if (!station || !station.latitude || !station.longitude) {
-        console.error("Invalid station data:", station);
-        return;
-    }
-
-    if(activeRequest){
-        activeRequest.abort();
-    }
-    activeRequest = new XMLHttpRequest();
-    const start = `${userLon},${userLat}`;
-    const end = `${station.longitude},${station.latitude}`;
-    const api_key = '';
-    activeRequest.open('GET', `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${api_key}&start=${start}&end=${end}`);
-
-    activeRequest.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
-    activeRequest.onreadystatechange = function () {
-    if (this.readyState === 4) {
-        if (this.status === 200){
-    
-            const routeData = JSON.parse(this.responseText);
-            const cordinates = routeData.features[0].geometry.coordinates;
-        
-            drawRouteOnMap(cordinates,userLat,userLon);
-        }else{
-            console.error("Error in route request,",this.responseText);
+async function getDirection(stationId = null) {
+    try {
+        if (activeController) {
+            activeController.abort();
         }
-        activeRequest=null;
-        }
-    };
 
-    activeRequest.send();
+        activeController = new AbortController();
+        const stationSignal = activeController.signal;
+
+        const response = await fetch(`api/stations?id=${stationId}`, { signal: stationSignal });
+        if (!response.ok) {
+            console.error("Error fetching station", response.status);
+            return;
+        }
+
+        const data = await response.json();
+        const station = data.station;
+
+        if (!station || !station.latitude || !station.longitude) {
+            console.error("Invalid station data:", station);
+            return;
+        }
+
+        const directionController = new AbortController();
+        const directionSignal = directionController.signal;
+
+        const api_response = await fetch(`api/get_direction/${station.id}/${userLon}/${userLat}`, { signal: directionSignal });
+
+        if (!api_response.ok) {
+            console.error("Error fetching direction", api_response.status);
+            return;
+        }
+
+        const api_data = await api_response.json();
+        console.log(api_data);
+
+        const coordinates = api_data.features[0].geometry.coordinates;
+        drawRouteOnMap(coordinates, userLat, userLon);
 
     } catch (error) {
-        console.error("Error in getDirection:", error);
+        if (error.name === 'AbortError') {
+            console.log("Previous request aborted");
+        } else {
+            console.error("Error in getDirection:", error);
+        }
     }
 }
 function drawRouteOnMap(coordinates, userLat, userLon) {
@@ -225,15 +221,13 @@ function drawRouteOnMap(coordinates, userLat, userLon) {
         map.removeLayer(routeLayer);
     }
 
-    const latLngs = coordinates.map(coord => [coord[1], coord[0]]); // Correct order: [lat, lng]
+    const latLngs = coordinates.map(coord => [coord[1], coord[0]]);
 
-    // Create new polyline
     routeLayer = L.polyline(latLngs, { color: 'blue' });
 
-    // Check if map is initialized
     if (map) {
-        routeLayer.addTo(map);  // Add polyline to map
-        map.fitBounds(routeLayer.getBounds());  // Adjust the view to fit the route
+        routeLayer.addTo(map);
+        map.fitBounds(routeLayer.getBounds());
     } else {
         console.error("Map is not initialized");
     }
