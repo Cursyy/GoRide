@@ -27,23 +27,25 @@ class UserSubscription(models.Model):
     start_date = models.DateTimeField(default=now)
     end_date = models.DateTimeField(null=True, blank=True)
     remaining_rides = models.IntegerField(null=True, blank=True)
+    is_paid = models.BooleanField(default=False)
 
     def is_active(self):
-        return self.end_date >= now()
+        return self.is_paid and self.end_date >= now()
     
-    def can_use_vehicle(self):
-        if self.plan and self.plan.type == "Athlete" and Vehicle.type != "Bike":
+    def can_use_vehicle(self, vehicle):
+        if self.plan and self.plan.type == "Athlete" and vehicle.type != "Bike":
             return False
         return True
     
     def has_time(self):
-        if self.plan and self.plan.remaining_rides > 0:
+        if self.plan and self.remaining_rides > 0:
             return True
         return False
 
-    def renew(self):
-        if self.plan:
-            self.start_date = now()
-            self.end_date = now() + timedelta(days=self.plan.duration_days)
-            self.remaining_rides = self.plan.max_ride_hours
-            self.save()
+    def activate(self, plan):
+        self.plan = plan
+        self.start_date = now()
+        self.end_date = now() + timedelta(days=self.plan.duration_days)
+        self.remaining_rides = self.plan.max_ride_hours if self.plan.max_ride_hours else None
+        self.is_paid = True
+        self.save()

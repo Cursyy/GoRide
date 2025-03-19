@@ -15,16 +15,11 @@ def subscribe_user(request, plan_id):
     plan = get_object_or_404(SubscriptionPlan, id=plan_id)
     subscription, created = UserSubscription.objects.get_or_create(user=request.user)
 
-    if not created:
+    if subscription.is_active():
         messages.error(request, _("You already have an active subscription."))
         return redirect('subscriptions:subscription_plans')
 
-    subscription.plan = plan
-    subscription.start_date = now()
-    subscription.end_date = now() + timedelta(days=plan.duration_days)
-    subscription.remaining_rides = plan.max_ride_hours
-    subscription.save()
-
+    subscription.activate(plan)
     return redirect('subscriptions:subscription_success')
 
 @login_required
