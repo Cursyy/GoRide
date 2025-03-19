@@ -5,6 +5,7 @@ import requests
 from cache_manager import load_from_cache, save_to_cache
 from django.db.models import Count
 from django.forms.models import model_to_dict
+from decouple import config
 
 
 def get_address(lat, lon):
@@ -77,7 +78,6 @@ def get_station(request):
             return JsonResponse({"station": model_to_dict(station)})
         return JsonResponse({"error": "Station not found"}, status=404)
 
-    # Підрахунок машин на всіх станціях одночасно
     stations = EVStation.objects.annotate(vehicle_count=Count("vehicle"))
 
     stations_data = [
@@ -92,3 +92,27 @@ def get_station(request):
         for station in stations
     ]
     return JsonResponse(stations_data, safe=False)
+
+
+def get_direction(request, station_id, lon, lat):
+    headers = {
+        "Accept": "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8",
+    }
+    api_key = config("OPENROUTE_API_KEY")
+
+    station = EVStation.objects.filter(id=station_id).first()
+    start = f"{lon},{lat}"
+    end = f"{station.longitude},{station.latitude}"
+    url = f"https://api.openrouteservice.org/v2/directions/foot-walking?api_key={api_key}&start={start}&end={end}"
+    if station_id and lon and lat:
+        call = requests.get(f"{url}", headers=headers)
+        if call.is_redirect or call.status_code == 301:
+            call = request.get(call.headers["Location"], headers=headers)
+        if call.status_code != 200:
+            return JsonResponse(
+                {"error": "API request failed", "details": call.text},
+                status=call.status_code,
+            )
+
+        response = call.json()
+        return JsonResponse(response, safe=False)
