@@ -2,20 +2,92 @@
 {% load i18n %}
 {% block title %}{% trans "Profile" %} {% endblock%}
 {% block content %}
-<div class="container p-4">
-    <h1 class="text-center my_title">{% trans "My Profile" %}</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="profile-card p-4 text-center my_custom_div rounded">
+<div class="container p-3">
+    <div class="row shadow-lg p-3">
+        <div class="col-md-4 p-3">
+            <div class="profile-card p-4 text-center my_custom_div">
                 <div class="profile-title">
                     <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/images/default-avatar.png{% endif %}"
                         alt="Profile Picture" class="rounded-circle border border-light mb-3" width="120" height="120">
                     <h2 class="my_title">{{ user.username }}</h2>
                 </div>
+                <hr>
+                <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary w-100">{% trans "Edit Profile" %}</a>
+                <hr>
                 <div class="user-information text-start">
                     <p>{% trans "Email" %}: <span class="text-muted">{{ user.email }}</span></p>
-                    <p>{% trans "Phone" %}: <span class="text-muted">{{ user.phone_num|default:"N/A" }}</span></p>
+                    {% if user.phone_num %}
+                        <p>{% trans "Phone" %}: <span class="text-muted">{{ user.phone_num}}</span></p>
+                    {% endif %}
                 </div>
+                <hr>
+                {% if statistics %}
+                    <div class="user-badges">
+                        {% with statistics.get_badges as badges %}
+                            {% if badges %}
+                                <div class="badges-container">
+                                    {% for badge in badges %}
+                                        <div class="badge">
+                                            <span class="badge-emoji">{{ badge.emoji }}</span>
+                                            <span class="badge-name">{{ badge.name }}</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p>{% trans "No achievements yet. Keep riding!" %}</p>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-8 p-3">
+                <div class="profile-card p-4 text-center my_custom_div">
+                <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active w-100 text-dark" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="true">{% trans "Statistics" %}</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link w-100 text-dark" id="subscription-tab" data-bs-toggle="tab" data-bs-target="#subscription" type="button" role="tab" aria-controls="subscription" aria-selected="false">{% trans "Subscription" %}</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="profileTabsContent">
+                    <div class="tab-pane fade show active" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
+                        <div class="user-statistics mt-3">
+                            {% if statistics %}
+                                <h3>{% trans "Your Statistics" %}</h3>
+                                <p><strong>{% trans "Total Rides:" %}</strong> {{ statistics.total_rides }}</p>
+                                <p><strong>{% trans "Total Hours:" %}</strong> {{ statistics.total_hours|floatformat:2 }}</p>
+                                <p><strong>{% trans "Total Spent:" %}</strong> €{{ statistics.total_spent|floatformat:2 }}</p>
+                                <p><strong>{% trans "Most Used Vehicle:" %}</strong> {{ statistics.most_used_vehicle|default:_("N/A") }}</p>
+                            {% else %}
+                                <p>{% trans "No statistics available." %}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
+                        <div class="user-subscription mt-3">
+                            {% if subscription and subscription.is_active %}
+                                <p><span class="w-25">{% trans "Subscription"%}:</span> <span class="text-muted">{{ subscription.plan.type}}</span></p>
+                                <p><span class="w-25">{% trans "Start date" %}: </span> <span class="text-muted">{{subscription.start_date}}</span></p>
+                                <p><span class="w-25">{% trans "End date" %}:   </span> <span class="text-muted">{{subscription.end_date}}</span></p>
+                            {% else %}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="m-0">{% trans "Subscription" %}: <span class="text-muted">{% trans "You have no active subscriptions" %}</span></p>
+                                    <a href="{% url 'subscriptions:subscription_plans' %}" class="btn btn-secondary">{% trans "Choose plan" %}</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% comment %} <h1 class="text-center my_title">{% trans "My Profile" %}</h1> {% endcomment %}
+    {% comment %} <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="profile-card p-4 text-center my_custom_div rounded">
                 <div class="user-subscription text-start">
                     {% if subscription and subscription.is_active %}
                         <p><span class="w-25">{% trans "Subscription"%}:</span> <span class="text-muted">{{ subscription.plan.type}}</span></p>
@@ -28,9 +100,17 @@
                     </div>
                     {% endif %}
                 </div>
-                <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary mt-3">{% trans "Edit Profile" %}</a>
+                {% if statistics %}
+                    <div class="user-statistics">
+                        <h3>{% trans "Your Statistics" %}</h3>
+                        <p><strong>{% trans "Total Rides:" %}</strong> {{ statistics.total_rides }}</p>
+                        <p><strong>{% trans "Total Hours:" %}</strong> {{ statistics.total_hours|floatformat:2 }}</p>
+                        <p><strong>{% trans "Total Spent:" %}</strong> €{{ statistics.total_spent|floatformat:2 }}</p>
+                        <p><strong>{% trans "Most Used Vehicle:" %}</strong> {{ statistics.most_used_vehicle|default:_("N/A") }}</p>
+                    </div>    
+                {% endif %}
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
 </div>
 {% endblock %}
