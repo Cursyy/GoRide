@@ -4,7 +4,8 @@ let userLon = null;
 let activeController = null;
 let routeLayer = null;
 let map = null;
-
+let price = null;
+let voucher = false;
 document.addEventListener("DOMContentLoaded", function() {
     loadStations();
     loadVehicles();
@@ -12,10 +13,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const batteryFilter = document.getElementById("battery-filter");
     const typeFilter = document.getElementById("type-filter");
 
+    if (!batteryFilter || !typeFilter) {
+        console.error("battery-filter або type-filter не знайдено у DOM.");
+        return;
+    }
 
-    console.log(currentStation)
     batteryFilter.addEventListener("input", function() {
-        document.getElementById("battery-value").innerText = this.value;
+        document.getElementById("battery-filter").innerText = batteryFilter.value;
         loadVehicles(currentStation);
     });
 
@@ -24,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
 
 });
+
 document.addEventListener("submit", async function(event) {
     if (!event.target.matches(".voucher-form")) return;
 
@@ -60,6 +65,8 @@ document.addEventListener("submit", async function(event) {
 
         if (response.ok) {
             alert(`Voucher applied successfully. New price: €${data.price}`);
+            price = data.price;
+            voucher = true;
         } else {
             alert(`Error: ${data.error}`);
         }
@@ -151,11 +158,7 @@ async function loadVehicles(stationId = null) {
     const response = await fetch('api/vehicles');
     let vehicles = await response.json();
     const typeFilter = document.getElementById("type-filter").value;
-    const batteryFilter = parseInt(document.getElementById("battery-filter").value);
-    vehicles = vehicles.filter(v =>
-        (typeFilter === "" || v.type === typeFilter) &&
-        (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
-    );
+    batteryFilter = parseInt(document.getElementById("battery-filter").value);
     if (stationId) {
         vehicles = vehicles.filter(v => (v.station_id === stationId)&&
         (typeFilter === "" || v.type === typeFilter) &&
