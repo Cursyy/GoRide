@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from subscriptions.models import UserSubscription
+from subscriptions.models import UserSubscription, UserStatistics
 
 # Create your views here.
 
@@ -24,17 +24,22 @@ class SignUpView(CreateView):
         login(self.request, self.object)
         return response
 
-
 @login_required
 def profile_view(request):
-    try:
-        subscription = UserSubscription.objects.get(user=request.user)
-    except UserSubscription.DoesNotExist:
-        subscription = None
+    subscription = UserSubscription.objects.filter(user=request.user).first()
+    statistics = UserStatistics.objects.filter(user=request.user).first()
+    
+    context = {
+        "user": request.user,
+        "subscription": subscription,
+        "statistics": statistics,
+    }
+    
     if subscription:
-        return render(request, "profile.html", {"user": request.user, "subscription": subscription})
-    else:
-        return render(request, "profile.html", {"user": request.user})
+        context["subscription_progress"] = subscription.progress_remaining()
+    
+    return render(request, "profile.html", context)
+
 
 @login_required
 def profile_edit_view(request):
