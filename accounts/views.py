@@ -24,19 +24,22 @@ class SignUpView(CreateView):
         login(self.request, self.object)
         return response
 
-
 @login_required
 def profile_view(request):
-    try:
-        subscription = UserSubscription.objects.get(user=request.user)
-        statistics = UserStatistics.objects.get(user=request.user)
-    except UserSubscription.DoesNotExist:
-        subscription = None
-        statistics = None
-    if subscription and statistics:
-        return render(request, "profile.html", {"user": request.user, "subscription": subscription, "statistics": statistics})
-    else:
-        return render(request, "profile.html", {"user": request.user})
+    subscription = UserSubscription.objects.filter(user=request.user).first()
+    statistics = UserStatistics.objects.filter(user=request.user).first()
+    
+    context = {
+        "user": request.user,
+        "subscription": subscription,
+        "statistics": statistics,
+    }
+    
+    if subscription:
+        context["subscription_progress"] = subscription.progress_remaining()
+    
+    return render(request, "profile.html", context)
+
 
 @login_required
 def profile_edit_view(request):
