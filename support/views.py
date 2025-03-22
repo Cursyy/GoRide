@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Chat, Message
 from .forms import MessageForm
-from django.http import JsonResponse
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 
-# View for user to interact with their chat
 @login_required
 def user_chat_view(request):
     chat, created = Chat.objects.get_or_create(user=request.user, is_active=True)
@@ -17,6 +17,12 @@ def user_chat_view(request):
             message.chat = chat
             message.sender = request.user
             message.save()
+
+            channel_layer = get_channel_layer()
+            async_to_sync(channel_layer.group_send)(
+                "support", {"type": "chat_message", "message": message.content}
+            )
+
             return redirect("support:user_chat")
     else:
         form = MessageForm()
@@ -27,11 +33,3 @@ def user_chat_view(request):
         "support/user_chat.html",
         {"chat": chat, "form": form, "messages": messages},
     )
-
-
-@login_required
-def user_chat_unread(request):
-    unread_message = Message.objects.filter(
-        receiver=request.user, is_read=False
-    ).count()
-    return JsonResponse({"new messages": unread_message}, safe=False)

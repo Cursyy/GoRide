@@ -11,22 +11,24 @@
             <h5 class="mb-0">{% trans "Chat History" %}</h5>
         </div>
         <div class="card-body" style="max-height: 400px; overflow-y: auto;">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="mb-3">
-                        <strong class="text" style="color: #0E6655;">{{ message.sender.username }}:</strong>
-                        <p class="mb-1">{{ message.content }}</p>
-                        <small class="text-muted">{{ message.created_at|date:"d M Y, H:i" }}</small>
-                    </div>
-                    <hr>
-                {% endfor %}
-            {% else %}
-                <p class="text-muted text-center">{% trans "No messages yet. Start the conversation!" %}</p>
-            {% endif %}
+            <div id="messages">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="mb-3">
+                            <strong class="text" style="color: #0E6655;">{{ message.sender.username }}:</strong>
+                            <p class="mb-1">{{ message.content }}</p>
+                            <small class="text-muted">{{ message.created_at|date:"d M Y, H:i" }}</small>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted text-center">{% trans "No messages yet. Start the conversation!" %}</p>
+                {% endif %}
+            </div>
+            <audio id="notification-sound" src="{% static 'sounds/notification.wav' %}" preload="auto"></audio>
         </div>
     </div>
-    <audio id="notification-sound" src="{% static 'sounds/notification.wav' %}"></audio>
-    <form method="post" class="chat-form card shadow-sm">
+    
+    <form method="post" class="chat-form card shadow-sm" id="form">
         {% csrf_token %}
         <div class="card-body d-flex align-items-center">
             {{ form.as_p }}
@@ -34,6 +36,6 @@
         </div>
     </form>
 </div>
-<script src="{% static 'js/support.js' %}" defer></script>
 
+<script type="text/javascript" src="{% static 'js/support.js' %}" defer></script>
 {% endblock %}

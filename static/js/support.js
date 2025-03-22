@@ -5,22 +5,36 @@ textarea.addEventListener('input', () => {
     textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`;
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    const sound = document.getElementById("notification-sound");
+let url = `ws://${window.location.host}/ws/socket-server/`;
 
-    async function checkMessages() {
-        try {
-            const response = await fetch("unread/");
-            const data = await response.json();
+const chatSocket = new WebSocket(url);
 
-            if (data.new_messages > 0) {
-                sound.play();
-                alert(`You have ${data.new_messages} unread messages!`);
-            }
-        } catch (error) {
-            console.error("Error checking messages: ", error);
-        }
+chatSocket.onmessage = function(e) {
+    let data = JSON.parse(e.data);
+    console.log('Data:', data);
+
+    if (data.type === 'chat') {
+        let messages = document.getElementById('messages');
+
+        messages.insertAdjacentHTML('beforeend', `
+            <div>
+                <p>${data.message}</p>
+            </div>
+        `);
+
+        let notificationSound = document.getElementById('notification-sound');
+        notificationSound.play();
     }
+}
 
-    setInterval(checkMessages, 10000);
+let form = document.getElementById('form');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let message = e.target.message.value;
+
+    chatSocket.send(JSON.stringify({
+        'message': message
+    }));
+
+    form.reset();
 });
