@@ -189,14 +189,6 @@ async function loadVehicles(stationId = null) {
         }
 
         vehicleCard.innerHTML = `
-            <div class="left-part col-12 col-lg-8">
-                <div class="vehicle-image"><img src="${imgSrc}" alt="${vehicle.type} image"/></div>
-                <div class="vehicle-details">
-                    <h3>${vehicle.type}</h3>
-                    ${vehicle.battery_percentage !== null ? `<p>Battery: ${vehicle.battery_percentage}%</p>` : ""}
-                    <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" target="_blank">Show on Map</a>
-                </div>
-            </div>
             <div class="vehicle-price col-12 col-lg-4">
         <form class="voucher-form" data-vehicle-id="${vehicle.id}">
             <label for="voucher-${vehicle.id}">Voucher code:</label>
@@ -205,14 +197,11 @@ async function loadVehicles(stationId = null) {
             <button type="submit">Apply</button>
         </form>
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
-                <form method="get" action="/payments/payment/${vehicle.id}/stripe/" class="d-flex">
+                <form method="get" action="/payments/payment/${vehicle.id}/booking/" class="d-flex">
                     <input type="number" name="hours" min="1" value="1" class="hours-input">
-                    <button type="submit" class="rent-button">Pay with Stripe</button>
+                    <button type="submit" class="rent-button">booking</button>
                 </form>
-                <form method="get" action="/payments/payment/${vehicle.id}/paypal/" class="d-flex"">
-                    <input type="number" name="hours" min="1" value="1" class="hours-input">
-                    <button type="submit" class="rent-button">Pay with PayPal</button>
-                </form>
+                
             </div>
         `;
         container.appendChild(vehicleCard);
