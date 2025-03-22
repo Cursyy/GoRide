@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "find_transport",
     "payments",
     "subscriptions",
+    # "vouchers",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",
@@ -59,7 +60,7 @@ INSTALLED_APPS = [
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
-    'django.middleware.locale.LocaleMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -123,24 +124,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGES = (
-    ('en', ('English')),
-    ('ga', ('Gaeilge')),
-    ('uk', ('Українська'))
-)
+LANGUAGES = (("en", ("English")), ("ga", ("Gaeilge")), ("uk", ("Українська")))
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
 USE_TZ = True
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, "locale"),
 ]
 
 
@@ -199,8 +196,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-PAYPAL_TEST = True  
-PAYPAL_RECEIVER_EMAIL = 'sb-yfvxa37272511@business.example.com'
+PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = "sb-yfvxa37272511@business.example.com"
 
-STRIPE_PUBLIC_KEY = 'pk_test_51R0WIqROGR3zD47VtuGDVitvNeNBD6LmTg86TjFPmBXpe7Sfqgw3NcsIoL92driG9mGERBFg1LyYVNtqgm4yi42s00iy3HzKXl'
-STRIPE_SECRET_KEY = 'sk_test_51R0WIqROGR3zD47VMbe3QkWi3V2Cd7GNs32f2jtYoeB1BbMJdNTfeDSJ6hrKdudlRYBVokFzRFj2TqsaQV3Dehey00V8dbL1mC'
+STRIPE_PUBLIC_KEY = "pk_test_51R0WIqROGR3zD47VtuGDVitvNeNBD6LmTg86TjFPmBXpe7Sfqgw3NcsIoL92driG9mGERBFg1LyYVNtqgm4yi42s00iy3HzKXl"
+STRIPE_SECRET_KEY = "sk_test_51R0WIqROGR3zD47VMbe3QkWi3V2Cd7GNs32f2jtYoeB1BbMJdNTfeDSJ6hrKdudlRYBVokFzRFj2TqsaQV3Dehey00V8dbL1mC"
