@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import datetime
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -177,7 +178,7 @@ LOGGING = {
     },
     "handlers": {
         "file": {
-            "level": "WARNING",  # Змінити на 'WARNING', щоб збирати попередження та помилки
+            "level": "WARNING",
             "class": "logging.FileHandler",
             "filename": os.path.join(
                 LOG_DIR, f"{datetime.datetime.now().strftime('%Y-%m-%d')}_errors.log"
@@ -187,7 +188,7 @@ LOGGING = {
     },
     "root": {
         "handlers": ["file"],
-        "level": "WARNING",  # Змінити на 'WARNING', щоб збирати попередження та помилки
+        "level": "WARNING",
     },
 }
 
@@ -199,5 +200,16 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 PAYPAL_TEST = True
 PAYPAL_RECEIVER_EMAIL = "sb-yfvxa37272511@business.example.com"
 
-STRIPE_PUBLIC_KEY = "pk_test_51R0WIqROGR3zD47VtuGDVitvNeNBD6LmTg86TjFPmBXpe7Sfqgw3NcsIoL92driG9mGERBFg1LyYVNtqgm4yi42s00iy3HzKXl"
-STRIPE_SECRET_KEY = "sk_test_51R0WIqROGR3zD47VMbe3QkWi3V2Cd7GNs32f2jtYoeB1BbMJdNTfeDSJ6hrKdudlRYBVokFzRFj2TqsaQV3Dehey00V8dbL1mC"
+STRIPE_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_FROM = "tud.goride@gmail.com"
+EMAIL_HOST_USER = "tud.goride@gmail.com"
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 4

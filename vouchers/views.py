@@ -27,12 +27,16 @@ def voucher_apply(request):
                 elif type == "vehicle":
                     if vehicle_id is not None:
                         price = get_vehicle_price(vehicle_id, voucher.discount)
+                        voucher.used = (voucher.used or 0) + 1
+                        voucher.save()
                         return JsonResponse({"price": price}, status=200)
                 elif type == "subscription":
                     if user is not None:
                         price = get_subscription_price(
                             subscription_id, voucher.discount
                         )
+                        voucher.used = (voucher.used or 0) + 1
+                        voucher.save()
                         return JsonResponse({"price": price}, status=200)
             else:
                 return JsonResponse(
