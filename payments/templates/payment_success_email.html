@@ -1,0 +1,31 @@
+{% autoescape off %}
+Dear {{user}},
+
+We are pleased to inform you that your transaction has been successfully processed. Below are the details of your transaction:
+
+{% comment %} Transaction ID: {{transaction_id}}
+
+Date: {{date}}
+
+Time: {{time}}
+
+Amount Paid: {{amount}}
+
+{% if {{payment_subject}}=="Rental" %}
+You rent:  {{rental_item}}
+For: {{rental_duration}} minutes
+{% elif {{payment_subject}}=="Subscription" %}
+You have subscribed to our {{subscription_type}} plan.
+You subscribed for {{subscription_duration}}.
+{% elif {{payment_subject}}=="Wallet" %}
+You have successfully added {{wallet_top_up_amount}} to your wallet.
+Your current wallet balance is {{wallet_balance}}.
+{% endif %} {% endcomment %}
+
+
+Rental Duration: [Insert Duration]
+
+Thank you for choosing our bike rental service. We hope you enjoy your ride! If you have any questions or require assistance, please do not hesitate to contact us at [Insert Contact Information].
+
+Safe travels, [Your Company Name] Team
+{% endautoescape %}
