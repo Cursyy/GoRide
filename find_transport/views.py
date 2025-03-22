@@ -6,6 +6,7 @@ from cache_manager import load_from_cache, save_to_cache
 from django.db.models import Count
 from django.forms.models import model_to_dict
 from decouple import config
+from vouchers.views import voucher_apply
 
 
 def get_address(lat, lon):
@@ -116,3 +117,8 @@ def get_direction(request, station_id, lon, lat):
 
         response = call.json()
         return JsonResponse(response, safe=False)
+
+
+def get_voucher(request):
+    print("Request body:", request.body)
+    return voucher_apply(request)
