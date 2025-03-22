@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import find_transport, get_vehicles, get_station, get_direction
+from .views import find_transport, get_vehicles, get_station, get_direction, get_voucher
 
 app_name = "find_transport"
 
@@ -12,4 +12,5 @@ urlpatterns = [
         get_direction,
         name="get_direction",
     ),
+    path("api/voucher", get_voucher, name="get_voucher"),
 ]
