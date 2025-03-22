@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Chat, Message
 from .forms import MessageForm
+from django.http import JsonResponse
 
 
 # View for user to interact with their chat
@@ -26,3 +27,11 @@ def user_chat_view(request):
         "support/user_chat.html",
         {"chat": chat, "form": form, "messages": messages},
     )
+
+
+@login_required
+def user_chat_unread(request):
+    unread_message = Message.objects.filter(
+        receiver=request.user, is_read=False
+    ).count()
+    return JsonResponse({"new messages": unread_message}, safe=False)

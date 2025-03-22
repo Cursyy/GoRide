@@ -32,7 +32,7 @@ def sendEmail(request, user, to_email):
             #  # date is a variable that holds the date of the transaction
             # 'time': time,
             #  # time is a variable that holds the time of the transaction
-            # 'payment_subject': payment_subject, 
+            # 'payment_subject': payment_subject,
             # # payment_subject is a variable that holds the subject of the payment "Rent","Subscription","Wallet"
             # 'rental_item': rental_item,
             #  # rental_item is a variable that holds the item rented "Bike","E-Scooter","E-Bike"
@@ -40,20 +40,19 @@ def sendEmail(request, user, to_email):
             #  # payment_method is a variable that holds the payment method used "PayPal","Stripe"
             # 'duration': duration,
             #  # duration is a variable that holds the duration of the rental if the payment_subject is "Rent"
-            # 'subscription_type': subscription_type, 
+            # 'subscription_type': subscription_type,
             # # subscription_type is a variable that holds the type of subscription if the payment_subject is "Subscription"
             # 'subscription_duration': subscription_duration,
             #  # subscription_duration is a variable that holds the duration of the subscription if the payment_subject is "Subscription"
-            #'wallet_top_up_amount': wallet_top_up_amount,
+            # 'wallet_top_up_amount': wallet_top_up_amount,
             #  # wallet_top_up_amount is a variable that holds the amount of the wallet top-up if the payment_subject is "Wallet Top-up"
-            #'wallet_balance': wallet_balance,
+            # 'wallet_balance': wallet_balance,
             #  # wallet_balance is a variable that holds the balance of the wallet after the wallet top-up if the payment_subject is "Wallet Top-up"
             "domain": get_current_site(request).domain,
             "protocol": "https" if request.is_secure() else "http",
         },
     )
     email = EmailMessage(mail_subject, message, to=[to_email])
-    print(email)
     if email.send():
         messages.success(
             request,
