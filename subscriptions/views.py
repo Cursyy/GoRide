@@ -22,6 +22,7 @@ def subscribe_user(request, plan_id):
     subscription.activate(plan)
     return redirect('subscriptions:subscription_success')
 
+
 @login_required
 def subscription_success(request):
     return render(request, 'success.html')
