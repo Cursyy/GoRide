@@ -7,6 +7,10 @@ from django.shortcuts import render, redirect , get_object_or_404
 from django.urls import reverse 
 from .models import Payment
 from find_transport.models import Vehicle
+from django.http import HttpResponse
+from paypal.standard.models import ST_PP_COMPLETED
+from paypal.standard.ipn.signals import valid_ipn_received
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -14,7 +18,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 
-def payment_view(request, vehicle_id):
+def booking_view(request, vehicle_id):
     vehicle = get_object_or_404(Vehicle, id=vehicle_id)
     hours = int(request.GET.get('hours', 1))
     total_amount = vehicle.price_per_hour * hours
@@ -65,16 +69,23 @@ def stripe_payment(request, vehicle_id):
                 success_url=request.build_absolute_uri(reverse('payment_success')),  
                 cancel_url=request.build_absolute_uri(reverse('find_transport:find_transport')),  
             )
+            customer_details = checkout_session.customer_details
+            customer_name = customer_details.name
+            customer_email = customer_details.email
+            customer_address = f"{customer_details.address.line1}, {customer_details.address.city}, {customer_details.address.postal_code}, {customer_details.address.country}"
+            
             payment = Payment.objects.create(
                 vehicle=vehicle,
                 amount=total_amount / 100,  
                 payment_method="Stripe",
+                transaction_id=checkout_session.payment_intent,
+                status='Completed',
+                customer_name=customer_name,
+                customer_email=customer_email,
+                customer_address=customer_address,
             )
 
-            
-            vehicle.status = False
-            vehicle.save()
-            
+
             return redirect(checkout_session.url, code=303)
         except Exception as e:
             return render(request, 'payments/stripe_payment.html', {
@@ -96,10 +107,10 @@ def paypal_payment(request, vehicle_id):
     hours = int(request.GET.get('hours', 1))
     total_amount = vehicle.price_per_hour * hours
 
-    # Get the host from the request
+
     host = request.get_host()
 
-    # PayPal payment details
+   
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': total_amount,
@@ -110,12 +121,40 @@ def paypal_payment(request, vehicle_id):
         'return_url': request.build_absolute_uri(reverse('payment_success')),
         'cancel_return': request.build_absolute_uri(reverse('find_transport:find_transport')),
     }
-
-    # Create the PayPal form
     paypal_form = PayPalPaymentsForm(initial=paypal_dict)
+
+    payment = Payment.objects.create(
+        vehicle=vehicle,
+        amount=total_amount,
+        payment_method="PayPal",
+        status='Pending'
+    )
+
+    
 
     return render(request, 'payments/paypal_payment.html', {
         'vehicle': vehicle,
         'total_amount': total_amount,
         'form': paypal_form,
     })
+
+@csrf_exempt  
+def paypal_ipn(request):
+    if request.method == 'POST':
+        pass
+    return HttpResponse(status=200)
+
+
+def update_payment_status(sender, **kwargs):
+    ipn_obj = sender
+    if ipn_obj.payment_status == ST_PP_COMPLETED:
+      
+        payment = Payment.objects.get(invoice=ipn_obj.invoice)
+        payment.status = 'Completed'
+        payment.transaction_id = ipn_obj.txn_id
+        payment.customer_name = ipn_obj.first_name + ' ' + ipn_obj.last_name
+        payment.customer_email = ipn_obj.payer_email
+        payment.customer_address = f"{ipn_obj.address_street}, {ipn_obj.address_city}, {ipn_obj.address_zip}, {ipn_obj.address_country}"
+        payment.save()
+
+valid_ipn_received.connect(update_payment_status)
