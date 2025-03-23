@@ -72,3 +72,15 @@ def admin_chat(request, chat_id=None):
         "support/admin_chat.html",
         {"chats": active_chats, "chat": chat, "form": form, "messages": messages},
     )
+
+
+@login_required
+def admin_chats(request):
+    if not request.user.is_staff:
+        return redirect("support:user_chat")
+    Chat.objects.filter(is_active=True)
+    return render(
+        request,
+        "support/admin_chats.html",
+        {"chats": Chat.objects.filter(is_active=True)},
+    )

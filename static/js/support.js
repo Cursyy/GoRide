@@ -7,6 +7,12 @@ textarea.addEventListener('input', () => {
     textarea.style.height = 'auto';
     textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`;
 });
+document.addEventListener('DOMContentLoaded', scrollToBottom);
+
+function scrollToBottom() {
+    const messagesContainer = document.getElementById('messages');
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
 
 
 
@@ -17,20 +23,27 @@ chatSocket.onmessage = function(e) {
     console.log('Data:', data);
 
     if (data.type === 'chat') {
-        let messages = document.getElementById('messages');
-
-        messages.insertAdjacentHTML('beforeend', `
+        const messageHtml = `
             <div class="mb-3">
                 <strong style="color: #0E6655;">${data.username}:</strong>
-                    <p>${data.message}</p>
+                <p>${data.message}</p>
                 <small class="text-muted">${data.created_at}</small>
             </div>
-        `);
-
+        `;
+        addNewMessage(messageHtml)
         let notificationSound = document.getElementById('notification-sound');
         notificationSound.play();
     }
 }
+
+
+function addNewMessage(messageHtml) {
+    const messagesContainer = document.getElementById('messages');
+    messagesContainer.insertAdjacentHTML('beforeend', messageHtml);
+    scrollToBottom();
+}
+
+
 chatSocket.onerror = function(e) {
     console.error('WebSocket error:', e);
 };
