@@ -88,14 +88,14 @@ def stripe_payment(request, vehicle_id):
 
             return redirect(checkout_session.url, code=303)
         except Exception as e:
-            return render(request, 'payments/stripe_payment.html', {
+            return render(request, 'payments/booking.html', {
                 'error': str(e),
                 'vehicle': vehicle,
                 'total_amount': total_amount / 100,  
             })
 
   
-    return render(request, 'payments/stripe_payment.html', {
+    return render(request, 'payments/booking.html', {
         'vehicle': vehicle,
         'total_amount': total_amount / 100,  
         })
@@ -132,7 +132,7 @@ def paypal_payment(request, vehicle_id):
 
     
 
-    return render(request, 'payments/paypal_payment.html', {
+    return render(request, 'payments/booking.html', {
         'vehicle': vehicle,
         'total_amount': total_amount,
         'form': paypal_form,
