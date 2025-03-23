@@ -20,8 +20,10 @@ chatSocket.onmessage = function(e) {
         let messages = document.getElementById('messages');
 
         messages.insertAdjacentHTML('beforeend', `
-            <div>
-                <p>${data.message}</p>
+            <div class="mb-3">
+                <strong style="color: #0E6655;">${data.username}:</strong>
+                    <p>${data.message}</p>
+                <small class="text-muted">${data.created_at}</small>
             </div>
         `);
 
@@ -41,13 +43,14 @@ chatSocket.onclose = function(e) {
 let form = document.getElementById('form');
 if (form) {
     form.addEventListener('submit', (e) => {
-        e.preventDefault(); // Забороняємо перезавантаження сторінки
+        e.preventDefault();
         let message = e.target.content.value;
         
         console.log('Sending message:', message);
 
         if (chatSocket.readyState === WebSocket.OPEN) {
             chatSocket.send(JSON.stringify({
+                'chat_id': chatId,
                 'message': message
             }));
             form.reset();
