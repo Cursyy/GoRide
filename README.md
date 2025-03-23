@@ -190,3 +190,29 @@ git commit -m "docs(readme): update setup instructions"
 - `test`: Adding or updating tests
 - `chore`: Maintenance tasks (e.g., dependencies, CI/CD updates)
 
+## 8. Async server daphne
+
+Daphne is an asynchronous HTTP, WebSocket, and HTTP/2 server for Django, used with Channels for handling WebSockets and async requests.
+
+### When to Use:
+- **WebSockets**: For real-time communication (e.g., chat, notifications).
+- **Async Requests**: To handle high-performance async operations.
+- **Scaling**: Supports high-load, asynchronous connections.
+
+### Basic Commands:
+1. **Run Daphne:**
+   ```
+   daphne your_project.asgi:application
+   ```
+2. **Run Daphne on a specific port:**
+   ```
+   daphne -p 8001 your_project.asgi:application
+   ```
+3. **Run Daphne on all interfaces:**
+   ```
+   daphne -b 0.0.0.0 -p 8001 your_project.asgi:application
+   ```
+4. **Check Daphne version:**
+   ```
+   daphne --version
+   ```
