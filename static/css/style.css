@@ -198,6 +198,14 @@ form input[type="file"] {
   .chat-button i {
     font-size: 20px;
   }
+.chat-link {
+    color: #0E6655;
+    text-decoration: none;
+}
+
+.chat-link:hover {
+    color: #2a917c;
+}
 /*support chat page*/
 /* chat form*/
 .chat-form {
