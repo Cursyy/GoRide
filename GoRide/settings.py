@@ -37,6 +37,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # project apps
+    "daphne",
+    "channels",
     "accounts",
     # default apps
     "django.contrib.admin",
@@ -57,8 +59,11 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "paypal.standard.ipn",
 ]
-
+ASGI_APPLICATION = "GoRide.asgi.application"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 
 MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
