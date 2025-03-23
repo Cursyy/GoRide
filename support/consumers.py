@@ -5,7 +5,8 @@ from asgiref.sync import async_to_sync
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
-        self.room_group_name = "support"
+        self.chat_id = self.scope["url_route"]["kwargs"]["chat_id"]
+        self.room_group_name = f"chat_{self.chat_id}"
 
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name, self.channel_name
