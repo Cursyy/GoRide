@@ -25,12 +25,11 @@
             <input type="number" name="min_battery" id="battery-filter" min="0" max="100" value="0">
         </div>
     </form>
-    
     <div id="map" class="my-4"></div>
     
     <div id="vehicle-container"></div>
 </section>
 
-<script src="{% static 'js/find_transport.js' %}"></script>
+<script src="{% static 'js/find_transport.js' %}" defer></script>
 
 {% endblock %}

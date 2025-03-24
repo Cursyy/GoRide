@@ -1,31 +1,29 @@
 {% extends "base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block content %}
 <div class="container mt-5">
     <h2 class="text-center mb-4">{% trans "Chat with Support" %}</h2>
-
     <div class="card shadow-sm mb-4">
         <div class="card-header" style="background-color: #0E6655; color: white;">
             <h5 class="mb-0">{% trans "Chat History" %}</h5>
         </div>
-        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="mb-3">
-                        <strong class="text" style="color: #0E6655;">{{ message.sender.username }}:</strong>
-                        <p class="mb-1">{{ message.content }}</p>
-                        <small class="text-muted">{{ message.created_at|date:"d M Y, H:i" }}</small>
-                    </div>
-                    <hr>
-                {% endfor %}
-            {% else %}
+        <div class="card-body" style="max-height: 400px; overflow-y: auto;" id="messages">
+            {% for message in messages %}
+                <div class="mb-3">
+                    <strong style="color: #0E6655;">{{ message.sender.username }}:</strong>
+                    <p>{{ message.content }}</p>
+                    <small class="text-muted">{{ message.created_at|date:"d M Y, H:i" }}</small>
+                </div>
+            {% empty %}
                 <p class="text-muted text-center">{% trans "No messages yet. Start the conversation!" %}</p>
-            {% endif %}
+            {% endfor %}
         </div>
     </div>
+    <audio id="notification-sound" src="{% static 'sounds/notification.wav' %}" preload="auto"></audio>
 
-    <form method="post" class="chat-form card shadow-sm">
+    <form method="post" class="chat-form card shadow-sm" id="form">
         {% csrf_token %}
         <div class="card-body d-flex align-items-center">
             {{ form.as_p }}
@@ -34,15 +32,10 @@
     </form>
 </div>
 
-{% block scripts %}
 <script>
-    const textarea = document.querySelector('.chat-form textarea');
-
-    textarea.addEventListener('input', () => {
-        textarea.style.height = 'auto';
-        textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`;
-    });
+    let chatId = "{{ chat.id }}";
 </script>
-{% endblock %}
+<script src="{% static 'js/support.js' %}" defer></script>
+
 
 {% endblock %}

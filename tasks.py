@@ -26,3 +26,11 @@ def migrate(ctx):
 def createsuperuser(ctx):
     """Create a superuser for the Django project."""
     ctx.run("python manage.py createsuperuser")
+
+
+@task
+def loaddata(ctx):
+    """Load initial data into the database."""
+    ctx.run("python manage.py loaddata find_transport/fixtures/ev_stations.json")
+    ctx.run("python manage.py loaddata find_transport/fixtures/vehicle_data.json")
+    ctx.run("python manage.py loaddata subscriptions/fixtures/subscriptions.json")
