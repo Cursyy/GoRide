@@ -4,7 +4,7 @@ let markers=[];
 let waypoints = [];
 let route;
 let turnByTurnLayer;
-
+let userMarkersCount;
 const categoriesList = "accommodation.hotel,accommodation.hostel,activity,airport,commercial.supermarket,commercial.marketplace,commercial.shopping_mall,commercial.elektronics,commercial.outdoor_and_sport,commercial.hobby,commercial.gift_and_souvenir,commercial.clothing,commercial.houseware_and_hardware,commercial.florist,commercial.health_and_beauty,commercial.pet,commercial.food_and_drink,commercial.gas,catering.restaurant.pizza,catering.restaurant.burger,catering.restaurant.italian,catering.restaurant.chinese,catering.restaurant.chicken,catering.restaurant.japanese,catering.restaurant.thai,catering.restaurant.steak_house,catering,education.school,education.library,education.college,education.university,entertainment,entertainment.culture,entertainment.zoo,entertainment.museum,entertainment.cinema,healthcare,healthcare.hospital,leisure,leisure.picnic,leisure.spa,leisure.park,natural,natural.forest,natural.water,national_park,office.government,railway,railway.train,railway.subway,railway.tram,railway.light_rail,rental,service,tourism,religion,amenity,beach,public_transport";
 
 
@@ -38,7 +38,7 @@ async function  searchPlaces(value) {
         markers.push(marker);
         marker.on('click', () => {
             waypoints.push([lat,lon]);
-            createButton();
+            createButton("get-direction-button","Get Direction");
         });
     });
     
@@ -134,7 +134,7 @@ function clearRoute(){
     }
 
     waypoints = [];
-    createButton();
+    createButton("get-direction-button","Get Direction");
 }
 function clearMarkers() {
     markers.forEach(marker => map.removeLayer(marker));
@@ -214,21 +214,67 @@ function showError(error) {
 }
 
 
-function createButton(){
-    let button = document.getElementById("get-direction-button");
+function createButton(buttonId, buttonText) {
+    let button = document.getElementById(buttonId);
 
     if (!button) {
         button = document.createElement("button");
-        button.id = "get-direction-button";
-        button.textContent = "Get Direction";
+        button.id = buttonId;
+        button.textContent = buttonText;
 
         document.body.appendChild(button);
     }
 
-
     button.onclick = null;
 
     button.addEventListener("click", function() {
-        getRoute(waypoints);
+        if (buttonId === "get-direction-button") {
+            getRoute(waypoints);
+        } else if (buttonId === "delete-markers-button") {
+            clearMarkers();
+            clearRoute();
+            document.getElementById("get-direction-button").remove()
+        } else if (buttonId === "add-stops-button") {
+            map.on('dblclick', async (e) => {
+                const { lat, lng } = e.latlng;
+                try {
+                    const response = await fetch(`/en/get_direction/api/get_address_marker/${lat}/${lng}`);
+                    if (!response.ok) throw new Error("Can't find address.");
+                    const data = await response.text();
+                    const marker = L.marker([lat, lng]).addTo(map).bindPopup(data).openPopup();
+                    markers.push(marker);
+                    waypoints.push([lat, lng]);
+
+                    if (waypoints.length > 1) {
+                        getRoute(waypoints);
+                    }
+                    createButton("add-stops-button", "Add more stops");
+                    createButton("delete-markers-button", "Delete my markers");
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            });
+        }
     });
 }
+
+map.on('dblclick', async (e) => {
+    const { lat, lng } = e.latlng;
+    try {
+        const response = await fetch(`/en/get_direction/api/get_address_marker/${lat}/${lng}`);
+        if (!response.ok) throw new Error("Can't find address.");
+        const data = await response.text();
+
+        const marker = L.marker([lat, lng]).addTo(map).bindPopup(data).openPopup();
+        markers.push(marker);
+        waypoints.push([lat, lng]);
+
+        if (waypoints.length > 1) {
+            getRoute(waypoints);
+        }
+        createButton("add-stops-button", "Add more stops");
+        createButton("delete-markers-button", "Delete my markers");
+    } catch (error) {
+        console.error("Error:", error);
+    }
+});

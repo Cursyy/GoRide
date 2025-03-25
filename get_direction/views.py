@@ -4,6 +4,8 @@ from decouple import config
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from find_transport.views import get_address
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
@@ -59,6 +61,11 @@ def get_route(request):
             )
 
     return JsonResponse({"error": "Method not allowed"}, status=405)
+
+
+def get_address_marker(request, lat, lon):
+    response = get_address(lat, lon)
+    return HttpResponse(f"Address: {response}")
 
 
 def map_view(request):
