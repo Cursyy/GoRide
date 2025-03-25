@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "payments",
     "subscriptions",
     "vouchers",
+    'booking',
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",
