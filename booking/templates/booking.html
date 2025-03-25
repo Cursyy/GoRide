@@ -21,10 +21,11 @@
             <label for="hours">Hours to Rent:</label>
             <input type="number" id="hours" name="hours" class="form-control" required>
         </div>
-    {% elif subject == "Subscription" %}
+    {% elif subject == "Subscription"%}
     <form method="post" action="{% url 'booking:process_subscription' %}">
         {% csrf_token %}
-        <p>Subscription Price: €{{ subscription_price }}</p>
+        <p>{{plan}}</p>
+        <p>Subscription Price: €{{ plan.price }}</p>
     {% elif subject == "Balance" %}
     <form method="post" action="{% url 'booking:process_topup' %}">
         {% csrf_token %}

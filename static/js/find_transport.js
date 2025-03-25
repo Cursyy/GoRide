@@ -205,7 +205,7 @@ async function loadVehicles(stationId = null) {
                     <button type="submit">Apply</button>
                 </form>
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
-                <button onclick="rentVehicle(${vehicle.id})">Rent</button>
+                <a href="/booking/rent/${vehicle.id}/" class="btn btn-primary">Rent</a>
             </div>
         `;
         container.appendChild(vehicleCard);

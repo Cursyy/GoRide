@@ -1,116 +1,88 @@
-from django.shortcuts import render, get_object_or_404
-from find_transport.models import Vehicle
-from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView
+from .forms import RentalBookingForm
+from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+
 from .models import Booking
-from vouchers.models import Voucher
-from django.shortcuts import redirect
+from find_transport.models import Vehicle
+from subscriptions.models import UserSubscription, SubscriptionPlan
+from .forms import SubscriptionBookingForm
 
-@login_required
-def booking_page(request, subject, vehicle_id=None):
-    context = {"subject": subject}
+class RentalBookingCreateView(CreateView):
+    model = Booking
+    form_class = RentalBookingForm
+    template_name = 'rental_booking.html'
 
-    if subject == "Rent" and vehicle_id:
-        vehicle = get_object_or_404(Vehicle, id=vehicle_id)
-        context["vehicle"] = vehicle
-    elif subject == "Subscription":
-        context["subscription_price"] = 20.00 
-    elif subject == "Balance":
-        pass
+    def get_subscription_details(self):
+        try:
+            subscription = self.request.user.usersubscription
+            if subscription.is_active():
+                return {
+                    'type': subscription.plan.type,
+                    'remaining_hours': subscription.remaining_rides
+                }
+        except UserSubscription.DoesNotExist:
+            return None
+        return None
 
-    return render(request, "booking.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        vehicle = get_object_or_404(Vehicle, id=self.kwargs['vehicle_id'])
+        context['vehicle'] = vehicle
+        context['price_per_hour'] = vehicle.price_per_hour
+        context['subscription'] = self.get_subscription_details()
+        return context
+
+    def form_valid(self, form):
+        vehicle = get_object_or_404(Vehicle, id=self.kwargs['vehicle_id'])
+        form.instance.user = self.request.user
+        form.instance.vehicle = vehicle
+        hours = form.cleaned_data['hours']
+        payment_type = form.cleaned_data['payment_type']
+        subscription = self.get_subscription_details()
+
+        if payment_type == 'Subscription':
+            if not subscription or subscription['remaining_hours'] < hours:
+                form.add_error('payment_type', "Not enough subscription hours.")
+                return self.form_invalid(form)
+            form.instance.amount = 0  # No additional cost
+            subscription_obj = self.request.user.usersubscription
+            subscription_obj.remaining_rides -= hours
+            subscription_obj.save()  # Decrease hours in DB
+        else:
+            form.instance.amount = vehicle.price_per_hour * hours
+            # Process other payment methods (e.g., Stripe) here
+
+        vehicle.status = False  # Mark vehicle as rented
+        vehicle.save()
+        return super().form_valid(form)
 
 
-@login_required
-def rent_vehicle(request):
-    if request.method == "POST":
-        vehicle_id = request.POST.get("vehicle_id")
-        hours = int(request.POST.get("hours", 1))
-        payment_type = request.POST.get("payment_type")
-        voucher_code = request.POST.get("voucher", "").strip()
+class SubscriptionBookingCreateView(CreateView):
+    model = Booking
+    form_class = SubscriptionBookingForm
+    template_name = 'subscription_booking.html'
 
-        vehicle = get_object_or_404(Vehicle, id=vehicle_id)
-        
-        # Перевіряємо ваучер
-        discount = 0
-        if voucher_code:
-            try:
-                voucher = Voucher.objects.get(code=voucher_code, is_active=True)
-                discount = voucher.discount_amount
-            except Voucher.DoesNotExist:
-                return render(request, "booking.html", {
-                    "vehicle": vehicle,
-                    "error": "Invalid voucher code."
-                })
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        plan = get_object_or_404(SubscriptionPlan, id=self.kwargs['plan_id'])
+        context['plan'] = plan
+        context['amount'] = plan.price
+        return context
 
-        total_price = (vehicle.price_per_hour * hours) - discount
-        total_price = max(total_price, 0)
+    def form_valid(self, form):
+        plan = get_object_or_404(SubscriptionPlan, id=self.kwargs['plan_id'])
+        form.instance.user = self.request.user
+        form.instance.subject = 'Subscription'
+        form.instance.amount = plan.price
+        payment_type = form.cleaned_data['payment_type']
 
-        # payment_success = process_payment(request.user, total_price, payment_type)
-        # if not payment_success:
-        #     return render(request, "booking.html", {"vehicle": vehicle, "error": "Payment failed."})
+        # if not process_payment(payment_type, form.instance.amount):
+        #     form.add_error(None, "Payment failed.")
+        #     return self.form_invalid(form)
 
-        booking = Booking.objects.create(
-            user=request.user,
-            vehicle=vehicle,
-            hours=hours,
-            amount=total_price,
-            payment_type=payment_type,
-            subject="Rent",
-            status="Paid"
-        )
-
-        return redirect("booking:success")
-
-    return redirect("main:home")
-
-@login_required
-def success(request):
-    return render(request, "success.html")
-
-@login_required
-def buy_subscription(request):
-    if request.method == "POST":
-        payment_type = request.POST.get("payment_type")
-        plan_price = 20.00
-
-        # payment_success = process_payment(request.user, plan_price, payment_type)
-        # if not payment_success:
-        #     return render(request, "subscription.html", {"error": "Payment failed."})
-
-        booking = Booking.objects.create(
-            user=request.user,
-            amount=plan_price,
-            payment_type=payment_type,
-            subject="Subscription",
-            status="Paid"
-        )
-
-        return redirect("subscription:success")
-
-    return redirect("home")
-
-@login_required
-def top_up_balance(request):
-    if request.method == "POST":
-        amount = float(request.POST.get("amount"))
-        payment_type = request.POST.get("payment_type")
-
-        # payment_success = process_payment(request.user, amount, payment_type)
-        # if not payment_success:
-        #     return render(request, "topup.html", {"error": "Payment failed."})
-
-        booking = Booking.objects.create(
-            user=request.user,
-            amount=amount,
-            payment_type=payment_type,
-            subject="Balance",
-            status="Paid"
-        )
-
-        # Додаємо баланс користувачу
-        request.user.profile.balance += amount
-        request.user.profile.save()
-
-        return redirect("account:success")
-
-    return redirect("home")
+        form.instance.status = 'Paid'
+        # Activate subscription logic here
+        UserSubscription.objects.create(user=self.request.user, plan=plan)
+        return super().form_valid(form)
+    

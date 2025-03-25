@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Rent {{ vehicle.type }} (ID: {{ vehicle.id }})</h2>
+    <p>Price per hour: €{{ price_per_hour }}</p>
+    <p id="final_amount">Final Amount: €{{ price_per_hour }} (for 1 hour)</p>
+
+    {% if subscription %}
+        <div class="alert alert-info">
+            <strong>Subscription:</strong> {{ subscription.type }} with 
+            {{ subscription.remaining_hours|default:"unlimited" }} hours remaining.
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_hours" class="form-label">Hours</label>
+            <input type="number" name="hours" id="id_hours" class="form-control" min="1" value="1" required oninput="updateFinalAmount()">
+            {% if form.hours.errors %}
+                <div class="text-danger">{{ form.hours.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Payment Method</label>
+            <div>
+                <input type="radio" name="payment_type" value="Subscription" id="id_subscription" 
+                    {% if subscription and subscription.remaining_hours >= form.hours.value|default:1 %}checked{% else %}disabled{% endif %}>
+                <label for="id_subscription">Subscription</label><br>
+                <input type="radio" name="payment_type" value="Stripe" id="id_stripe" 
+                    {% if not subscription or subscription.remaining_hours < form.hours.value|default:1 %}checked{% endif %}>
+                <label for="id_stripe">Stripe</label>
+            </div>
+            {% if form.payment_type.errors %}
+                <div class="text-danger">{{ form.payment_type.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Book Now</button>
+    </form>
+</div>
+
+<script>
+    function updateFinalAmount() {
+        const hours = document.getElementById('id_hours').value;
+        const pricePerHour = {{ price_per_hour }};
+        const finalAmount = (hours * pricePerHour).toFixed(2);
+        document.getElementById('final_amount').textContent = `Final Amount: €${finalAmount} (for ${hours} hours)`;
+
+        // Enable/disable subscription based on remaining hours
+        const remainingHours = {{ subscription.remaining_hours|default:0 }};
+        const subscriptionRadio = document.getElementById('id_subscription');
+        const stripeRadio = document.getElementById('id_stripe');
+        if (remainingHours >= hours) {
+            subscriptionRadio.disabled = false;
+            subscriptionRadio.checked = true;
+        } else {
+            subscriptionRadio.disabled = true;
+            stripeRadio.checked = true;
+        }
+    }
+    updateFinalAmount(); // Initial call
+</script>
+{% endblock %}

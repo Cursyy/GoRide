@@ -127,7 +127,7 @@ def stripe_payment(request, vehicle_id):
                 billing_address_collection="required",
                 shipping_address_collection={},
                 payment_intent_data={"description": description},
-                success_url=request.build_absolute_uri(reverse("payment_success")),
+                success_url=request.build_absolute_uri(reverse("payments:payment_success")),
                 cancel_url=request.build_absolute_uri(
                     reverse("find_transport:find_transport")
                 ),

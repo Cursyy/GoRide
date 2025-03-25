@@ -28,7 +28,7 @@
                             {% trans "All types available" %}
                             {% endif %}
                         </p>
-                        <a href="{% url 'subscriptions:subscribe_user' plan.id %}" class="btn btn-primary">{% trans "Subscribe" %}</a>
+                        <a href="{% url 'booking:subscribe_plan' plan_id=plan.id %}" class="btn btn-primary">{% trans "Subscribe" %}</a>
                     </div>
                 </div>
             </div>
