@@ -8,7 +8,7 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
     path("", include("main.urls")),
@@ -16,9 +16,10 @@ urlpatterns += i18n_patterns(
     path("accounts/", include("accounts.urls")),
     path("support/", include("support.urls")),
     path("find_transport/", include("find_transport.urls")),
-    path('payments/', include('payments.urls')),
-    path('subscriptions/', include('subscriptions.urls')),
-    path('',include('paypal.standard.ipn.urls')),
+    path("payments/", include("payments.urls")),
+    path("subscriptions/", include("subscriptions.urls")),
+    path("get_direction/", include("get_direction.urls")),
+    path("", include("paypal.standard.ipn.urls")),
 )
 
 
