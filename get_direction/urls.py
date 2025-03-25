@@ -7,6 +7,6 @@ urlpatterns = [
     path(
         "api/places/<str:category>/<str:lat>/<str:lon>/", get_places, name="get_places"
     ),
-    path("api/route", get_route, name="get_route"),
+    path("api/route/", get_route, name="get_route"),
     path("", map_view, name="map"),
 ]

@@ -1,15 +1,17 @@
 let map;
 let userLat, userLon;
 let markers=[];
-// Список категорій (рядок, розділений комами)
+let waypoints = [];
+let route;
+let turnByTurnLayer;
+
 const categoriesList = "accommodation.hotel,accommodation.hostel,activity,airport,commercial.supermarket,commercial.marketplace,commercial.shopping_mall,commercial.elektronics,commercial.outdoor_and_sport,commercial.hobby,commercial.gift_and_souvenir,commercial.clothing,commercial.houseware_and_hardware,commercial.florist,commercial.health_and_beauty,commercial.pet,commercial.food_and_drink,commercial.gas,catering.restaurant.pizza,catering.restaurant.burger,catering.restaurant.italian,catering.restaurant.chinese,catering.restaurant.chicken,catering.restaurant.japanese,catering.restaurant.thai,catering.restaurant.steak_house,catering,education.school,education.library,education.college,education.university,entertainment,entertainment.culture,entertainment.zoo,entertainment.museum,entertainment.cinema,healthcare,healthcare.hospital,leisure,leisure.picnic,leisure.spa,leisure.park,natural,natural.forest,natural.water,national_park,office.government,railway,railway.train,railway.subway,railway.tram,railway.light_rail,rental,service,tourism,religion,amenity,beach,public_transport";
 
-// Розділяємо рядок на масив
+
 const categories = categoriesList.split(',');
 
-// Створимо структуру, що групує підкатегорії за батьківською категорією
-const groupedCategories = {}; // { parent: [fullValue, ...] }
-const simpleCategories = []; // без крапки
+const groupedCategories = {};
+const simpleCategories = [];
 
 categories.forEach(cat => {
     if (cat.indexOf('.') === -1) {
@@ -24,9 +26,7 @@ categories.forEach(cat => {
     }
 });
 
-// Функція, яка буде викликатися при натисканні на кнопку/опцію
 async function  searchPlaces(value) {
-    console.log("Search for:", value);
     clearMarkers();
 
     const response = await fetch(`/en/get_direction/api/places/${value}/${userLat}/${userLon}`);
@@ -36,26 +36,122 @@ async function  searchPlaces(value) {
         const [lon, lat] = place.geometry.coordinates;
         const marker = L.marker([lat, lon]).addTo(map).bindPopup(place.properties.name);
         markers.push(marker);
+        marker.on('click', () => {
+            waypoints.push([lat,lon]);
+            createButton();
+        });
     });
     
 
+}
+const turnByTurnMarkerStyle = {
+    radius: 5,
+    fillColor: "#fff",
+    color: "#0E6655",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 1
+  }
+  
+  async function getRoute(waypoints) {
+    clearRoute();
+    waypoints.push([userLat, userLon]);
+    try {
+        console.log("Відправляємо waypoints:", waypoints);
+        
+        const response = await fetch(`/en/get_direction/api/route/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ waypoints: waypoints }),
+        });
+
+        if (!response.ok) throw new Error("Failed to fetch route");
+
+        const result = await response.json();
+
+        route = L.geoJSON(result, {
+            style: (feature) => ({
+                color: "rgba(20, 137, 255, 0.7)",
+                weight: 5
+            })
+        }).bindPopup((layer) => {
+            return `${layer.feature.properties.distance} ${layer.feature.properties.distance_units}, ${layer.feature.properties.time}`;
+        }).addTo(map);
+        
+         turnByTurns = [];
+
+        result.features.forEach(feature => {
+            feature.properties.legs.forEach((leg, legIndex) => {
+                leg.steps.forEach(step => {
+                    if (step.instruction && step.instruction.text) {
+                        turnByTurns.push({
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": feature.geometry.coordinates[legIndex][step.from_index]
+                            },
+                            "properties": {
+                                "instruction": step.instruction.text
+                            }
+                        });
+                    } 
+                });
+            });
+        });
+
+        if (turnByTurns.length > 0) {
+            turnByTurnLayer = L.geoJSON({
+                type: "FeatureCollection",
+                features: turnByTurns
+            }, {
+                pointToLayer: (feature, latlng) => {
+                    return L.circleMarker(latlng, {
+                        radius: 5,
+                        color: "#FF5733"
+                    });
+                }
+            }).bindPopup((layer) => `${layer.feature.properties.instruction}`).addTo(map);
+        } else {
+            console.warn("There are no available turns to show.");
+        }
+
+    } catch (err) {
+        console.error("Error fetching route:", err);
+    }
+}
+
+function clearRoute(){
+    if (route) {
+        map.removeLayer(route);
+        route = null;
+    }
+
+    if (turnByTurnLayer) {
+        map.removeLayer(turnByTurnLayer);
+        turnByTurnLayer = null;
+    }
+
+    waypoints = [];
+    createButton();
 }
 function clearMarkers() {
     markers.forEach(marker => map.removeLayer(marker));
     markers = [];
 }
-// Генеруємо HTML
+
 let html = '';
 
-// Спочатку кнопки для простих категорій
+
 simpleCategories.forEach(cat => {
     html += `<button class="category-btn" onclick="searchPlaces('${cat}')">${cat}</button>`;
 });
 
-// Тепер для групованих категорій – випадаючі меню
+
 for (const parent in groupedCategories) {
     const subcats = groupedCategories[parent];
-    // Якщо більше ніж одна підкатегорія, створюємо dropdown
+
     if (subcats.length > 1) {
         html += `
             <div class="dropdown" style="display:inline-block; margin: 5px;">
@@ -69,12 +165,11 @@ for (const parent in groupedCategories) {
         html += `</ul>
             </div>`;
     } else {
-        // Якщо лише одна підкатегорія, можна показати як звичайну кнопку
+
         html += `<button class="category-btn" onclick="searchPlaces('${subcats[0]}')">${subcats[0]}</button>`;
     }
 }
 
-// Вставляємо згенерований HTML у контейнер
 document.getElementById('categories-container').innerHTML = html;
 
 if (navigator.geolocation) {
@@ -116,4 +211,24 @@ function showPosition(position) {
 
 function showError(error) {
     console.log("Error getting location:", error.message);
+}
+
+
+function createButton(){
+    let button = document.getElementById("get-direction-button");
+
+    if (!button) {
+        button = document.createElement("button");
+        button.id = "get-direction-button";
+        button.textContent = "Get Direction";
+
+        document.body.appendChild(button);
+    }
+
+
+    button.onclick = null;
+
+    button.addEventListener("click", function() {
+        getRoute(waypoints);
+    });
 }
