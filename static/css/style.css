@@ -503,7 +503,88 @@ button {
 /* subscriptions */
 
 /* paypal button style*/
+
 .paypalbutton {
   width: 200px;
   height: auto;
 }
+
+/* get_direction*/
+#categories-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 10px; 
+    padding: 10px;
+}
+
+
+.category-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.category-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #6c757d;
+    border-radius: 8px;
+    background-color: #6c757d;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: #5a6268;
+}
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 160px;
+    padding: 5px 0;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; 
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+/* get_direction*/
+

@@ -35,7 +35,7 @@ def get_address(lat, lon):
         )
         save_to_cache(lat, lon, content)
         print(f"Response from API: {content}")
-        return content
+        return " ".join(content)
     else:
         print(f"Error {response.status_code}: {response.text}")
         return "Address fetch failed"
