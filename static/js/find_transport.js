@@ -198,25 +198,23 @@ async function loadVehicles(stationId = null) {
                 </div>
             </div>
             <div class="vehicle-price col-12 col-lg-4">
-        <form class="voucher-form" data-vehicle-id="${vehicle.id}">
-            <label for="voucher-${vehicle.id}">Voucher code:</label>
-            <input type="text" id="voucher-${vehicle.id}" name="voucher" placeholder="Enter voucher code">
-            <input type="hidden" name="voucher_type" value="vehicle">
-            <button type="submit">Apply</button>
-        </form>
+                <form class="voucher-form" data-vehicle-id="${vehicle.id}">
+                    <label for="voucher-${vehicle.id}">Voucher code:</label>
+                    <input type="text" id="voucher-${vehicle.id}" name="voucher" placeholder="Enter voucher code">
+                    <input type="hidden" name="voucher_type" value="vehicle">
+                    <button type="submit">Apply</button>
+                </form>
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
-                <form method="get" action="/payments/payment/${vehicle.id}/stripe/" class="d-flex">
-                    <input type="number" name="hours" min="1" value="1" class="hours-input">
-                    <button type="submit" class="rent-button">Pay with Stripe</button>
-                </form>
-                <form method="get" action="/payments/payment/${vehicle.id}/paypal/" class="d-flex"">
-                    <input type="number" name="hours" min="1" value="1" class="hours-input">
-                    <button type="submit" class="rent-button">Pay with PayPal</button>
-                </form>
+                <a href="/booking/rent/${vehicle.id}/" class="btn btn-success">Rent</a>
             </div>
         `;
+        
         container.appendChild(vehicleCard);
     });
+}
+
+function rentVehicle(vehicleId) {
+    window.location.href = `/booking/rent/${vehicleId}/`;
 }
 
 function createButton(){

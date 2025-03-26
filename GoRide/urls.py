@@ -16,9 +16,10 @@ urlpatterns += i18n_patterns(
     path("accounts/", include("accounts.urls")),
     path("support/", include("support.urls")),
     path("find_transport/", include("find_transport.urls")),
-    path("payments/", include("payments.urls")),
     path("subscriptions/", include("subscriptions.urls")),
     path("get_direction/", include("get_direction.urls")),
+    path('booking/', include('booking.urls')),
+    path('payments/', include('payments.urls')),
     path("", include("paypal.standard.ipn.urls")),
 )
 

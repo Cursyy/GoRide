@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white text-center">
+            <h2 class="mb-0">Subscribe to {{ plan.type }}</h2>
+        </div>
+        <div class="card-body">
+            <p class="lead text-center">Duration: {{plan.duration_days}}</p>
+            <p class="lead text-center">Ride Limit: {{ plan.max_ride_hours }}</p>
+            <p class="lead text-center">Price: €{{ plan.price }}</p>
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Choose Payment Method</label>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_type" value="Stripe" id="stripe" required>
+                            <label class="form-check-label" for="stripe">Stripe</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_type" value="Paypal" id="paypal">
+                            <label class="form-check-label" for="paypal">Paypal</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance">
+                            <label class="form-check-label" for="appbalance">App Balance</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Proceed to Pay</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

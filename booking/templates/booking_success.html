@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="container">
+        <h1>Booking Successful!</h1>
+        <p>Thank you for booking with GoRide. Your booking has been confirmed.</p>
+        <a href="{% url 'main:home' %}" class="btn">Return to Home</a>
+    </div>
+{% endblock %}
