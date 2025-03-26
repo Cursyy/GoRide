@@ -93,17 +93,17 @@ class UserStatistics(models.Model):
     def get_badges(self):
         badges = []
         if self.total_rides >= 1:
-            badges.append({"name": "Beginner", "src": ""})
+            badges.append({"name": "Beginner", "src": "/static/images/badges/beginner.png"})
         if self.bike_rides + self.ebike_rides >= 20:
             badges.append({"name": "Bike Lover", "src": "/static/images/badges/bike_lover.png"})
         if self.scooter_rides >= 30:
             badges.append({"name": "Scooter Enthusiast", "src": "/static/images/badges/scooter_ent.png"})
         if self.total_hours >= 100:
-            badges.append({"name": "Marathon Rider", "src": ""})
+            badges.append({"name": "Marathon Rider", "src": "/static/images/badges/marathon_rider.png"})
         if self.total_spent >= 200:
-            badges.append({"name": "Big Spender", "src": ""})
+            badges.append({"name": "Big Spender", "src": "/static/images/badges/big_spender.png"})
         if self.total_rides >= 50 and self.most_used_vehicle == "Bike":
-            badges.append({"name": "Eco Warrior", "src": ""})
+            badges.append({"name": "Eco Warrior", "src": "/static/images/badges/eco_warrior.png"})
 
         return badges
 
