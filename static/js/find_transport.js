@@ -6,6 +6,9 @@ let routeLayer = null;
 let map = null;
 let price = null;
 let voucher = false;
+const vehiclesPerPage = 10;
+let currentPage = 1;
+let allVehicles = [];
 document.addEventListener("DOMContentLoaded", function() {
     loadStations();
     loadVehicles();
@@ -156,23 +159,41 @@ async function loadStations() {
 
 async function loadVehicles(stationId = null) {
     const response = await fetch('api/vehicles');
-    let vehicles = await response.json();
+    allVehicles = await response.json();
+   
     const typeFilter = document.getElementById("type-filter").value;
-    batteryFilter = parseInt(document.getElementById("battery-filter").value);
+    const batteryFilter = parseInt(document.getElementById("battery-filter").value);
+   
     if (stationId) {
-        vehicles = vehicles.filter(v => (v.station_id === stationId)&&
-        (typeFilter === "" || v.type === typeFilter) &&
-        (v.battery_percentage === null || v.battery_percentage >= batteryFilter));
+        allVehicles = allVehicles.filter(v =>
+            v.station_id === stationId &&
+            (typeFilter === "" || v.type === typeFilter) &&
+            (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
+        );
+    } else {
+        allVehicles = allVehicles.filter(v =>
+            (typeFilter === "" || v.type === typeFilter) &&
+            (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
+        );
     }
+   
+    currentPage = 1;
+    displayVehicles();
+    setupPagination();
+}
+
+function displayVehicles() {
     const container = document.getElementById("vehicle-container");
     container.innerHTML = "";
-
-    vehicles.forEach(vehicle => {
+   
+    const start = (currentPage - 1) * vehiclesPerPage;
+    const end = start + vehiclesPerPage;
+    const vehiclesToShow = allVehicles.slice(start, end);
+   
+    vehiclesToShow.forEach(vehicle => {
         const vehicleCard = document.createElement('div');
         vehicleCard.classList.add('vehicle-card');
-        vehicleCard.classList.add('w-100');
-        vehicleCard.classList.add('row');
-
+        
         let imgSrc;
         switch (vehicle.type) {
             case "Bike":
@@ -187,29 +208,96 @@ async function loadVehicles(stationId = null) {
             default:
                 imgSrc = '/static/images/placeholder.jpg';
         }
-
+        
         vehicleCard.innerHTML = `
-            <div class="left-part col-12 col-lg-8 p-4">
-                <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <div class="vehicle-image"><img src="${imgSrc}" alt="${vehicle.type} image"/></div>
-                    </div>
-                    <div class="vehicle-details col-12 col-lg-6">
-                        <h3>${vehicle.type}</h3>
-                        ${vehicle.battery_percentage !== null ? `<p>Battery: ${vehicle.battery_percentage}%</p>` : ""}
-                        <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" target="_blank">Show on Map</a>
-                    </div>
-                </div>
+            <div class="vehicle-image">
+                <img src="${imgSrc}" alt="${vehicle.type} image"/>
             </div>
-            <div class="vehicle-price col-12 col-lg-4 d-flex flex-column justify-content-center align-items-center p-4">
+            <div class="vehicle-details">
+                <h3>${vehicle.type}</h3>
+                ${vehicle.battery_percentage !== null ? 
+                    `<p>Battery: ${vehicle.battery_percentage}%</p>` : 
+                    "<p>Battery: Not Available</p>"}
+                <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" 
+                   target="_blank" class="map-link">Show on Map</a>
+            </div>
+            <div class="vehicle-price">
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
-                <a href="/booking/rent/${vehicle.id}/" class="btn btn-success w-100">Rent</a>
+                <a href="/booking/rent/${vehicle.id}/" class="rent-button">Rent</a>
             </div>
         `;
-        
+       
         container.appendChild(vehicleCard);
     });
 }
+
+function setupPagination() {
+    const pageNumbersContainer = document.getElementById("page-numbers");
+    const prevButton = document.getElementById("prev-page");
+    const nextButton = document.getElementById("next-page");
+    
+    const totalPages = Math.ceil(allVehicles.length / vehiclesPerPage);
+    
+    pageNumbersContainer.innerHTML = "";
+    
+    // Show first 5 page numbers
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    
+    // Adjust start and end pages to always show 5 pages if possible
+    if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+        const pageButton = document.createElement("button");
+        pageButton.innerText = i;
+        pageButton.classList.add("page-button");
+        
+        if (i === currentPage) {
+            pageButton.classList.add("active");
+        }
+        
+        pageButton.addEventListener("click", () => {
+            currentPage = i;
+            displayVehicles();
+            setupPagination();
+        });
+        
+        pageNumbersContainer.appendChild(pageButton);
+    }
+    
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages;
+    
+    prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            displayVehicles();
+            setupPagination();
+        }
+    });
+    
+    nextButton.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayVehicles();
+            setupPagination();
+        }
+    });
+}
+
+// Additional interactivity for battery filter
+document.getElementById("battery-filter").addEventListener("input", function() {
+    document.getElementById("battery-display").textContent = `${this.value}%`;
+    loadVehicles(); // Reload vehicles when battery filter changes
+});
+
+// Type filter event listener
+document.getElementById("type-filter").addEventListener("change", function() {
+    loadVehicles(); // Reload vehicles when type filter changes
+});
 
 function rentVehicle(vehicleId) {
     window.location.href = `/booking/rent/${vehicleId}/`;
