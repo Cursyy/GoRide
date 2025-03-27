@@ -154,7 +154,7 @@ for (const parent in groupedCategories) {
 
     if (subcats.length > 1) {
         html += `
-            <div class="dropdown" style="display:inline-block; margin: 5px;">
+            <div class="dropdown" style="display:inline-block;">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-${parent}" data-bs-toggle="dropdown" aria-expanded="false">
                     ${parent}
                 </button>
