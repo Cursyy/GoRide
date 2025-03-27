@@ -48,7 +48,7 @@ def find_transport(request):
 def get_vehicles(request):
     vehicle_type = request.GET.get("type")
     min_battery = request.GET.get("min_battery")
-    vehicles = Vehicle.objects.all()
+    vehicles = Vehicle.objects.filter(status=True)
     if vehicle_type:
         vehicles = vehicles.filter(type=vehicle_type)
     if min_battery:
