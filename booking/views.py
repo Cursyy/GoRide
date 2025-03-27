@@ -2,57 +2,11 @@ from django.shortcuts import render, redirect
 from .models import Booking
 from subscriptions.models import UserSubscription, SubscriptionPlan, UserStatistics
 from find_transport.models import Vehicle
-from vouchers.models import Voucher
 from django.utils import timezone
-from django.contrib import messages
-from django.template.loader import render_to_string
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+from decimal import Decimal
+from successful_booking import send_transaction_email
 
-
-def sendEmail(request, user, to_email, booking):
-    print(user.email)
-    mail_subject = "Transaction Successful."
-    message = render_to_string(
-        "payment_success_email.html",
-        {
-            "user": user.username,
-            "transaction_status": "Successful",
-            "transaction_id": booking.booking_id,
-            # transaction_id is a variable that holds the transaction id
-            "amount": booking.amount,
-            # amount is a variable that holds the amount of the transaction
-            "date": booking.booking_date,
-            # date is a variable that holds the date of the transaction
-            "time": booking.created_at,
-            # time is a variable that holds the time of the transaction
-            "payment_subject": booking.subject,
-            # payment_subject is a variable that holds the subject of the payment "Rent","Subscription","Wallet"
-            "rental_item": booking.vehicle or None,
-            # rental_item is a variable that holds the item rented "Bike","E-Scooter","E-Bike"
-            "payment_method": booking.payment_type,
-            # payment_method is a variable that holds the payment method used "PayPal","Stripe"
-            "duration": booking.hours or None,
-            # duration is a variable that holds the duration of the rental if the payment_subject is "Rent"
-            # 'wallet_top_up_amount': wallet_top_up_amount,
-            # wallet_top_up_amount is a variable that holds the amount of the wallet top-up if the payment_subject is "Wallet Top-up"
-            # 'wallet_balance': wallet_balance,
-            "domain": get_current_site(request).domain,
-            "protocol": "https" if request.is_secure() else "http",
-        },
-    )
-    email = EmailMessage(mail_subject, message, to=[to_email])
-    if email.send():
-        messages.success(
-            request,
-            f"Dear <b>{user}</b>Your transaction was successful!\
-                          Please check your<b>{to_email}</b>  for the details. Thank you for using our rental service!",
-        )
-    else:
-        messages.error(
-            request,
-            f"Problem sending email to {to_email}, check if you typed it correctly.",
-        )
+# from vouchers.models import Voucher
 
 
 def rent_vehicle(request, vehicle_id):
@@ -91,7 +45,7 @@ def rent_vehicle(request, vehicle_id):
                 vehicle=vehicle,
                 payment_type=payment_type,
                 subject="Rent",
-                amount=total_amount,
+                amount=Decimal(str(total_amount)),
                 hours=hours,
                 status="Paid",
                 created_at=timezone.now(),
@@ -110,7 +64,21 @@ def rent_vehicle(request, vehicle_id):
                 stats = UserStatistics.objects.create(user=request.user)
             stats.update_stats(hours, total_amount, vehicle.type)
 
-            return redirect("booking:booking_success", booking_id=booking.booking_id)
+            transaction_data = {
+                "transaction_id": booking.booking_id,
+                "date": booking.booking_date,
+                "time": booking.created_at,
+                "amount": booking.amount,
+                "payment_method": booking.payment_type,
+                "payment_subject": booking.subject,
+                "rental_item": booking.vehicle.type if booking.vehicle else None,
+                "duration": booking.hours,
+            }
+
+            send_transaction_email(
+                request, request.user, request.user.email, transaction_data
+            )
+            return redirect("booking:booking_success")
 
     return render(
         request,
@@ -148,10 +116,20 @@ def subscribe(request, plan_id):
             except UserSubscription.DoesNotExist:
                 user_subscription = UserSubscription(user=request.user)
                 user_subscription.activate(plan)
-
-            return redirect(
-                "subscriptions:subscription_success", booking_id=booking.booking_id
+            transaction_data = {
+                "transaction_id": booking.booking_id,
+                "date": booking.booking_date,
+                "time": booking.created_at,
+                "amount": booking.amount,
+                "payment_method": booking.payment_type,
+                "payment_subject": booking.subject,
+                "subscription_type": plan.type,
+                "subscription_duration": plan.duration_days,
+            }
+            send_transaction_email(
+                request, request.user, request.user.email, transaction_data
             )
+            return redirect("subscriptions:subscription_success")
 
     return render(
         request,
@@ -162,8 +140,5 @@ def subscribe(request, plan_id):
     )
 
 
-def booking_success(request, booking_id):
-    booking = Booking.objects.get(booking_id=booking_id)
-    user = request.user
-    sendEmail(request, user, user.email, booking)
+def booking_success(request):
     return render(request, "booking_success.html")
