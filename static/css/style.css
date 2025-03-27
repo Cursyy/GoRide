@@ -88,6 +88,7 @@ a {
   height: 400px;
 }
 
+
 .feature-text {
   background-color: var(--main-bg-color);
   color: var(--main-font-color);
@@ -260,7 +261,6 @@ form input[type="file"] {
 
 .vehicle-card {
   display: flex;
-  width: 85%;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -270,7 +270,8 @@ form input[type="file"] {
 
 /* Vehicle image styles */
 .vehicle-image {
-  width: 20%;
+  width: 50%;
+  height: 100%;
 }
 
 .vehicle-image img {
@@ -511,47 +512,53 @@ button {
 
 /* get_direction*/
 #categories-container {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr); 
-    gap: 10px; 
-    padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust columns dynamically */
+  gap: 10px; 
+  padding: 20px 0;
 }
 
-
 .category-btn {
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 1px solid #007bff;
-    border-radius: 8px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
+  min-height: 50px;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #007bff;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  overflow: hidden;
 }
 
 .category-btn:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 
 .dropdown {
     position: relative;
+    margin: 0;
 }
 
 .dropdown-toggle {
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 1px solid #6c757d;
-    border-radius: 8px;
-    background-color: #6c757d;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  min-height: 50px;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #6c757d;
+  border-radius: 8px;
+  background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
 }
 
 .dropdown-toggle:hover {
-    background-color: #5a6268;
+    background-color: var(--accent-color);
 }
 
 
@@ -588,3 +595,23 @@ button {
 }
 /* get_direction*/
 
+
+@media screen and (max-width: 768px) {
+  .hero_img {
+    width: 100%;
+  }
+
+  .card{
+    min-height: 195px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .hero-text {
+    text-align: center;
+  }
+
+  .card{
+    min-height: 140px;
+  }
+}

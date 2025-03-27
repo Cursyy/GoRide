@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Subscribe{% endblock title %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container my-5">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-success text-white text-center">
             <h2 class="mb-0">Subscribe to {{ plan.type }}</h2>
@@ -10,7 +13,15 @@
             <p class="lead text-center">Duration: {{plan.duration_days}}</p>
             <p class="lead text-center">Ride Limit: {{ plan.max_ride_hours }}</p>
             <p class="lead text-center">Price: €{{ plan.price }}</p>
-            <form method="post" class="needs-validation" novalidate>
+            <form id="voucher-form" class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="voucher_input" placeholder="Enter voucher code">
+                    <button type="button" class="btn btn-outline-secondary" onclick="applyVoucher('subscription', null, {{ plan.id }})">Apply</button>
+                </div>
+                <div id="voucher_message" class="mt-2"></div>
+            </form>
+
+            <form method="post" id="subscribe_form" class="needs-validation" novalidate>
                 {% csrf_token %}
                 <div class="mb-4">
                     <label class="form-label fw-bold">Choose Payment Method</label>
@@ -24,14 +35,49 @@
                             <label class="form-check-label" for="paypal">Paypal</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance">
+                            <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance" disabled>
                             <label class="form-check-label" for="appbalance">App Balance</label>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success w-100">Proceed to Pay</button>
+
+                <input type="hidden" name="voucher" id="voucher_hidden">
+                <button type="submit" class="btn btn-primary w-100">Proceed to Pay</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    let voucherApplied = false;
+    let discount = 0;
+
+    function applyVoucher(type, vehicleId, subscriptionId) {
+        const code = document.getElementById('voucher_input').value;
+        fetch("/vouchers/apply/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ code: code, type: type, vehicle_id: vehicleId, subscription: subscriptionId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const messageDiv = document.getElementById('voucher_message');
+            if (data.error) {
+                messageDiv.innerHTML = `<span class="text-danger">${data.error}</span>`;
+                voucherApplied = false;
+                discount = 0;
+            } else {
+                messageDiv.innerHTML = `<span class="text-success">Voucher applied! Discount: ${data.discount}%</span>`;
+                voucherApplied = true;
+                discount = data.discount;
+                document.getElementById('voucher_hidden').value = code;
+                const total = {{ price }} - ({{ price }} * data.discount / 100);
+                document.getElementById('total_amount').textContent = '€' + total.toFixed(2);
+            }
+        });
+    }
+</script>
 {% endblock %}

@@ -5,6 +5,7 @@ from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from find_transport.models import Vehicle
+from decimal import Decimal
 
 
 class SubscriptionPlan(models.Model):
