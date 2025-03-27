@@ -189,23 +189,21 @@ async function loadVehicles(stationId = null) {
         }
 
         vehicleCard.innerHTML = `
-            <div class="left-part col-12 col-lg-8">
-                <div class="vehicle-image"><img src="${imgSrc}" alt="${vehicle.type} image"/></div>
-                <div class="vehicle-details">
-                    <h3>${vehicle.type}</h3>
-                    ${vehicle.battery_percentage !== null ? `<p>Battery: ${vehicle.battery_percentage}%</p>` : ""}
-                    <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" target="_blank">Show on Map</a>
+            <div class="left-part col-12 col-lg-8 p-4">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="vehicle-image"><img src="${imgSrc}" alt="${vehicle.type} image"/></div>
+                    </div>
+                    <div class="vehicle-details col-12 col-lg-6">
+                        <h3>${vehicle.type}</h3>
+                        ${vehicle.battery_percentage !== null ? `<p>Battery: ${vehicle.battery_percentage}%</p>` : ""}
+                        <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" target="_blank">Show on Map</a>
+                    </div>
                 </div>
             </div>
-            <div class="vehicle-price col-12 col-lg-4">
-                <form class="voucher-form" data-vehicle-id="${vehicle.id}">
-                    <label for="voucher-${vehicle.id}">Voucher code:</label>
-                    <input type="text" id="voucher-${vehicle.id}" name="voucher" placeholder="Enter voucher code">
-                    <input type="hidden" name="voucher_type" value="vehicle">
-                    <button type="submit">Apply</button>
-                </form>
+            <div class="vehicle-price col-12 col-lg-4 d-flex flex-column justify-content-center align-items-center p-4">
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
-                <a href="/booking/rent/${vehicle.id}/" class="btn btn-success">Rent</a>
+                <a href="/booking/rent/${vehicle.id}/" class="btn btn-success w-100">Rent</a>
             </div>
         `;
         

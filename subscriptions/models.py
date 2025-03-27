@@ -4,6 +4,7 @@ from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from find_transport.models import Vehicle
+from decimal import Decimal
 
 class SubscriptionPlan(models.Model):
     TYPE_CHOICES = [
@@ -73,7 +74,7 @@ class UserStatistics(models.Model):
     def update_stats(self, duration_hours, cost, vehicle_type):
         self.total_rides += 1
         self.total_hours += duration_hours
-        self.total_spent += cost
+        self.total_spent += Decimal(str(cost))
         if vehicle_type == "Bike":
             self.bike_rides += 1
         elif vehicle_type == "E-Scooter":
