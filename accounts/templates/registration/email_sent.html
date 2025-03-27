@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Email sent{% endblock title %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-success text-white text-center">
+                    <h2>{% trans "Email Sent" %}</h2>
+                </div>
+                <div class="card-body">
+                    <p>{% trans "A confirmation email has been sent to your email address. Please check your inbox (and spam folder) to confirm your account." %}</p>
+                    <a href="{% url 'main:home' %}" class="btn btn-success w-100">{% trans "Back to Home" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
