@@ -39,10 +39,20 @@ def rent_vehicle(request, vehicle_id):
             except Voucher.DoesNotExist:
                 return redirect('rent_vehicle', vehicle_id=vehicle_id)
 
-        if payment_type == 'Subscription':
-            if not subscription or subscription.remaining_rides is None or subscription.remaining_rides < hours:
+        if payment_type == 'Subscription' and not voucher_code:
+            if subscription:
+                if subscription.remaining_rides is None:
+                    total_amount = 0
+                elif subscription.remaining_rides == 0:
+                    return redirect('rent_vehicle', vehicle_id=vehicle_id)
+                elif subscription.remaining_rides < hours: 
+                    return redirect('rent_vehicle', vehicle_id=vehicle_id)
+                else:  
+                    total_amount = 0
+                    subscription.remaining_rides -= hours 
+                    subscription.save()
+            else:
                 return redirect('rent_vehicle', vehicle_id=vehicle_id)
-            total_amount = 0
 
         
 
@@ -115,7 +125,7 @@ def subscribe(request, plan_id):
                 amount=plan.price,
                 status='Paid',
                 created_at=timezone.now(),
-                voucher=voucher_code if voucher_code else None,
+                voucher = voucher_code if voucher_code else None,
             )
 
             try:
@@ -130,14 +140,6 @@ def subscribe(request, plan_id):
     return render(request, 'subscription_booking.html', {
         'plan': plan,
     })
-
-def get_vehicle_price(vehicle_id, discount):
-    vehicle = Vehicle.objects.get(id=vehicle_id)
-    return vehicle.price_per_hour - (vehicle.price_per_hour * discount / 100)
-
-def get_subscription_price(subscription_id, discount):
-    subscription = SubscriptionPlan.objects.get(id=subscription_id)
-    return subscription.price - (subscription.price * discount / 100)
     
 def booking_success(request):
     return render(request, 'booking_success.html')

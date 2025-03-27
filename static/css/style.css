@@ -88,6 +88,7 @@ a {
   height: 400px;
 }
 
+
 .feature-text {
   background-color: var(--main-bg-color);
   color: var(--main-font-color);
@@ -270,7 +271,8 @@ form input[type="file"] {
 
 /* Vehicle image styles */
 .vehicle-image {
-  width: 20%;
+  width: 50%;
+  height: 100%;
 }
 
 .vehicle-image img {
@@ -588,3 +590,10 @@ button {
 }
 /* get_direction*/
 
+
+@media screen and (max-width: 768px) {
+  .hero_img {
+    width: 100%;
+  }
+  
+}
