@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Booking
 from subscriptions.models import UserSubscription, SubscriptionPlan, UserStatistics
 from find_transport.models import Vehicle
+from vouchers.models import Voucher
 from django.utils import timezone
 
 def rent_vehicle(request, vehicle_id):
@@ -28,6 +29,8 @@ def rent_vehicle(request, vehicle_id):
             if not subscription or subscription.remaining_rides is None or subscription.remaining_rides < hours:
                 return redirect('rent_vehicle', vehicle_id=vehicle_id)
             total_amount = 0
+
+        
 
         payment_success = True
         if payment_success:
@@ -98,6 +101,14 @@ def subscribe(request, plan_id):
     return render(request, 'subscription_booking.html', {
         'plan': plan,
     })
+
+def get_vehicle_price(vehicle_id, discount):
+    vehicle = Vehicle.objects.get(id=vehicle_id)
+    return vehicle.price_per_hour - (vehicle.price_per_hour * discount / 100)
+
+def get_subscription_price(subscription_id, discount):
+    subscription = SubscriptionPlan.objects.get(id=subscription_id)
+    return subscription.price - (subscription.price * discount / 100)
     
 def booking_success(request):
     return render(request, 'booking_success.html')
