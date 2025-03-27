@@ -16,7 +16,15 @@
                 </div>
             {% endif %}
 
-            <form method="post" class="needs-validation" novalidate>
+            <form id="voucher-form"  class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="voucher_input" placeholder="Enter voucher code">
+                    <button type="button" class="btn btn-outline-secondary" onclick="applyVoucher('vehicle', {{ vehicle.id }}, null)">Apply</button>
+                </div>
+                <div id="voucher_message" class="mt-2"></div>
+            </form>
+
+            <form method="post" id="rent_form" class="needs-validation" novalidate>
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="hours" class="form-label fw-bold">Number of Hours</label>
@@ -27,7 +35,7 @@
                     <label class="form-label fw-bold">Choose Payment Method</label>
                     <div class="d-flex flex-column gap-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment_type" value="Stripe" id="stripe" {% if not subscription %}checked{% endif %}>
+                            <input class="form-check-input" type="radio" name="payment_type" value="Stripe" id="stripe" checked>
                             <label class="form-check-label" for="stripe">Stripe</label>
                         </div>
                         <div class="form-check">
@@ -40,36 +48,78 @@
                         </div>
                         {% if subscription and subscription.remaining_rides is not null %}
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_type" value="Subscription" id="subscription_radio" checked>
+                                <input class="form-check-input" type="radio" name="payment_type" value="Subscription" id="subscription_radio">
                                 <label class="form-check-label" for="subscription_radio">Subscription</label>
                             </div>
                         {% endif %}
                     </div>
                 </div>
 
+                <input type="hidden" name="voucher" id="voucher_hidden">
                 <button type="submit" class="btn btn-success w-100">Rent Now</button>
             </form>
         </div>
     </div>
 </div>
-
 <script>
+    let voucherApplied = false;
+    let discount = 0;
+
     function updateTotal() {
         const hours = document.getElementById('hours').value;
         const pricePerHour = {{ vehicle.price_per_hour }};
-        const total = hours * pricePerHour;
-        document.getElementById('total_amount').textContent = '€' + total;
-
-        const remainingHours = {{ subscription.remaining_rides|default:0 }};
-        const subscriptionRadio = document.getElementById('subscription_radio');
-        if (subscriptionRadio && remainingHours < hours) {
-            subscriptionRadio.disabled = true;
-            subscriptionRadio.checked = false;
-            document.querySelector('input[value="Stripe"]').checked = true;
-        } else if (subscriptionRadio) {
-            subscriptionRadio.disabled = false;
-            subscriptionRadio.checked = true;
+        let total = hours * pricePerHour;
+        if (voucherApplied) {
+            total -= (total * discount / 100);
+            document.getElementById('subscription_radio').disabled = true;
+        } else {
+            const subscriptionRadio = document.getElementById('subscription_radio');
+            if (subscriptionRadio) {
+                const remainingHours = {{ subscription.remaining_rides|default:0 }};
+                subscriptionRadio.disabled = remainingHours < hours;
+                subscriptionRadio.checked = !subscriptionRadio.disabled;
+            }
         }
+        document.getElementById('total_amount').textContent = '€' + total.toFixed(2);
+    }
+
+    function applyVoucher(type, vehicleId, subscriptionId) {
+        const code = document.getElementById('voucher_input').value;
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+        const data = { code: code, type: type, vehicle_id: vehicleId, subscription: subscriptionId };
+        console.log('Sending data:', data);
+        fetch("{% url 'vouchers:voucher_apply' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Response data:', data);
+            const messageDiv = document.getElementById('voucher_message');
+            if (data.error) {
+                messageDiv.innerHTML = `<span class="text-danger">${data.error}</span>`;
+                voucherApplied = false;
+                discount = 0;
+            } else {
+                messageDiv.innerHTML = `<span class="text-success">Voucher applied! Discount: ${data.discount}%</span>`;
+                voucherApplied = true;
+                discount = data.discount;
+                document.getElementById('voucher_hidden').value = code;
+            }
+            updateTotal();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('voucher_message').innerHTML = `<span class="text-danger">Something went wrong!</span>`;
+        });
     }
 </script>
 {% endblock %}
