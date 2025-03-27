@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth.models import Group, Permission
-from django.conf import settings
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
@@ -16,9 +15,8 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, email, password=None, **extra_fields):
         extra_fields.setdefault("is_admin", True)
         extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("is_admin", True)
+        extra_fields.setdefault("is_active", True)
         return self.create_user(username, email, password, **extra_fields)
-
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     user_id = models.AutoField(primary_key=True)
@@ -30,8 +28,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     objects = CustomUserManager()
 
     groups = models.ManyToManyField(

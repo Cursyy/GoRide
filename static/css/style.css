@@ -543,7 +543,7 @@ button {
     margin: 0;
 }
 
-.dropdown-toggle {
+.get-direction .dropdown-toggle {
   min-height: 50px;
   width: 100%;
   padding: 8px 12px;
@@ -557,12 +557,12 @@ button {
   overflow: hidden;
 }
 
-.dropdown-toggle:hover {
+.get-direction .dropdown-toggle:hover {
     background-color: var(--accent-color);
 }
 
 
-.dropdown-menu {
+.get-direction .dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -577,11 +577,11 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown:hover .dropdown-menu {
+.get-direction .dropdown:hover .dropdown-menu {
     display: block; 
 }
 
-.dropdown-item {
+.get-direction .dropdown-item {
     padding: 8px 12px;
     font-size: 14px;
     color: #333;
@@ -590,7 +590,7 @@ button {
     cursor: pointer;
 }
 
-.dropdown-item:hover {
+.get-direction .dropdown-item:hover {
     background-color: #f8f9fa;
 }
 /* get_direction*/
