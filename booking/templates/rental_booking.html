@@ -1,33 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
-{% block title %}Rent{% endblock title %}
+{% block title %}{% trans "Rent" %}{% endblock title %}
 
 {% block content %}
 <div class="container my-5">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-success text-white text-center">
-            <h2 class="mb-0">Rent {{ vehicle.type }}</h2>
+            <h2 class="mb-0">{% trans "Rent" %} {{ vehicle.type }}</h2>
         </div>
         <div class="card-body">
-            <p class="lead">Price per hour: €{{ vehicle.price_per_hour }}</p>
-            <p class="lead">Total amount: <span id="total_amount">€{{ vehicle.price_per_hour }}</span></p>
+            <p class="lead">{% trans "Price per hour" %}: €{{ vehicle.price_per_hour }}</p>
+            <p class="lead">{% trans "Total amount" %}: <span id="total_amount">€{{ vehicle.price_per_hour }}</span></p>
 
             {% if subscription %}
             <div class="alert alert-info text-center">
-                Your subscription: {{ subscription.plan.type }} (remaining hours: 
+                {% trans "Your subscription" %}: {{ subscription.plan.get_type_display }} ({% trans "remaining hours" %}: 
                 {% if subscription.remaining_rides is not None %}
                     {% if subscription.remaining_rides > 0 %} {{ subscription.remaining_rides }}
                     {% else %} 0 {% endif %}
-                {% else %} unlimited {% endif %}
+                {% else %} {% trans "unlimited" %} {% endif %}
                 )
             </div>
             {% endif %}
 
             <form id="voucher-form"  class="mb-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="voucher_input" placeholder="Enter voucher code">
-                    <button type="button" class="btn btn-outline-secondary" onclick="applyVoucher('vehicle', {{ vehicle.id }}, null)">Apply</button>
+                    <input type="text" class="form-control m-0" id="voucher_input" placeholder="{% trans 'Enter voucher code' %}">
+                    <button type="button" class="btn btn-outline-secondary" id="apply-voucher-btn">{% trans "Apply" %}</button>
                 </div>
                 <div id="voucher_message" class="mt-2"></div>
             </form>
@@ -35,41 +35,41 @@
             <form method="post" id="rent_form" class="needs-validation" novalidate>
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="hours" class="form-label fw-bold">Number of Hours</label>
+                    <label for="hours" class="form-label fw-bold">{% trans "Number of Hours" %}</label>
                     <input type="number" name="hours" id="hours" class="form-control" min="1" value="1" oninput="updateTotal()" required>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label fw-bold">Choose Payment Method</label>
+                    <label class="form-label fw-bold">{% trans "Choose Payment Method" %}</label>
                     <div class="d-flex flex-column gap-2">
                         {% if subscription and subscription.remaining_rides > 0 and subscription.remaining_rides is not null %}
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="payment_type" value="Subscription" id="subscription_radio" checked>
-                                <label class="form-check-label" for="subscription_radio">Subscription</label>
+                                <label class="form-check-label" for="subscription_radio">{% trans "Subscription" %}</label>
                             </div>
                         {% else %}
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="payment_type" value="Subscription" id="subscription_radio" disabled>
-                                <label class="form-check-label" for="subscription_radio">Subscription</label>
+                                <label class="form-check-label" for="subscription_radio">{% trans "Subscription" %}</label>
                             </div>
                         {% endif %}
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment_type" value="Stripe" id="stripe" {% if not subscription or subscription.remaining_rides <= 0 %}checked{% endif %}>
-                            <label class="form-check-label" for="stripe">Stripe</label>
+                            <label class="form-check-label" for="stripe">{% trans "Stripe" %}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment_type" value="Paypal" id="paypal">
-                            <label class="form-check-label" for="paypal">Paypal</label>
+                            <label class="form-check-label" for="paypal">{% trans "Paypal" %}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance" disabled>
-                            <label class="form-check-label" for="appbalance">App Balance</label>
+                            <label class="form-check-label" for="appbalance">{% trans "App Balance" %}</label>
                         </div>
                     </div>
                 </div>
 
                 <input type="hidden" name="voucher" id="voucher_hidden">
-                <button type="submit" class="btn btn-success w-100">Rent Now</button>
+                <button type="submit" class="btn btn-success w-100">{% trans "Rent Now" %}</button>
             </form>
         </div>
     </div>
@@ -80,8 +80,8 @@
 
     function updateTotal() {
         const hours = document.getElementById('hours').value;
-        const pricePerHour = {{ vehicle.price_per_hour }};
-        let total = hours * pricePerHour;
+        const pricePerHour = parseFloat({{ vehicle.price_per_hour }});
+        let total =  hours * pricePerHour;
         if (voucherApplied) {
             total -= (total * discount / 100);
             document.getElementById('subscription_radio').disabled = true;
@@ -118,7 +118,7 @@
             console.log('Response data:', data);
             const messageDiv = document.getElementById('voucher_message');
             if (data.error) {
-                messageDiv.innerHTML = `<span class="text-danger">${data.error}</span>`;
+                messageDiv.innerHTML = `<span class="text-danger">Something went wrong!</span>`;
                 voucherApplied = false;
                 discount = 0;
             } else {
@@ -134,5 +134,14 @@
             document.getElementById('voucher_message').innerHTML = `<span class="text-danger">Something went wrong!</span>`;
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const applyVoucherBtn = document.getElementById('apply-voucher-btn');
+        if (applyVoucherBtn) {
+            applyVoucherBtn.addEventListener('click', function() {
+                applyVoucher('vehicle', {{ vehicle.id }}, null);
+            });
+        }
+    });
 </script>
 {% endblock %}

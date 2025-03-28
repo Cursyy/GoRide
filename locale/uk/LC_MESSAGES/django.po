@@ -1,64 +1,132 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-12 15:26+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2025-03-28 13:33+0000\n"
+"PO-Revision-Date: 2025-03-28 15:00+0000\n"
+"Last-Translator: Grok 3 <grok3@xai.com>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : "
-"4);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
-#: accounts/templates/profile.html:2 main/templates/header.html:52
+#: accounts/templates/profile.html:4 main/templates/header.html:52
 msgid "Profile"
 msgstr "Профіль"
 
-#: accounts/templates/profile.html:5
-msgid "My Profile"
-msgstr "Мій профіль"
-
-#: accounts/templates/profile.html:12 accounts/templates/profile_edit.html:19
-msgid "Email"
-msgstr "Електронна пошта"
-
-#: accounts/templates/profile.html:13
-msgid "Phone"
-msgstr "Телефон"
-
-#: accounts/templates/profile.html:14 accounts/templates/profile_edit.html:4
-#: accounts/templates/profile_edit.html:8
+#: accounts/templates/profile.html:16 accounts/templates/profile_edit.html:5
+#: accounts/templates/profile_edit.html:9
 msgid "Edit Profile"
 msgstr "Редагувати профіль"
 
-#: accounts/templates/profile_edit.html:15
+#: accounts/templates/profile.html:19 accounts/templates/profile_edit.html:20
+msgid "Email"
+msgstr "Електронна пошта"
+
+#: accounts/templates/profile.html:21
+msgid "Phone"
+msgstr "Телефон"
+
+#: accounts/templates/profile.html:37
+msgid "No achievements yet. Keep riding!"
+msgstr "Поки що немає досягнень. Продовжуйте їздити!"
+
+#: accounts/templates/profile.html:48
+msgid "Statistics"
+msgstr "Статистика"
+
+#: accounts/templates/profile.html:51
+msgid "Avatar"
+msgstr "Аватар"
+
+#: accounts/templates/profile.html:60
+msgid "Total Rides:"
+msgstr "Загальна кількість поїздок:"
+
+#: accounts/templates/profile.html:61
+msgid "Total Hours:"
+msgstr "Загальна кількість годин:"
+
+#: accounts/templates/profile.html:62
+msgid "Total Spent:"
+msgstr "Загалом витрачено:"
+
+#: accounts/templates/profile.html:63
+msgid "Most Used Vehicle:"
+msgstr "Найчастіше використовуваний транспорт:"
+
+#: accounts/templates/profile.html:63
+msgid "N/A"
+msgstr "Н/Д"
+
+#: accounts/templates/profile.html:65
+msgid "No statistics available."
+msgstr "Статистика відсутня."
+
+#: accounts/templates/profile.html:72 accounts/templates/profile.html:84
+#: booking/templates/rental_booking.html:48
+#: booking/templates/rental_booking.html:53
+msgid "Subscription"
+msgstr "Підписка"
+
+#: accounts/templates/profile.html:73
+msgid "Start date"
+msgstr "Дата початку"
+
+#: accounts/templates/profile.html:74
+msgid "End date"
+msgstr "Дата закінчення"
+
+#: accounts/templates/profile.html:84
+msgid "You have no active subscriptions"
+msgstr "У вас немає активних підписок"
+
+#: accounts/templates/profile.html:85
+msgid "Choose plan"
+msgstr "Оберіть план"
+
+#: accounts/templates/profile_edit.html:16
 msgid "Username"
 msgstr "Ім'я користувача"
 
-#: accounts/templates/profile_edit.html:23
+#: accounts/templates/profile_edit.html:24
 msgid "Phone Number"
 msgstr "Номер телефону"
 
-#: accounts/templates/profile_edit.html:27
+#: accounts/templates/profile_edit.html:28
 msgid "Profile Picture"
 msgstr "Фото профілю"
 
-#: accounts/templates/profile_edit.html:30
+#: accounts/templates/profile_edit.html:31
 msgid "Save Changes"
 msgstr "Зберегти зміни"
 
+#: accounts/templates/registration/email_sent.html:4
+msgid "Email sent"
+msgstr "Електронний лист надіслано"
+
+#: accounts/templates/registration/email_sent.html:11
+msgid "Email Sent"
+msgstr "Електронний лист надіслано"
+
+#: accounts/templates/registration/email_sent.html:14
+msgid ""
+"A confirmation email has been sent to your email address. Please check your "
+"inbox (and spam folder) to confirm your account."
+msgstr ""
+"Лист із підтвердженням надіслано на вашу електронну адресу. Перевірте вашу "
+"вхідну скриньку (і папку зі спамом), щоб підтвердити ваш обліковий запис."
+
+#: accounts/templates/registration/email_sent.html:15
+msgid "Back to Home"
+msgstr "Повернутися на головну"
+
 #: accounts/templates/registration/login.html:7
 #: accounts/templates/registration/login.html:26
-#: accounts/templates/registration/password_reset_complete.html:12
+#: accounts/templates/registration/password_reset_complete.html:13
 #: accounts/templates/registration/signup.html:17 main/templates/header.html:64
 msgid "Login"
 msgstr "Увійти"
@@ -83,78 +151,80 @@ msgstr "Тільки для зареєстрованих клієнтів"
 msgid "Forgot your password?"
 msgstr "Забули пароль?"
 
-#: accounts/templates/registration/password_change_done.html:5
+#: accounts/templates/registration/password_change_done.html:6
 msgid "Password Changed"
 msgstr "Пароль змінено"
 
-#: accounts/templates/registration/password_change_done.html:10
+#: accounts/templates/registration/password_change_done.html:11
 msgid "Password Changed Successfully"
 msgstr "Пароль успішно змінено"
 
-#: accounts/templates/registration/password_change_done.html:14
+#: accounts/templates/registration/password_change_done.html:15
 msgid "Your password has been updated successfully."
 msgstr "Ваш пароль успішно оновлено."
 
-#: accounts/templates/registration/password_change_done.html:15
+#: accounts/templates/registration/password_change_done.html:16
 msgid "Return to Homepage"
 msgstr "Повернутися на головну сторінку"
 
 #: accounts/templates/registration/password_change_form.html:7
 #: accounts/templates/registration/password_change_form.html:21
-#: accounts/templates/registration/password_reset_confirm.html:20
+#: accounts/templates/registration/password_reset_confirm.html:21
 #: main/templates/header.html:53
 msgid "Change Password"
 msgstr "Змінити пароль"
 
 #: accounts/templates/registration/password_change_form.html:12
 msgid "Change Your Password"
-msgstr "Змініть свій пароль"
+msgstr "Змінити ваш пароль"
 
 #: accounts/templates/registration/password_change_form.html:16
 msgid "Secure Your Account"
-msgstr "Захистіть свій обліковий запис"
+msgstr "Захистіть ваш обліковий запис"
 
 #: accounts/templates/registration/password_change_form.html:17
 msgid "Enter your current password and choose a new one."
-msgstr "Введіть свій поточний пароль і виберіть новий."
+msgstr "Введіть ваш поточний пароль і оберіть новий."
 
-#: accounts/templates/registration/password_reset_complete.html:5
+#: accounts/templates/registration/password_reset_complete.html:6
 msgid "Password Reset Complete"
 msgstr "Скидання пароля завершено"
 
-#: accounts/templates/registration/password_reset_complete.html:10
-msgid "Password Reset Successful"
-msgstr "Пароль успішно скинуто"
-
 #: accounts/templates/registration/password_reset_complete.html:11
+msgid "Password Reset Successful"
+msgstr "Скидання пароля успішне"
+
+#: accounts/templates/registration/password_reset_complete.html:12
 msgid "Your password has been reset successfully."
 msgstr "Ваш пароль успішно скинуто."
 
-#: accounts/templates/registration/password_reset_confirm.html:6
-#: accounts/templates/registration/password_reset_confirm.html:11
+#: accounts/templates/registration/password_reset_confirm.html:7
+#: accounts/templates/registration/password_reset_confirm.html:12
 msgid "Set a New Password"
-msgstr "Встановіть новий пароль"
-
-#: accounts/templates/registration/password_reset_confirm.html:15
-msgid "Create a New Password"
-msgstr "Створіть новий пароль"
+msgstr "Встановити новий пароль"
 
 #: accounts/templates/registration/password_reset_confirm.html:16
+msgid "Create a New Password"
+msgstr "Створити новий пароль"
+
+#: accounts/templates/registration/password_reset_confirm.html:17
 msgid "Enter your new password below."
-msgstr "Введіть свій новий пароль нижче."
+msgstr "Введіть ваш новий пароль нижче."
 
-#: accounts/templates/registration/password_reset_done.html:3
-#: accounts/templates/registration/password_reset_done.html:8
+#: accounts/templates/registration/password_reset_done.html:6
+#: accounts/templates/registration/password_reset_done.html:11
 msgid "Check Your Email"
-msgstr "Перевірте свою електронну пошту"
+msgstr "Перевірте вашу електронну пошту"
 
-#: accounts/templates/registration/password_reset_done.html:9
+#: accounts/templates/registration/password_reset_done.html:12
 msgid ""
 "If an account exists with the email you entered, you will receive a password "
 "reset link."
-msgstr "Якщо обліковий запис існує з введеною вами електронною поштою, ви отримаєте посилання для скидання пароля."
+msgstr ""
+"Якщо обліковий запис із введеною вами електронною поштою існує, ви отримаєте "
+"посилання для скидання пароля."
 
-#: accounts/templates/registration/password_reset_done.html:10
+#: accounts/templates/registration/password_reset_done.html:13
 msgid "Back to Login"
 msgstr "Повернутися до входу"
 
@@ -164,15 +234,15 @@ msgstr "Скинути пароль"
 
 #: accounts/templates/registration/password_reset_form.html:12
 msgid "Forgot Your Password?"
-msgstr "Забули свій пароль?"
+msgstr "Забули ваш пароль?"
 
 #: accounts/templates/registration/password_reset_form.html:16
 msgid "Reset Your Password"
-msgstr "Скиньте свій пароль"
+msgstr "Скинути ваш пароль"
 
 #: accounts/templates/registration/password_reset_form.html:17
 msgid "Enter your email, and we’ll send you a link to reset your password."
-msgstr "Введіть свою електронну пошту, і ми надішлемо вам посилання для скидання пароля."
+msgstr "Введіть вашу електронну пошту, і ми надішлемо вам посилання для скидання пароля."
 
 #: accounts/templates/registration/password_reset_form.html:21
 msgid "Send Reset Link"
@@ -196,109 +266,212 @@ msgstr "Введіть наступну інформацію, щоб створ�
 msgid "Register Account"
 msgstr "Зареєструвати обліковий запис"
 
-#: find_transport/templates/find_transport.html:5
-#: find_transport/templates/find_transport.html:8
-msgid "Available Transport"
-msgstr "Доступний транспорт"
+#: booking/templates/booking_success.html:4
+msgid "Booking Successful"
+msgstr "Бронювання успішне"
 
-#: find_transport/templates/find_transport.html:11
-msgid "Type:"
-msgstr "Тип:"
+#: booking/templates/booking_success.html:9
+msgid "Booking Successful!"
+msgstr "Бронювання успішне!"
 
-#: find_transport/templates/find_transport.html:13
-msgid "All"
-msgstr "Всі"
+#: booking/templates/booking_success.html:10
+msgid "Thank you for booking with"
+msgstr "Дякуємо за бронювання з"
 
-#: find_transport/templates/find_transport.html:14
-#: find_transport/models.py:20
-msgid "E-Bike"
-msgstr "Електровелосипед"
+#: booking/templates/booking_success.html:10
+msgid "Your booking has been confirmed."
+msgstr "Ваше бронювання підтверджено."
 
-#: find_transport/templates/find_transport.html:15
-#: find_transport/models.py:21
-msgid "E-Scooter"
-msgstr "Електросамокат"
+#: booking/templates/booking_success.html:13
+msgid "Return to Home"
+msgstr "Повернутися на головну"
 
-#: find_transport/templates/find_transport.html:16
-#: find_transport/models.py:19
+#: booking/templates/booking_success.html:16
+msgid "Find Your Way"
+msgstr "Знайдіть свій шлях"
+
+#: booking/templates/rental_booking.html:4
+#: booking/templates/rental_booking.html:10
+msgid "Rent"
+msgstr "Орендувати"
+
+#: booking/templates/rental_booking.html:13
+msgid "Price per hour"
+msgstr "Ціна за годину"
+
+#: booking/templates/rental_booking.html:14
+msgid "Total amount"
+msgstr "Загальна сума"
+
+#: booking/templates/rental_booking.html:18
+msgid "Your subscription"
+msgstr "Ваша підписка"
+
+#: booking/templates/rental_booking.html:18
+msgid "remaining hours"
+msgstr "годин залишилося"
+
+#: booking/templates/rental_booking.html:22
+msgid "unlimited"
+msgstr "необмежено"
+
+#: booking/templates/rental_booking.html:29
+#: booking/templates/subscription_booking.html:18
+msgid "Enter voucher code"
+msgstr "Введіть код ваучера"
+
+#: booking/templates/rental_booking.html:30
+#: booking/templates/subscription_booking.html:19
+msgid "Apply"
+msgstr "Застосувати"
+
+#: booking/templates/rental_booking.html:38
+msgid "Number of Hours"
+msgstr "Кількість годин"
+
+#: booking/templates/rental_booking.html:43
+#: booking/templates/subscription_booking.html:27
+msgid "Choose Payment Method"
+msgstr "Оберіть спосіб оплати"
+
+#: booking/templates/rental_booking.html:58
+#: booking/templates/subscription_booking.html:31
+msgid "Stripe"
+msgstr "Stripe"
+
+#: booking/templates/rental_booking.html:62
+#: booking/templates/subscription_booking.html:35
+msgid "Paypal"
+msgstr "Paypal"
+
+#: booking/templates/rental_booking.html:66
+#: booking/templates/subscription_booking.html:39
+msgid "App Balance"
+msgstr "Баланс додатку"
+
+#: booking/templates/rental_booking.html:72 main/templates/home.html:13
+msgid "Rent Now"
+msgstr "Орендувати зараз"
+
+#: booking/templates/subscription_booking.html:4
+#: subscriptions/templates/plans.html:31
+msgid "Subscribe"
+msgstr "Підписатися"
+
+#: booking/templates/subscription_booking.html:10
+msgid "Subscribe to"
+msgstr "Підписатися на"
+
+#: booking/templates/subscription_booking.html:13
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1863
+msgid "Duration"
+msgstr "Тривалість"
+
+#: booking/templates/subscription_booking.html:14
+msgid "Ride Limit"
+msgstr "Ліміт поїздок"
+
+#: booking/templates/subscription_booking.html:15
+msgid "Price"
+msgstr "Ціна"
+
+#: booking/templates/subscription_booking.html:45
+msgid "Proceed to Pay"
+msgstr "Перейти до оплати"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:14
+msgid "First Name"
+msgstr "Ім'я"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:15
+msgid "Last Name"
+msgstr "Прізвище"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:16
+msgid "Street Address"
+msgstr "Адреса вулиці"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:17
+msgid "City"
+msgstr "Місто"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:18
+msgid "State"
+msgstr "Область"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:19
+msgid "Country"
+msgstr "Країна"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:20
+msgid "Postal / Zip Code"
+msgstr "Поштовий індекс"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:21
+msgid "Credit Card Number"
+msgstr "Номер кредитної картки"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:22
+msgid "Expiration Date"
+msgstr "Дата закінчення терміну дії"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:23
+msgid "Card Security Code"
+msgstr "Код безпеки картки"
+
+#: env/lib/python3.13/site-packages/paypal/standard/forms.py:83
+#, python-format
+msgid "Invalid date format %(value)s: %(e)s"
+msgstr "Невірний формат дати %(value)s: %(e)s"
+
+#: find_transport/models.py:19 find_transport/templates/find_transport.html:22
 msgid "Bike"
 msgstr "Велосипед"
 
-#: find_transport/templates/find_transport.html:21
+#: find_transport/models.py:20 find_transport/templates/find_transport.html:20
+msgid "E-Bike"
+msgstr "Електровелосипед"
+
+#: find_transport/models.py:21 find_transport/templates/find_transport.html:21
+msgid "E-Scooter"
+msgstr "Електросамокат"
+
+#: find_transport/templates/find_transport.html:6
+#: find_transport/templates/find_transport.html:11
+msgid "Available Transport"
+msgstr "Доступний транспорт"
+
+#: find_transport/templates/find_transport.html:17
+msgid "Type:"
+msgstr "Тип:"
+
+#: find_transport/templates/find_transport.html:19
+msgid "All"
+msgstr "Усі"
+
+#: find_transport/templates/find_transport.html:27
 msgid "Minimum Battery:"
 msgstr "Мінімальний заряд батареї:"
 
-#: find_transport/templates/find_transport.html:25
-msgid "Filter"
-msgstr "Фільтр"
+#: find_transport/templates/find_transport.html:38
+msgid "Get Direction"
+msgstr "Отримати маршрут"
 
-#: find_transport/templates/find_transport.html:34
-msgid "Geolocation is not supported by this browser."
-msgstr "Геолокація не підтримується цим браузером."
+#: get_direction/templates/get_direction/get_direction.html:5
+msgid "Find your way"
+msgstr "Знайдіть свій шлях"
 
-#: find_transport/templates/find_transport.html:52
-msgid "You are here"
-msgstr "Ви тут"
+#: get_direction/templates/get_direction/get_direction.html:11
+msgid "Search locations..."
+msgstr "Пошук місць..."
 
-#: find_transport/templates/find_transport.html:55
-msgid "Map is not initialized yet"
-msgstr "Карта ще не ініціалізована"
+#: get_direction/templates/get_direction/get_direction.html:12
+msgid "Search"
+msgstr "Пошук"
 
-#: find_transport/templates/find_transport.html:60
-msgid "Error getting location:"
-msgstr "Помилка отримання місцезнаходження:"
-
-#: find_transport/templates/find_transport.html:67
-msgid "Max spaces:"
-msgstr "Максимальна кількість місць:"
-
-#: find_transport/templates/find_transport.html:68
-msgid "Free spaces:"
-msgstr "Вільні місця:"
-
-#: find_transport/templates/find_transport.html:77
-msgid "E-Bike image"
-msgstr "Зображення електровелосипеда"
-
-#: find_transport/templates/find_transport.html:79
-msgid "E-Scooter image"
-msgstr "Зображення електросамоката"
-
-#: find_transport/templates/find_transport.html:81
-msgid "Bike image"
-msgstr "Зображення велосипеда"
-
-#: find_transport/templates/find_transport.html:83
-msgid "Default image"
-msgstr "Зображення за замовчуванням"
-
-#: find_transport/templates/find_transport.html:89
-msgid "Battery:"
-msgstr "Батарея:"
-
-#: find_transport/templates/find_transport.html:91
-msgid "Status:"
-msgstr "Статус:"
-
-#: find_transport/templates/find_transport.html:91
-msgid "Available"
-msgstr "Доступний"
-
-#: find_transport/templates/find_transport.html:91
-msgid "Not Available"
-msgstr "Недоступний"
-
-#: find_transport/templates/find_transport.html:92
-msgid "Show on Map"
-msgstr "Показати на карті"
-
-#: find_transport/templates/find_transport.html:95
-msgid "Price per hour:"
-msgstr "Ціна за годину:"
-
-#: find_transport/templates/find_transport.html:107
-msgid "No vehicles found"
-msgstr "Транспортні засоби не знайдено"
+#: get_direction/templates/get_direction/get_direction.html:20
+msgid "Select Categories"
+msgstr "Оберіть категорії"
 
 #: main/templates/footer.html:10 main/templates/header.html:19
 msgid "About"
@@ -344,11 +517,9 @@ msgstr "Сучасні електровелосипеди та самокати 
 msgid ""
 "GoRide offers a convenient, eco-friendly fleet of electric bikes and "
 "scooters available 24 hours to easily zip around the city."
-msgstr "GoRide пропонує зручний, екологічний парк електровелосипедів та самокатів, доступний 24 години на добу для легкого пересування містом."
-
-#: main/templates/home.html:13
-msgid "Rent Now"
-msgstr "Орендувати зараз"
+msgstr ""
+"GoRide пропонує зручний, екологічний парк електровелосипедів і самокатів, "
+"доступних 24 години, щоб легко пересуватися містом."
 
 #: main/templates/home.html:16
 msgid "City Transport"
@@ -356,7 +527,7 @@ msgstr "Міський транспорт"
 
 #: main/templates/home.html:26
 msgid "Sustainable commuting"
-msgstr "Сталий транспорт"
+msgstr "Стале пересування"
 
 #: main/templates/home.html:27
 msgid "Transforming urban transport"
@@ -368,7 +539,11 @@ msgid ""
 "convenient, smooth urban commuting. Founded in 2021 by green mobility "
 "advocates, our mission is to transform urban transportation through "
 "innovative zero-emission mobility solutions."
-msgstr "GoRide надає екологічно чисті електросамокати та велосипеди для зручного та плавного міського транспорту. Заснована в 2021 році прихильниками зеленої мобільності, наша місія полягає в трансформації міського транспорту за допомогою інноваційних рішень з нульовими викидами."
+msgstr ""
+"GoRide надає екологічні послуги оренди електросамокатів і велосипедів для "
+"зручного та плавного міського пересування. Заснована у 2021 році прихильниками "
+"зеленої мобільності, наша місія — трансформувати міський транспорт за допомогою "
+"інноваційних рішень із нульовими викидами."
 
 #: main/templates/home.html:31
 msgid "Our Services"
@@ -380,7 +555,7 @@ msgstr "Міська сцена"
 
 #: main/templates/home.html:44
 msgid "Retro Poster"
-msgstr "Ретро постер"
+msgstr "Ретро-постер"
 
 #: main/templates/home.html:48
 msgid "Bike Parking"
@@ -388,13 +563,13 @@ msgstr "Парковка для велосипедів"
 
 #: main/templates/home.html:57
 msgid "Exceptional Bike and Scooter Rentals"
-msgstr "Виняткова оренда велосипедів та самокатів"
+msgstr "Виняткова оренда велосипедів і самокатів"
 
 #: main/templates/home.html:58
 msgid ""
-"GoRide offers on-demand access to our shared fleet of electric bikes and "
-"scooters."
-msgstr "GoRide пропонує доступ на вимогу до нашого спільного парку електровелосипедів та самокатів."
+"GoRide offers on-demand access to our shared fleet of electric bikes and scooters."
+msgstr ""
+"GoRide пропонує доступ на вимогу до нашого спільного парку електровелосипедів і самокатів."
 
 #: main/templates/home.html:62
 msgid "Easy Rentals"
@@ -402,7 +577,7 @@ msgstr "Легка оренда"
 
 #: main/templates/home.html:63
 msgid "Locate and unlock vehicles with the GoRide app."
-msgstr "Знаходьте та розблоковуйте транспортні засоби за допомогою додатку GoRide."
+msgstr "Знайдіть і розблокуйте транспорт за допомогою додатку GoRide."
 
 #: main/templates/home.html:68
 msgid "Affordable Pricing"
@@ -410,7 +585,7 @@ msgstr "Доступні ціни"
 
 #: main/templates/home.html:69
 msgid "Pay by the minute or choose a membership."
-msgstr "Платіть за хвилину або оберіть членство."
+msgstr "Платіть за хвилини або оберіть підписку."
 
 #: main/templates/home.html:74
 msgid "Flexible Parking"
@@ -418,85 +593,180 @@ msgstr "Гнучка парковка"
 
 #: main/templates/home.html:75
 msgid "Conveniently park anywhere in designated areas."
-msgstr "Зручно паркуйтеся в будь-якому місці в зазначених зонах."
+msgstr "Зручно паркуйтеся будь-де у визначених зонах."
 
 #: main/templates/home.html:84
 msgid "Download the GoRide app and start riding"
-msgstr "Завантажте додаток GoRide і почніть їздити"
+msgstr "Завантажте додаток GoRide і починайте їздити"
 
 #: main/templates/home.html:85
 msgid "With just a few taps, you can locate, unlock, and ride."
-msgstr "З кількома натисканнями ви можете знайти, розблокувати та їздити."
+msgstr "Лише кількома дотиками ви можете знайти, розблокувати та поїхати."
 
 #: main/templates/home.html:86
 msgid "Get Started"
 msgstr "Почати"
 
-#: payments/templates/payments/payment.html:3
-msgid "Payment for"
-msgstr "Оплата за"
-
-#: payments/templates/payments/payment.html:7
-msgid "Pay"
-msgstr "Оплатити"
-
-#: payments/templates/payments/payment_success.html:3
-msgid "Payment Successful"
-msgstr "Оплата успішна"
-
-#: payments/templates/payments/payment_success.html:4
-msgid "Thank you for your payment!"
-msgstr "Дякуємо за вашу оплату!"
-
-#: payments/templates/payments/payment_success.html:5
-msgid "Return to Transport"
-msgstr "Повернутися до транспорту"
-
-#: payments/templates/payments/stripe_payment.html:3
+#: payments/templates/payments/booking.html:23
+#: payments/templates/payments/stripe_payment.html:5
 msgid "Stripe Payment for"
-msgstr "Оплата через Stripe за"
+msgstr "Оплата через Stripe для"
 
-#: payments/templates/payments/stripe_payment.html:4
+#: payments/templates/payments/booking.html:24
+#: payments/templates/payments/stripe_payment.html:6
 msgid "Total Amount:"
 msgstr "Загальна сума:"
 
-#: payments/templates/payments/stripe_payment.html:11
+#: payments/templates/payments/booking.html:30
+#: payments/templates/payments/stripe_payment.html:13
 msgid "Pay with Stripe"
 msgstr "Оплатити через Stripe"
 
-#: support/templates/support/admin_chat_detail.html:5
-#: support/templates/support/admin_chat_list.html:6
-msgid "Chat with"
-msgstr "Чат з"
+#: payments/templates/payments/payment.html:5
+msgid "Payment for"
+msgstr "Оплата за"
 
-#: support/templates/support/admin_chat_detail.html:13
-msgid "Reply to the chat:"
-msgstr "Відповісти в чаті:"
+#: payments/templates/payments/payment.html:9
+msgid "Pay"
+msgstr "Оплатити"
 
-#: support/templates/support/admin_chat_detail.html:17
-msgid "Send Reply"
-msgstr "Надіслати відповідь"
+#: payments/templates/payments/payment_success.html:6
+msgid "Payment Successful"
+msgstr "Оплата успішна"
 
-#: support/templates/support/admin_chat_detail.html:20
-msgid "Back to chat list"
-msgstr "Повернутися до списку чатів"
+#: payments/templates/payments/payment_success.html:7
+msgid "Thank you for your payment!"
+msgstr "Дякуємо за вашу оплату!"
 
+#: payments/templates/payments/payment_success.html:8
+msgid "Return to Transport"
+msgstr "Повернутися до транспорту"
+
+#: subscriptions/models.py:13
+msgid "Daily Subscription"
+msgstr "Щоденна підписка"
+
+#: subscriptions/models.py:14
+msgid "Weekly Subscription"
+msgstr "Тижнева підписка"
+
+#: subscriptions/models.py:15
+msgid "Monthly Subscription"
+msgstr "Місячна підписка"
+
+#: subscriptions/models.py:16
+msgid "Student"
+msgstr "Студент"
+
+#: subscriptions/models.py:17
+msgid "Athlete"
+msgstr "Спортсмен"
+
+#: subscriptions/templates/plans.html:5 subscriptions/templates/plans.html:9
+msgid "Choose a Subscription Plan"
+msgstr "Оберіть план підписки"
+
+#: subscriptions/templates/plans.html:18
+msgid "Price:"
+msgstr "Ціна:"
+
+#: subscriptions/templates/plans.html:20
+msgid "Ride Limit:"
+msgstr "Ліміт поїздок:"
+
+#: subscriptions/templates/plans.html:21
+msgid "Unlimited"
+msgstr "Необмежено"
+
+#: subscriptions/templates/plans.html:24
+msgid "Transport type:"
+msgstr "Тип транспорту:"
+
+#: subscriptions/templates/plans.html:26
+msgid "Bike only"
+msgstr "Тільки велосипед"
+
+#: subscriptions/templates/plans.html:28
+msgid "All types available"
+msgstr "Усі типи доступні"
+
+#: subscriptions/templates/success.html:4
+msgid "Subscription Successful"
+msgstr "Підписка успішна"
+
+#: subscriptions/templates/success.html:9
+msgid "Subscription Successful!"
+msgstr "Підписка успішна!"
+
+#: subscriptions/templates/success.html:10
+msgid "Your subscription has been activated."
+msgstr "Вашу підписку активовано."
+
+#: subscriptions/templates/success.html:11
+msgid "Return to Plans"
+msgstr "Повернутися до планів"
+
+#: support/templates/support/admin_chat.html:7
+msgid "Admin Support Panel"
+msgstr "Панель підтримки адміністратора"
+
+#: support/templates/support/admin_chat.html:13
 #: support/templates/support/admin_chat_list.html:3
 msgid "Active Chats"
 msgstr "Активні чати"
 
-#: support/templates/support/user_chat.html:6
+#: support/templates/support/admin_chat.html:23
+msgid "No active chats"
+msgstr "Немає активних чатів"
+
+#: support/templates/support/admin_chat.html:33
+#: support/templates/support/admin_chat_detail.html:6
+#: support/templates/support/admin_chat_list.html:6
+msgid "Chat with"
+msgstr "Чат з"
+
+#: support/templates/support/admin_chat.html:43
+#: support/templates/support/user_chat.html:20
+msgid "No messages yet. Start the conversation!"
+msgstr "Немає повідомлень. Почніть листування!"
+
+#: support/templates/support/admin_chat.html:53
+#: support/templates/support/user_chat.html:30
+msgid "Send"
+msgstr "Надіслати"
+
+#: support/templates/support/admin_chat_detail.html:3
+msgid "Admin chat details"
+msgstr "Деталі чату адміна"
+
+#: support/templates/support/admin_chat_detail.html:14
+msgid "Reply to the chat:"
+msgstr "Відповідь до чату"
+
+#: support/templates/support/admin_chat_detail.html:18
+msgid "Send Reply"
+msgstr "Надіслати відповідь"
+
+#: support/templates/support/admin_chat_detail.html:21
+msgid "Back to chat list"
+msgstr "Повернутися до списку чатів"
+
+#: support/templates/support/admin_chats.html:5
+msgid "All chats"
+msgstr "Всі чати"
+
+#: support/templates/support/admin_chats.html:11
+msgid "Chat"
+msgstr "Чат"
+
+#: support/templates/support/admin_chats.html:15
+msgid "No active chats."
+msgstr "Немає активних чатів."
+
+#: support/templates/support/user_chat.html:7
 msgid "Chat with Support"
-msgstr "Чат з підтримкою"
+msgstr "Час з службою підтримки"
 
 #: support/templates/support/user_chat.html:10
 msgid "Chat History"
 msgstr "Історія чату"
-
-#: support/templates/support/user_chat.html:23
-msgid "No messages yet. Start the conversation!"
-msgstr "Повідомлень ще немає. Почніть розмову!"
-
-#: support/templates/support/user_chat.html:32
-msgid "Send"
-msgstr "Надіслати"

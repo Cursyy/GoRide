@@ -14,14 +14,14 @@
             <div class="col-md-4">
                 <div class="card shadow-lg p-3 mb-5 bg-white rounded">
                     <div class="card-body">
-                        <h4 class="card-title text-center">{{plan.type}}</h4>
+                        <h4 class="card-title text-center">{{ plan.get_type_display }}</h4>
                         <p class="card-text"><strong>{% trans "Price:" %}</strong> {{ plan.price }} €</p>
                         <p class="card-text">
                             <strong>{% trans "Ride Limit:" %}</strong>
                             {% if plan.max_ride_hours %}{{ plan.max_ride_hours }}{% else %}{% trans "Unlimited" %}{% endif %}
                         </p>
                         <p class="card-text">
-                            <strong>{% trans "Transport type: "%}</strong>
+                            <strong>{% trans "Transport type:" %}</strong>
                             {% if plan.type == "Athlete" %}
                             {% trans "Bike only" %}
                             {% else %}
@@ -37,10 +37,4 @@
         </div>
     </div>
 </section>
-
-<script>
-    if ("{{alert_message}}"){
-        alert("{{alert_message}}");
-    }
-</script>
 {% endblock %}

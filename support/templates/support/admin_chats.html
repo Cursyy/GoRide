@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 {% block content %}
-<h2>All chats</h2>
+<h2>{% trans "All chats" %}</h2>
 
 <ul>
     {% for chat in chats %}
         <li>
-            <a href="{% url 'support:admin_chat' chat.id %}"  class="chat-link" color="#0E6655">
-                Chat №{{ chat.id }} ({{ chat.user.username }})
+            <a href="{% url 'support:admin_chat' chat.id %}" class="chat-link" color="#0E6655">
+                {%trans "Chat"  %} №{{ chat.id }} ({{ chat.user.username }})
             </a>
         </li>
     {% empty %}
-        <p>No active chats.</p>
+        <p>{% trans "No active chats." %}</p>
     {% endfor %}
 </ul>
 

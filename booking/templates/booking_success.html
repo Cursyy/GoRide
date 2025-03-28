@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
-{% block title %}Booking Successful{% endblock title %}
+{% block title %}{% trans "Booking Successful" %}{% endblock title %}
 {% block content %}
     <div class="container my-5">
         <div class="card shadow-lg">
             <div class="card-body text-center">
-                <h1 class="card-title text-success mb-4">Booking Successful!</h1>
-                <p class="card-text fs-5">Thank you for booking with <strong>GoRide</strong>. Your booking has been confirmed.</p>
+                <h1 class="card-title text-success mb-4">{% trans "Booking Successful!" %}</h1>
+                <p class="card-text fs-5">{% trans "Thank you for booking with" %} <strong>GoRide</strong>. {% trans "Your booking has been confirmed." %}</p>
                 <div class="mt-4">
                     <a href="{% url 'main:home' %}" class="btn btn-primary me-2">
-                        <i class="bi bi-house-door-fill"></i> Return to Home
+                        <i class="bi bi-house-door-fill"></i> {% trans "Return to Home" %}
                     </a>
                     <a href="{% url 'get_direction:map' %}" class="btn btn-success">
-                        <i class="bi bi-map-fill"></i> Find Your Way
+                        <i class="bi bi-map-fill"></i> {% trans "Find Your Way" %}
                     </a>
                 </div>
             </div>

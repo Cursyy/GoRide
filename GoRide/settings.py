@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "paypal.standard.ipn",
+    # "modeltranslation",
 ]
 ASGI_APPLICATION = "GoRide.asgi.application"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -136,7 +137,8 @@ LANGUAGES = (("en", ("English")), ("ga", ("Gaeilge")), ("uk", ("Українсь
 
 LANGUAGE_CODE = "en-us"
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
+# MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
+# MODELTRANSLATION_LANGUAGES = ("en", "ga", "uk")
 
 TIME_ZONE = "UTC"
 

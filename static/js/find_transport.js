@@ -211,7 +211,7 @@ function displayVehicles() {
         
         vehicleCard.innerHTML = `
             <div class="vehicle-image">
-                <img src="${imgSrc}" alt="${vehicle.type} image"/>
+                <img src="${imgSrc}" alt="${vehicle.get_type_display} image"/>
             </div>
             <div class="vehicle-details">
                 <h3>${vehicle.type}</h3>
