@@ -2,14 +2,14 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
- Find your way
+ {% trans "Find your way" %}
 {% endblock %}
    
 {% block content %}
 <div class="container get-direction my-4">
     <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search locations...">
-        <button id="search-button" onclick="searchLocations()">Search</button>
+        <input type="text" id="search-input" placeholder="{% trans 'Search locations...' %}">
+        <button id="search-button" onclick="searchLocations()">{% trans 'Search' %}</button>
     </div>
    
     <div id="map" class="my-4" style="position: relative; height: 500px;"></div>
@@ -17,7 +17,7 @@
     <div class="categories-sidebar">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle w-100 mb-2" type="button" id="mainCategoriesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                Select Categories
+                {% trans "Select Categories" %}
             </button>
             <ul class="dropdown-menu w-100" aria-labelledby="mainCategoriesDropdown" id="categories-container">
             </ul>

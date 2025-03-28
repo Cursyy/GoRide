@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% block title %} {% trans "Admin chat details" %} {% endblock title %}
 
 {% block content %}
 <h2>{% trans "Chat with" %} {{ chat.user.username }}</h2>

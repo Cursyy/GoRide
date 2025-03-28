@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
-{% block title %}Subscribe{% endblock title %}
+{% block title %}{% trans "Subscribe" %}{% endblock title %}
 
 {% block content %}
 <div class="container my-5">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-success text-white text-center">
-            <h2 class="mb-0">Subscribe to {{ plan.type }}</h2>
+            <h2 class="mb-0">{% trans "Subscribe to" %} {{ plan.type }}</h2>
         </div>
         <div class="card-body">
-            <p class="lead text-center">Duration: {{plan.duration_days}}</p>
-            <p class="lead text-center">Ride Limit: {{ plan.max_ride_hours }}</p>
-            <p class="lead text-center">Price: €{{ plan.price }}</p>
+            <p class="lead text-center">{% trans "Duration" %}: {{ plan.duration_days }}</p>
+            <p class="lead text-center">{% trans "Ride Limit" %}: {{ plan.max_ride_hours }}</p>
+            <p class="lead text-center">{% trans "Price" %}: €{{ plan.price }}</p>
             <form id="voucher-form" class="mb-3">
                 <div class="input-group">
-                    <input type="text" class="form-control m-0" id="voucher_input" placeholder="Enter voucher code">
-                    <button type="button" class="btn btn-outline-secondary" onclick="applyVoucher('subscription', null, {{ plan.id }})">Apply</button>
+                    <input type="text" class="form-control m-0" id="voucher_input" placeholder="{% trans 'Enter voucher code' %}">
+                    <button type="button" class="btn btn-outline-secondary" onclick="applyVoucher('subscription', null, {{ plan.id }})">{% trans "Apply" %}</button>
                 </div>
                 <div id="voucher_message" class="mt-2"></div>
             </form>
@@ -24,25 +24,25 @@
             <form method="post" id="subscribe_form" class="needs-validation" novalidate>
                 {% csrf_token %}
                 <div class="mb-4">
-                    <label class="form-label fw-bold">Choose Payment Method</label>
+                    <label class="form-label fw-bold">{% trans "Choose Payment Method" %}</label>
                     <div class="d-flex flex-column gap-2">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment_type" value="Stripe" id="stripe" required>
-                            <label class="form-check-label" for="stripe">Stripe</label>
+                            <label class="form-check-label" for="stripe">{% trans "Stripe" %}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment_type" value="Paypal" id="paypal">
-                            <label class="form-check-label" for="paypal">Paypal</label>
+                            <label class="form-check-label" for="paypal">{% trans "Paypal" %}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance" disabled>
-                            <label class="form-check-label" for="appbalance">App Balance</label>
+                            <label class="form-check-label" for="appbalance">{% trans "App Balance" %}</label>
                         </div>
                     </div>
                 </div>
 
                 <input type="hidden" name="voucher" id="voucher_hidden">
-                <button type="submit" class="btn btn-primary w-100">Proceed to Pay</button>
+                <button type="submit" class="btn btn-primary w-100">{% trans "Proceed to Pay" %}</button>
             </form>
         </div>
     </div>
