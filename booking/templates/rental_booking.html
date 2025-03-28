@@ -15,7 +15,7 @@
 
             {% if subscription %}
             <div class="alert alert-info text-center">
-                {% trans "Your subscription" %}: {{ subscription.plan.type }} ({% trans "remaining hours" %}: 
+                {% trans "Your subscription" %}: {{ subscription.plan.get_type_display }} ({% trans "remaining hours" %}: 
                 {% if subscription.remaining_rides is not None %}
                     {% if subscription.remaining_rides > 0 %} {{ subscription.remaining_rides }}
                     {% else %} 0 {% endif %}

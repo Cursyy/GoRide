@@ -7,7 +7,7 @@
 <div class="container my-5">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-success text-white text-center">
-            <h2 class="mb-0">{% trans "Subscribe to" %} {{ plan.type }}</h2>
+            <h2 class="mb-0">{% trans "Subscribe to" %} {{ plan.get_type_display }}</h2>
         </div>
         <div class="card-body">
             <p class="lead text-center">{% trans "Duration" %}: {{ plan.duration_days }}</p>
