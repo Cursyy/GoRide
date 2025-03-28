@@ -7,29 +7,47 @@
 {% endblock %}
 
 {% block content %}
-<section class="container">
-    <h2 class="my-4">{% trans "Available Transport" %}</h2>
-    <form method="get" class="filter-form w-100">
-        <div class="filter-item">
-            <label for="type">{% trans "Type:" %}</label>
-            <select name="type" id="type-filter">
-                <option value="">{% trans "All" %}</option>
-                <option value="E-Bike">{% trans "E-Bike" %}</option>
-                <option value="E-Scooter">{% trans "E-Scooter" %}</option>
-                <option value="Bike">{% trans "Bike" %}</option>
-            </select>
+<section class="container vehicle-section">
+    <h2 class="section-title">{% trans "Available Transport" %}</h2>
+   
+    <div class="filters-wrapper">
+        <form method="get" class="filter-form">
+            <div class="filter-group">
+                <div class="filter-item">
+                    <label for="type-filter">{% trans "Type:" %}</label>
+                    <select name="type" id="type-filter" class="form-select">
+                        <option value="">{% trans "All" %}</option>
+                        <option value="E-Bike">{% trans "E-Bike" %}</option>
+                        <option value="E-Scooter">{% trans "E-Scooter" %}</option>
+                        <option value="Bike">{% trans "Bike" %}</option>
+                    </select>
+                </div>
+       
+                <div class="filter-item">
+                    <label for="battery-filter">{% trans "Minimum Battery:" %}</label>
+                    <input type="range" name="min_battery" id="battery-filter"
+                           min="0" max="100" value="0" class="form-range">
+                    <span id="battery-display">0%</span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="map-section">
+        <div id="map" class="map-container">
+            <button id="get-direction-button">{% trans "Get Direction" %}</button>
         </div>
-    
-        <div class="filter-item">
-            <label for="min_battery">{% trans "Minimum Battery:" %}</label>
-            <input type="number" name="min_battery" id="battery-filter" min="0" max="100" value="0">
+    </div>
+   
+    <div id="vehicle-container" class="vehicle-list"></div>
+   
+    <div class="pagination-section">
+        <div id="pagination-container" class="pagination-wrapper">
+            <button id="prev-page" class="pagination-arrow">&#10094;</button>
+            <div id="page-numbers" class="page-numbers"></div>
+            <button id="next-page" class="pagination-arrow">&#10095;</button>
         </div>
-    </form>
-    <div id="map" class="my-4"></div>
-    
-    <div id="vehicle-container"></div>
+    </div>
 </section>
-
 <script src="{% static 'js/find_transport.js' %}" defer></script>
-
 {% endblock %}

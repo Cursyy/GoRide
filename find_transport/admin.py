@@ -10,6 +10,16 @@ class VehicleAdmin(admin.ModelAdmin):
     list_per_page = 10
     list_max_show_all = 100
 
+    actions = ["mark_as_available", "mark_as_unavailable"]
+
+    @admin.action(description="Mark selected vehicles as available")
+    def mark_as_available(self, request, queryset):
+        queryset.update(status=True)
+
+    @admin.action(description="Mark selected vehicles as unavailable")
+    def mark_as_unavailable(self, request, queryset):
+        queryset.update(status=False)
+
 
 @admin.register(EVStation)
 class EVStationAdmin(admin.ModelAdmin):

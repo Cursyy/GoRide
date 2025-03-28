@@ -35,7 +35,7 @@ def get_address(lat, lon):
         )
         save_to_cache(lat, lon, content)
         print(f"Response from API: {content}")
-        return content
+        return " ".join(content)
     else:
         print(f"Error {response.status_code}: {response.text}")
         return "Address fetch failed"
@@ -48,7 +48,7 @@ def find_transport(request):
 def get_vehicles(request):
     vehicle_type = request.GET.get("type")
     min_battery = request.GET.get("min_battery")
-    vehicles = Vehicle.objects.all()
+    vehicles = Vehicle.objects.filter(status=True)
     if vehicle_type:
         vehicles = vehicles.filter(type=vehicle_type)
     if min_battery:

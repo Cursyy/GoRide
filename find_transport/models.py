@@ -44,7 +44,8 @@ class Vehicle(models.Model):
         elif not (0 <= self.battery_percentage <= 100):
             raise ValidationError("Battery percentage must be between 0 and 100")
         if (
-            self.station
+            self.pk is None
+            and self.station
             and Vehicle.objects.filter(station=self.station).count()
             >= self.station.max_spaces
         ):
