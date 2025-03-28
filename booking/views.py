@@ -72,7 +72,7 @@ def rent_vehicle(request, vehicle_id):
                 voucher = voucher_code if voucher_code else None,
             )
 
-            if payment_type == 'Subscription' and not voucher:
+            if payment_type == 'Subscription':
                             subscription.remaining_rides -= hours
                             subscription.save()
 

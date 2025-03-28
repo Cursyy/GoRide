@@ -71,7 +71,7 @@ def get_station(request):
     station_id = request.GET.get("id")
 
     if station_id and not station_id.isdigit():
-        return JsonResponse({"error": "Invalid ID"}, status=400)
+        return JsonResponse({"error": "Invalid ID"}, status=404)
 
     if station_id:
         station = EVStation.objects.filter(id=station_id).first()
