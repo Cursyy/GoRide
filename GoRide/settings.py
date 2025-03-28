@@ -222,3 +222,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 4
+
+# just for testing
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]

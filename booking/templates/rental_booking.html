@@ -85,6 +85,7 @@
         if (voucherApplied) {
             total -= (total * discount / 100);
             document.getElementById('subscription_radio').disabled = true;
+            document.getElementById('stripe').checked = true;
         } else {
             const subscriptionRadio = document.getElementById('subscription_radio');
             if (subscriptionRadio) {
