@@ -12,11 +12,11 @@
         <div class="card-body">
             <p class="lead text-center">{% trans "Duration" %}: {{ plan.duration_days }}</p>
             <p class="lead text-center">{% trans "Ride Limit" %}: {{ plan.max_ride_hours }}</p>
-            <p class="lead text-center">{% trans "Price" %}: €{{ plan.price }}</p>
+            <p class="lead text-center">{% trans "Price" %}: <span id="total_amount">€{{ plan.price }}</span></p>
             <form id="voucher-form" class="mb-3">
                 <div class="input-group">
                     <input type="text" class="form-control m-0" id="voucher_input" placeholder="{% trans 'Enter voucher code' %}">
-                    <button type="button" class="btn btn-outline-secondary" onclick="applyVoucher('subscription', null, {{ plan.id }})">{% trans "Apply" %}</button>
+                    <button type="button" class="btn btn-outline-secondary" id="apply_voucher_btn">{% trans "Apply" %}</button>
                 </div>
                 <div id="voucher_message" class="mt-2"></div>
             </form>
@@ -52,17 +52,29 @@
     let voucherApplied = false;
     let discount = 0;
 
+    function updateTotal() {
+        const basePrice = parseFloat({{ plan.price }});
+        let total = voucherApplied ? basePrice - (basePrice * discount / 100) : basePrice;
+        document.getElementById('total_amount').textContent = '€' + total.toFixed(2);
+    }
+
     function applyVoucher(type, vehicleId, subscriptionId) {
         const code = document.getElementById('voucher_input').value;
-        fetch("/vouchers/apply/", {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+        const data = { code: code, type: type, vehicle_id: vehicleId, subscription: subscriptionId };
+        
+        fetch("{% url 'vouchers:voucher_apply' %}", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
+                'X-CSRFToken': csrfToken
             },
-            body: JSON.stringify({ code: code, type: type, vehicle_id: vehicleId, subscription: subscriptionId })
+            body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
+            return response.json();
+        })
         .then(data => {
             const messageDiv = document.getElementById('voucher_message');
             if (data.error) {
@@ -74,10 +86,22 @@
                 voucherApplied = true;
                 discount = data.discount;
                 document.getElementById('voucher_hidden').value = code;
-                const total = {{ price }} - ({{ price }} * data.discount / 100);
-                document.getElementById('total_amount').textContent = '€' + total.toFixed(2);
             }
+            updateTotal();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('voucher_message').innerHTML = `<span class="text-danger">Something went wrong!</span>`;
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const applyVoucherBtn = document.getElementById('apply_voucher_btn');
+        if (applyVoucherBtn) {
+            applyVoucherBtn.addEventListener('click', function() {
+                applyVoucher('subscription', null, {{ plan.id }});
+            });
+        }
+    });
 </script>
 {% endblock %}

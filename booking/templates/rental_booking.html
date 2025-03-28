@@ -27,7 +27,7 @@
             <form id="voucher-form"  class="mb-3">
                 <div class="input-group">
                     <input type="text" class="form-control m-0" id="voucher_input" placeholder="{% trans 'Enter voucher code' %}">
-                    <button type="button" class="btn btn-outline-secondary" onclick="applyVoucher('vehicle', {{ vehicle.id }}, null)">{% trans "Apply" %}</button>
+                    <button type="button" class="btn btn-outline-secondary" id="apply-voucher-btn">{% trans "Apply" %}</button>
                 </div>
                 <div id="voucher_message" class="mt-2"></div>
             </form>
@@ -80,8 +80,8 @@
 
     function updateTotal() {
         const hours = document.getElementById('hours').value;
-        const pricePerHour = {{ vehicle.price_per_hour }};
-        let total = hours * pricePerHour;
+        const pricePerHour = parseFloat({{ vehicle.price_per_hour }});
+        let total =  hours * pricePerHour;
         if (voucherApplied) {
             total -= (total * discount / 100);
             document.getElementById('subscription_radio').disabled = true;
@@ -134,5 +134,14 @@
             document.getElementById('voucher_message').innerHTML = `<span class="text-danger">Something went wrong!</span>`;
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const applyVoucherBtn = document.getElementById('apply-voucher-btn');
+        if (applyVoucherBtn) {
+            applyVoucherBtn.addEventListener('click', function() {
+                applyVoucher('vehicle', {{ vehicle.id }}, null);
+            });
+        }
+    });
 </script>
 {% endblock %}
