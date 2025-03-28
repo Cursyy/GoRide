@@ -13,6 +13,7 @@ const categories = categoriesList.split(',');
 const groupedCategories = {};
 const simpleCategories = [];
 
+
 categories.forEach(cat => {
     if (cat.indexOf('.') === -1) {
         simpleCategories.push(cat);
@@ -26,12 +27,55 @@ categories.forEach(cat => {
     }
 });
 
+function renderCategories() {
+    const categoriesContainer = document.getElementById('categories-container');
+    let html = '';
+
+    // Add simple categories
+    simpleCategories.forEach(cat => {
+        html += `
+            <li>
+                <a class="dropdown-item" href="#" onclick="searchPlaces('${cat}'); return false;">${cat}</a>
+            </li>`;
+    });
+
+    // Add grouped categories with nested dropdowns
+    for (const parent in groupedCategories) {
+        const subcats = groupedCategories[parent];
+        if (subcats.length > 1) {
+            html += `
+                <li class="dropend">
+                    <a class="dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        ${parent}
+                    </a>
+                    <ul class="dropdown-menu">`;
+            
+            subcats.forEach(subcat => {
+                html += `
+                    <li>
+                        <a class="dropdown-item" href="#" onclick="searchPlaces('${subcat}'); return false;">${subcat.split('.').pop()}</a>
+                    </li>`;
+            });
+            
+            html += `</ul></li>`;
+        }
+    }
+
+    categoriesContainer.innerHTML = html;
+}
+
+function searchLocations() {
+    const searchInput = document.getElementById('search-input').value;
+    // Implement search functionality
+    console.log('Searching for:', searchInput);
+}
+
 async function  searchPlaces(value) {
     clearMarkers();
 
     const response = await fetch(`/en/get_direction/api/places/${value}/${userLat}/${userLon}`);
     const data = await response.json();
-
+    console.log(data)
     data.features.forEach(place => {
         const [lon, lat] = place.geometry.coordinates;
         const marker = L.marker([lat, lon]).addTo(map).bindPopup(place.properties.name);
@@ -134,7 +178,7 @@ function clearRoute(){
     }
 
     waypoints = [];
-    createButton("get-direction-button","Get Direction");
+    createButton("get-direction","Get Direction");
 }
 function clearMarkers() {
     markers.forEach(marker => map.removeLayer(marker));
@@ -221,19 +265,17 @@ function createButton(buttonId, buttonText) {
         button = document.createElement("button");
         button.id = buttonId;
         button.textContent = buttonText;
-
-        document.body.appendChild(button);
+        button.classList.add("map-button");
     }
 
     button.onclick = null;
 
     button.addEventListener("click", function() {
-        if (buttonId === "get-direction-button") {
+        if (buttonId === "get-direction") {
             getRoute(waypoints);
         } else if (buttonId === "delete-markers-button") {
             clearMarkers();
             clearRoute();
-            document.getElementById("get-direction-button").remove()
         } else if (buttonId === "add-stops-button") {
             map.on('dblclick', async (e) => {
                 const { lat, lng } = e.latlng;
@@ -256,6 +298,22 @@ function createButton(buttonId, buttonText) {
             });
         }
     });
+
+    return button;
+}
+
+function addMapControls() {
+    const controlDiv = L.control({ position: 'topleft' });
+
+    controlDiv.onAdd = function() {
+        const container = L.DomUtil.create('div', 'map-buttons-container');
+        container.appendChild(createButton("get-direction", "Get Directions"));
+        container.appendChild(createButton("add-stops-button", "Add more stops"));
+        container.appendChild(createButton("delete-markers-button", "Delete my markers"));
+        return container;
+    };
+
+    controlDiv.addTo(map);
 }
 
 map.on('dblclick', async (e) => {
@@ -272,9 +330,11 @@ map.on('dblclick', async (e) => {
         if (waypoints.length > 1) {
             getRoute(waypoints);
         }
-        createButton("add-stops-button", "Add more stops");
-        createButton("delete-markers-button", "Delete my markers");
     } catch (error) {
         console.error("Error:", error);
     }
 });
+
+addMapControls();
+
+document.addEventListener('DOMContentLoaded', renderCategories);
