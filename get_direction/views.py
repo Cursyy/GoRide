@@ -68,5 +68,20 @@ def get_address_marker(request, lat, lon):
     return HttpResponse(f"Address: {response}")
 
 
+def get_search(request, searchInput):
+    url = f"https://api.geoapify.com/v1/geocode/search?text={searchInput}&format=json&filter=countrycode:ie&apiKey={GEOAPIFY_API_KEY}"
+
+    response = requests.get(url)
+
+    print(response)
+    if response.status_code != 200:
+        return JsonResponse(
+            {"error": "API request failed", "details": response.text},
+            status=response.status_code,
+        )
+    response = response.json()
+    return JsonResponse(response, safe=False)
+
+
 def map_view(request):
     return render(request, "get_direction/get_direction.html")

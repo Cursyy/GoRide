@@ -8,7 +8,7 @@
     {% for chat in chats %}
         <li>
             <a href="{% url 'support:admin_chat' chat.id %}" class="chat-link" color="#0E6655">
-                {%trans "Chat"  %} №{{ chat.id }} ({{ chat.user.username }})
+                {%trans "Chat"  %} {{ chat.id }} ({{ chat.user.username }})
             </a>
         </li>
     {% empty %}

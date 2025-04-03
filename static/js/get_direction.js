@@ -5,13 +5,15 @@ let waypoints = [];
 let route;
 let turnByTurnLayer;
 let userMarkersCount;
-const categoriesList = "accommodation.hotel,accommodation.hostel,activity,airport,commercial.supermarket,commercial.marketplace,commercial.shopping_mall,commercial.elektronics,commercial.outdoor_and_sport,commercial.hobby,commercial.gift_and_souvenir,commercial.clothing,commercial.houseware_and_hardware,commercial.florist,commercial.health_and_beauty,commercial.pet,commercial.food_and_drink,commercial.gas,catering.restaurant.pizza,catering.restaurant.burger,catering.restaurant.italian,catering.restaurant.chinese,catering.restaurant.chicken,catering.restaurant.japanese,catering.restaurant.thai,catering.restaurant.steak_house,catering,education.school,education.library,education.college,education.university,entertainment,entertainment.culture,entertainment.zoo,entertainment.museum,entertainment.cinema,healthcare,healthcare.hospital,leisure,leisure.picnic,leisure.spa,leisure.park,natural,natural.forest,natural.water,national_park,office.government,railway,railway.train,railway.subway,railway.tram,railway.light_rail,rental,service,tourism,religion,amenity,beach,public_transport";
+const categoriesList = "accommodation,activity,airport,commercial,catering,education,entertainment,healthcare,leisure,natural,national_park,railway,service,tourism,religion,amenity,beach,public_transport";
 
 
 const categories = categoriesList.split(',');
 
 const groupedCategories = {};
 const simpleCategories = [];
+
+
 
 
 categories.forEach(cat => {
@@ -31,7 +33,6 @@ function renderCategories() {
     const categoriesContainer = document.getElementById('categories-container');
     let html = '';
 
-    // Add simple categories
     simpleCategories.forEach(cat => {
         html += `
             <li>
@@ -39,36 +40,33 @@ function renderCategories() {
             </li>`;
     });
 
-    // Add grouped categories with nested dropdowns
-    for (const parent in groupedCategories) {
-        const subcats = groupedCategories[parent];
-        if (subcats.length > 1) {
-            html += `
-                <li class="dropend">
-                    <a class="dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        ${parent}
-                    </a>
-                    <ul class="dropdown-menu">`;
-            
-            subcats.forEach(subcat => {
-                html += `
-                    <li>
-                        <a class="dropdown-item" href="#" onclick="searchPlaces('${subcat}'); return false;">${subcat.split('.').pop()}</a>
-                    </li>`;
-            });
-            
-            html += `</ul></li>`;
-        }
-    }
-
     categoriesContainer.innerHTML = html;
 }
 
-function searchLocations() {
+async function searchLocations() {
     const searchInput = document.getElementById('search-input').value;
-    // Implement search functionality
     console.log('Searching for:', searchInput);
+
+    clearMarkers();
+
+    const response = await fetch(`/en/get_direction/api/search/${searchInput}/`);
+    const data = await response.json();
+    console.log(data)
+
+    data.results.forEach(result=> {
+        if(result.rank.confidence > 0.5){
+            const lon= result.lon;
+            const lat = result.lat;
+            const marker = L.marker([lat, lon]).addTo(map).bindPopup(result.formatted);
+            markers.push(marker);
+            marker.on('click', () => {
+            waypoints.push([lat,lon]);
+            createButton("get-direction-button","Get Direction");
+        });
+        }
+    })
 }
+
 
 async function  searchPlaces(value) {
     clearMarkers();
@@ -88,14 +86,6 @@ async function  searchPlaces(value) {
     
 
 }
-const turnByTurnMarkerStyle = {
-    radius: 5,
-    fillColor: "#fff",
-    color: "#0E6655",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 1
-  }
   
   async function getRoute(waypoints) {
     clearRoute();
@@ -223,40 +213,51 @@ if (navigator.geolocation) {
 }
 
 function initializeMap() {
-    map = L.map('map').setView([53.347854,-6.259504], 13);
+    map = L.map('map').setView([53.347854, -6.259504], 13);
     L.tileLayer('https://maps.geoapify.com/v1/tile/klokantech-basic/{z}/{x}/{y}.png?apiKey=d16fda76e6fc4822bbc407474c620a8e', {
-        attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | <a href="https://openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> contributors',
-        maxZoom: 20, id: 'osm-bright'
-      }).addTo(map);
+        attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a>',
+        maxZoom: 20
+    }).addTo(map);
 }
 initializeMap();
 
 function showPosition(position) {
-    userLat = position.coords.latitude;
-    userLon = position.coords.longitude;
-    if (map) {
-        map.setView([userLat, userLon], 15);
-        let userIcon = L.icon({
-                iconUrl: '/static/images/you_are_here.png',
-                iconSize: [38, 50],
-                iconAnchor: [22, 38],
-                popupAnchor: [-3, -38]
-            });
-            L.marker([userLat, userLon], { icon: userIcon })
-                .bindPopup("You are here")
-                .openPopup()
-                .addTo(map);
-
-    } else {
-        console.error("Map is not initialized yet");
-    }
+    let button = document.getElementById("userLocation");
+    button.addEventListener("click", function() {
+        userLat = position.coords.latitude;
+        userLon = position.coords.longitude;
+        if (map) {
+            map.setView([userLat, userLon], 15);
+        }});
+        if (window.userMarker) {
+                window.userMarker.setLatLng([userLat, userLon]);
+        } else {
+                let userIcon = L.icon({
+                    iconUrl: '/static/images/you_are_here.png',
+                    iconSize: [38, 50],
+                    iconAnchor: [22, 38],
+                    popupAnchor: [-3, -38]
+                });
+                window.userMarker = L.marker([userLat, userLon], { icon: userIcon })
+                    .bindPopup("You are here")
+                    .openPopup()
+                    .addTo(map);
+        }
+        
 }
-
 
 function showError(error) {
-    console.log("Error getting location:", error.message);
+    console.error("Error getting location:", error.message);
 }
 
+if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition, showError, {
+        enableHighAccuracy: true,
+        maximumAge: 0
+    });
+} else {
+    console.log("Geolocation is not supported by this browser.");
+}
 
 function createButton(buttonId, buttonText) {
     let button = document.getElementById(buttonId);

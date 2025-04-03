@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_places, get_route, map_view, get_address_marker
+from .views import get_places, get_route, map_view, get_address_marker, get_search
 
 app_name = "get_direction"
 
@@ -14,4 +14,5 @@ urlpatterns = [
         get_address_marker,
         name="get_address_marker",
     ),
+    path("api/search/<str:searchInput>/", get_search, name="get_search"),
 ]
