@@ -6,6 +6,7 @@ from django.utils import timezone
 from decimal import Decimal
 from successful_booking import send_transaction_email
 from vouchers.models import Voucher
+from get_direction.models import Trip
 
 
 def rent_vehicle(request, vehicle_id):
@@ -32,31 +33,32 @@ def rent_vehicle(request, vehicle_id):
         if voucher_code:
             try:
                 voucher = Voucher.objects.get(code=voucher_code, active=True)
-                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (voucher.used or 0) < (voucher.max_use or float('inf')):
-                    total_amount -= (total_amount * voucher.discount / 100)
+                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (
+                    voucher.used or 0
+                ) < (voucher.max_use or float("inf")):
+                    total_amount -= total_amount * voucher.discount / 100
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
-                    if payment_type == 'Subscription':
-                        payment_type = 'Stripe'
+                    if payment_type == "Subscription":
+                        payment_type = "Stripe"
             except Voucher.DoesNotExist:
-                return redirect('rent_vehicle', vehicle_id=vehicle_id)
+                return redirect("rent_vehicle", vehicle_id=vehicle_id)
 
-            if payment_type == 'Subscription' and not voucher_code:
+            if payment_type == "Subscription" and not voucher_code:
                 if subscription:
                     if subscription.remaining_rides is None:
                         total_amount = 0
                     elif subscription.remaining_rides == 0:
-                        return redirect('rent_vehicle', vehicle_id=vehicle_id)
-                    elif subscription.remaining_rides < hours: 
-                        return redirect('rent_vehicle', vehicle_id=vehicle_id)
-                    else:  
+                        return redirect("rent_vehicle", vehicle_id=vehicle_id)
+                    elif subscription.remaining_rides < hours:
+                        return redirect("rent_vehicle", vehicle_id=vehicle_id)
+                    else:
                         total_amount = 0
-                        subscription.remaining_rides -= hours 
+                        subscription.remaining_rides -= hours
                         subscription.save()
                 else:
                     return redirect("rent_vehicle", vehicle_id=vehicle_id)
                 total_amount = 0
-
 
         payment_success = True
         if payment_success:
@@ -69,12 +71,12 @@ def rent_vehicle(request, vehicle_id):
                 hours=hours,
                 status="Paid",
                 created_at=timezone.now(),
-                voucher = voucher_code if voucher_code else None,
+                voucher=voucher_code if voucher_code else None,
             )
 
-            if payment_type == 'Subscription':
-                            subscription.remaining_rides -= hours
-                            subscription.save()
+            if payment_type == "Subscription":
+                subscription.remaining_rides -= hours
+                subscription.save()
 
             vehicle.status = False
             vehicle.save()
@@ -95,7 +97,13 @@ def rent_vehicle(request, vehicle_id):
                 "rental_item": booking.vehicle.type if booking.vehicle else None,
                 "duration": booking.hours,
             }
-
+            minutes_paid = hours * 60
+            Trip.objects.create(
+                user=request.user,
+                prepaid_minutes=minutes_paid,
+                cost_per_minute=Decimal(vehicle.price_per_hour) / 60,
+                status="not_started",
+            )
             send_transaction_email(
                 request, request.user, request.user.email, transaction_data
             )
@@ -119,19 +127,21 @@ def subscribe(request, plan_id):
 
     if request.method == "POST":
         payment_type = request.POST.get("payment_type")
-        voucher_code = request.POST.get('voucher', '')
+        voucher_code = request.POST.get("voucher", "")
 
         total_amount = plan.price
 
         if voucher_code:
             try:
                 voucher = Voucher.objects.get(code=voucher_code, active=True)
-                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (voucher.used or 0) < (voucher.max_use or float('inf')):
-                    total_amount -= (total_amount * voucher.discount / 100)
+                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (
+                    voucher.used or 0
+                ) < (voucher.max_use or float("inf")):
+                    total_amount -= total_amount * voucher.discount / 100
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
             except Voucher.DoesNotExist:
-                return redirect('subscribe', plan_id=plan_id)
+                return redirect("subscribe", plan_id=plan_id)
 
         payment_success = True
         if payment_success:
@@ -142,7 +152,7 @@ def subscribe(request, plan_id):
                 amount=plan.price,
                 status="Paid",
                 created_at=timezone.now(),
-                voucher = voucher_code if voucher_code else None,
+                voucher=voucher_code if voucher_code else None,
             )
 
             try:

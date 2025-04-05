@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "payments",
     "subscriptions",
     "vouchers",
-    'booking',
+    "booking",
     "get_direction",
     # third party apps
     "crispy_forms",
@@ -92,6 +92,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "get_direction.context_processors.active_trip",
             ],
         },
     },
