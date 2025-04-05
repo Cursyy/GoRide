@@ -28,6 +28,24 @@ categories.forEach(cat => {
         groupedCategories[parent].push(cat);
     }
 });
+function renderResults(results) {
+    const resultsContainer = document.getElementById('places-container');
+    resultsContainer.innerHTML = '';
+
+    results.forEach(result => {
+        let resultHTML = `
+            <div class="result-item">
+                    <div class="result-content">
+                        <h5 class="result-title">${result.name || 'No name available'}</h5>
+                        <p><strong>Address:</strong> ${result.address_line2 || ''}</p>
+                        <p><strong>Distance:</strong> ${result.distance} meters</p>
+                        <p><strong>Estimated Time:</strong> ${Math.ceil(result.distance / 5.5 / 60)} minutes</p>
+                    </div>
+                </div>
+        `;
+        resultsContainer.innerHTML += resultHTML;
+    });
+}
 
 function renderCategories() {
     const categoriesContainer = document.getElementById('categories-container');
@@ -43,6 +61,7 @@ function renderCategories() {
     categoriesContainer.innerHTML = html;
 }
 
+
 async function searchLocations() {
     const searchInput = document.getElementById('search-input').value;
     console.log('Searching for:', searchInput);
@@ -53,8 +72,21 @@ async function searchLocations() {
     const data = await response.json();
     console.log(data)
 
+    const results = data.results.map(result => ({
+        name: result.name,
+        address_line1: result.address_line1,
+        address_line2: result.address_line2,
+        distance: result.distance,
+        distance_units: result.properties?.distance_units,
+        time: result.properties?.time,
+        lat: result.lat,
+        lon: result.lon
+    }));
+
+    renderResults(results);
+
     data.results.forEach(result=> {
-        if(result.rank.confidence > 0.5){
+        if(result.rank.confidence > 0.5 ){
             const lon= result.lon;
             const lat = result.lat;
             const marker = L.marker([lat, lon]).addTo(map).bindPopup(result.formatted);
@@ -74,9 +106,24 @@ async function  searchPlaces(value) {
     const response = await fetch(`/en/get_direction/api/places/${value}/${userLat}/${userLon}`);
     const data = await response.json();
     console.log(data)
+    const results = data.features.map(result => ({
+        name: result.properties?.name, 
+        address_line1: result.properties?.address_line1,
+        address_line2: result.properties?.address_line2,
+        distance: result.properties?.distance,
+        distance_units: result.properties?.distance_units,
+        time: result.properties?.time ? result.properties.time : null,
+        lat: result.lat,
+        lon: result.lon
+    }));
+
+    renderResults(results);
     data.features.forEach(place => {
         const [lon, lat] = place.geometry.coordinates;
-        const marker = L.marker([lat, lon]).addTo(map).bindPopup(place.properties.name);
+        const marker = L.marker([lat, lon]).addTo(map).bindPopup(`
+            ${place.properties.address_line1}<br>
+            ${place.properties.address_line2}
+        `);
         markers.push(marker);
         marker.on('click', () => {
             waypoints.push([lat,lon]);
@@ -86,12 +133,18 @@ async function  searchPlaces(value) {
     
 
 }
-  
+
+if (!document.getElementById('results-container')) {
+    const resultsContainer = document.createElement('div');
+    resultsContainer.id = 'results-container';
+    document.body.appendChild(resultsContainer)
+}
+
   async function getRoute(waypoints) {
     clearRoute();
     waypoints.push([userLat, userLon]);
     try {
-        console.log("Відправляємо waypoints:", waypoints);
+        console.log("Send waypoints:", waypoints);
         
         const response = await fetch(`/en/get_direction/api/route/`, {
             method: 'POST',
@@ -104,7 +157,6 @@ async function  searchPlaces(value) {
         if (!response.ok) throw new Error("Failed to fetch route");
 
         const result = await response.json();
-
         route = L.geoJSON(result, {
             style: (feature) => ({
                 color: "rgba(20, 137, 255, 0.7)",

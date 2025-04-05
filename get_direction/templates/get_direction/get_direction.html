@@ -10,7 +10,7 @@
     <div class="search-container">
         <input type="text" id="search-input" placeholder="{% trans 'Search locations...' %}">
         <button id="search-button" onclick="searchLocations()">{% trans 'Search' %}</button>
-        <button id="userLocation">Show me</button>
+        <button id="userLocation">My Location</button>
     </div>
    
     <div id="map" class="my-4" style="position: relative; height: 500px;"></div>
@@ -24,6 +24,8 @@
             </ul>
         </div>
     </div>
+
+    <div id="places-container" class="places-list"></div>
    
     <script src="{% static 'js/get_direction.js' %}" defer></script>
 </div>
