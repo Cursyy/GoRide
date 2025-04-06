@@ -3,16 +3,14 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 
-
 class EVStation(models.Model):
     id = models.AutoField(primary_key=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
     max_spaces = models.IntegerField()
-
+    
     def __str__(self):
         return f"EVStation {self.id}"
-
 
 class Vehicle(models.Model):
     TYPE_VEHICLE = [
@@ -20,7 +18,6 @@ class Vehicle(models.Model):
         ("E-Bike", _("E-Bike")),
         ("E-Scooter", _("E-Scooter")),
     ]
-
     id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=20, choices=TYPE_VEHICLE)
     latitude = models.FloatField()
@@ -31,10 +28,14 @@ class Vehicle(models.Model):
     )
     price_per_hour = models.FloatField()
     station = models.ForeignKey(
-        EVStation, on_delete=models.SET_NULL, blank=True, null=True, default=""
+        EVStation, 
+        on_delete=models.SET_NULL, 
+        blank=True, 
+        null=True
     )
-
+    
     def clean(self):
+        # Remove the check for station being present
         if self.type == "Bike":
             self.battery_percentage = None
         elif self.battery_percentage is None:
@@ -43,6 +44,8 @@ class Vehicle(models.Model):
             )
         elif not (0 <= self.battery_percentage <= 100):
             raise ValidationError("Battery percentage must be between 0 and 100")
+        
+        # Station capacity check only for vehicles with a station
         if (
             self.pk is None
             and self.station
@@ -56,4 +59,4 @@ class Vehicle(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return super().__str__()
+        return f"{self.type} Vehicle {self.id}"
