@@ -468,7 +468,7 @@ form input[type="file"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 85%;
+  width: 100%;
   margin: 20px auto;
   padding: 10px;
   border: 1px solid #ddd;

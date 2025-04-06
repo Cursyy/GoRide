@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'wallet.apps.WalletConfig',
     # project apps
     "main",
     "support",
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     "vouchers",
     'booking',
     "get_direction",
+    # "wallet",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",
@@ -92,6 +94,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "wallet.context_proccesors.wallet_balance",
             ],
         },
     },
@@ -222,3 +225,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 4
+
+# just for testing
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]

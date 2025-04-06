@@ -49,6 +49,14 @@
                             {{ user.username }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <li>
+                                <a class="dropdown-item d-flex justify-content-between align-items-center" href="{% url 'booking:topup' %}">
+                                    {{ wallet_balance }}€
+                                    <span class="badge bg-success rounded-pill float-end">
+                                        {% trans "Top Up" %}
+                                    </span>
+                                </a>
+                            </li>
                             <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'password_change' %}">{% trans "Change Password" %}</a></li>
                             <li><hr class="dropdown-divider"></li>

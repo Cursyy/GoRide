@@ -223,7 +223,7 @@ function displayVehicles() {
             </div>
             <div class="vehicle-price">
                 <p>Price per hour: €${vehicle.price_per_hour}</p>
-                <a href="/booking/rent/${vehicle.id}/" class="rent-button">Rent</a>
+                <a href="/booking/rent/${vehicle.id}/" class="rent-button w-100 text-center">Rent</a>
             </div>
         `;
        
@@ -254,6 +254,7 @@ function setupPagination() {
         const pageButton = document.createElement("button");
         pageButton.innerText = i;
         pageButton.classList.add("page-button");
+        pageButton.classList.add("mx-1");
         
         if (i === currentPage) {
             pageButton.classList.add("active");
