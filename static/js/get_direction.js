@@ -5,8 +5,12 @@ let waypoints = [];
 let route;
 let turnByTurnLayer;
 let userMarkersCount;
+let timerInterval = null;
+let startedAt = null;
+let baseTime = 0;
+const tripTimer = document.getElementById("trip-timer");
 const categoriesList = "accommodation,activity,airport,commercial,catering,education,entertainment,healthcare,leisure,natural,national_park,railway,service,tourism,religion,amenity,beach,public_transport";
-
+const socket = new WebSocket(`ws://${window.location.host}/ws/trip/status/`);
 
 const categories = categoriesList.split(',');
 
@@ -60,6 +64,29 @@ function renderCategories() {
 
     categoriesContainer.innerHTML = html;
 }
+function updateTripButtons(status) {
+    const tripButtons = document.getElementById("trip-buttons");
+    tripButtons.innerHTML = ''; 
+
+    if (status === "active") {
+        tripButtons.innerHTML = `
+            <button  onclick="pauseTrip()">Pause</button>
+            <button  onclick="endTrip()">Finish</button>
+        `;
+    } else if (status === "paused") {
+        tripButtons.innerHTML = `
+            <button  onclick="resumeTrip()">Pause</button>
+            <button  onclick="endTrip()">Finish</button>
+        `;
+    } else if (status === "resumed") {
+        tripButtons.innerHTML = `
+            <button  onclick="pauseTrip()">Resume</button>
+            <button  onclick="endTrip()">Finish</button>
+        `;
+    } else if (status === "finished") {
+        tripButtons.innerHTML = "Trip finished. Thank you for using our service!";
+    }
+}
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -88,6 +115,7 @@ function startTrip() {
             alert("Start error: " + data.error);
         } else {
             console.log("Trip started:", data);
+            updateTripButtons("active");
         }
     });
 }
@@ -105,6 +133,7 @@ function pauseTrip() {
             alert("Pause error: " + data.error);
         } else {
             console.log("Trip paused:", data);
+            updateTripButtons("paused");
         }
     });
 }
@@ -122,6 +151,7 @@ function resumeTrip() {
             alert("Resume error: " + data.error);
         } else {
             console.log("Trip resumed:", data);
+            updateTripButtons("resumed");
         }
     });
 }
@@ -138,11 +168,66 @@ function endTrip() {
         if (data.error) {
             alert("End error: " + data.error);
         } else {
-            console.log("Trip ended. Total cost:", data.total_cost);
-            alert(`Trip ended. Cost: €${data.total_cost.toFixed(2)}`);
+            let sum = data.total_cost
+            console.log("Trip ended. Total cost:",sum.toFixed(2));
+            alert(`Trip ended. Cost: €${sum.toFixed(2)}`);
+            updateTripButtons("finished");
         }
     });
 }
+
+
+
+
+socket.onopen = function() {
+    socket.send(JSON.stringify({type: "get_status"}));
+};
+
+socket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    clearInterval(timerInterval);
+    timerInterval = null;
+
+    if (data.status === "active") {
+        startedAt = new Date(data.started_at);
+        baseTime = data.total_travel_time;
+
+        updateTripButtons("active");
+
+        timerInterval = setInterval(() => {
+            const now = new Date();
+            const elapsed = now - startedAt + baseTime * 1000;
+
+            const hours = String(Math.floor(elapsed / (1000 * 60 * 60))).padStart(2, '0');
+            const minutes = String(Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            const seconds = String(Math.floor((elapsed % (1000 * 60)) / 1000)).padStart(2, '0');
+
+            tripTimer.textContent = `${hours}:${minutes}:${seconds}`+"Trip in progress...";
+        }, 1000);
+
+    } else if (data.status === "paused") {
+        updateTripButtons("paused");
+
+        const hours = String(Math.floor(data.total_travel_time / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((data.total_travel_time % 3600) / 60)).padStart(2, '0');
+        const seconds = String(Math.floor(data.total_travel_time % 60)).padStart(2, '0');
+        tripTimer.textContent = `${hours}:${minutes}:${seconds} (Paused)`;
+    } else {
+        updateTripButtons("none");
+        tripTimer.textContent = "How was your trip? Give us feedback!";
+    }
+};
+
+socket.onerror = function(e) {
+    console.error('WebSocket error:', e);
+};
+socket.onopen = function(e) {
+    console.log('WebSocket connection established',e);
+};
+socket.onclose = function(e) {
+    console.log('WebSocket connection closed',e);
+}
+
 async function searchLocations() {
     const searchInput = document.getElementById('search-input').value;
     console.log('Searching for:', searchInput);

@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from find_transport.views import get_address
 from .models import Trip
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
@@ -96,7 +98,7 @@ def map_view(request):
 def start_trip(request):
     user = request.user
     trip = Trip.objects.filter(user=user, status="not_started").first()
-
+    notify_trip_status(user)
     if not trip:
         return JsonResponse({"error": "No trip to start"}, status=400)
 
@@ -110,6 +112,7 @@ def start_trip(request):
 def pause_trip(request):
     user = request.user
     trip = Trip.objects.filter(user=user, status="active").first()
+    notify_trip_status(user)
     if trip:
         trip.status = "paused"
         trip.paused_at = timezone.now()
@@ -124,6 +127,7 @@ def pause_trip(request):
 def resume_trip(request):
     user = request.user
     trip = Trip.objects.filter(user=user, status="paused").first()
+    notify_trip_status(user)
     if trip:
         trip.status = "active"
         trip.started_at = timezone.now()
@@ -138,6 +142,7 @@ def resume_trip(request):
 def end_trip(request):
     user = request.user
     trip = Trip.objects.filter(user=user, status="active").first()
+    notify_trip_status(user)
     if trip:
         trip.status = "finished"
         trip.ended_at = timezone.now()
@@ -152,18 +157,20 @@ def end_trip(request):
         return JsonResponse({"error": "No active trip found"}, status=404)
 
 
-@login_required
-def trip_status(request):
-    trip = Trip.objects.filter(
-        user=request.user, status__in=["active", "paused"]
-    ).first()
-    if trip:
-        return JsonResponse(
-            {
-                "status": trip.status,
-                "started_at": trip.started_at,
-                "paused_at": trip.paused_at,
-                "total_travel_time": trip.total_travel_time.total_seconds(),
-            }
-        )
-    return JsonResponse({"status": "none"})
+def notify_trip_status(user):
+    channel_layer = get_channel_layer()
+    trip = Trip.objects.filter(user=user, status__in=["active", "paused"]).first()
+    data = (
+        {
+            "status": trip.status,
+            "started_at": trip.started_at.isoformat(),
+            "paused_at": trip.paused_at.isoformat() if trip.paused_at else None,
+            "total_travel_time": trip.total_travel_time.total_seconds(),
+        }
+        if trip
+        else {"status": "none"}
+    )
+
+    async_to_sync(channel_layer.group_send)(
+        f"user_{user.user_id}", {"type": "trip_status_update", "data": data}
+    )

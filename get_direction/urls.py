@@ -9,7 +9,7 @@ from .views import (
     pause_trip,
     resume_trip,
     end_trip,
-    trip_status,
+    notify_trip_status,
 )
 
 app_name = "get_direction"
@@ -30,5 +30,5 @@ urlpatterns = [
     path("api/pause_trip/", pause_trip, name="pause_trip"),
     path("api/resume_trip/", resume_trip, name="resume_trip"),
     path("api/end_trip/", end_trip, name="end_trip"),
-    path("api/trip_status/", trip_status, name="trip_status"),
+    path("api/trip_status/", notify_trip_status, name="trip_status"),
 ]

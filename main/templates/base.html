@@ -36,35 +36,9 @@
         </a>
     {% endif %}
 {% endif %}
-{% if active_trip %}
-    <div id="trip-status" class="fixed-bottom bg-light border-top p-3 d-flex justify-content-between align-items-center shadow">
-        <div>
-            <strong>Active trip</strong> — <span id="trip-timer">00:00:00</span>
-        </div>
-        <a href="{% url 'get_direction:map' %}" class="btn btn-primary btn-sm">Go to trip</a>
-    </div>
-    <div id="trip-buttons">
-        <button id="pause-button" onclick="pauseTrip()">Pause</button>
-        <button id="end-button" onclick="endTrip()">Finish</button>
-    </div>
-{% elif paused_trip %}
-    <div id="trip-status" class="fixed-bottom bg-light border-top p-3 d-flex justify-content-between align-items-center shadow">
-        <div>
-            <strong>Paused trip</strong> — <span id="trip-timer">00:00:00</span>
-        </div>
-        <a href="{% url 'get_direction:map' %}" class="btn btn-primary btn-sm">Go to trip</a>
-    </div>
-    <div id="trip-buttons">
-        <button id="resume-button" onclick="resumeTrip()">Resume</button>
-        <button id="end-button" onclick="endTrip()">Finish</button>
-    </div>
-{% else %}
-    <div id="trip-buttons">
-        <button id="start-button" onclick="startTrip()">Start</button>
-    </div>
-{% endif %}
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="{% static 'js/script.js'%}"></script>
+    <script src="{% static 'js/script.js'%}" defer></script>
 </body>
 </html>

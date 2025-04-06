@@ -746,7 +746,24 @@ form input[type="file"] {
   background-color: var(--light-green);
   color: white;
 }
+/*trip buttons*/
+#trip-controls button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
 
+#trip-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#trip-timer {
+  min-width: 120px;
+  text-align: right;
+}
+/*trip buttons*/
 @media (max-width: 768px) {
   .categories-sidebar {
     width: 100%;

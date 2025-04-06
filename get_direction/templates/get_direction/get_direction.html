@@ -14,11 +14,11 @@
     </div>
    
     <div id="map" class="my-4" style="position: relative; height: 500px;"></div>
-    <div id = "trip-buttons">
-        <button id="start-button" onclick="startTrip()">Start</button>
-        <button id="pause-button" onclick="pauseTrip()">Pause</button>
-        <button id="resume-button" onclick="resumeTrip()">Resume</button>
-        <button id="end-button" onclick="endTrip()">Finish</button>
+    <div id="trip-controls" class="d-flex justify-content-between align-items-center bg-light border p-3 rounded shadow-sm mb-3" style="position: relative; z-index: 10;">
+        <div id="trip-buttons">
+            <button id="start-button" onclick="startTrip()">Start</button>
+        </div>
+        <div id="trip-timer" class="fw-bold">00:00:00</div>
     </div>
     <div class="categories-sidebar">
         <div class="dropdown">

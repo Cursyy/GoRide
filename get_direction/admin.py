@@ -4,7 +4,7 @@ from .models import Trip
 
 @admin.register(Trip)
 class TripAdmin(admin.ModelAdmin):
-    list_display = ("booking", "status", "user")
+    list_display = ("id", "status", "user")
     list_filter = ["user", "status"]
     list_editable = ["status"]
     list_per_page = 50
