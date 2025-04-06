@@ -60,8 +60,89 @@ function renderCategories() {
 
     categoriesContainer.innerHTML = html;
 }
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
+function startTrip() {
+    fetch('/get_direction/api/start_trip/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert("Start error: " + data.error);
+        } else {
+            console.log("Trip started:", data);
+        }
+    });
+}
 
+function pauseTrip() {
+    fetch('/get_direction/api/pause_trip/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert("Pause error: " + data.error);
+        } else {
+            console.log("Trip paused:", data);
+        }
+    });
+}
+
+function resumeTrip() {
+    fetch('/get_direction/api/resume_trip/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert("Resume error: " + data.error);
+        } else {
+            console.log("Trip resumed:", data);
+        }
+    });
+}
+
+function endTrip() {
+    fetch('/get_direction/api/end_trip/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert("End error: " + data.error);
+        } else {
+            console.log("Trip ended. Total cost:", data.total_cost);
+            alert(`Trip ended. Cost: €${data.total_cost.toFixed(2)}`);
+        }
+    });
+}
 async function searchLocations() {
     const searchInput = document.getElementById('search-input').value;
     console.log('Searching for:', searchInput);
@@ -391,3 +472,4 @@ map.on('dblclick', async (e) => {
 addMapControls();
 
 document.addEventListener('DOMContentLoaded', renderCategories);
+

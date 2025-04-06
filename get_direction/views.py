@@ -1,11 +1,15 @@
+from decimal import Decimal
+from django.utils import timezone
 import json
 import requests
 from decouple import config
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from find_transport.views import get_address
+from .models import Trip
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
@@ -27,6 +31,7 @@ def get_places(request, lat, lon, category):
             {"error": "API request failed", "details": response.text},
             status=response.status_code,
         )
+
     response = response.json()
     return JsonResponse(response, safe=False)
 
@@ -85,3 +90,80 @@ def get_search(request, searchInput):
 
 def map_view(request):
     return render(request, "get_direction/get_direction.html")
+
+
+@login_required
+def start_trip(request):
+    user = request.user
+    trip = Trip.objects.filter(user=user, status="not_started").first()
+
+    if not trip:
+        return JsonResponse({"error": "No trip to start"}, status=400)
+
+    trip.status = "active"
+    trip.started_at = timezone.now()
+    trip.save()
+    return JsonResponse({"trip_id": trip.id, "started_at": trip.started_at})
+
+
+@login_required
+def pause_trip(request):
+    user = request.user
+    trip = Trip.objects.filter(user=user, status="active").first()
+    if trip:
+        trip.status = "paused"
+        trip.paused_at = timezone.now()
+        trip.total_travel_time += timezone.now() - trip.started_at
+        trip.save()
+        return JsonResponse({"status": "paused", "trip_id": trip.id})
+    else:
+        return JsonResponse({"error": "No active trip found"}, status=404)
+
+
+@login_required
+def resume_trip(request):
+    user = request.user
+    trip = Trip.objects.filter(user=user, status="paused").first()
+    if trip:
+        trip.status = "active"
+        trip.started_at = timezone.now()
+        trip.paused_at = None
+        trip.save()
+        return JsonResponse({"status": "resumed", "trip_id": trip.id})
+    else:
+        return JsonResponse({"error": "No paused trip found"}, status=404)
+
+
+@login_required
+def end_trip(request):
+    user = request.user
+    trip = Trip.objects.filter(user=user, status="active").first()
+    if trip:
+        trip.status = "finished"
+        trip.ended_at = timezone.now()
+        trip.total_travel_time += timezone.now() - trip.started_at
+        total_minutes = trip.total_travel_time.total_seconds() / 60
+        trip.total_amount = Decimal(total_minutes) * trip.cost_per_minute
+        trip.save()
+        return JsonResponse(
+            {"status": "ended", "trip_id": trip.id, "total_cost": trip.total_amount}
+        )
+    else:
+        return JsonResponse({"error": "No active trip found"}, status=404)
+
+
+@login_required
+def trip_status(request):
+    trip = Trip.objects.filter(
+        user=request.user, status__in=["active", "paused"]
+    ).first()
+    if trip:
+        return JsonResponse(
+            {
+                "status": trip.status,
+                "started_at": trip.started_at,
+                "paused_at": trip.paused_at,
+                "total_travel_time": trip.total_travel_time.total_seconds(),
+            }
+        )
+    return JsonResponse({"status": "none"})
