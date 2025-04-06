@@ -24,6 +24,12 @@ def rent_vehicle(request, vehicle_id):
     except UserSubscription.DoesNotExist:
         pass
 
+    wallet = None
+    try:
+        wallet = Wallet.objects.get(user=request.user)
+    except Wallet.DoesNotExist:
+        pass
+
     if request.method == "POST":
         hours = int(request.POST.get("hours", 0))
         payment_type = request.POST.get("payment_type")
@@ -55,10 +61,18 @@ def rent_vehicle(request, vehicle_id):
                         total_amount = 0
                         subscription.remaining_rides -= hours 
                         subscription.save()
+                        # payment_success = True
                 else:
                     return redirect("rent_vehicle", vehicle_id=vehicle_id)
                 total_amount = 0
 
+            if payment_type == 'AppBalance' and wallet:
+                if wallet.balance >= total_amount:
+                    wallet.withdraw(total_amount)
+                    wallet.save()
+                    # payment_success = True
+                else:
+                    return redirect("rent_vehicle", vehicle_id=vehicle_id)
 
         payment_success = True
         if payment_success:

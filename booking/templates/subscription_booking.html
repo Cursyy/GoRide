@@ -35,7 +35,7 @@
                             <label class="form-check-label" for="paypal">{% trans "Paypal" %}</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance" disabled>
+                            <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance">
                             <label class="form-check-label" for="appbalance">{% trans "App Balance" %}</label>
                         </div>
                     </div>
@@ -56,6 +56,12 @@
         const basePrice = parseFloat({{ plan.price }});
         let total = voucherApplied ? basePrice - (basePrice * discount / 100) : basePrice;
         document.getElementById('total_amount').textContent = '€' + total.toFixed(2);
+
+        if ({{wallet_balance}} <= total) {
+            document.getElementById('appbalance').disabled = true;
+        } else {
+            document.getElementById('appbalance').disabled = false;
+        }
     }
 
     function applyVoucher(type, vehicleId, subscriptionId) {
