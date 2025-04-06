@@ -10,6 +10,7 @@
             <h2 class="mb-0">{% trans "Top up your wallet" %}</h2>
         </div>
         <div class="card-body">
+            <p class="lead text-center">{% trans "Current balance" %}: {{wallet_balance}} €</p>
             <p class="lead text-center">{% trans "Price" %}: <span id="total_amount">€ 1.0</span></p>
             <form method="post" id="topup_form" class="needs-validation" novalidate>
                 {% csrf_token %}

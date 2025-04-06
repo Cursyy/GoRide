@@ -35,44 +35,49 @@ def rent_vehicle(request, vehicle_id):
         payment_type = request.POST.get("payment_type")
         voucher_code = request.POST.get("voucher_code", None)
 
-        total_amount = vehicle.price_per_hour * hours
+        total_amount = Decimal(str(vehicle.price_per_hour * hours))
 
         if voucher_code:
             try:
                 voucher = Voucher.objects.get(code=voucher_code, active=True)
-                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (voucher.used or 0) < (voucher.max_use or float('inf')):
-                    total_amount -= (total_amount * voucher.discount / 100)
+                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (
+                    voucher.used or 0
+                ) < (voucher.max_use or float("inf")):
+                    total_amount -= total_amount * voucher.discount / 100
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
-                    if payment_type == 'Subscription':
-                        payment_type = 'Stripe'
+                    if payment_type == "Subscription":
+                        payment_type = "Stripe"
             except Voucher.DoesNotExist:
-                return redirect('rent_vehicle', vehicle_id=vehicle_id)
+                return redirect("rent_vehicle", vehicle_id=vehicle_id)
 
-            if payment_type == 'Subscription' and not voucher_code:
-                if subscription:
-                    if subscription.remaining_rides is None:
-                        total_amount = 0
-                    elif subscription.remaining_rides == 0:
-                        return redirect('rent_vehicle', vehicle_id=vehicle_id)
-                    elif subscription.remaining_rides < hours: 
-                        return redirect('rent_vehicle', vehicle_id=vehicle_id)
-                    else:  
-                        total_amount = 0
-                        subscription.remaining_rides -= hours 
-                        subscription.save()
-                        # payment_success = True
-                else:
+        if payment_type == "Subscription" and not voucher_code:
+            if subscription:
+                if subscription.remaining_rides is None:
+                    total_amount = 0
+                elif subscription.remaining_rides == 0:
                     return redirect("rent_vehicle", vehicle_id=vehicle_id)
-                total_amount = 0
+                elif subscription.remaining_rides < hours:
+                    return redirect("rent_vehicle", vehicle_id=vehicle_id)
+                else:
+                    total_amount = 0
+                    subscription.remaining_rides -= hours
+                    subscription.save()
+                    # payment_success = True
+            else:
+                return redirect("rent_vehicle", vehicle_id=vehicle_id)
+            total_amount = 0
 
-            if payment_type == 'AppBalance' and wallet:
+        if payment_type == "AppBalance":
+            try:
+                wallet = Wallet.objects.get(user=request.user)
                 if wallet.balance >= total_amount:
                     wallet.withdraw(total_amount)
-                    wallet.save()
-                    # payment_success = True
+                    payment_success = True
                 else:
                     return redirect("rent_vehicle", vehicle_id=vehicle_id)
+            except Wallet.DoesNotExist:
+                return redirect("rent_vehicle", vehicle_id=vehicle_id)
 
         payment_success = True
         if payment_success:
@@ -81,14 +86,14 @@ def rent_vehicle(request, vehicle_id):
                 vehicle=vehicle,
                 payment_type=payment_type,
                 subject="Rent",
-                amount=Decimal(str(total_amount)),
+                amount=total_amount,
                 hours=hours,
                 status="Paid",
                 created_at=timezone.now(),
-                voucher = voucher_code if voucher_code else None,
+                voucher=voucher_code if voucher_code else None,
             )
 
-            if payment_type == 'Subscription':
+            if payment_type == "Subscription":
                 subscription.remaining_rides -= hours
                 subscription.save()
 
@@ -135,19 +140,32 @@ def subscribe(request, plan_id):
 
     if request.method == "POST":
         payment_type = request.POST.get("payment_type")
-        voucher_code = request.POST.get('voucher', '')
+        voucher_code = request.POST.get("voucher", "")
 
-        total_amount = plan.price
+        total_amount = Decimal(str(plan.price))
 
         if voucher_code:
             try:
                 voucher = Voucher.objects.get(code=voucher_code, active=True)
-                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (voucher.used or 0) < (voucher.max_use or float('inf')):
-                    total_amount -= (total_amount * voucher.discount / 100)
+                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (
+                    voucher.used or 0
+                ) < (voucher.max_use or float("inf")):
+                    total_amount -= total_amount * voucher.discount / 100
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
             except Voucher.DoesNotExist:
-                return redirect('subscribe', plan_id=plan_id)
+                return redirect("subscribe", plan_id=plan_id)
+
+        if payment_type == "AppBalance":
+            try:
+                wallet = Wallet.objects.get(user=request.user)
+                if wallet.balance >= total_amount:
+                    wallet.withdraw(total_amount)
+                    payment_success = True
+                else:
+                    return redirect("subscribe", plan_id=plan_id)
+            except Wallet.DoesNotExist:
+                return redirect("subscribe", plan_id=plan_id)
 
         payment_success = True
         if payment_success:
@@ -155,10 +173,10 @@ def subscribe(request, plan_id):
                 user=request.user,
                 payment_type=payment_type,
                 subject="Subscription",
-                amount=plan.price,
+                amount=total_amount,
                 status="Paid",
                 created_at=timezone.now(),
-                voucher = voucher_code if voucher_code else None,
+                voucher=voucher_code if voucher_code else None,
             )
 
             try:
@@ -189,6 +207,7 @@ def subscribe(request, plan_id):
             "plan": plan,
         },
     )
+
 
 @login_required
 def top_up_wallet(request):
@@ -233,13 +252,16 @@ def top_up_wallet(request):
             else:
                 booking.status = "Cancelled"
                 booking.save()
-                return render(request, "top_up_wallet.html", {"error": "Failed to top up wallet"})
+                return render(
+                    request, "top_up_wallet.html", {"error": "Failed to top up wallet"}
+                )
         else:
             booking.status = "Cancelled"
             booking.save()
             return render(request, "top_up_wallet.html", {"error": "Payment failed"})
 
     return render(request, "top_up_wallet.html")
+
 
 def booking_success(request):
     return render(request, "booking_success.html")
