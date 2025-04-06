@@ -49,6 +49,7 @@
                             {{ user.username }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <li><a>{{wallet_balance}}</a></li>
                             <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'password_change' %}">{% trans "Change Password" %}</a></li>
                             <li><hr class="dropdown-divider"></li>

@@ -6,6 +6,8 @@ from django.utils import timezone
 from decimal import Decimal
 from successful_booking import send_transaction_email
 from vouchers.models import Voucher
+from wallet.models import Wallet
+from django.contrib.auth.decorators import login_required
 
 
 def rent_vehicle(request, vehicle_id):
@@ -174,6 +176,56 @@ def subscribe(request, plan_id):
         },
     )
 
+@login_required
+def top_up_wallet(request):
+    if request.method == "POST":
+        amount = float(request.POST.get("amount", 0))
+        payment_type = request.POST.get("payment_type")
+        voucher_code = request.POST.get("voucher_code", None)
+
+        total_amount = Decimal(str(amount))
+
+        booking = Booking.objects.create(
+            user=request.user,
+            payment_type=payment_type,
+            subject="Balance",
+            amount=total_amount,
+            status="Pending",
+            created_at=timezone.now(),
+            voucher=voucher_code if voucher_code else None,
+        )
+
+        payment_success = True
+
+        if payment_success:
+            wallet = Wallet.objects.get(user=request.user)
+            if wallet.top_up(total_amount):
+                booking.status = "Paid"
+                booking.save()
+
+                transaction_data = {
+                    "transaction_id": booking.booking_id,
+                    "date": booking.booking_date,
+                    "time": booking.created_at,
+                    "amount": booking.amount,
+                    "payment_method": booking.payment_type,
+                    "payment_subject": booking.subject,
+                }
+
+                send_transaction_email(
+                    request, request.user, request.user.email, transaction_data
+                )
+                return redirect("booking:booking_success")
+            else:
+                booking.status = "Cancelled"
+                booking.save()
+                return render(request, "top_up_wallet.html", {"error": "Failed to top up wallet"})
+        else:
+            booking.status = "Cancelled"
+            booking.save()
+            return render(request, "top_up_wallet.html", {"error": "Payment failed"})
+
+    return render(request, "top_up_wallet.html")
 
 def booking_success(request):
     return render(request, "booking_success.html")

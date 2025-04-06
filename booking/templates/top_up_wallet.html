@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Top Up" %}{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white text-center">
+            <h2 class="mb-0">{% trans "Top up your wallet" %}</h2>
+        </div>
+        <div class="card-body">
+            <p class="lead text-center">{% trans "Price" %}: <span id="total_amount">€ 1.0</span></p>
+            <form method="post" id="topup_form" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="amount" class="form-label fw-bold">{% trans "Top up amount" %}</label>
+                    <input type="number" name="amount" id="amount" class="form-control" min="1" value="1" oninput="updateTotal()" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">{% trans "Choose Payment Method" %}</label>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_type" value="Stripe" id="stripe" checked>
+                            <label class="form-check-label" for="stripe">{% trans "Stripe" %}</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_type" value="Paypal" id="paypal">
+                            <label class="form-check-label" for="paypal">{% trans "Paypal" %}</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">{% trans "Proceed to Pay" %}</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateTotal() {
+        let total = parseFloat(document.getElementById('amount').value).toFixed(2);
+        document.getElementById('total_amount').textContent = '€' + total;
+    }
+</script>
+{% endblock %}
