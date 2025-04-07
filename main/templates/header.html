@@ -68,4 +68,9 @@
             </div>
         </div>
     </nav>
+    <div id="global-trip-status" style="position: fixed; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; display: none; z-index: 1000;">
+        <span id="base-timer-display">Connecting...</span>
+        <a href="{% url 'get_direction:map' %}" style="color: #aadeff; margin-left: 10px; text-decoration: none;">Manage</a>
+    </div>
+    <script src="{% static 'js/trip_timer.js' %}" defer></script>
 </header>

@@ -5,15 +5,9 @@ let waypoints = [];
 let route;
 let turnByTurnLayer;
 let userMarkersCount;
-let timerInterval = null;
-let startedAt = null;
-let baseTime = 0;
-let isLocalTimerRunning = false;
-let syncInterval = null;
 
 const categoriesList =
   "accommodation,activity,airport,commercial,catering,education,entertainment,healthcare,leisure,natural,national_park,railway,service,tourism,religion,amenity,beach,public_transport";
-const socket = new WebSocket(`ws://${window.location.host}/ws/trip/status/`);
 
 const categories = categoriesList.split(",");
 
@@ -72,99 +66,38 @@ function renderCategories() {
 
   categoriesContainer.innerHTML = html;
 }
-function startLocalTimer() {
-  if (!tripTimer) {
-    console.error("startLocalTimer: tripTimer element not found!");
-    isLocalTimerRunning = false;
-    return;
-  }
-  if (timerInterval) clearInterval(timerInterval);
-
-  console.log(
-    `Attempting to start local timer. baseTime: ${baseTime}s, startedAt: ${
-      startedAt ? new Date(startedAt).toISOString() : "null"
-    }`,
-  );
-
-  if (startedAt === null || typeof startedAt === "undefined") {
-    console.error(
-      "startLocalTimer cannot proceed: startedAt is not set. Stopping.",
-    );
-    if (tripTimer) tripTimer.textContent = "Error: Timer sync failed.";
-    isLocalTimerRunning = false;
-    return;
-  }
-
-  timerInterval = setInterval(() => {
-    const now = Date.now();
-    const elapsedSinceStart = Math.floor((now - startedAt) / 1000);
-    const totalElapsed = baseTime + elapsedSinceStart;
-
-    if (tripTimer) {
-      tripTimer.textContent = `${formatDuration(
-        totalElapsed,
-      )} Trip in progress...`;
-    } else {
-      console.error("tripTimer element lost inside interval!");
-      clearInterval(timerInterval);
-      isLocalTimerRunning = false;
-    }
-  }, 1000);
-  isLocalTimerRunning = true;
-  console.log("Local timer started successfully.");
-}
-
 function updateTripButtons(status) {
-  console.log("Updating trip buttons with status:", status);
-  if (!tripButtons) {
-    console.error("updateTripButtons: tripButtons element not found!");
+  console.log(
+    "Executing updateTripButtons on control page for status:",
+    status,
+  );
+  const buttonsContainer = document.getElementById("trip-buttons");
+  if (!buttonsContainer) {
+    console.error("trip_controls.js: Cannot find #trip-buttons container!");
     return;
   }
-  tripButtons.innerHTML = "";
+  buttonsContainer.innerHTML = ""; // Очищення
 
   if (status === "not_started" || status === "none") {
-    tripButtons.innerHTML = `<button onclick="startTrip()">Start</button>`;
+    buttonsContainer.innerHTML = `<button onclick="startTrip()">Start</button>`;
   } else if (status === "active") {
-    tripButtons.innerHTML = `
-            <button onclick="pauseTrip()">Pause</button>
-            <button onclick="endTrip()">Finish</button>
-        `;
+    buttonsContainer.innerHTML = `
+          <button onclick="pauseTrip()">Pause</button>
+          <button onclick="endTrip()">Finish</button>
+      `;
   } else if (status === "paused") {
-    tripButtons.innerHTML = `
-            <button onclick="resumeTrip()">Resume</button>
-            <button onclick="endTrip()">Finish</button>
-        `;
+    buttonsContainer.innerHTML = `
+          <button onclick="resumeTrip()">Resume</button>
+          <button onclick="endTrip()">Finish</button>
+      `;
   } else if (status === "finished") {
-    tripButtons.innerHTML = "Trip finished. Thank you!";
-  } else if (status === "loading") {
-    tripButtons.innerHTML = "Loading status...";
+    buttonsContainer.innerHTML = "Trip finished.";
+  } else {
+    buttonsContainer.innerHTML = "Loading...";
   }
-}
-function stopLocalTimer(displayText = "") {
-  if (timerInterval) clearInterval(timerInterval);
-  timerInterval = null;
-  isLocalTimerRunning = false;
-  if (tripTimer && displayText) {
-    tripTimer.textContent = displayText;
-  } else if (!tripTimer) {
-    console.error("stopLocalTimer: tripTimer element not found!");
-  }
-  console.log("Local timer stopped. Display:", displayText);
 }
 
-function syncWithServer(data) {
-  const localElapsed = Math.floor((Date.now() - startedAt) / 1000) + baseTime;
-  const serverElapsed = Math.floor(data.server_time);
-
-  const drift = Math.abs(localElapsed - serverElapsed);
-  if (drift > 2) {
-    console.log(`Correcting drift of ${drift}s`);
-    baseTime = serverElapsed;
-    startedAt = Date.now();
-  }
-}
 function getCookie(name) {
-  console.log("Getting cookie:", name);
   let cookieValue = null;
   if (document.cookie && document.cookie !== "") {
     const cookies = document.cookie.split(";");
@@ -176,50 +109,52 @@ function getCookie(name) {
       }
     }
   }
-  console.log("Cookie value:", cookieValue);
   return cookieValue;
 }
+const csrftoken = getCookie("csrftoken");
+
+const API_BASE = "/get_direction/api/";
 
 function startTrip() {
-  console.log("Starting trip (requesting)...");
-
-  fetch("/get_direction/api/start_trip/", {
-    /* ... */
+  console.log("Control page: Requesting START trip...");
+  fetch(API_BASE + "start_trip/", {
+    method: "POST",
+    headers: {
+      "X-CSRFToken": csrftoken,
+      "Content-Type": "application/json",
+    },
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Start trip response:", data);
+      console.log("Control page: Start trip response:", data);
       if (data.error) {
         alert("Start error: " + data.error);
-
-        updateTripButtons("not_started");
       } else {
         console.log(
-          "Trip start requested successfully. Waiting for WebSocket update.",
+          "Control page: Trip start requested. Waiting for WebSocket.",
         );
       }
     })
     .catch((error) => {
       console.error("Fetch startTrip error:", error);
       alert("Network error starting trip.");
-      updateTripButtons("not_started");
     });
 }
 
 function pauseTrip() {
-  console.log("Pausing trip (requesting)...");
-
-  fetch("/get_direction/api/pause_trip/", {
-    /* ... */
+  console.log("Control page: Requesting PAUSE trip...");
+  fetch(API_BASE + "pause_trip/", {
+    method: "POST",
+    headers: { "X-CSRFToken": csrftoken, "Content-Type": "application/json" },
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Pause trip response:", data);
+      console.log("Control page: Pause trip response:", data);
       if (data.error) {
         alert("Pause error: " + data.error);
       } else {
         console.log(
-          "Trip pause requested successfully. Waiting for WebSocket update.",
+          "Control page: Trip pause requested. Waiting for WebSocket.",
         );
       }
     })
@@ -230,19 +165,19 @@ function pauseTrip() {
 }
 
 function resumeTrip() {
-  console.log("Resuming trip (requesting)...");
-
-  fetch("/get_direction/api/resume_trip/", {
-    /* ... */
+  console.log("Control page: Requesting RESUME trip...");
+  fetch(API_BASE + "resume_trip/", {
+    method: "POST",
+    headers: { "X-CSRFToken": csrftoken, "Content-Type": "application/json" },
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Resume trip response:", data);
+      console.log("Control page: Resume trip response:", data);
       if (data.error) {
         alert("Resume error: " + data.error);
       } else {
         console.log(
-          "Trip resume requested successfully. Waiting for WebSocket update.",
+          "Control page: Trip resume requested. Waiting for WebSocket.",
         );
       }
     })
@@ -253,19 +188,21 @@ function resumeTrip() {
 }
 
 function endTrip() {
-  console.log("Ending trip (requesting)...");
-  fetch("/get_direction/api/end_trip/", {
-    /* ... */
+  if (!confirm("Are you sure you want to end the current trip?")) {
+    return;
+  }
+  console.log("Control page: Requesting END trip...");
+  fetch(API_BASE + "end_trip/", {
+    method: "POST",
+    headers: { "X-CSRFToken": csrftoken, "Content-Type": "application/json" },
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("End trip response:", data);
+      console.log("Control page: End trip response:", data);
       if (data.error) {
         alert("End error: " + data.error);
       } else {
-        console.log(
-          "Trip end requested successfully. Waiting for WebSocket update.",
-        );
+        console.log("Control page: Trip end requested. Waiting for WebSocket.");
       }
     })
     .catch((error) => {
@@ -274,200 +211,11 @@ function endTrip() {
     });
 }
 
-socket.onopen = function () {
-  console.log("WebSocket connection opened.");
-  console.log("Requesting initial status via WebSocket.");
-  socket.send(JSON.stringify({ type: "get_status" }));
-};
-
-socket.onmessage = function (event) {
-  if (!tripTimer || !tripButtons) {
-    console.warn(
-      "socket.onmessage received before DOM elements were ready. This shouldn't normally happen if elements are fetched in DOMContentLoaded.",
-    );
-
-    tripTimer = document.getElementById("trip-timer");
-    tripButtons = document.getElementById("trip-buttons");
-    if (!tripTimer || !tripButtons) {
-      console.error(
-        "Critical: DOM elements not found even on retry in onmessage. Aborting message processing.",
-      );
-      return;
-    }
-  }
-
-  console.log("WebSocket message received:", event.data);
-  let data;
-  try {
-    data = JSON.parse(event.data);
-    console.log("Parsed data:", data);
-  } catch (e) {
-    console.error("Failed to parse WebSocket message:", e);
-    return;
-  }
-
-  if (data.error) {
-    console.error(
-      "WebSocket error from server:",
-      data.error,
-      data.details || "",
-    );
-    if (tripTimer) tripTimer.textContent = `Error: ${data.error}`;
-    updateTripButtons("not_started");
-    return;
-  }
-
-  const currentStatus = data.status;
-  const serverTotalTime = data.total_travel_time || 0;
-
-  console.log(
-    `Processing status: '${currentStatus}', Current isLocalTimerRunning state: ${isLocalTimerRunning}`,
-  );
-
-  if (currentStatus === "finished") {
-    if (
-      isLocalTimerRunning ||
-      (tripTimer && !tripTimer.textContent.startsWith("Trip finished"))
-    ) {
-      const finalDuration = formatDuration(serverTotalTime);
-      stopLocalTimer(`Trip finished. Duration: ${finalDuration}. Thank you!`);
-    }
-    updateTripButtons("finished");
-  } else if (currentStatus === "active" || currentStatus === "resumed") {
-    baseTime = serverTotalTime;
-
-    if (!isLocalTimerRunning) {
-      startedAt = Date.now();
-      startLocalTimer();
-    } else {
-      console.log(
-        ">>> Condition '!isLocalTimerRunning' is FALSE. Timer already running, updating baseTime.",
-      );
-      if (startedAt) {
-        const localElapsedSinceStart = Math.floor(
-          (Date.now() - startedAt) / 1000,
-        );
-        const localTotalElapsed = baseTime + localElapsedSinceStart;
-        const serverCurrentTime = data.server_time || 0;
-        const drift = Math.abs(localTotalElapsed - serverCurrentTime);
-        if (drift > 3) {
-          console.warn(`Correcting time drift of ${drift.toFixed(1)}s.`);
-          baseTime = serverTotalTime;
-          startedAt = Date.now();
-          console.log(
-            `Drift correction applied. New baseTime: ${baseTime}s, new startedAt: ${new Date(
-              startedAt,
-            ).toISOString()}`,
-          );
-        }
-      }
-    }
-    updateTripButtons("active");
-  } else if (currentStatus === "paused") {
-    if (isLocalTimerRunning) {
-      console.log("Status changed to paused. Stopping local timer.");
-      baseTime = serverTotalTime;
-      stopLocalTimer(`${formatDuration(serverTotalTime)} (Paused)`);
-    } else {
-      if (tripTimer)
-        tripTimer.textContent = `${formatDuration(serverTotalTime)} (Paused)`;
-    }
-    updateTripButtons("paused");
-  } else if (
-    currentStatus === "not_started" ||
-    currentStatus === "none" ||
-    !currentStatus
-  ) {
-    if (
-      isLocalTimerRunning ||
-      (tripTimer &&
-        !tripTimer.textContent.includes("not started") &&
-        !tripTimer.textContent.includes("No current trip"))
-    ) {
-      console.log(
-        "Status is not_started/none. Stopping local timer and resetting.",
-      );
-      stopLocalTimer(
-        currentStatus === "none" ? "No current trip" : "Trip not started",
-      );
-    } else if (tripTimer) {
-      tripTimer.textContent =
-        currentStatus === "none" ? "No current trip" : "Trip not started";
-    }
-    updateTripButtons("not_started");
-    baseTime = 0;
-    startedAt = null;
-  } else {
-    console.warn("Received unknown status:", currentStatus);
-    updateTripButtons("not_started");
-  }
-};
-
-socket.onerror = function (error) {
-  console.error("WebSocket Error:", error);
-  if (tripTimer) tripTimer.textContent = "Connection error.";
-  updateTripButtons("not_started");
-};
-
-socket.onclose = function (event) {
-  console.log(
-    "WebSocket connection closed:",
-    event.reason,
-    `(Code: ${event.code})`,
-  );
-  if (tripTimer) tripTimer.textContent = "Connection closed.";
-  stopLocalTimer();
-  updateTripButtons("not_started");
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM fully loaded and parsed");
-
-  tripTimer = document.getElementById("trip-timer");
-  tripButtons = document.getElementById("trip-buttons");
-
-  if (!tripTimer)
-    console.error(
-      "Initialization Error: Element with ID 'trip-timer' not found!",
-    );
-  if (!tripButtons)
-    console.error(
-      "Initialization Error: Element with ID 'trip-buttons' not found!",
-    );
-
-  if (tripTimer) tripTimer.textContent = "Connecting...";
-  updateTripButtons("loading");
-
-  if (!socket) {
-    console.error(
-      "WebSocket object ('socket') was not initialized before DOMContentLoaded!",
-    );
-    if (tripTimer) tripTimer.textContent = "Initialization Error.";
-    updateTripButtons("not_started");
-  } else {
-    console.log("DOM ready. WebSocket state:", socket.readyState);
-
-    if (socket.readyState === WebSocket.OPEN) {
-      console.log(
-        "WebSocket was already open on DOMContentLoaded. Requesting status.",
-      );
-      socket.send(JSON.stringify({ type: "get_status" }));
-    }
+  console.log("Control page specific JS loaded after DOM ready.");
+  if (typeof updateTripButtons === "function") {
   }
 });
-function formatDuration(totalSeconds) {
-  if (isNaN(totalSeconds) || totalSeconds < 0) {
-    console.warn("formatDuration received invalid input:", totalSeconds);
-    totalSeconds = 0;
-  }
-  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
-    2,
-    "0",
-  );
-  const seconds = String(Math.floor(totalSeconds % 60)).padStart(2, "0");
-  return `${hours}:${minutes}:${seconds}`;
-}
 
 async function searchLocations() {
   const searchInput = document.getElementById("search-input").value;
