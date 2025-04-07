@@ -36,7 +36,7 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="hours" class="form-label fw-bold">{% trans "Number of Hours" %}</label>
-                    <input type="number" name="hours" id="hours" class="form-control" min="1" value="1" oninput="updateTotal()" required>
+                    <input type="number" name="hours" id="hours" class="form-control" min="1" value="1" required>
                 </div>
 
                 <div class="mb-4">
@@ -62,8 +62,8 @@
                             <label class="form-check-label" for="paypal">{% trans "Paypal" %}</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance" disabled>
-                            <label class="form-check-label" for="appbalance">{% trans "App Balance" %}</label>
+                            <input class="form-check-input" type="radio" name="payment_type" value="AppBalance" id="appbalance">
+                            <label class="form-check-label" for="appbalance">{% trans "Balance" %}: {{wallet_balance}}€</label>
                         </div>
                     </div>
                 </div>
@@ -85,13 +85,20 @@
         if (voucherApplied) {
             total -= (total * discount / 100);
             document.getElementById('subscription_radio').disabled = true;
+            document.getElementById('appbalance').disabled = true;
+            document.getElementById('stripe').checked = true;
         } else {
             const subscriptionRadio = document.getElementById('subscription_radio');
-            if (subscriptionRadio) {
+            if ((subscriptionRadio) && {{subscription|yesno:"true,false"}}) {
                 const remainingHours = {{ subscription.remaining_rides|default:0 }};
                 subscriptionRadio.disabled = remainingHours < hours;
                 subscriptionRadio.checked = !subscriptionRadio.disabled;
             }
+        }
+        if ({{wallet_balance}} <= total) {
+            document.getElementById('appbalance').disabled = true;
+        } else {
+            document.getElementById('appbalance').disabled = false;
         }
         document.getElementById('total_amount').textContent = '€' + total.toFixed(2);
     }
@@ -137,6 +144,12 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         const applyVoucherBtn = document.getElementById('apply-voucher-btn');
+        const hours = document.getElementById('hours');
+        if (hours) {
+            hours.addEventListener('input', function() {
+                updateTotal();
+            });
+        }
         if (applyVoucherBtn) {
             applyVoucherBtn.addEventListener('click', function() {
                 applyVoucher('vehicle', {{ vehicle.id }}, null);

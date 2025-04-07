@@ -7,6 +7,7 @@ from django.db.models import Count
 from django.forms.models import model_to_dict
 from decouple import config
 from vouchers.views import voucher_apply
+from django.contrib.auth.decorators import login_required
 
 
 def get_address(lat, lon):
@@ -40,7 +41,7 @@ def get_address(lat, lon):
         print(f"Error {response.status_code}: {response.text}")
         return "Address fetch failed"
 
-
+@login_required
 def find_transport(request):
     return render(request, "find_transport.html")
 
