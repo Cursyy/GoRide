@@ -7,7 +7,15 @@ let baseTimerDisplayElement;
 let globalTripStatusContainer;
 let tripTimerElement;
 let tripButtonsContainer;
+let reconnectTimeout = null;
 
+function tryReconnectWebSocket() {
+  if (reconnectTimeout) clearTimeout(reconnectTimeout);
+  reconnectTimeout = setTimeout(() => {
+    console.warn("Reconnecting WebSocket...");
+    initializeWebSocket();
+  }, 3000);
+}
 function formatDuration(totalSeconds) {
   if (isNaN(totalSeconds) || totalSeconds < 0) {
     totalSeconds = 0;
@@ -135,7 +143,7 @@ function initializeWebSocket() {
     }
 
     const currentStatus = data.status;
-    const serverTotalTime = data.total_travel_time || 0;
+    const serverTotalTime = data.total_travel_time || data.server_time || 0;
     const serverCurrentTime = data.server_time || 0;
 
     console.log(
@@ -149,10 +157,15 @@ function initializeWebSocket() {
         serverTotalTime,
       )}.`;
       baseTime = 0;
+      socket.close();
       startedAt = null;
       if (isLocalTimerRunning) stopLocalTimer(timerText);
       else updateTimerDisplay(timerText);
       showGlobalTripStatus(false);
+      if (socket && socket.readyState === WebSocket.OPEN) {
+        console.log("Closing socket after trip finished.");
+        socket.close(1000, "Trip finished");
+      }
     } else if (currentStatus === "active" || currentStatus === "resumed") {
       baseTime = serverTotalTime;
 
@@ -232,6 +245,7 @@ function initializeWebSocket() {
     stopLocalTimer("Connection error.");
     if (typeof updateTripButtons === "function")
       updateTripButtons("not_started");
+    tryReconnectWebSocket();
   };
 
   socket.onclose = function (event) {

@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'wallet.apps.WalletConfig',
+    "wallet.apps.WalletConfig",
     # project apps
     "main",
     "support",
@@ -228,8 +228,8 @@ EMAIL_USE_TLS = True
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 4
 
 # just for testing
-EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+# ]

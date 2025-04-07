@@ -73,7 +73,8 @@ class TripConsumer(AsyncWebsocketConsumer):
                         )
                 else:
                     current_server_time_seconds = trip.total_travel_time.total_seconds()
-
+                if current_server_time_seconds > trip.prepaid_minutes * 60:
+                    trip.status = "finished"
                 trip_status = {
                     "status": trip.status,
                     "started_at": trip.started_at.isoformat()
@@ -110,7 +111,7 @@ class TripConsumer(AsyncWebsocketConsumer):
                         if last_finished_trip.ended_at
                         else None,
                         "total_travel_time": last_finished_trip.total_travel_time.total_seconds(),
-                        "server_time": last_finished_trip.total_travel_time.total_seconds(),  # Для завершеної час фіксований
+                        "server_time": last_finished_trip.total_travel_time.total_seconds(),
                         "total_cost": str(last_finished_trip.total_amount)
                         if last_finished_trip.total_amount is not None
                         else None,
@@ -132,7 +133,11 @@ class TripConsumer(AsyncWebsocketConsumer):
                 print("Sending periodic trip status update")
                 trip_data = await self.get_trip_status()
                 print(f"Periodic trip status: {trip_data}")
+                if trip_data.get("status") == "finished":
+                    print("Trip finished. Stopping periodic updates.")
+                    await self.send(text_data=json.dumps(trip_data))
+                    break
                 await self.send(text_data=json.dumps(trip_data))
-                await asyncio.sleep(30)
+                await asyncio.sleep(5)
             except Exception as e:
                 print(f"Error in send_trip_status_per: {e}")
