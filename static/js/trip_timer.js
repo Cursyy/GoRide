@@ -8,7 +8,7 @@ let globalTripStatusContainer;
 let tripTimerElement;
 let tripButtonsContainer;
 let reconnectTimeout = null;
-
+let tripSummaryContainer;
 function tryReconnectWebSocket() {
   if (reconnectTimeout) clearTimeout(reconnectTimeout);
   reconnectTimeout = setTimeout(() => {
@@ -153,18 +153,15 @@ function initializeWebSocket() {
     let timerText = "";
 
     if (currentStatus === "finished") {
-      timerText = `Trip finished. Duration: ${formatDuration(
-        serverTotalTime,
-      )}.`;
+      const totalCost = data.total_cost ?? 0;
       baseTime = 0;
-      socket.close();
       startedAt = null;
-      if (isLocalTimerRunning) stopLocalTimer(timerText);
-      else updateTimerDisplay(timerText);
-      showGlobalTripStatus(false);
+      if (isLocalTimerRunning) stopLocalTimer();
+
       if (socket && socket.readyState === WebSocket.OPEN) {
         console.log("Closing socket after trip finished.");
         socket.close(1000, "Trip finished");
+        showTripSummary(serverCurrentTime, totalCost);
       }
     } else if (currentStatus === "active" || currentStatus === "resumed") {
       baseTime = serverTotalTime;
@@ -269,6 +266,10 @@ document.addEventListener("DOMContentLoaded", () => {
   globalTripStatusContainer = document.getElementById("global-trip-status");
   tripTimerElement = document.getElementById("trip-timer");
   tripButtonsContainer = document.getElementById("trip-buttons");
+  tripSummaryContainer = document.getElementById("trip-summary-container");
+
+  if (!tripSummaryContainer)
+    console.error("Shared Init Warning: '#trip-summary-container' not found!");
 
   if (!baseTimerDisplayElement)
     console.error(
@@ -292,3 +293,18 @@ document.addEventListener("DOMContentLoaded", () => {
   showGlobalTripStatus(false);
   updateTimerDisplay("Connecting...");
 });
+function showTripSummary(durationSeconds, totalCost) {
+  const formattedDuration = formatDuration(durationSeconds);
+  const summaryMessage = `Trip finished. Duration: ${formattedDuration}, Total Cost: $${parseFloat(
+    totalCost,
+  ).toFixed(2)}.`;
+
+  if (tripSummaryContainer) {
+    tripSummaryContainer.textContent = summaryMessage;
+    tripSummaryContainer.style.display = "block";
+  }
+
+  // Сховаємо глобальний статус і таймер
+  showGlobalTripStatus(false);
+  updateTimerDisplay("");
+}

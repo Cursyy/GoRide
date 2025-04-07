@@ -41,6 +41,9 @@ class Trip(models.Model):
     total_amount = models.DecimalField(
         null=True, blank=True, max_digits=10, decimal_places=2
     )
+    pause_duration = models.DecimalField(
+        default=0, blank=True, max_digits=10, decimal_places=2
+    )
 
     def __str__(self):
         return f"Trip #{self.id} by {self.user}"

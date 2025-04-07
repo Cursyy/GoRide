@@ -13,6 +13,7 @@ from find_transport.views import get_address
 from .models import Trip
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from wallet.models import Wallet
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
@@ -159,7 +160,9 @@ def resume_trip(request):
     if trip:
         trip.status = "active"
         trip.started_at = timezone.now()
-
+        pause_delta = timezone.now() - trip.paused_at
+        pause_minutes = Decimal(pause_delta.total_seconds() / 60)
+        trip.pause_duration += pause_minutes
         trip.paused_at = None
         trip.save()
         notify_trip_status(user)
@@ -183,7 +186,14 @@ def end_trip(request):
             trip.total_travel_time += trip.ended_at - trip.started_at
 
         total_minutes = trip.total_travel_time.total_seconds() / 60
-        trip.total_amount = Decimal(total_minutes) * trip.cost_per_minute
+        trip.total_amount = (Decimal(total_minutes) * trip.cost_per_minute) + (
+            trip.pause_duration * trip.cost_per_minute / 2
+        )
+        charge = trip.prepaid_minutes * trip.cost_per_minute - trip.total_amount
+        wallet = Wallet.objects.get(user=user)
+        print(wallet.balance)
+        wallet.top_up(charge)
+        print(wallet.balance)
         trip.save()
         notify_trip_status(user)
         print(f"Trip ended: {trip.id}, Total cost: {trip.total_amount}")

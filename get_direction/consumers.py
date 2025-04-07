@@ -84,6 +84,9 @@ class TripConsumer(AsyncWebsocketConsumer):
                     "ended_at": trip.ended_at.isoformat() if trip.ended_at else None,
                     "total_travel_time": trip.total_travel_time.total_seconds(),
                     "server_time": current_server_time_seconds,
+                    "total_cost": float(trip.total_amount)
+                    if trip.total_amount is not None
+                    else 0.0,
                 }
                 print(
                     f"Trip status fetched for user {self.user.user_id}: {trip_status}"
@@ -112,9 +115,9 @@ class TripConsumer(AsyncWebsocketConsumer):
                         else None,
                         "total_travel_time": last_finished_trip.total_travel_time.total_seconds(),
                         "server_time": last_finished_trip.total_travel_time.total_seconds(),
-                        "total_cost": str(last_finished_trip.total_amount)
+                        "total_cost": float(last_finished_trip.total_amount)
                         if last_finished_trip.total_amount is not None
-                        else None,
+                        else 0.0,
                     }
                 else:
                     print(f"No trip found for user {self.user.user_id}")
