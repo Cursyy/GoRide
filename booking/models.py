@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from find_transport.models import Vehicle
+from subscriptions.models import SubscriptionPlan
 
 class Booking(models.Model):
     PAYMENT_TYPE = [
@@ -26,6 +27,7 @@ class Booking(models.Model):
     booking_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.SET_NULL, blank=True, null=True)
+    plan_id = models.IntegerField(blank=True, null=True)
     payment_type = models.CharField(max_length=20, choices=PAYMENT_TYPE)
     subject = models.CharField(max_length=20, choices=SUBJECT)
     voucher = models.CharField(max_length=20, blank=True, null=True)

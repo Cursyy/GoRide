@@ -1,15 +1,41 @@
 from django.shortcuts import render, redirect
-from .models import Booking
-from subscriptions.models import UserSubscription, SubscriptionPlan, UserStatistics
-from find_transport.models import Vehicle
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from decimal import Decimal
+from booking.models import Booking
+from wallet.models import Wallet
+from find_transport.models import Vehicle
+from subscriptions.models import SubscriptionPlan, UserSubscription, UserStatistics
 from successful_booking import send_transaction_email
 from vouchers.models import Voucher
-from wallet.models import Wallet
-from django.contrib.auth.decorators import login_required
 
+@login_required
+def top_up_wallet(request):
+    if request.method == "POST":
+        amount = float(request.POST.get("amount", 0))
+        payment_type = request.POST.get("payment_type")
+        voucher_code = request.POST.get("voucher_code", None)
 
+        total_amount = Decimal(str(amount))
+
+        booking = Booking.objects.create(
+            user=request.user,
+            payment_type=payment_type,
+            subject="Balance",
+            amount=total_amount,
+            status="Pending",
+            created_at=timezone.now(),
+            voucher=voucher_code if voucher_code else None,
+        )
+
+        if payment_type == "Stripe":
+            return redirect("payments:process_stripe_payment", booking_id=booking.booking_id)
+        elif payment_type == "Paypal":
+            return redirect("payments:process_paypal_payment", booking_id=booking.booking_id)
+
+    return render(request, "top_up_wallet.html")
+
+@login_required
 def rent_vehicle(request, vehicle_id):
     vehicle = Vehicle.objects.get(id=vehicle_id)
 
@@ -40,91 +66,81 @@ def rent_vehicle(request, vehicle_id):
         if voucher_code:
             try:
                 voucher = Voucher.objects.get(code=voucher_code, active=True)
-                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (
-                    voucher.used or 0
-                ) < (voucher.max_use or float("inf")):
-                    total_amount -= total_amount * voucher.discount / 100
+                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (voucher.used or 0) < (voucher.max_use or float("inf")):
+                    total_amount -= total_amount * Decimal(str(voucher.discount)) / 100
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
                     if payment_type == "Subscription":
                         payment_type = "Stripe"
             except Voucher.DoesNotExist:
-                return redirect("rent_vehicle", vehicle_id=vehicle_id)
+                return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
 
-        if payment_type == "Subscription" and not voucher_code:
+        booking = Booking.objects.create(
+            user=request.user,
+            vehicle=vehicle,
+            payment_type=payment_type,
+            subject="Rent",
+            amount=total_amount,
+            hours=hours,
+            status="Pending",
+            created_at=timezone.now(),
+            voucher=voucher_code if voucher_code else None,
+        )
+
+        if payment_type == "Stripe":
+            return redirect("payments:process_stripe_payment", booking_id=booking.booking_id)
+        elif payment_type == "Paypal":
+            return redirect("payments:process_paypal_payment", booking_id=booking.booking_id)
+        elif payment_type == "Subscription" and not voucher_code:
             if subscription:
-                if subscription.remaining_rides is None:
-                    total_amount = 0
-                elif subscription.remaining_rides == 0:
-                    return redirect("rent_vehicle", vehicle_id=vehicle_id)
-                elif subscription.remaining_rides < hours:
-                    return redirect("rent_vehicle", vehicle_id=vehicle_id)
-                else:
-                    total_amount = 0
-                    subscription.remaining_rides -= hours
+                if subscription.remaining_rides is None or subscription.remaining_rides >= hours:
+                    total_amount = Decimal("0")
+                    subscription.remaining_rides = (subscription.remaining_rides or 0) - hours
                     subscription.save()
-                    # payment_success = True
-            else:
-                return redirect("rent_vehicle", vehicle_id=vehicle_id)
-            total_amount = 0
-
-        if payment_type == "AppBalance":
-            try:
-                wallet = Wallet.objects.get(user=request.user)
-                if wallet.balance >= total_amount:
-                    wallet.withdraw(total_amount)
-                    payment_success = True
                 else:
-                    return redirect("rent_vehicle", vehicle_id=vehicle_id)
-            except Wallet.DoesNotExist:
-                return redirect("rent_vehicle", vehicle_id=vehicle_id)
+                    booking.status = "Cancelled"
+                    booking.save()
+                    return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
+            else:
+                booking.status = "Cancelled"
+                booking.save()
+                return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
+        elif payment_type == "AppBalance":
+            if wallet and wallet.balance >= total_amount:
+                wallet.withdraw(total_amount)
+            else:
+                booking.status = "Cancelled"
+                booking.save()
+                return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
 
-        payment_success = True
-        if payment_success:
-            booking = Booking.objects.create(
-                user=request.user,
-                vehicle=vehicle,
-                payment_type=payment_type,
-                subject="Rent",
-                amount=total_amount,
-                hours=hours,
-                status="Paid",
-                created_at=timezone.now(),
-                voucher=voucher_code if voucher_code else None,
-            )
+        vehicle.status = False
+        vehicle.save()
 
-            vehicle.status = False
-            vehicle.save()
+        try:
+            stats = UserStatistics.objects.get(user=request.user)
+        except UserStatistics.DoesNotExist:
+            stats = UserStatistics.objects.create(user=request.user)
+        stats.update_stats(hours, total_amount, vehicle.type)
 
-            try:
-                stats = UserStatistics.objects.get(user=request.user)
-            except UserStatistics.DoesNotExist:
-                stats = UserStatistics.objects.create(user=request.user)
-            stats.update_stats(hours, total_amount, vehicle.type)
+        transaction_data = {
+            "transaction_id": booking.booking_id,
+            "date": booking.booking_date,
+            "time": booking.created_at,
+            "amount": booking.amount,
+            "payment_method": booking.payment_type,
+            "payment_subject": booking.subject,
+            "rental_item": vehicle.type,
+            "duration": hours,
+        }
+        send_transaction_email(request, request.user, request.user.email, transaction_data)
 
-            transaction_data = {
-                "transaction_id": booking.booking_id,
-                "date": booking.booking_date,
-                "time": booking.created_at,
-                "amount": booking.amount,
-                "payment_method": booking.payment_type,
-                "payment_subject": booking.subject,
-                "rental_item": booking.vehicle.type if booking.vehicle else None,
-                "duration": booking.hours,
-            }
+        booking.status = "Paid"
+        booking.save()
+        return render(request, "booking_success.html")
 
-            send_transaction_email(
-                request, request.user, request.user.email, transaction_data
-            )
-            return redirect("booking:booking_success")
+    return render(request, "rental_booking.html", {"vehicle": vehicle, "subscription": subscription})
 
-    return render(
-        request,
-        "rental_booking.html",
-        {"vehicle": vehicle, "subscription": subscription},
-    )
-
-
+@login_required
 def subscribe(request, plan_id):
     plan = SubscriptionPlan.objects.get(id=plan_id)
     try:
@@ -143,121 +159,118 @@ def subscribe(request, plan_id):
         if voucher_code:
             try:
                 voucher = Voucher.objects.get(code=voucher_code, active=True)
-                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (
-                    voucher.used or 0
-                ) < (voucher.max_use or float("inf")):
-                    total_amount -= total_amount * voucher.discount / 100
+                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (voucher.used or 0) < (voucher.max_use or float("inf")):
+                    total_amount -= total_amount * Decimal(str(voucher.discount)) / 100
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
             except Voucher.DoesNotExist:
-                return redirect("subscribe", plan_id=plan_id)
-
-        if payment_type == "AppBalance":
-            try:
-                wallet = Wallet.objects.get(user=request.user)
-                if wallet.balance >= total_amount:
-                    wallet.withdraw(total_amount)
-                    payment_success = True
-                else:
-                    return redirect("subscribe", plan_id=plan_id)
-            except Wallet.DoesNotExist:
-                return redirect("subscribe", plan_id=plan_id)
-
-        payment_success = True
-        if payment_success:
-            booking = Booking.objects.create(
-                user=request.user,
-                payment_type=payment_type,
-                subject="Subscription",
-                amount=total_amount,
-                status="Paid",
-                created_at=timezone.now(),
-                voucher=voucher_code if voucher_code else None,
-            )
-
-            try:
-                user_subscription = UserSubscription.objects.get(user=request.user)
-                user_subscription.activate(plan)
-            except UserSubscription.DoesNotExist:
-                user_subscription = UserSubscription(user=request.user)
-                user_subscription.activate(plan)
-            transaction_data = {
-                "transaction_id": booking.booking_id,
-                "date": booking.booking_date,
-                "time": booking.created_at,
-                "amount": booking.amount,
-                "payment_method": booking.payment_type,
-                "payment_subject": booking.subject,
-                "subscription_type": plan.type,
-                "subscription_duration": plan.duration_days,
-            }
-            send_transaction_email(
-                request, request.user, request.user.email, transaction_data
-            )
-            return redirect("subscriptions:subscription_success")
-
-    return render(
-        request,
-        "subscription_booking.html",
-        {
-            "plan": plan,
-        },
-    )
-
-
-@login_required
-def top_up_wallet(request):
-    if request.method == "POST":
-        amount = float(request.POST.get("amount", 0))
-        payment_type = request.POST.get("payment_type")
-        voucher_code = request.POST.get("voucher_code", None)
-
-        total_amount = Decimal(str(amount))
+                return redirect("booking:subscribe", plan_id=plan_id)
 
         booking = Booking.objects.create(
             user=request.user,
             payment_type=payment_type,
-            subject="Balance",
+            subject="Subscription",
             amount=total_amount,
             status="Pending",
             created_at=timezone.now(),
             voucher=voucher_code if voucher_code else None,
+            plan_id=plan_id,
         )
 
-        payment_success = True
-
-        if payment_success:
-            wallet = Wallet.objects.get(user=request.user)
-            if wallet.top_up(total_amount):
-                booking.status = "Paid"
-                booking.save()
-
-                transaction_data = {
-                    "transaction_id": booking.booking_id,
-                    "date": booking.booking_date,
-                    "time": booking.created_at,
-                    "amount": booking.amount,
-                    "payment_method": booking.payment_type,
-                    "payment_subject": booking.subject,
-                }
-
-                send_transaction_email(
-                    request, request.user, request.user.email, transaction_data
-                )
-                return redirect("booking:booking_success")
-            else:
+        if payment_type == "Stripe":
+            return redirect("payments:process_stripe_payment", booking_id=booking.booking_id)
+        elif payment_type == "Paypal":
+            return redirect("payments:process_paypal_payment", booking_id=booking.booking_id)
+        elif payment_type == "AppBalance":
+            try:
+                wallet = Wallet.objects.get(user=request.user)
+                if wallet.balance >= total_amount:
+                    wallet.withdraw(total_amount)
+                else:
+                    booking.status = "Cancelled"
+                    booking.save()
+                    return redirect("booking:subscribe", plan_id=plan_id)
+            except Wallet.DoesNotExist:
                 booking.status = "Cancelled"
                 booking.save()
-                return render(
-                    request, "top_up_wallet.html", {"error": "Failed to top up wallet"}
-                )
-        else:
-            booking.status = "Cancelled"
-            booking.save()
-            return render(request, "top_up_wallet.html", {"error": "Payment failed"})
+                return redirect("booking:subscribe", plan_id=plan_id)
 
-    return render(request, "top_up_wallet.html")
+        user_subscription, created = UserSubscription.objects.get_or_create(user=request.user)
+        user_subscription.activate(plan)
+        transaction_data = {
+            "transaction_id": booking.booking_id,
+            "date": booking.booking_date,
+            "time": booking.created_at,
+            "amount": booking.amount,
+            "payment_method": booking.payment_type,
+            "payment_subject": booking.subject,
+            "subscription_type": plan.type,
+            "subscription_duration": plan.duration_days,
+        }
+        send_transaction_email(request, request.user, request.user.email, transaction_data)
+        booking.status = "Paid"
+        booking.save()
+        return redirect("subscriptions:subscription_success")
 
+    return render(request, "subscription_booking.html", {"plan": plan_id})
 
-def booking_success(request):
+@login_required
+def booking_success(request, booking_id):
+    booking = Booking.objects.get(booking_id=booking_id)
+    booking.status = "Paid"
+    booking.save()
+
+    if booking.subject == "Balance":
+        wallet = Wallet.objects.get(user=request.user)
+        wallet.top_up(booking.amount)
+        transaction_data = {
+            "transaction_id": booking.booking_id,
+            "date": booking.booking_date,
+            "time": booking.created_at,
+            "amount": booking.amount,
+            "payment_method": booking.payment_type,
+            "payment_subject": booking.subject,
+        }
+        send_transaction_email(request, request.user, request.user.email, transaction_data)
+        return render(request, "booking_success.html")
+
+    elif booking.subject == "Rent":
+        vehicle = booking.vehicle
+        vehicle.status = False
+        vehicle.save()
+        try:
+            stats = UserStatistics.objects.get(user=request.user)
+        except UserStatistics.DoesNotExist:
+            stats = UserStatistics.objects.create(user=request.user)
+        stats.update_stats(booking.hours, booking.amount, vehicle.type)
+        transaction_data = {
+            "transaction_id": booking.booking_id,
+            "date": booking.booking_date,
+            "time": booking.created_at,
+            "amount": booking.amount,
+            "payment_method": booking.payment_type,
+            "payment_subject": booking.subject,
+            "rental_item": vehicle.type,
+            "duration": booking.hours,
+        }
+        send_transaction_email(request, request.user, request.user.email, transaction_data)
+        return render(request, "booking_success.html")
+
+    elif booking.subject == "Subscription":
+        plan = SubscriptionPlan.objects.get(id=booking.plan_id)
+        user_subscription, created = UserSubscription.objects.get_or_create(user=request.user)
+        user_subscription.activate(plan)
+        transaction_data = {
+            "transaction_id": booking.booking_id,
+            "date": booking.booking_date,
+            "time": booking.created_at,
+            "amount": booking.amount,
+            "payment_method": booking.payment_type,
+            "payment_subject": booking.subject,
+            "subscription_type": plan.type,
+            "subscription_duration": plan.duration_days,
+        }
+        send_transaction_email(request, request.user, request.user.email, transaction_data)
+        return redirect("subscriptions:subscription_success")
+
     return render(request, "booking_success.html")
