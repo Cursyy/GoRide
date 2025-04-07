@@ -211,6 +211,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 PAYPAL_TEST = True
+PAYPAL_MODE = "sandbox"
+PAYPAL_CLIENT_ID = config("PAYPAL_CLIENT_ID")
+PAYPAL_CLIENT_SECRET = config("PAYPAL_CLIENT_SECRET")
 PAYPAL_RECEIVER_EMAIL = "sb-yfvxa37272511@business.example.com"
 
 STRIPE_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY")
@@ -228,8 +231,8 @@ EMAIL_USE_TLS = True
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 4
 
 # just for testing
-EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+# ]f
