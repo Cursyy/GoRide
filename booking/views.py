@@ -1,6 +1,9 @@
+from datetime import timedelta
+import json
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.http import JsonResponse
 from decimal import Decimal
 from booking.models import Booking
 from wallet.models import Wallet
@@ -8,6 +11,10 @@ from find_transport.models import Vehicle
 from subscriptions.models import SubscriptionPlan, UserSubscription, UserStatistics
 from successful_booking import send_transaction_email
 from vouchers.models import Voucher
+from get_direction.models import Trip
+from get_direction.views import end_active_trip, start_trip
+from wallet.models import Wallet
+from django.contrib.auth.decorators import login_required
 
 @login_required
 def top_up_wallet(request):
@@ -129,14 +136,58 @@ def rent_vehicle(request, vehicle_id):
             "amount": booking.amount,
             "payment_method": booking.payment_type,
             "payment_subject": booking.subject,
-            "rental_item": vehicle.type,
-            "duration": hours,
+            "rental_item": booking.vehicle.type if booking.vehicle else None,
+            "duration": booking.hours,
         }
-        send_transaction_email(request, request.user, request.user.email, transaction_data)
+        minutes_paid = hours * 60
+        end_active_trip(request.user)
+        print(f"Previous trip ended (if any) for user: {request.user}")
+        try:
+            new_trip = Trip.objects.create(
+                user=request.user,
+                prepaid_minutes=minutes_paid,
+                cost_per_minute=Decimal(vehicle.price_per_hour) / 60,
+                status="not_started",
+                total_travel_time=timedelta(seconds=0),
+            )
+            print(
+                f"New trip created (id: {new_trip.id}) for user: {request.user}. Attempting auto-start..."
+            )
 
-        booking.status = "Paid"
-        booking.save()
-        return render(request, "booking_success.html")
+            start_response = start_trip(request)
+
+            try:
+                start_data = json.loads(start_response.content)
+            except json.JSONDecodeError:
+                start_data = {}
+
+            if start_response.status_code == 200 and "trip_id" in start_data:
+                print(
+                    f"Auto-start successful for trip id: {start_data.get('trip_id')}"
+                )
+
+                send_transaction_email(request, request.user, request.user.email, transaction_data)
+
+                booking.status = "Paid"
+                booking.save()
+                return render(request, "booking_success.html")
+            else:
+                print(
+                    f"Error during auto-start for newly created trip {new_trip.id}. Response: {start_response.content}"
+                )
+
+                error_message = start_data.get(
+                    "error", "Failed to auto-start the trip after creation."
+                )
+
+                return JsonResponse(
+                    {"error": error_message},
+                    status=start_response.status_code or 400,
+                )
+
+        except Exception as e:
+            print(f"Error creating trip for user {request.user}: {e}")
+            return JsonResponse({"error": "Failed to create the trip."}, status=500)
 
     return render(request, "rental_booking.html", {"vehicle": vehicle, "subscription": subscription})
 
@@ -253,8 +304,52 @@ def booking_success(request, booking_id):
             "rental_item": vehicle.type,
             "duration": booking.hours,
         }
-        send_transaction_email(request, request.user, request.user.email, transaction_data)
-        return render(request, "booking_success.html")
+        minutes_paid = booking.hours * 60
+        end_active_trip(request.user)
+        print(f"Previous trip ended (if any) for user: {request.user}")
+        try:
+            new_trip = Trip.objects.create(
+                user=request.user,
+                prepaid_minutes=minutes_paid,
+                cost_per_minute=Decimal(vehicle.price_per_hour) / 60,
+                status="not_started",
+                total_travel_time=timedelta(seconds=0),
+            )
+            print(
+                f"New trip created (id: {new_trip.id}) for user: {request.user}. Attempting auto-start..."
+            )
+
+            start_response = start_trip(request)
+
+            try:
+                start_data = json.loads(start_response.content)
+            except json.JSONDecodeError:
+                start_data = {}
+
+            if start_response.status_code == 200 and "trip_id" in start_data:
+                print(
+                    f"Auto-start successful for trip id: {start_data.get('trip_id')}"
+                )
+
+                send_transaction_email(request, request.user, request.user.email, transaction_data)
+                return render(request, "booking_success.html")
+            else:
+                print(
+                    f"Error during auto-start for newly created trip {new_trip.id}. Response: {start_response.content}"
+                )
+
+                error_message = start_data.get(
+                    "error", "Failed to auto-start the trip after creation."
+                )
+
+                return JsonResponse(
+                    {"error": error_message},
+                    status=start_response.status_code or 400,
+                )
+
+        except Exception as e:
+            print(f"Error creating trip for user {request.user}: {e}")
+            return JsonResponse({"error": "Failed to create the trip."}, status=500)
 
     elif booking.subject == "Subscription":
         plan = SubscriptionPlan.objects.get(id=booking.plan_id)

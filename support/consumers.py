@@ -2,6 +2,7 @@ import json
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 from .models import Message
+import uuid
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -26,10 +27,16 @@ class ChatConsumer(WebsocketConsumer):
         try:
             text_data_json = json.loads(text_data)
             message = text_data_json.get("message")
-            chat_id = text_data_json.get("chat_id")
+            chat_id_str = text_data_json.get("chat_id")
 
-            if not message or not chat_id:
+            if not message or not chat_id_str:
                 print("Missing message or chat_id")
+                return
+
+            try:
+                chat_id = uuid.UUID(chat_id_str)
+            except ValueError:
+                print(f"Invalid UUID: {chat_id_str}")
                 return
 
             user = self.scope.get("user")
