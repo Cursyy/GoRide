@@ -1,3 +1,4 @@
+from django.utils import timezone
 from datetime import timedelta
 from django.db import models
 from django.contrib.auth import get_user_model
@@ -43,3 +44,11 @@ class Trip(models.Model):
 
     def __str__(self):
         return f"Trip #{self.id} by {self.user}"
+
+    @property
+    def trip_current_time(self):
+        if self.status == "active" and self.started_at:
+            current_time = self.total_travel_time + (timezone.now() - self.started_at)
+            print("Trip current time:", current_time)
+            return current_time
+        return self.total_travel_time
