@@ -1,11 +1,18 @@
+from datetime import timedelta
+from decimal import Decimal
+from django.utils import timezone
 import json
 import requests
 from decouple import config
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from find_transport.views import get_address
+from .models import Trip
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
@@ -27,6 +34,7 @@ def get_places(request, lat, lon, category):
             {"error": "API request failed", "details": response.text},
             status=response.status_code,
         )
+
     response = response.json()
     return JsonResponse(response, safe=False)
 
@@ -68,5 +76,202 @@ def get_address_marker(request, lat, lon):
     return HttpResponse(f"Address: {response}")
 
 
+def get_search(request, searchInput):
+    url = f"https://api.geoapify.com/v1/geocode/search?text={searchInput}&format=json&filter=countrycode:ie&apiKey={GEOAPIFY_API_KEY}"
+
+    response = requests.get(url)
+
+    print(response)
+    if response.status_code != 200:
+        return JsonResponse(
+            {"error": "API request failed", "details": response.text},
+            status=response.status_code,
+        )
+    response = response.json()
+    return JsonResponse(response, safe=False)
+
+
 def map_view(request):
     return render(request, "get_direction/get_direction.html")
+
+
+@login_required
+def start_trip(request):
+    user = request.user
+    print(f"API: start_trip called for user: {user}")
+    trip = Trip.objects.filter(user=user, status="not_started").order_by("-id").first()
+    if not trip:
+        print("API start_trip: No trip with status 'not_started' found to start")
+        active_trip = Trip.objects.filter(user=user, status="active").first()
+        if active_trip:
+            print(f"API start_trip: User already has an active trip: {active_trip.id}")
+            notify_trip_status(user)
+            return JsonResponse(
+                {"error": "An active trip is already in progress"}, status=400
+            )
+        return JsonResponse({"error": "No suitable trip found to start"}, status=404)
+
+    trip.status = "active"
+    trip.started_at = timezone.now()
+    trip.total_travel_time = timedelta(seconds=0)
+    trip.save()
+
+    notify_trip_status(user)
+
+    print(f"API start_trip: Trip started successfully: {trip.id}")
+    return JsonResponse(
+        {
+            "trip_id": trip.id,
+            "started_at": trip.started_at.isoformat(),
+            "status": "active",
+        },
+        status=200,
+    )
+
+
+@login_required
+def pause_trip(request):
+    user = request.user
+    print(f"Pausing trip for user: {user}")
+    trip = Trip.objects.filter(user=user, status="active").first()
+    if trip:
+        trip.status = "paused"
+        trip.paused_at = timezone.now()
+
+        if trip.started_at:
+            trip.total_travel_time += trip.paused_at - trip.started_at
+
+        trip.started_at = None
+        trip.save()
+        notify_trip_status(user)
+        print(f"Trip paused: {trip.id}")
+        return JsonResponse({"status": "paused", "trip_id": trip.id})
+    else:
+        print("No active trip found to pause")
+        return JsonResponse({"error": "No active trip found"}, status=404)
+
+
+@login_required
+def resume_trip(request):
+    user = request.user
+    print(f"Resuming trip for user: {user}")
+    trip = Trip.objects.filter(user=user, status="paused").first()
+    if trip:
+        trip.status = "active"
+        trip.started_at = timezone.now()
+
+        trip.paused_at = None
+        trip.save()
+        notify_trip_status(user)
+        print(f"Trip resumed: {trip.id}")
+        return JsonResponse({"status": "resumed", "trip_id": trip.id})
+    else:
+        print("No paused trip found to resume")
+        return JsonResponse({"error": "No paused trip found"}, status=404)
+
+
+@login_required
+def end_trip(request):
+    user = request.user
+    print(f"Ending trip for user: {user}")
+    trip = Trip.objects.filter(user=user, status="active").first()
+    if trip:
+        trip.status = "finished"
+        trip.ended_at = timezone.now()
+
+        if trip.started_at:
+            trip.total_travel_time += trip.ended_at - trip.started_at
+
+        total_minutes = trip.total_travel_time.total_seconds() / 60
+        trip.total_amount = Decimal(total_minutes) * trip.cost_per_minute
+        trip.save()
+        notify_trip_status(user)
+        print(f"Trip ended: {trip.id}, Total cost: {trip.total_amount}")
+        return JsonResponse(
+            {
+                "status": "finished",
+                "trip_id": trip.id,
+                "total_cost": str(trip.total_amount),
+            }
+        )
+
+    else:
+        print("No active trip found to end")
+        return JsonResponse({"error": "No active trip found"}, status=404)
+
+
+def notify_trip_status(user):
+    channel_layer = get_channel_layer()
+    trip = (
+        Trip.objects.filter(user=user, status__in=["active", "paused"])
+        .order_by("-id")
+        .first()
+    )
+
+    if trip:
+        current_server_time_seconds = 0
+        if trip.status == "active" and trip.started_at:
+            if hasattr(trip, "trip_current_time"):
+                current_server_time_seconds = trip.trip_current_time.total_seconds()
+            else:
+                current_server_time_seconds = (
+                    trip.total_travel_time.total_seconds()
+                    + (timezone.now() - trip.started_at).total_seconds()
+                )
+        else:
+            current_server_time_seconds = trip.total_travel_time.total_seconds()
+
+        data = {
+            "status": trip.status,
+            "started_at": trip.started_at.isoformat() if trip.started_at else None,
+            "paused_at": trip.paused_at.isoformat() if trip.paused_at else None,
+            "total_travel_time": trip.total_travel_time.total_seconds(),
+            "server_time": current_server_time_seconds,
+            "trip_id": trip.id,
+        }
+        print(f"Notify: Preparing status update for trip {trip.id}: {data}")
+    else:
+        last_finished = (
+            Trip.objects.filter(user=user, status="finished")
+            .order_by("-ended_at", "-id")
+            .first()
+        )
+        if last_finished:
+            data = {
+                "status": "finished",
+                "trip_id": last_finished.id,
+                "ended_at": last_finished.ended_at.isoformat()
+                if last_finished.ended_at
+                else None,
+                "total_travel_time": last_finished.total_travel_time.total_seconds(),
+                "total_cost": str(last_finished.total_amount)
+                if last_finished.total_amount is not None
+                else None,
+            }
+            print(
+                f"Notify: No active/paused trip found for user {user.user_id}, sending last finished."
+            )
+        else:
+            data = {"status": "none", "message": "No relevant trip found."}
+            print(f"Notify: No active/paused/finished trip found for user {user.id}")
+
+    group_name = f"user_{user.pk}"
+    print(f"Notify: Sending to group: {group_name} data: {data}")
+
+    try:
+        async_to_sync(channel_layer.group_send)(
+            group_name, {"type": "trip_status_update", "data": data}
+        )
+        print(f"Notify: Message sent successfully to group {group_name}")
+    except Exception as e:
+        print(f"ERROR: Could not send message to group {group_name}: {e}")
+
+
+def end_active_trip(user):
+    active_trip = Trip.objects.filter(user=user).exclude(status="finished").last()
+    if active_trip:
+        if active_trip.status == "active" and active_trip.started_at:
+            active_trip.total_travel_time += timezone.now() - active_trip.started_at
+        active_trip.status = "finished"
+        active_trip.ended_at = timezone.now()
+        active_trip.save()

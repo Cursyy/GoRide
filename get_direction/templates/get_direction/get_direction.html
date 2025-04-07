@@ -10,10 +10,17 @@
     <div class="search-container">
         <input type="text" id="search-input" placeholder="{% trans 'Search locations...' %}">
         <button id="search-button" onclick="searchLocations()">{% trans 'Search' %}</button>
+        <button id="userLocation">My Location</button>
     </div>
    
     <div id="map" class="my-4" style="position: relative; height: 500px;"></div>
-   
+    <h1>Trip Management</h1>
+    <div id="trip-status-details">
+         <p>Current Status: <span id="trip-timer">Loading...</span></p>
+    </div>
+    <div id="trip-buttons">
+        Loading controls...
+    </div>
     <div class="categories-sidebar">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle w-100 mb-2" type="button" id="mainCategoriesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -23,7 +30,9 @@
             </ul>
         </div>
     </div>
-   
+
+    <div id="places-container" class="places-list"></div>
+    <script src="{% static 'js/trip_timer.js' %}" defer></script>
     <script src="{% static 'js/get_direction.js' %}" defer></script>
 </div>
 {% endblock %}

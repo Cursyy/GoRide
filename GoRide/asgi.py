@@ -9,14 +9,15 @@ django.setup()
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from django.contrib.staticfiles.handlers import ASGIStaticFilesHandler
-import support.routing
+from support.routing import websocket_urlpatterns as support_routes
+from get_direction.routing import websocket_urlpatterns as get_direction_routes
 
 
 application = ProtocolTypeRouter(
     {
         "http": ASGIStaticFilesHandler(get_asgi_application()),
         "websocket": AuthMiddlewareStack(
-            URLRouter(support.routing.websocket_urlpatterns)
+            URLRouter(support_routes + get_direction_routes)
         ),
     }
 )
