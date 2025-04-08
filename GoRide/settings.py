@@ -102,6 +102,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "get_direction.context_processors.active_trip",
                 "wallet.context_proccesors.wallet_balance",
+                "main.context_processors.location_context",
             ],
         },
     },
