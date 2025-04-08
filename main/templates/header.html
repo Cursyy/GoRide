@@ -24,6 +24,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'subscriptions:subscription_plans' %}">{% trans "Plans" %}</a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin:index' %}">{% trans "Admin Panel" %}</a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
                 </ul>
                 <div class="d-flex align-items-center">
                     <div>
@@ -32,8 +39,8 @@
                         {% get_language_info_list for LANGUAGES as languages %}
                         <form action="{% url 'set_language' %}" method="POST" class="d-flex align-items-center">
                             {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}">
-                            <select name="language" class="form-select me-3 mt-0" onchange="this.form.submit()">
+                            <input name="next" type="hidden" value="{{ request.get_full_path|urlencode }}"> 
+                            <select name="language" class="form-select form-select-sm me-3" onchange="this.form.submit()"> 
                                 {% for language in languages %}
                                 <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
                                     {{ language.name_local }}
@@ -43,8 +50,8 @@
                         </form>
                     </div>
                     {% if user.is_authenticated %}
-                    <div class="dropdown">
-                        <button class="btn btn-outline-light dropdown-toggle w-100" type="button" id="userMenu" data-bs-toggle="dropdown"
+                    <div class="dropdown ms-2">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             {{ user.username }}
                         </button>
@@ -72,6 +79,9 @@
                     <a href="{% url 'login' %}" class="btn btn-outline-light me-2">{% trans "Login" %}</a>
                     <a href="{% url 'accounts:signup' %}" class="btn btn-light">{% trans "Sign Up" %}</a>
                     {% endif %}
+                    <button id="theme-toggle" class="btn btn-outline-light ms-3" type="button" title="{% trans 'Switch theme' %}">
+                        <i id="theme-icon" class="fas fa-sun"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -80,5 +90,4 @@
         <span id="base-timer-display">Connecting...</span>
         <a href="{% url 'get_direction:map' %}" style="color: #aadeff; margin-left: 10px; text-decoration: none;">Manage</a>
     </div>
-    <script src="{% static 'js/trip_timer.js' %}" defer></script>
 </header>

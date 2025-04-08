@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "channels",
     "accounts",
     # default apps
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -230,9 +231,124 @@ EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 4
 
-# just for testing
-# EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+CUSTOM_CSS_PATH = "admin/admin.css"  # Example: file is located in static/admin/css/
+SITE_LOGO_PATH = "admin/logo.png"  # Example: file is located in static/admin/img/
 
-# AUTHENTICATION_BACKENDS = [
-#     'django.contrib.auth.backends.ModelBackend',
-# ]
+JAZZMIN_SETTINGS = {
+    # Path to custom CSS (RELATIVE TO STATIC_URL!)
+    "custom_css": CUSTOM_CSS_PATH,
+    # Site name
+    "site_title": "GoRide Admin",
+    "site_header": "GoRide Admin",
+    "site_brand": "GoRide Admin Panel",
+    # Path to logo (RELATIVE TO STATIC_URL!)
+    "site_logo": SITE_LOGO_PATH,
+    "site_logo_classes": "img-circle",
+    # Copyright
+    "copyright": "GoRide Ltd",
+    #############
+    # UI / Theme #
+    #############
+    # Set LIGHT theme by default
+    "theme": "flatly",  # Or another light theme: "litera", "pulse", "simplex", "yeti"
+    # Set DARK theme for the switcher
+    "dark_mode_theme": "darkly",  # Or another dark theme: "cyborg", "slate"
+    "show_ui_builder": True,  # Allows the user to change the theme via UI
+    ###############
+    # Navigation  #
+    ###############
+    "show_sidebar": True,
+    "language_chooser": True,
+    "navigation_expanded": True,
+    # Sorting order (check app names!)
+    "order_with_respect_to": [
+        # User management
+        "accounts",  # App for CustomUser
+        "auth",  # Default auth (for Group, if used)
+        "subscriptions",
+        "support",
+        # Transport operations
+        "get_direction",
+        "find_transport",
+        # Finance
+        "wallet",
+        "vouchers",
+        "booking",
+        "payments",  # Added payments if it should be in the admin panel
+        "paypal.standard.ipn",  # Added PayPal IPN if needed
+    ],
+    # Icons (FIXED CustomUser, check other models!)
+    "icons": {
+        "accounts": "fas fa-user-circle",
+        "accounts.customuser": "fas fa-user",  # Model name in lowercase
+        "auth": "fas fa-users-cog",  # For default auth (if Group is needed)
+        "auth.group": "fas fa-users",
+        "subscriptions": "fas fa-id-card",
+        "support": "fa-regular fa-comment",
+        "get_direction": "fas fa-directions",
+        "get_direction.trip": "fas fa-route",
+        "get_direction.route": "fas fa-map-marked-alt",
+        "find_transport": "fas fa-search-location",
+        "find_transport.vehicles": "fa-solid fa-bicycle",  # Example icon for Vehicles
+        "wallet": "fa-solid fa-money-bill",
+        "vouchers": "fas fa-ticket-alt",
+        "vouchers.voucher": "fas fa-receipt",  # Example
+        "booking": "fas fa-calendar-check",
+        "booking.booking": "fas fa-book-open",  # Example
+        "payments": "fas fa-credit-card",  # Example
+        "paypal.standard.ipn.paypalipn": "fab fa-paypal",  # Example
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    #################
+    # Related Modal #
+    #################
+    "related_modal_active": True,
+    #############
+    # Links     #
+    #############
+    "topmenu_links": [
+        # Link to the main site page (check the URL name 'main:home')
+        {"name": "Back to Site", "url": "main:home", "new_window": False},
+    ],
+    #############
+    # Forms     #
+    #############
+    "changeform_format": "horizontal_tabs",
+}
+
+# UI Tweaks settings remain the same, but now they will
+# apply to the default light theme.
+# The dark theme "darkly" has its own styles that may override some tweaks.
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-warning",
+    "navbar": "navbar-gray navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-teal",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "flatly",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+    "actions_sticky_top": True,
+}

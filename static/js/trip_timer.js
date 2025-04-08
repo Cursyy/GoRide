@@ -161,7 +161,7 @@ function initializeWebSocket() {
       if (socket && socket.readyState === WebSocket.OPEN) {
         console.log("Closing socket after trip finished.");
         socket.close(1000, "Trip finished");
-        showTripSummary(serverCurrentTime, totalCost);
+        showTripSummary(serverTotalTime, totalCost);
       }
     } else if (currentStatus === "active" || currentStatus === "resumed") {
       baseTime = serverTotalTime;
