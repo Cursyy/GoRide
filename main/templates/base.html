@@ -1,44 +1,58 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ request.LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token }}">
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %}GoRide{% endblock title %}</title>
     <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+
+    {# CSS #}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock extra_css %} 
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark-mode'); 
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+            }
+        })();
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
-    {% include "header.html" %}
-    <main>
-        {% block content %}
 
+    {% include "header.html" %}
+
+    <main class="container my-4">
+        {% block content %}
         {% endblock content %}
     </main>
+
     {% include "footer.html" %}
     {% if request.user.is_authenticated %}
         {% if request.user.is_staff %}
-        <a href="{% url 'support:admin_chat_list' %}" class="chat-button">
+        <a href="{% url 'support:admin_chat_list' %}" class="chat-button" title="{% trans 'Admin Chats' %}">
             <i class="fa fa-comments"></i>
         </a>
         {% else %}
-        <a href="{% url 'support:user_chat_no_id' %}" class="chat-button">
+        <a href="{% url 'support:user_chat_no_id' %}" class="chat-button" title="{% trans 'Support Chat' %}">
             <i class="fa fa-comments"></i>
         </a>
+        {% endif %}
     {% endif %}
-{% endif %}
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="{% static 'js/script.js'%}" defer></script>
+    <script src="{% static 'js/script.js'%}"></script>
+    <script src="{% static 'js/theme_change.js' %}"></script>
+    <script src="{% static 'js/trip_timer.js' %}"></script>
+
 </body>
 </html>

@@ -1,0 +1,225 @@
+
+:root {
+    --primary-green: #0e6655;
+    --secondary-green: #16a085;
+    --light-green: #2ecc71;
+    --dark-green: #027353;
+    --bg-light: #f4f6f7; /* Фон для світлої теми */
+    --text-dark: #2c3e50; /* Текст для світлої теми */
+    --main-bg-color: #0e6655; /* Основний фон темної теми / Акценти */
+    --second-bg-color: #22272B; /* Темніший фон для темної теми (краще за #000) */
+    --main-font-color: #dee2e6; /* Світлий текст для темної теми */
+    --second-font-color: #343a40; /* Темний текст для світлої теми */
+    --accent-color: #ffa726; /* Помаранчевий акцент */
+    --mint: #d7ffe7;
+  
+    /* Спробуємо прив'язати до змінних Jazzmin/AdminLTE */
+    --jazzy-primary: var(--primary-green);
+    --jazzy-secondary: var(--secondary-green);
+    --jazzy-accent: var(--accent-color);
+    --jazzy-font-base: "Roboto", sans-serif;
+    --jazzy-font-small: 0.9rem;
+    --jazzy-font-brand: 1.2rem;
+  }
+  
+  /* --- Загальні стилі для адмінки --- */
+  body, .wrapper {
+      font-family: var(--jazzy-font-base) !important;
+  }
+  
+  /* --- Стилі для СВІТЛОЇ теми (за замовчуванням, якщо theme='flatly') --- */
+  body:not(.dark-mode) {
+    background-color: var(--bg-light) !important;
+    color: var(--second-font-color) !important;
+  }
+  
+  body:not(.dark-mode) .main-header.navbar-light {
+    background-color: var(--primary-green) !important;
+    border-bottom-color: var(--dark-green) !important;
+  }
+  body:not(.dark-mode) .main-header.navbar-light .navbar-nav .nav-link {
+    color: #f8f9fa !important; /* Білий текст на зеленому */
+  }
+  body:not(.dark-mode) .main-header.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--mint) !important;
+  }
+  
+  body:not(.dark-mode) .brand-link {
+     background-color: var(--primary-green) !important;
+     color: #f8f9fa !important;
+  }
+  /* Світлий сайдбар */
+  body:not(.dark-mode) .main-sidebar.sidebar-light-primary {
+      background-color: #ffffff !important; /* Білий фон сайдбару */
+      border-right: 1px solid #dee2e6;
+  }
+  body:not(.dark-mode) .main-sidebar.sidebar-light-primary .nav-sidebar .nav-link {
+      color: var(--second-font-color) !important; /* Темний текст */
+  }
+  body:not(.dark-mode) .main-sidebar.sidebar-light-primary .nav-sidebar .nav-link:hover {
+      background-color: #f0f0f0 !important; /* Світло-сірий при наведенні */
+  }
+  body:not(.dark-mode) .main-sidebar.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+      background-color: var(--primary-green) !important;
+      color: #f8f9fa !important; /* Білий текст на зеленому */
+  }
+  /* Картки у світлій темі */
+  body:not(.dark-mode) .card {
+      background-color: #ffffff !important;
+      border: 1px solid #dee2e6 !important;
+      color: var(--second-font-color) !important;
+  }
+  body:not(.dark-mode) .card-header {
+      background-color: #f8f9fa !important; /* Дуже світлий фон заголовку */
+      color: var(--second-font-color) !important;
+      border-bottom: 1px solid #dee2e6 !important;
+  }
+  /* Таблиці у світлій темі */
+  body:not(.dark-mode) .table {
+      color: var(--second-font-color) !important;
+  }
+  body:not(.dark-mode) .table thead th {
+      border-bottom: 2px solid var(--primary-green) !important;
+      border-top: 1px solid #dee2e6 !important;
+  }
+  body:not(.dark-mode) .table tbody tr {
+      border-top: 1px solid #dee2e6 !important;
+  }
+  body:not(.dark-mode) .table tbody tr:hover {
+       background-color: #f0f0f0 !important;
+  }
+  /* Кнопки у світлій темі */
+  body:not(.dark-mode) .btn-primary {
+      background-color: var(--primary-green) !important;
+      border-color: var(--dark-green) !important;
+      color: #ffffff !important;
+  }
+  body:not(.dark-mode) .btn-primary:hover {
+      background-color: var(--dark-green) !important;
+      border-color: var(--dark-green) !important;
+  }
+  body:not(.dark-mode) .btn-warning {
+      background-color: var(--accent-color) !important;
+      border-color: var(--accent-color) !important;
+      color: var(--second-font-color) !important; /* Чорний текст на помаранчевому */
+  }
+  body:not(.dark-mode) .btn-warning:hover {
+      filter: brightness(110%);
+  }
+  
+  
+  /* --- Стилі для ТЕМНОЇ теми (коли клас .dark-mode активний) --- */
+  body.dark-mode, .dark-mode .wrapper {
+      background-color: var(--second-bg-color) !important; /* Темний фон */
+      color: var(--main-font-color) !important; /* Світлий текст */
+  }
+  
+  .dark-mode .main-header.navbar-dark {
+      background-color: var(--main-bg-color) !important; /* Темно-зелена навігація */
+      border-bottom: 1px solid var(--dark-green) !important;
+  }
+  .dark-mode .main-header.navbar-dark .navbar-nav .nav-link {
+      color: var(--main-font-color) !important;
+  }
+  .dark-mode .main-header.navbar-dark .navbar-nav .nav-link:hover {
+      color: var(--light-green) !important;
+  }
+  
+  .dark-mode .brand-link {
+      background-color: var(--main-bg-color) !important;
+      color: var(--main-font-color) !important;
+      border-bottom: 1px solid var(--dark-green) !important;
+  }
+  
+  /* Темний сайдбар */
+  .dark-mode .main-sidebar.sidebar-dark-primary {
+      background-color: var(--main-bg-color) !important; /* Темно-зелений фон сайдбару */
+  }
+  .dark-mode .main-sidebar.sidebar-dark-primary .nav-sidebar .nav-link {
+      color: var(--main-font-color) !important; /* Світлий текст */
+  }
+  .dark-mode .main-sidebar.sidebar-dark-primary .nav-sidebar .nav-link:hover {
+      background-color: var(--dark-green) !important; /* Темніший зелений при наведенні */
+  }
+  .dark-mode .main-sidebar.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active {
+      background-color: var(--secondary-green) !important; /* Світліший зелений для активного */
+      color: #ffffff !important;
+  }
+  
+  /* Картки у темній темі */
+  .dark-mode .card {
+       background-color: #2E3338 !important; /* Трохи світліший за фон */
+       border: 1px solid var(--dark-green) !important;
+       color: var(--main-font-color) !important;
+  }
+  .dark-mode .card-header {
+      background-color: var(--main-bg-color) !important;
+      color: var(--main-font-color) !important;
+      border-bottom: 1px solid var(--dark-green) !important;
+  }
+  
+  /* Таблиці у темній темі */
+  .dark-mode .table {
+      color: var(--main-font-color) !important;
+  }
+  .dark-mode .table thead th {
+       border-bottom: 2px solid var(--secondary-green) !important;
+       border-top: 1px solid var(--dark-green) !important;
+  }
+   .dark-mode .table tbody tr {
+       border-top: 1px solid var(--dark-green) !important;
+   }
+    .dark-mode .table tbody tr:hover {
+        background-color: var(--dark-green) !important;
+    }
+  
+  /* Кнопки у темній темі */
+  .dark-mode .btn-primary {
+      background-color: var(--secondary-green) !important;
+      border-color: var(--light-green) !important;
+      color: #ffffff !important;
+  }
+  .dark-mode .btn-primary:hover {
+      background-color: var(--light-green) !important;
+      border-color: var(--light-green) !important;
+  }
+  .dark-mode .btn-warning {
+      background-color: var(--accent-color) !important;
+      border-color: var(--accent-color) !important;
+      color: var(--second-font-color) !important;
+  }
+  .dark-mode .btn-warning:hover {
+      filter: brightness(110%);
+  }
+  
+  /* --- Загальні перевизначення (для обох тем) --- */
+  .accent-warning {
+      color: var(--accent-color) !important;
+  }
+  
+  /* Стилі для логотипу, якщо потрібно */
+  .brand-image.img-circle {
+      /* Можливо, додати рамку або тінь */
+      /* border: 1px solid var(--dark-green); */
+  }
+  
+  /* Стилі для повідомлень Django */
+  .alert-success {
+      background-color: var(--mint) !important;
+      color: var(--dark-green) !important;
+      border-color: var(--secondary-green) !important;
+  }
+  .alert-warning {
+       background-color: #fff3cd !important;
+       color: #664d03 !important;
+       border-color: #ffecb5 !important;
+  }
+  .alert-danger {
+      background-color: #f8d7da !important;
+      color: #58151c !important;
+      border-color: #f1aeb5 !important;
+  }
+  
+
+  
+  
