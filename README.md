@@ -216,3 +216,18 @@ Daphne is an asynchronous HTTP, WebSocket, and HTTP/2 server for Django, used wi
    ```
    daphne --version
    ```
+## Run Redis in Docker
+
+1. Install Docker (https://www.docker.com/)
+2. In project folder run:
+
+```bash
+docker-compose up -d
+```
+## Run Server with Redis
+
+1. In project folder run:
+
+```bash
+python run-project.py
+```
