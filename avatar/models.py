@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 class AvatarItem(models.Model):
     ITEM_TYPES = (
@@ -18,7 +19,7 @@ class AvatarItem(models.Model):
         return f"{self.name} ({self.item_type})"
 
 class UserAvatar(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     equipped_hat = models.ForeignKey(AvatarItem, on_delete=models.SET_NULL, null=True, blank=True, related_name='equipped_hat', limit_choices_to={'item_type': 'hat'})
     equipped_shirt = models.ForeignKey(AvatarItem, on_delete=models.SET_NULL, null=True, blank=True, related_name='equipped_shirt', limit_choices_to={'item_type': 'shirt'})
     equipped_accessory = models.ForeignKey(AvatarItem, on_delete=models.SET_NULL, null=True, blank=True, related_name='equipped_accessory', limit_choices_to={'item_type': 'accessory'})

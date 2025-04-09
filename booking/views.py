@@ -45,9 +45,13 @@ def top_up_wallet(request):
 @login_required
 def rent_vehicle(request, vehicle_id):
     vehicle = Vehicle.objects.get(id=vehicle_id)
+    trip = Trip.objects.filter(user=request.user, status="active").first()
 
     if not vehicle.status:
         return redirect("find_transport:find_transport")
+    
+    if trip:
+        return redirect("get_direction:map")
 
     subscription = None
     try:
