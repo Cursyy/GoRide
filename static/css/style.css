@@ -15,10 +15,10 @@
   font-size: 16px;
 }  */
 :root {
-  --primary-green: #0e6655;
-  --secondary-green: #16a085;
-  --light-green: #2ecc71;
-  --dark-green: #027353;
+  --primary-green: #409B65;
+  --secondary-green: #71BF95;
+  --light-green: #75cd9a;
+  --dark-green: #155933;
   --accent-color: #ffa726;
   --mint: #d7ffe7;
   --main-font-color: #fff;
@@ -29,7 +29,7 @@
 html {
   --bg-light: #f4f6f7;
   --text-dark: #2c3e50;
-  --main-bg-color: #0e6655;
+  --main-bg-color: #155933;
   --second-bg-color: #000;
 }
 html.dark-mode {
@@ -293,8 +293,6 @@ form input[type="file"] {
 }
 
 .vehicle-section {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 2rem;
   background-color: #f4f4f4;
 }
@@ -611,8 +609,26 @@ form input[type="file"] {
 }
 
 .user-subscription,
-.user-statistics {
-  min-height: 180px;
+.user-statistics,
+.bookings-history,
+.balance {
+  height: 180px;
+  width: 100%;
+}
+
+.bookings-history{
+  overflow-y: auto;
+}
+
+.balance{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.balance > a{
+  align-self: flex-end;
 }
 
 .badge-img {

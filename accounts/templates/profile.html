@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="col-md-8 p-3 my_custom_div">
-                <div class="profile-card p-4">
+            <div class="profile-card p-4">
                 <ul class="nav nav-tabs" id="profileTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active w-100 text-dark" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="true">{% trans "Statistics" %}</button>
@@ -59,7 +59,7 @@
                                     {% if statistics %}
                                         <p><strong>{% trans "Total Rides:" %}</strong> {{ statistics.total_rides }}</p>
                                         <p><strong>{% trans "Total Hours:" %}</strong> {{ statistics.total_hours|floatformat:2 }}</p>
-                                        <p><strong>{% trans "Total Spent:" %}</strong> €{{ statistics.total_spent|floatformat:2 }}</p>
+                                        <p><strong>{% trans "Total Spent:" %}</strong> € {{ statistics.total_spent|floatformat:2 }}</p>
                                         <p class="m-0"><strong>{% trans "Most Used Vehicle:" %}</strong> {{ statistics.most_used_vehicle|default:_("N/A") }}</p>
                                     {% else %}
                                         <p>{% trans "No statistics available." %}</p>
@@ -88,9 +88,46 @@
                                 </div>                                                   
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-3">
+                                <div class="bookings-history border rounded p-3">
+                                    {% if bookings %}
+                                        {% for booking in bookings %}
+                                            <p class="d-flex justify-content-between align-items-center">
+                                                <span>{{booking.booking_date}}</span>
+                                                <span>{{booking.subject}}</span>
+                                                <span>€{{booking.amount}}</span>
+                                            </p>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>{% trans "No statistics available." %}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <div class="balance border rounded p-3">
+                                    <p><strong>{% trans "Balance" %}: € {{wallet_balance}}</strong></p>
+                                    <a href="{%url 'booking:topup'%}" class="top-up-btn btn btn-success">{% trans "Top up" %}</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
-                        <h1>Avatar comming soon</h1>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="avatar-container w-100">
+                                    <img src="{% static '/images/avatar/avatar.png'%}" class="w-100" alt="avater">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h2 class="text-center my-3 border-bottom">{% trans "Your inventory" %}</h2>
+                                <div class="inventory">
+                                    {% for item in items %}
+                                        <img style="width: 64px; height: 64px;" src="{{item.image.url}}" alt="{{ item.name }}">
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

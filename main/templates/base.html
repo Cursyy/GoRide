@@ -31,8 +31,39 @@
         window.GLOBAL_USER_LOCATION_AVAILABLE = {{ session_user_location_available|yesno:"true,false" }};
  </script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .loader-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .tenor-gif-embed {
+            max-width: 250px;
+            max-height: 250px;
+        }
+    </style>
 </head>
 <body>
+    <div class="loader-wrapper text-light text-center d-flex flex-column justify-content-center align-items-center" id="loader-wrapper">
+        <div class="p-4 bg-dark rounded shadow">
+            <img src="{% static 'images/load_gif.gif' %}" alt="Loading..." class="tenor-gif-embed mb-3 img-fluid">
+            <h4 class="mb-2 fw-bold">Jack is riding to your page...</h4>
+            <p class="small fst-italic">Please wait a moment</p>
+        </div>
+        <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    </div>
 
     {% include "header.html" %}
 
@@ -58,6 +89,13 @@
     <script src="{% static 'js/script.js'%}"></script>
     <script src="{% static 'js/theme_change.js' %}"></script>
     <script src="{% static 'js/trip_timer.js' %}"></script>
-
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader-wrapper');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 500);
+        });
+    </script>
 </body>
 </html>

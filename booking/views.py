@@ -15,7 +15,7 @@ from get_direction.models import Trip
 from get_direction.views import end_active_trip, start_trip
 from wallet.models import Wallet
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 @login_required
 def top_up_wallet(request):
     if request.method == "POST":
@@ -45,9 +45,14 @@ def top_up_wallet(request):
 @login_required
 def rent_vehicle(request, vehicle_id):
     vehicle = Vehicle.objects.get(id=vehicle_id)
+    trip = Trip.objects.filter(user=request.user, status="active").first()
 
     if not vehicle.status:
         return redirect("find_transport:find_transport")
+    
+    if trip:
+        messages.info(request, "You have not finished trip")
+        return redirect("get_direction:map")
 
     subscription = None
     try:
@@ -197,6 +202,7 @@ def subscribe(request, plan_id):
     try:
         user_subscription = UserSubscription.objects.get(user=request.user)
         if user_subscription.is_active():
+            messages.info(request, "You already have an active subscription.")
             return redirect("main:home")
     except UserSubscription.DoesNotExist:
         pass
@@ -334,18 +340,10 @@ def booking_success(request, booking_id):
                 send_transaction_email(request, request.user, request.user.email, transaction_data)
                 return render(request, "booking_success.html")
             else:
-                print(
-                    f"Error during auto-start for newly created trip {new_trip.id}. Response: {start_response.content}"
-                )
-
-                error_message = start_data.get(
-                    "error", "Failed to auto-start the trip after creation."
-                )
-
-                return JsonResponse(
-                    {"error": error_message},
-                    status=start_response.status_code or 400,
-                )
+                print(f"Error during auto-start for newly created trip {new_trip.id}. Response: {start_response.content}")
+                error_message = start_data.get("error", "Failed to auto-start the trip after creation.")
+                return JsonResponse( {"error": error_message}, status=start_response.status_code or 400)
+            
 
         except Exception as e:
             print(f"Error creating trip for user {request.user}: {e}")
@@ -367,5 +365,3 @@ def booking_success(request, booking_id):
         }
         send_transaction_email(request, request.user, request.user.email, transaction_data)
         return redirect("subscriptions:subscription_success")
-
-    return render(request, "booking_success.html")

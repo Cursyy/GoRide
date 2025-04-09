@@ -4,7 +4,7 @@
 {% block title %}{% trans "Main page" %}{% endblock title %} 
 
 {% block content %}
-<section class="hero d-flex align-items-center py-5">
+<section class="hero d-flex align-items-center py-5 px-0 px-lg-5">
     <div class="container text-white">
         <div class="row align-items-center">
             <div class="col-md-6 hero-text">
@@ -79,11 +79,17 @@
     </div>
 </section>
 
-<section class="cta text-center text-white py-5 mb-5">
+<section class="cta text-center text-white py-5 mb-5 rounded">
     <div class="container">
         <h2>{% trans "Download the GoRide app and start riding" %}</h2>
         <p>{% trans "With just a few taps, you can locate, unlock, and ride." %}</p>
         <a href="#" class="btn btn-light">{% trans "Get Started" %}</a>
     </div>
 </section>
+
+<script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+</script>
 {% endblock content %}
