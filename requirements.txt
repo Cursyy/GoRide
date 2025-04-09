@@ -17,6 +17,7 @@ daphne==4.1.2
 distlib==0.3.9
 Django==5.1.5
 django-crispy-forms==2.3
+django-jazzmin==3.0.1
 django-modeltranslation==0.19.13
 django-paypal==2.1
 filelock==3.17.0
@@ -48,8 +49,8 @@ pytz==2025.1
 PyYAML==6.0.2
 requests==2.32.3
 service-identity==24.2.0
-six==1.17.0
 setuptools==77.0.3
+six==1.17.0
 sqlparse==0.5.3
 stripe==11.6.0
 Twisted==24.11.0

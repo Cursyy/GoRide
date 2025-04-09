@@ -26,8 +26,37 @@
         })();
     </script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .loader-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .tenor-gif-embed {
+            max-width: 250px;
+            max-height: 250px;
+        }
+    </style>
 </head>
 <body>
+    <div class="loader-wrapper" id="loader-wrapper">
+        <div class="tenor-gif-embed" data-postid="12915268833060253100" data-share-method="host" data-aspect-ratio="0.927711" data-width="25%">
+            <a href="https://tenor.com/view/galleta-gif-12915268833060253100">Galleta Sticker</a> from <a href="https://tenor.com/search/galleta-stickers">Galleta Stickers</a>
+        </div>
+        <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    </div>
 
     {% include "header.html" %}
 
@@ -53,6 +82,13 @@
     <script src="{% static 'js/script.js'%}"></script>
     <script src="{% static 'js/theme_change.js' %}"></script>
     <script src="{% static 'js/trip_timer.js' %}"></script>
-
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader-wrapper');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 300);
+        });
+    </script>
 </body>
 </html>

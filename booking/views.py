@@ -334,18 +334,10 @@ def booking_success(request, booking_id):
                 send_transaction_email(request, request.user, request.user.email, transaction_data)
                 return render(request, "booking_success.html")
             else:
-                print(
-                    f"Error during auto-start for newly created trip {new_trip.id}. Response: {start_response.content}"
-                )
-
-                error_message = start_data.get(
-                    "error", "Failed to auto-start the trip after creation."
-                )
-
-                return JsonResponse(
-                    {"error": error_message},
-                    status=start_response.status_code or 400,
-                )
+                print(f"Error during auto-start for newly created trip {new_trip.id}. Response: {start_response.content}")
+                error_message = start_data.get("error", "Failed to auto-start the trip after creation.")
+                return JsonResponse( {"error": error_message}, status=start_response.status_code or 400)
+            
 
         except Exception as e:
             print(f"Error creating trip for user {request.user}: {e}")
@@ -367,5 +359,3 @@ def booking_success(request, booking_id):
         }
         send_transaction_email(request, request.user, request.user.email, transaction_data)
         return redirect("subscriptions:subscription_success")
-
-    return render(request, "booking_success.html")

@@ -58,12 +58,11 @@ INSTALLED_APPS = [
     "vouchers",
     "booking",
     "get_direction",
-    # "wallet",
+    "avatar",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",
     "paypal.standard.ipn",
-    # "modeltranslation",
 ]
 ASGI_APPLICATION = "GoRide.asgi.application"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
