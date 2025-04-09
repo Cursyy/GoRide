@@ -1,5 +1,4 @@
 let map;
-let userLat, userLon;
 let markers = [];
 let waypoints = [];
 let route;
@@ -260,7 +259,7 @@ async function searchPlaces(value) {
   clearMarkers();
 
   const response = await fetch(
-    `/en/get_direction/api/places/${value}/${userLat}/${userLon}`,
+    `/en/get_direction/api/places/${value}/${window.GLOBAL_USER_LATITUDE}/${window.GLOBAL_USER_LONGITUDE}`,
   );
   const data = await response.json();
   console.log(data);
@@ -298,7 +297,7 @@ if (!document.getElementById("results-container")) {
 
 async function getRoute(waypoints) {
   clearRoute();
-  waypoints.push([userLat, userLon]);
+  waypoints.push([window.GLOBAL_USER_LATITUDE, window.GLOBAL_USER_LONGITUDE]);
   try {
     console.log("Send waypoints:", waypoints);
 
@@ -418,12 +417,6 @@ for (const parent in groupedCategories) {
 
 document.getElementById("categories-container").innerHTML = html;
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(showPosition, showError);
-} else {
-  console.log("Geolocation is not supported by this browser.");
-}
-
 function initializeMap() {
   map = L.map("map").setView([53.347854, -6.259504], 13);
   L.tileLayer(
@@ -437,29 +430,30 @@ function initializeMap() {
 }
 initializeMap();
 
-function showPosition(position) {
+function showPosition() {
   let button = document.getElementById("userLocation");
   button.addEventListener("click", function () {
-    userLat = position.coords.latitude;
-    userLon = position.coords.longitude;
-    if (map) {
-      map.setView([userLat, userLon], 15);
+    if (window.GLOBAL_USER_LOCATION_AVAILABLE && map) {
+      map.setView(
+        [window.GLOBAL_USER_LATITUDE, window.GLOBAL_USER_LONGITUDE],
+        15,
+      );
+      let userIcon = L.icon({
+        iconUrl: "/static/images/you_are_here.png",
+        iconSize: [38, 50],
+        iconAnchor: [22, 38],
+        popupAnchor: [-3, -38],
+      });
+      L.marker([window.GLOBAL_USER_LATITUDE, window.GLOBAL_USER_LONGITUDE], {
+        icon: userIcon,
+      })
+        .bindPopup("You are here")
+        .openPopup()
+        .addTo(map);
+    } else {
+      console.error("Map is not initialized yet");
     }
   });
-  if (window.userMarker) {
-    window.userMarker.setLatLng([userLat, userLon]);
-  } else {
-    let userIcon = L.icon({
-      iconUrl: "/static/images/you_are_here.png",
-      iconSize: [38, 50],
-      iconAnchor: [22, 38],
-      popupAnchor: [-3, -38],
-    });
-    window.userMarker = L.marker([userLat, userLon], { icon: userIcon })
-      .bindPopup("You are here")
-      .openPopup()
-      .addTo(map);
-  }
 }
 
 function showError(error) {
@@ -469,7 +463,7 @@ function showError(error) {
 if (navigator.geolocation) {
   navigator.geolocation.watchPosition(showPosition, showError, {
     enableHighAccuracy: true,
-    maximumAge: 0,
+    maximumAge: 2000,
   });
 } else {
   console.log("Geolocation is not supported by this browser.");

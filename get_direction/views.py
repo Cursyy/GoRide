@@ -14,11 +14,17 @@ from .models import Trip
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from wallet.models import Wallet
+from django.core.cache import cache
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
 
 def get_places(request, lat, lon, category):
+    cache_key = f"address_{lat}_{lon}_{category}"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return JsonResponse(cached_data, safe=False)
+
     url = f"https://api.geoapify.com/v2/places?apiKey={GEOAPIFY_API_KEY}"
 
     params = {
@@ -37,6 +43,7 @@ def get_places(request, lat, lon, category):
         )
 
     response = response.json()
+    cache.set(cache_key, response, timeout=60 * 60 * 24)  # one day cache
     return JsonResponse(response, safe=False)
 
 
@@ -55,14 +62,21 @@ def get_route(request):
                 "mode": "bicycle",
                 "details": "route_details",
             }
+
+            cache_key = f"route_{json.dumps(waypoints)}"
+            cached_data = cache.get(cache_key)
+            if cached_data:
+                return JsonResponse(cached_data, safe=False)
+
             response = requests.get(url, params=params)
             if response.status_code != 200:
                 return JsonResponse(
                     {"error": "API request failed", "details": response.text},
                     status=response.status_code,
                 )
-
-            return JsonResponse(response.json(), safe=False)
+            response = response.json()
+            cache.set(cache_key, response, timeout=60 * 60 * 24)
+            return JsonResponse(response, safe=False)
 
         except Exception as e:
             return JsonResponse(
@@ -78,6 +92,10 @@ def get_address_marker(request, lat, lon):
 
 
 def get_search(request, searchInput):
+    cache_key = f"search_{searchInput}"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return JsonResponse(cached_data, safe=False)
     url = f"https://api.geoapify.com/v1/geocode/search?text={searchInput}&format=json&filter=countrycode:ie&apiKey={GEOAPIFY_API_KEY}"
 
     response = requests.get(url)
@@ -89,6 +107,7 @@ def get_search(request, searchInput):
             status=response.status_code,
         )
     response = response.json()
+    cache.set(cache_key, response, timeout=60 * 60 * 24)
     return JsonResponse(response, safe=False)
 
 

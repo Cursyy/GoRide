@@ -2,18 +2,19 @@ from django.shortcuts import render
 from .models import Vehicle, EVStation
 from django.http import JsonResponse
 import requests
-from cache_manager import load_from_cache, save_to_cache
 from django.db.models import Count
 from django.forms.models import model_to_dict
 from decouple import config
 from vouchers.views import voucher_apply
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 
 
 def get_address(lat, lon):
-    cached_content = load_from_cache(lat, lon)
-    if cached_content:
-        return cached_content
+    cache_key = f"address_{lat}_{lon}"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return " ".join(cached_data)
 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -34,12 +35,13 @@ def get_address(lat, lon):
             + ", "
             + data.get("address", {}).get("postcode"),
         )
-        save_to_cache(lat, lon, content)
+        cache.set(cache_key, content, timeout=60 * 60 * 24)  # one day cache
         print(f"Response from API: {content}")
         return " ".join(content)
     else:
         print(f"Error {response.status_code}: {response.text}")
         return "Address fetch failed"
+
 
 @login_required
 def find_transport(request):
@@ -97,6 +99,10 @@ def get_station(request):
 
 
 def get_direction(request, station_id, lon, lat):
+    cache_key = f"direction_{lat}_{lon}_{station_id}"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return JsonResponse(cached_data)
     headers = {
         "Accept": "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8",
     }
@@ -117,6 +123,7 @@ def get_direction(request, station_id, lon, lat):
             )
 
         response = call.json()
+        cache.set(cache_key, response, timeout=60 * 60 * 24)  # one day cache
         return JsonResponse(response, safe=False)
 
 
