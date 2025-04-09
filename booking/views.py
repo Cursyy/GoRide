@@ -15,7 +15,7 @@ from get_direction.models import Trip
 from get_direction.views import end_active_trip, start_trip
 from wallet.models import Wallet
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 @login_required
 def top_up_wallet(request):
     if request.method == "POST":
@@ -51,6 +51,7 @@ def rent_vehicle(request, vehicle_id):
         return redirect("find_transport:find_transport")
     
     if trip:
+        messages.info(request, "You have not finished trip")
         return redirect("get_direction:map")
 
     subscription = None
@@ -201,6 +202,7 @@ def subscribe(request, plan_id):
     try:
         user_subscription = UserSubscription.objects.get(user=request.user)
         if user_subscription.is_active():
+            messages.info(request, "You already have an active subscription.")
             return redirect("main:home")
     except UserSubscription.DoesNotExist:
         pass

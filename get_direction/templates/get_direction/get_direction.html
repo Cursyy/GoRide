@@ -36,4 +36,9 @@
     <script src="{% static 'js/trip_timer.js' %}" defer></script>
     <script src="{% static 'js/get_direction.js' %}" defer></script>
 </div>
+<script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+</script>
 {% endblock %}

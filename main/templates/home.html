@@ -86,4 +86,10 @@
         <a href="#" class="btn btn-light">{% trans "Get Started" %}</a>
     </div>
 </section>
+
+<script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+</script>
 {% endblock content %}
