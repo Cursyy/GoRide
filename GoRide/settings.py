@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "accounts",
     # default apps
     "jazzmin",
+    "silk",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -76,12 +77,16 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "silk.middleware.SilkyMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 ROOT_URLCONF = "GoRide.urls"
 
 TEMPLATES = [
@@ -97,6 +102,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "get_direction.context_processors.active_trip",
                 "wallet.context_proccesors.wallet_balance",
+                "main.context_processors.location_context",
             ],
         },
     },
@@ -112,6 +118,15 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
     }
 }
 
@@ -231,17 +246,15 @@ EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 4
 
-CUSTOM_CSS_PATH = "admin/admin.css"  # Example: file is located in static/admin/css/
-SITE_LOGO_PATH = "admin/logo.png"  # Example: file is located in static/admin/img/
-
+CUSTOM_CSS_PATH = "admin/admin.css"
+SITE_LOGO_PATH = "admin/logo.png"
+# copied from jazzmin documentation
 JAZZMIN_SETTINGS = {
-    # Path to custom CSS (RELATIVE TO STATIC_URL!)
     "custom_css": CUSTOM_CSS_PATH,
     # Site name
     "site_title": "GoRide Admin",
     "site_header": "GoRide Admin",
     "site_brand": "GoRide Admin Panel",
-    # Path to logo (RELATIVE TO STATIC_URL!)
     "site_logo": SITE_LOGO_PATH,
     "site_logo_classes": "img-circle",
     # Copyright

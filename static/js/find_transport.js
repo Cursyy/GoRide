@@ -1,6 +1,4 @@
 let currentStation = null;
-let userLat = null;
-let userLon = null;
 let activeController = null;
 let routeLayer = null;
 let map = null;
@@ -9,381 +7,468 @@ let voucher = false;
 const vehiclesPerPage = 10;
 let currentPage = 1;
 let allVehicles = [];
-document.addEventListener("DOMContentLoaded", function() {
+let baseLayer = null;
+let initialTilesLoaded = false;
+let allStationsData = [];
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.getElementById("map")) {
     loadStations();
+  }
+  if (document.getElementById("vehicle-container")) {
     loadVehicles();
+  }
 
-    const batteryFilter = document.getElementById("battery-filter");
-    const typeFilter = document.getElementById("type-filter");
+  const batteryFilter = document.getElementById("battery-filter");
+  const typeFilter = document.getElementById("type-filter");
 
-    if (!batteryFilter || !typeFilter) {
-        console.error("battery-filter або type-filter не знайдено у DOM.");
-        return;
-    }
-
-    batteryFilter.addEventListener("input", function() {
-        document.getElementById("battery-filter").innerText = batteryFilter.value;
-        loadVehicles(currentStation);
+  if (batteryFilter && typeFilter) {
+    batteryFilter.addEventListener("input", function () {
+      const batteryDisplay = document.getElementById("battery-display");
+      if (batteryDisplay) {
+        batteryDisplay.textContent = `${this.value}%`;
+      }
+      loadVehicles(currentStation);
     });
 
-    typeFilter.addEventListener("change",function(){ loadVehicles(currentStation)});
-
-    
-
+    typeFilter.addEventListener("change", function () {
+      loadVehicles(currentStation);
+    });
+  } else {
+  }
 });
 
-document.addEventListener("submit", async function(event) {
-    if (!event.target.matches(".voucher-form")) return;
+document.addEventListener("submit", async function (event) {
+  if (!event.target.matches(".voucher-form")) return;
 
-    event.preventDefault();
+  event.preventDefault();
 
-    console.log("Form submitted!");
+  const form = event.target;
+  const vehicleId = form.getAttribute("data-vehicle-id");
+  const voucherCode = form.querySelector("input[name='voucher']").value;
+  const voucherType = form.querySelector("input[name='voucher_type']").value;
 
-    const form = event.target;
-    const vehicleId = form.getAttribute("data-vehicle-id");
-    const voucherCode = form.querySelector("input[name='voucher']").value;
-    const voucherType = form.querySelector("input[name='voucher_type']").value;
-
-    console.log({
+  try {
+    const response = await fetch(`api/voucher`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
+      },
+      body: JSON.stringify({
         vehicle_id: vehicleId,
         code: voucherCode,
-        type: voucherType
+        type: voucherType,
+      }),
     });
 
-    try {
-        const response = await fetch(`api/voucher`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                'X-CSRFToken': getCookie('csrftoken'),
-            },
-            body: JSON.stringify({
-                vehicle_id: vehicleId,
-                code: voucherCode,
-                type: voucherType
-            })
-        });
+    const data = await response.json();
 
-        const data = await response.json();
-
-        if (response.ok) {
-            alert(`Voucher applied successfully. New price: €${data.price}`);
-            price = data.price;
-            voucher = true;
-        } else {
-            alert(`Error: ${data.error}`);
-        }
-    } catch (error) {
-        console.error("Error applying voucher:", error);
-        alert("Something went wrong. Please try again.");
+    if (response.ok) {
+      alert(`Voucher applied successfully. New price: €${data.price}`);
+      price = data.price;
+      voucher = true;
+    } else {
+      alert(`Error: ${data.error}`);
     }
+  } catch (error) {
+    alert("Something went wrong while applying the voucher. Please try again.");
+  }
 });
-function getCookie(name){
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === name + "=") {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
     }
-    return cookieValue;
+  }
+  return cookieValue;
+}
+
+function initializeMap() {
+  map = L.map("map");
+
+  baseLayer = L.tileLayer(
+    "https://maps.geoapify.com/v1/tile/klokantech-basic/{z}/{x}/{y}.png?apiKey=d16fda76e6fc4822bbc407474c620a8e",
+    {
+      attribution:
+        'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | <a href="https://openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> contributors',
+      maxZoom: 20,
+      id: "osm-bright",
+    },
+  );
+
+  baseLayer.once("load", function () {
+    initialTilesLoaded = true;
+    showPosition();
+    addStationMarkers(allStationsData);
+  });
+
+  baseLayer.addTo(map);
+
+  if (window.GLOBAL_USER_LOCATION_AVAILABLE) {
+    map.setView(
+      [window.GLOBAL_USER_LATITUDE, window.GLOBAL_USER_LONGITUDE],
+      15,
+    );
+  } else {
+    map.setView([53.347854, -6.259504], 13);
+  }
+}
+
+function showPosition() {
+  if (!initialTilesLoaded || !map) {
+    return;
+  }
+  if (window.GLOBAL_USER_LOCATION_AVAILABLE) {
+    let userIcon = L.icon({
+      iconUrl: "/static/images/you_are_here.png",
+      iconSize: [38, 50],
+      iconAnchor: [22, 38],
+      popupAnchor: [-3, -38],
+    });
+    L.marker([window.GLOBAL_USER_LATITUDE, window.GLOBAL_USER_LONGITUDE], {
+      icon: userIcon,
+    })
+      .bindPopup("You are here")
+      .openPopup()
+      .addTo(map);
+  }
 }
 
 async function loadStations() {
-    const response = await fetch('api/stations');
-    let stations = await response.json();
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-        console.log("Geolocation is not supported by this browser.");
+  try {
+    const response = await fetch("api/stations");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-
-
-    function initializeMap() {
-        map = L.map('map').setView([53.347854,-6.259504], 13);
-        L.tileLayer('https://maps.geoapify.com/v1/tile/klokantech-basic/{z}/{x}/{y}.png?apiKey=d16fda76e6fc4822bbc407474c620a8e', {
-            attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a> | <a href="https://openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap</a> contributors',
-            maxZoom: 20, id: 'osm-bright'
-          }).addTo(map);
-    }
+    allStationsData = await response.json();
     initializeMap();
+  } catch (error) {
+    console.error("Error loading stations:", error);
+    initializeMap();
+  }
+}
 
-    function showPosition(position) {
-        userLat = position.coords.latitude;
-        userLon = position.coords.longitude;
-        if (map) {
-            map.setView([userLat, userLon], 15);
-            let userIcon = L.icon({
-                    iconUrl: '/static/images/you_are_here.png',
-                    iconSize: [38, 50],
-                    iconAnchor: [22, 38],
-                    popupAnchor: [-3, -38]
-                });
-                L.marker([userLat, userLon], { icon: userIcon })
-                    .bindPopup("You are here")
-                    .openPopup()
-                    .addTo(map);
-
-        } else {
-            console.error("Map is not initialized yet");
-        }
-    }
-
-    function showError(error) {
-        console.log("Error getting location:", error.message);
-    }
-
-    stations.forEach(station => {
-        let stationIcon = L.icon({
-            iconUrl: '/static/images/map-marker-2-64.png',
-            iconSize: [32, 32],
-            iconAnchor: [22, 38],
-            popupAnchor: [-3, -38]
-        });
-        let marker = L.marker([station.latitude, station.longitude], { icon: stationIcon })
-            .bindPopup(`<b>Max spaces:</b> ${station.max_spaces}<br><b>Free spaces:</b> ${station.free_spaces}<br>${station.address}`)
-            .openPopup()
-            .addTo(map);
-        marker.on('click', function() {
-            currentStation = station.id;
-            loadVehicles(station.id);
-            createButton(station.id);
-        });
+function addStationMarkers(stations) {
+  if (!initialTilesLoaded || !map) {
+    return;
+  }
+  stations.forEach((station) => {
+    let stationIcon = L.icon({
+      iconUrl: "/static/images/map-marker-2-64.png",
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
     });
+    let marker = L.marker([station.latitude, station.longitude], {
+      icon: stationIcon,
+    })
+      .bindPopup(
+        `<b>Max spaces:</b> ${station.max_spaces}<br><b>Free spaces:</b> ${station.free_spaces}<br>${station.address}`,
+      )
+      .addTo(map);
+    marker.on("click", function () {
+      currentStation = station.id;
+      loadVehicles(station.id);
+      createButton(station.id);
+    });
+  });
 }
 
 async function loadVehicles(stationId = null) {
-    const response = await fetch('api/vehicles');
-    allVehicles = await response.json();
-   
-    const typeFilter = document.getElementById("type-filter").value;
-    const batteryFilter = parseInt(document.getElementById("battery-filter").value);
-   
-    if (stationId) {
-        allVehicles = allVehicles.filter(v =>
-            v.station_id === stationId &&
-            (typeFilter === "" || v.type === typeFilter) &&
-            (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
-        );
-    } else {
-        allVehicles = allVehicles.filter(v =>
-            (typeFilter === "" || v.type === typeFilter) &&
-            (v.battery_percentage === null || v.battery_percentage >= batteryFilter)
-        );
+  try {
+    const response = await fetch("api/vehicles");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-   
+    let fetchedVehicles = await response.json();
+
+    const typeFilterValue = document.getElementById("type-filter")
+      ? document.getElementById("type-filter").value
+      : "";
+    const batteryFilterValue = document.getElementById("battery-filter")
+      ? parseInt(document.getElementById("battery-filter").value)
+      : 0;
+
+    if (stationId) {
+      allVehicles = fetchedVehicles.filter(
+        (v) =>
+          v.station_id === stationId &&
+          (typeFilterValue === "" || v.type === typeFilterValue) &&
+          (v.battery_percentage === null ||
+            v.battery_percentage >= batteryFilterValue),
+      );
+    } else {
+      allVehicles = fetchedVehicles.filter(
+        (v) =>
+          (typeFilterValue === "" || v.type === typeFilterValue) &&
+          (v.battery_percentage === null ||
+            v.battery_percentage >= batteryFilterValue),
+      );
+    }
+
     currentPage = 1;
     displayVehicles();
     setupPagination();
+  } catch (error) {
+    console.error("Error loading vehicles:", error);
+    const container = document.getElementById("vehicle-container");
+    if (container) {
+      container.innerHTML =
+        "<p>Error loading vehicles. Please try again later.</p>";
+    }
+  }
 }
 
 function displayVehicles() {
-    const container = document.getElementById("vehicle-container");
-    container.innerHTML = "";
-   
-    const start = (currentPage - 1) * vehiclesPerPage;
-    const end = start + vehiclesPerPage;
-    const vehiclesToShow = allVehicles.slice(start, end);
-   
-    vehiclesToShow.forEach(vehicle => {
-        const vehicleCard = document.createElement('div');
-        vehicleCard.classList.add('vehicle-card');
-        
-        let imgSrc;
-        switch (vehicle.type) {
-            case "Bike":
-                imgSrc = '/static/images/bike.webp';
-                break;
-            case "E-Bike":
-                imgSrc = '/static/images/e-bike.jpg';
-                break;
-            case "E-Scooter":
-                imgSrc = '/static/images/e-scooter.jpg';
-                break;
-            default:
-                imgSrc = '/static/images/placeholder.jpg';
-        }
-        
-        vehicleCard.innerHTML = `
+  const container = document.getElementById("vehicle-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const start = (currentPage - 1) * vehiclesPerPage;
+  const end = start + vehiclesPerPage;
+  const vehiclesToShow = allVehicles.slice(start, end);
+
+  if (vehiclesToShow.length === 0) {
+    container.innerHTML = "<p>No vehicles match the current criteria.</p>";
+    const paginationContainer = document.getElementById("pagination-controls");
+    if (paginationContainer) paginationContainer.innerHTML = "";
+    return;
+  }
+
+  vehiclesToShow.forEach((vehicle) => {
+    const vehicleCard = document.createElement("div");
+    vehicleCard.classList.add("vehicle-card");
+
+    let imgSrc;
+    switch (vehicle.type) {
+      case "Bike":
+        imgSrc = "/static/images/bike.webp";
+        break;
+      case "E-Bike":
+        imgSrc = "/static/images/e-bike.jpg";
+        break;
+      case "E-Scooter":
+        imgSrc = "/static/images/e-scooter.jpg";
+        break;
+      default:
+        imgSrc = "/static/images/placeholder.jpg";
+    }
+    const mapLink =
+      vehicle.latitude != null && vehicle.longitude != null
+        ? `<a href="https://www.google.com/maps/search/?api=1&query=${vehicle.latitude},${vehicle.longitude}"
+                 target="_blank" class="map-link">Show on Map</a>`
+        : `<span class="map-link-na">Map N/A</span>`; // Or empty string
+
+    vehicleCard.innerHTML = `
             <div class="vehicle-image">
-                <img src="${imgSrc}" alt="${vehicle.get_type_display} image"/>
+                <img src="${imgSrc}" alt="${vehicle.type || "Vehicle"} image"/>
             </div>
             <div class="vehicle-details">
-                <h3>${vehicle.type}</h3>
-                ${vehicle.battery_percentage !== null ? 
-                    `<p>Battery: ${vehicle.battery_percentage}%</p>` : 
-                    "<p>Battery: Not Available</p>"}
-                <a href="https://www.google.com/maps?q=${vehicle.latitude},${vehicle.longitude}" 
-                   target="_blank" class="map-link">Show on Map</a>
+                <h3>${vehicle.type || "Unknown Type"}</h3>
+                ${
+                  vehicle.battery_percentage !== null
+                    ? `<p>Battery: ${vehicle.battery_percentage}%</p>`
+                    : "<p>Battery: N/A</p>"
+                }
+                ${mapLink}
             </div>
             <div class="vehicle-price">
-                <p>Price per hour: €${vehicle.price_per_hour}</p>
-                <a href="/booking/rent/${vehicle.id}/" class="rent-button w-100 text-center">Rent</a>
-            </div>
-        `;
-       
-        container.appendChild(vehicleCard);
-    });
+                <p>Price per hour: €${
+                  vehicle.price_per_hour != null
+                    ? vehicle.price_per_hour.toFixed(2)
+                    : "N/A"
+                }</p>
+                <a href="/booking/rent/${
+                  vehicle.id
+                }/" class="rent-button w-100 text-center">Rent</a>
+            </div>`;
+
+    container.appendChild(vehicleCard);
+  });
 }
 
 function setupPagination() {
-    const pageNumbersContainer = document.getElementById("page-numbers");
-    const prevButton = document.getElementById("prev-page");
-    const nextButton = document.getElementById("next-page");
-    
-    const totalPages = Math.ceil(allVehicles.length / vehiclesPerPage);
-    
+  const pageNumbersContainer = document.getElementById("page-numbers");
+  const prevButton = document.getElementById("prev-page");
+  const nextButton = document.getElementById("next-page");
+
+  if (!pageNumbersContainer || !prevButton || !nextButton) {
+    return;
+  }
+
+  const totalPages = Math.ceil(allVehicles.length / vehiclesPerPage);
+  const paginationContainer = document.getElementById("pagination-controls");
+  if (paginationContainer) {
+    paginationContainer.style.display = totalPages <= 1 ? "none" : "";
+  }
+  if (totalPages <= 1) {
     pageNumbersContainer.innerHTML = "";
-    
-    // Show first 5 page numbers
-    const maxVisiblePages = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-    
-    // Adjust start and end pages to always show 5 pages if possible
-    if (endPage - startPage + 1 < maxVisiblePages) {
-        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    prevButton.style.display = "none";
+    nextButton.style.display = "none";
+    return;
+  } else {
+    prevButton.style.display = "";
+    nextButton.style.display = "";
+  }
+
+  pageNumbersContainer.innerHTML = "";
+
+  const maxVisiblePages = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+  if (endPage - startPage + 1 < maxVisiblePages) {
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    const pageButton = document.createElement("button");
+    pageButton.innerText = i;
+    pageButton.classList.add("page-button", "mx-1");
+
+    if (i === currentPage) {
+      pageButton.classList.add("active");
+      pageButton.disabled = true;
     }
-    
-    for (let i = startPage; i <= endPage; i++) {
-        const pageButton = document.createElement("button");
-        pageButton.innerText = i;
-        pageButton.classList.add("page-button");
-        pageButton.classList.add("mx-1");
-        
-        if (i === currentPage) {
-            pageButton.classList.add("active");
-        }
-        
-        pageButton.addEventListener("click", () => {
-            currentPage = i;
-            displayVehicles();
-            setupPagination();
-        });
-        
-        pageNumbersContainer.appendChild(pageButton);
+
+    pageButton.addEventListener("click", () => {
+      currentPage = i;
+      displayVehicles();
+      setupPagination();
+    });
+
+    pageNumbersContainer.appendChild(pageButton);
+  }
+
+  prevButton.disabled = currentPage === 1;
+  nextButton.disabled = currentPage === totalPages;
+
+  const newPrevButton = prevButton.cloneNode(true);
+  prevButton.parentNode.replaceChild(newPrevButton, prevButton);
+  newPrevButton.disabled = currentPage === 1;
+  newPrevButton.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      displayVehicles();
+      setupPagination();
     }
-    
-    prevButton.disabled = currentPage === 1;
-    nextButton.disabled = currentPage === totalPages;
-    
-    prevButton.addEventListener("click", () => {
-        if (currentPage > 1) {
-            currentPage--;
-            displayVehicles();
-            setupPagination();
-        }
-    });
-    
-    nextButton.addEventListener("click", () => {
-        if (currentPage < totalPages) {
-            currentPage++;
-            displayVehicles();
-            setupPagination();
-        }
-    });
+  });
+
+  const newNextButton = nextButton.cloneNode(true);
+  nextButton.parentNode.replaceChild(newNextButton, nextButton);
+  newNextButton.disabled = currentPage === totalPages;
+  newNextButton.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      displayVehicles();
+      setupPagination();
+    }
+  });
 }
 
-// Additional interactivity for battery filter
-document.getElementById("battery-filter").addEventListener("input", function() {
-    document.getElementById("battery-display").textContent = `${this.value}%`;
-    loadVehicles(); // Reload vehicles when battery filter changes
-});
+function createButton() {
+  let button = document.getElementById("get-direction-button");
+  const buttonContainer = document.getElementById("map");
 
-// Type filter event listener
-document.getElementById("type-filter").addEventListener("change", function() {
-    loadVehicles(); // Reload vehicles when type filter changes
-});
+  if (currentStation === null || !buttonContainer) {
+    if (button) button.remove();
+  }
 
-function rentVehicle(vehicleId) {
-    window.location.href = `/booking/rent/${vehicleId}/`;
-}
+  if (!button) {
+    button = document.createElement("button");
+    button.id = "get-direction-button";
+    button.textContent = "Get Directions";
+    button.classList.add("direction-button-style");
+    buttonContainer.appendChild(button);
+  }
 
-function createButton(){
-    let button = document.getElementById("get-direction-button");
+  const newButton = button.cloneNode(true);
+  button.parentNode.replaceChild(newButton, button);
 
-    if (!button) {
-        button = document.createElement("button");
-        button.id = "get-direction-button";
-        button.textContent = "Get Direction";
-
-        document.body.appendChild(button);
-    }
-
-
-    button.onclick = null;
-
-    button.addEventListener("click", function() {
-        console.log(currentStation)
-        getDirection(currentStation);
-    });
+  newButton.addEventListener("click", function () {
+    getDirection(currentStation);
+  });
 }
 
 async function getDirection(stationId = null) {
-    try {
-        if (activeController) {
-            activeController.abort();
-        }
-
-        activeController = new AbortController();
-        const stationSignal = activeController.signal;
-
-        const response = await fetch(`api/stations?id=${stationId}`, { signal: stationSignal });
-        if (!response.ok) {
-            console.error("Error fetching station", response.status);
-            return;
-        }
-
-        const data = await response.json();
-        const station = data.station;
-
-        if (!station || !station.latitude || !station.longitude) {
-            console.error("Invalid station data:", station);
-            return;
-        }
-
-        const directionController = new AbortController();
-        const directionSignal = directionController.signal;
-
-        const api_response = await fetch(`api/get_direction/${station.id}/${userLon}/${userLat}`, { signal: directionSignal });
-
-        if (!api_response.ok) {
-            console.error("Error fetching direction", api_response.status);
-            return;
-        }
-
-        const api_data = await api_response.json();
-        console.log(api_data);
-
-        const coordinates = api_data.features[0].geometry.coordinates;
-        drawRouteOnMap(coordinates, userLat, userLon);
-
-    } catch (error) {
-        if (error.name === 'AbortError') {
-            console.log("Previous request aborted");
-        } else {
-            console.error("Error in getDirection:", error);
-        }
+  if (stationId === null || !window.GLOBAL_USER_LOCATION_AVAILABLE) {
+    alert("Please select a station and ensure location is enabled.");
+    return;
+  }
+  try {
+    if (activeController) {
+      activeController.abort();
     }
-}
-function drawRouteOnMap(coordinates, userLat, userLon) {
-    if (routeLayer) {
-        map.removeLayer(routeLayer);
+    activeController = new AbortController();
+    const commonSignal = activeController.signal;
+
+    const stationResponse = await fetch(`api/stations?id=${stationId}`, {
+      signal: commonSignal,
+    });
+    if (!stationResponse.ok) {
+      if (stationResponse.status === 404)
+        throw new Error("Selected station not found.");
+      throw new Error(
+        `Error fetching station details: ${stationResponse.statusText}`,
+      );
+    }
+    const stationData = await stationResponse.json();
+    const station = stationData.station;
+
+    if (!station || station.latitude == null || station.longitude == null) {
+      throw new Error("Invalid station data received.");
     }
 
-    const latLngs = coordinates.map(coord => [coord[1], coord[0]]);
+    const directionResponse = await fetch(
+      `api/get_direction/${station.id}/${window.GLOBAL_USER_LONGITUDE}/${window.GLOBAL_USER_LATITUDE}`,
+      { signal: commonSignal },
+    );
+    if (!directionResponse.ok) {
+      throw new Error(
+        `Error fetching directions: ${directionResponse.statusText}`,
+      );
+    }
+    const directionData = await directionResponse.json();
 
-    routeLayer = L.polyline(latLngs, { color: 'blue' });
+    if (
+      !directionData.features ||
+      !directionData.features[0] ||
+      !directionData.features[0].geometry ||
+      !directionData.features[0].geometry.coordinates
+    ) {
+      throw new Error("Invalid direction data format received.");
+    }
 
-    if (map) {
-        routeLayer.addTo(map);
-        map.fitBounds(routeLayer.getBounds());
+    const coordinates = directionData.features[0].geometry.coordinates;
+    drawRouteOnMap(coordinates);
+  } catch (error) {
+    if (error.name === "AbortError") {
     } else {
-        console.error("Map is not initialized");
+      console.error("Error in getDirection:", error);
+      alert(`Could not get directions: ${error.message}`);
     }
+  } finally {
+    activeController = null;
+  }
+}
+
+function drawRouteOnMap(coordinates) {
+  if (!map) return;
+
+  if (routeLayer) {
+    map.removeLayer(routeLayer);
+  }
+  const latLngs = coordinates.map((coord) => [coord[1], coord[0]]);
+  if (latLngs.length === 0) return;
+  routeLayer = L.polyline(latLngs, { color: "blue", weight: 5 });
+  routeLayer.addTo(map);
+  map.fitBounds(routeLayer.getBounds().pad(0.1));
 }
