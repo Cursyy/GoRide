@@ -11,6 +11,7 @@ from django.views.generic import CreateView
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 from subscriptions.models import UserStatistics, UserSubscription
+from booking.models import Booking
 
 
 class SignUpView(CreateView):
@@ -95,11 +96,13 @@ def email_sent(request):
 def profile_view(request):
     subscription = UserSubscription.objects.filter(user=request.user).first()
     statistics = UserStatistics.objects.filter(user=request.user).first()
+    bookings = Booking.objects.filter(user=request.user)
     
     context = {
         "user": request.user,
         "subscription": subscription,
         "statistics": statistics,
+        "bookings": bookings,
     }
     
     if subscription:

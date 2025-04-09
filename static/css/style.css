@@ -609,8 +609,26 @@ form input[type="file"] {
 }
 
 .user-subscription,
-.user-statistics {
-  min-height: 180px;
+.user-statistics,
+.bookings-history,
+.balance {
+  height: 180px;
+  width: 100%;
+}
+
+.bookings-history{
+  overflow-y: auto;
+}
+
+.balance{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.balance > a{
+  align-self: flex-end;
 }
 
 .badge-img {
