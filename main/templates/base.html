@@ -51,9 +51,11 @@
     </style>
 </head>
 <body>
-    <div class="loader-wrapper" id="loader-wrapper">
-        <div class="tenor-gif-embed" data-postid="12915268833060253100" data-share-method="host" data-aspect-ratio="0.927711" data-width="25%">
-            <a href="https://tenor.com/view/galleta-gif-12915268833060253100">Galleta Sticker</a> from <a href="https://tenor.com/search/galleta-stickers">Galleta Stickers</a>
+    <div class="loader-wrapper text-light text-center d-flex flex-column justify-content-center align-items-center" id="loader-wrapper">
+        <div class="p-4 bg-dark rounded shadow">
+            <img src="{% static 'images/load_gif.gif' %}" alt="Loading..." class="tenor-gif-embed mb-3 img-fluid">
+            <h4 class="mb-2 fw-bold">Jack is riding to your page...</h4>
+            <p class="small fst-italic">Please wait a moment</p>
         </div>
         <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
     </div>
@@ -87,7 +89,7 @@
             const loader = document.getElementById('loader-wrapper');
             setTimeout(() => {
                 loader.classList.add('hidden');
-            }, 100);
+            }, 500);
         });
     </script>
 </body>

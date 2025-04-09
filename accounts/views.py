@@ -12,6 +12,7 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 from subscriptions.models import UserStatistics, UserSubscription
 from booking.models import Booking
+from avatar.models import UserAvatar, AvatarItem
 
 
 class SignUpView(CreateView):
@@ -97,12 +98,16 @@ def profile_view(request):
     subscription = UserSubscription.objects.filter(user=request.user).first()
     statistics = UserStatistics.objects.filter(user=request.user).first()
     bookings = Booking.objects.filter(user=request.user)
+    userAvatar = UserAvatar.objects.filter(user=request.user).first()
+    avatarItems = AvatarItem.objects.all()
     
     context = {
         "user": request.user,
         "subscription": subscription,
         "statistics": statistics,
         "bookings": bookings,
+        "userAvatar": userAvatar,
+        "items": avatarItems,
     }
     
     if subscription:
