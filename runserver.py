@@ -31,6 +31,7 @@ def start_redis():
 def run_daphne():
     try:
         print("Starting Daphne...")
+        print("Server running on http://127.0.0.1:8000")
         subprocess.run(["daphne", "GoRide.asgi:application"], check=True)
     except FileNotFoundError:
         print(
@@ -50,7 +51,6 @@ if __name__ == "__main__":
             start_redis()
         else:
             print("Redis is already running.")
-        print("Starting Daphne...")
         run_daphne()
     elif os_name == "Darwin" or os_name == "Linux":
         print("Checking and starting Redis (if necessary) using Docker Compose...")
@@ -58,7 +58,6 @@ if __name__ == "__main__":
             start_redis()
         else:
             print("Redis is already running.")
-        print("Starting Daphne...")
         run_daphne()
     else:
         print(

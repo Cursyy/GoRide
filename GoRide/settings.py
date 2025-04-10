@@ -247,7 +247,11 @@ PASSWORD_RESET_TIMEOUT = 60 * 60 * 4
 
 CUSTOM_CSS_PATH = "admin/admin.css"
 SITE_LOGO_PATH = "admin/logo.png"
-# copied from jazzmin documentation
+
+
+# Jazzmin admin theme
+# https://django-jazzmin.readthedocs.io/configuration/
+
 JAZZMIN_SETTINGS = {
     "custom_css": CUSTOM_CSS_PATH,
     # Site name
@@ -322,6 +326,7 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
         # Link to the main site page (check the URL name 'main:home')
         {"name": "Back to Site", "url": "main:home", "new_window": False},
+        {"name": "Screening", "url": "/silk/", "new_window": True},
     ],
     #############
     # Forms     #
@@ -352,8 +357,8 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": False,
-    "theme": "flatly",
-    "dark_mode_theme": "darkly",
+    "theme": "cyborg",
+    "dark_mode_theme": "cyborg",
     "button_classes": {
         "primary": "btn-primary",
         "secondary": "btn-secondary",

@@ -35,7 +35,7 @@ def get_address(lat, lon):
             + ", "
             + data.get("address", {}).get("postcode"),
         )
-        cache.set(cache_key, content, timeout=60 * 60 * 24)  # one day cache
+        cache.set(cache_key, content, timeout=60 * 60 * 24 * 30)  # one month cache
         print(f"Response from API: {content}")
         return " ".join(content)
     else:
