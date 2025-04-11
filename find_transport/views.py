@@ -72,6 +72,10 @@ def get_vehicles(request):
 
 def get_station(request):
     station_id = request.GET.get("id")
+    cache_key = f"station_{station_id}"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return JsonResponse({"station": model_to_dict(cached_data)})
 
     if station_id and not station_id.isdigit():
         return JsonResponse({"error": "Invalid ID"}, status=404)
@@ -79,9 +83,13 @@ def get_station(request):
     if station_id:
         station = EVStation.objects.filter(id=station_id).first()
         if station:
+            cache.set(cache_key, station, timeout=60 * 10)
             return JsonResponse({"station": model_to_dict(station)})
         return JsonResponse({"error": "Station not found"}, status=404)
-
+    cache_key = f"stations"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return JsonResponse({"station": model_to_dict(cached_data)})
     stations = EVStation.objects.annotate(vehicle_count=Count("vehicle"))
 
     stations_data = [
@@ -95,6 +103,7 @@ def get_station(request):
         }
         for station in stations
     ]
+    cache.set(cache_key, stations_data, timeout=60 * 10)
     return JsonResponse(stations_data, safe=False)
 
 
