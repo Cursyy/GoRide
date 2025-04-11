@@ -1,18 +1,19 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from django.core.mail import send_mail
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 from subscriptions.models import UserStatistics, UserSubscription
 from booking.models import Booking
 from avatar.models import UserAvatar, AvatarItem
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+from accounts.tasks import send_email_task
 
 
 class SignUpView(CreateView):
@@ -25,38 +26,20 @@ class SignUpView(CreateView):
         if request.user.is_authenticated:
             logout(request)
             request.session.flush()
-            return redirect('accounts:signup')
+            return redirect("accounts:signup")
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        email = form.cleaned_data['email']
+        email = form.cleaned_data["email"]
         if CustomUser.objects.filter(email=email).exists():
-            form.add_error('email', 'A user with this email already exists.')
+            form.add_error("email", "A user with this email already exists.")
             return self.form_invalid(form)
 
         user = form.save(commit=False)
-        user.is_active = False 
+        user.is_active = False
         user.save()
-
-        token = urlsafe_base64_encode(force_bytes(user.pk))
         domain = self.request.get_host()
-        confirm_url = f"http://{domain}/accounts/confirm/{token}/"
-
-        subject = "Confirm Your Email Address"
-        message = f"Hi {user.username},\n\nPlease confirm your email by clicking the link below:\n{confirm_url}\n\nIf you did not sign up, please ignore this email.\n\nThanks,\nThe GoRide Team"
-        html_message = render_to_string('registration/confirmation_email.html', {
-            'user': user,
-            'confirm_url': confirm_url,
-        })
-        send_mail(
-            subject,
-            message,
-            'tud.goride@gmail.com',
-            [user.email],
-            fail_silently=False,
-            html_message=html_message,
-        )
-
+        send_email_task.delay(user.user_id, domain)
         return super().form_valid(form)
 
 
@@ -69,29 +52,32 @@ def confirm_email(request, token):
 
     if user is not None:
         if user.is_active:
-            return redirect('accounts:login')
+            return redirect("accounts:login")
 
         user.is_active = True
         user.save()
 
         user.refresh_from_db()
         if not user.is_active:
-            return redirect('main:home')
+            return redirect("main:home")
 
         customer_group, created = Group.objects.get_or_create(name="Customer")
         user.groups.add(customer_group)
 
         UserStatistics.objects.create(user=user)
-        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        login(request, user, backend="django.contrib.auth.backends.ModelBackend")
         if not request.user.is_authenticated:
-            return redirect('accounts:login')
+            return redirect("accounts:login")
 
-        return redirect('main:home')
+        return redirect("main:home")
     else:
-        return redirect('main:home')
-    
+        return redirect("main:home")
+
+
+@cache_page(60 * 15)
 def email_sent(request):
     return render(request, "registration/email_sent.html")
+
 
 @login_required
 def profile_view(request):
@@ -99,8 +85,11 @@ def profile_view(request):
     statistics = UserStatistics.objects.filter(user=request.user).first()
     bookings = Booking.objects.filter(user=request.user)
     userAvatar = UserAvatar.objects.filter(user=request.user).first()
-    avatarItems = AvatarItem.objects.all()
-    
+    avatarItems = cache.get("all_avatar_items")
+    if avatarItems is None:
+        avatarItems = AvatarItem.objects.all()
+        cache.set("all_avatar_items", avatarItems, 60 * 60 * 24)
+
     context = {
         "user": request.user,
         "subscription": subscription,
@@ -109,10 +98,10 @@ def profile_view(request):
         "userAvatar": userAvatar,
         "items": avatarItems,
     }
-    
+
     if subscription:
         context["subscription_progress"] = subscription.progress_remaining()
-    
+
     return render(request, "profile.html", context)
 
 
