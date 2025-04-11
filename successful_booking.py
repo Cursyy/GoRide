@@ -7,7 +7,7 @@ template = "payment_success_email.html"
 
 def send_transaction_email(request, user, to_email, transaction_data):
     """
-    transaction_data: словник, який містить наступні ключі:
+    transaction_data: dict with next keys
         - transaction_id
         - date
         - time
@@ -18,7 +18,6 @@ def send_transaction_email(request, user, to_email, transaction_data):
         - duration (для Rent)
         - subscription_type (для Subscription)
         - subscription_duration (для Subscription)
-        # Для Wallet можна додати wallet_top_up_amount, wallet_balance тощо, якщо потрібно.
     """
     mail_subject = "Transaction Successful."
     context = {
@@ -33,8 +32,6 @@ def send_transaction_email(request, user, to_email, transaction_data):
         "duration": transaction_data.get("duration"),
         "subscription_type": transaction_data.get("subscription_type"),
         "subscription_duration": transaction_data.get("subscription_duration"),
-        # "wallet_top_up_amount": transaction_data.get("wallet_top_up_amount"),
-        # "wallet_balance": transaction_data.get("wallet_balance"),
         "domain": get_current_site(request).domain,
         "protocol": "https" if request.is_secure() else "http",
     }

@@ -797,21 +797,39 @@ form input[type="file"] {
   color: white;
 }
 /*trip buttons*/
-#trip-controls button {
+
+#trip-buttons button{
+  outline-style: none;
   margin-right: 8px;
   padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
   font-size: 14px;
-}
-
-#trip-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  background-color: var(--accent-color);
+  color:var(--bs-body-bg);
 }
 
 #trip-timer {
   min-width: 120px;
   text-align: right;
+}
+
+#userLocation{
+  outline-style: none;
+  margin-right: 8px;
+  margin-left: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background-color: var(--accent-color);
+  color:var(--bs-body-bg);
 }
 /*trip buttons*/
 @media (max-width: 768px) {
@@ -849,6 +867,7 @@ html.dark-mode body {
   background-color: var(--bg-light); /* темний фон */
   --bs-body-bg: #121212;
   --bs-body-color: #e0e0e0;
+  color:var(--bs-body-color);
 
   /* Перевизначення кнопок */
   .btn-light {
