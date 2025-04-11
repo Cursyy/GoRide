@@ -24,8 +24,8 @@ def send_email_task(user_id, domain):
         html_message = render_to_string(
             "registration/confirmation_email.html",
             {
-            "user": user,
-            "confirm_url": confirm_url,
+                "user": user,
+                "confirm_url": confirm_url,
             },
         )
 

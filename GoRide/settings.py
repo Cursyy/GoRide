@@ -119,17 +119,37 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get("POSTGRES_DB", "goride_db"),
+#         'USER': os.environ.get("POSTGRES_USER", "goride_user"),
+#         'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "yourpassword"),
+#         'HOST': os.environ.get("POSTGRES_HOST", "db"),
+#         'PORT': os.environ.get("POSTGRES_PORT", "5432"),
+#     }
+# }
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://redis:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },
     }
 }
 
+# celery config
+# https://docs.celeryq.dev/en/latest/django/first-steps-with-django.html
+CELERY_BROKER_URL = os.environ.get("REDIS_URL", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL", "redis://redis:6379/0")
 
+CELERY_BEAT_SCHEDULER = "django_celery_beat.scheduler:DatabaseScheduler"
+CELERY_ACCEPT_TOKEN = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["application/json"]
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 

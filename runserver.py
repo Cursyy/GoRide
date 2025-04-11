@@ -4,12 +4,14 @@ import subprocess
 
 def check_redis_running():
     try:
-        subprocess.run(
+        result = subprocess.run(
             ["docker", "ps", "-q", "-f", "name=redis_server"],
-            check=True,
+            check=False,  # Не викликаємо помилку, якщо контейнер не знайдено
             capture_output=True,
+            text=True,  # Декодуємо вихід як текст
         )
-        return True
+        # Якщо stdout не порожній, значить контейнер знайдено і запущено
+        return bool(result.stdout.strip())
     except subprocess.CalledProcessError:
         return False
     except FileNotFoundError:
@@ -19,13 +21,13 @@ def check_redis_running():
 
 def start_redis():
     try:
-        print("Redis is not running. Starting...")
-        subprocess.run(["docker-compose", "up", "-d", "redis"], check=True)
-        print("Redis started.")
+        print("Redis is not running. Starting Redis and Celery...")
+        subprocess.run(["docker-compose", "up", "-d"], check=True)
+        print("Redis and Celery started.")
     except FileNotFoundError:
         print("Error: docker-compose not found. Make sure Docker Compose is installed.")
     except subprocess.CalledProcessError as e:
-        print(f"Error starting Redis: {e}")
+        print(f"Error starting Redis and Celery: {e}")
 
 
 def run_daphne():
@@ -45,21 +47,12 @@ if __name__ == "__main__":
     os_name = platform.system()
     print(f"Detected operating system: {os_name}")
 
-    if os_name == "Windows":
-        print("Checking and starting Redis (if necessary) using Docker Compose...")
-        if not check_redis_running():
-            start_redis()
-        else:
-            print("Redis is already running.")
-        run_daphne()
-    elif os_name == "Darwin" or os_name == "Linux":
-        print("Checking and starting Redis (if necessary) using Docker Compose...")
-        if not check_redis_running():
-            start_redis()
-        else:
-            print("Redis is already running.")
-        run_daphne()
+    print(
+        "Checking and starting Redis and Celery (if necessary) using Docker Compose..."
+    )
+    if not check_redis_running():
+        start_redis()
     else:
-        print(
-            f"Unknown operating system: {os_name}. Please configure Redis and Daphne startup manually."
-        )
+        print("Redis is already running.")
+
+    run_daphne()
