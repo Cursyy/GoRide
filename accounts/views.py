@@ -63,7 +63,6 @@ def confirm_email(request, token):
 
         customer_group, created = Group.objects.get_or_create(name="Customer")
         user.groups.add(customer_group)
-
         UserStatistics.objects.create(user=user)
         login(request, user, backend="django.contrib.auth.backends.ModelBackend")
         if not request.user.is_authenticated:

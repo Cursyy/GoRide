@@ -1,8 +1,11 @@
 {% load static %}
 {% load i18n %}
+{% load cache %}
+
 <header class="p-4 bg-custom">
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
         <div class="container">
+            {% cache 3600 header_page %}
             <a class="navbar-brand" href="{% url 'main:home' %}">
                 <img src="{% static "/images/logo.png" %}" alt="GoRide" width="120"> 
             </a>
@@ -32,6 +35,7 @@
                         {% endif %}
                     {% endif %}
                 </ul>
+                {% endcache %}
                 <div class="d-flex align-items-center">
                     <div>
                         {% get_current_language as LANGUAGE_CODE %}

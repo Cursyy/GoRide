@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
-
+{% load cache %}
+{% cache 3600 success_subscription %}
 {% block title %} {% trans "Subscription Successful" %} {% endblock %}
 
 {% block content %}
@@ -12,3 +13,4 @@
     </div>
 </div>
 {% endblock %}
+{% endcache %}

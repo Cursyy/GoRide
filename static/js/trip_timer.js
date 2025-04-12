@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 function showTripSummary(durationSeconds, totalCost) {
   const formattedDuration = formatDuration(durationSeconds);
-  const summaryMessage = `Trip finished. Duration: ${formattedDuration}, Total Cost: $${parseFloat(
+  const summaryMessage = `Trip finished. Duration: ${formattedDuration}, Total Cost: €${parseFloat(
     totalCost,
   ).toFixed(2)}.`;
 
@@ -304,7 +304,6 @@ function showTripSummary(durationSeconds, totalCost) {
     tripSummaryContainer.style.display = "block";
   }
 
-  // Сховаємо глобальний статус і таймер
   showGlobalTripStatus(false);
   updateTimerDisplay("");
 }

@@ -89,7 +89,7 @@ def get_station(request):
     cache_key = f"stations"
     cached_data = cache.get(cache_key)
     if cached_data:
-        return JsonResponse({"station": model_to_dict(cached_data)})
+        return JsonResponse(cached_data, safe=False)
     stations = EVStation.objects.annotate(vehicle_count=Count("vehicle"))
 
     stations_data = [
