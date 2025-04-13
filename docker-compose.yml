@@ -20,18 +20,22 @@ services:
       - "6379:6379"
 
   web:
-    build: .
-    container_name: django_web
-    command: ["python", "runserver.py"]
-    volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-      - redis
-    env_file:
-      - .env
+      build: .
+      container_name: django_web
+      command: >
+        uvicorn GoRide.asgi:application
+        --host 0.0.0.0
+        --port 8000
+        --reload
+      volumes:
+        - .:/code
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+        - redis
+      env_file:
+        - .env
 
   celery:
     build: .
@@ -69,16 +73,7 @@ services:
     env_file:
       - .env
 
-  nginx:
-    image: nginx:alpine
-    container_name: nginx_proxy
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - static_volume:/code/static
-    depends_on:
-      - web
+
 
 volumes:
   postgres_data:

@@ -17,5 +17,4 @@ COPY . .
 # Run collectstatic (for production; might be off for development)
 # RUN python manage.py collectstatic --noinput
 
-# By default Daphne run first, but the command redecllared in the  docker-compose
-CMD ["daphne", "GoRide.asgi:application", "--bind", "0.0.0.0", "--port", "8000"]
+
