@@ -37,7 +37,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # project apps
-    "daphne",
+    "uvicorn",
     "channels",
     "accounts",
     # default apps
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "wallet.apps.WalletConfig",
     # project apps
+    "core",
     "main",
     "support",
     "find_transport",
