@@ -41,7 +41,6 @@ class ChatConsumer(WebsocketConsumer):
 
             user = self.scope.get("user")
             print(f"Received message from user: {user}, chat_id: {chat_id}")
-
             if not user or not user.is_authenticated:
                 print("Error: Unauthenticated user")
                 return
@@ -78,6 +77,16 @@ class ChatConsumer(WebsocketConsumer):
             )
         except Exception as e:
             print(f"Error in chat_message: {e}")
+
+    async def send_notification(self, user_id, message):
+        group_name = f"user_{user_id}"
+        await self.channel_layer.group_send(
+            group_name,
+            {
+                "type": "chat.message",
+                "message": message,
+            },
+        )
 
     def disconnect(self, close_code):
         try:
