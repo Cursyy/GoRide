@@ -25,7 +25,7 @@
             }
         })();
     </script>
-    
+    <script src="{% static 'js/alert.js' %}"></script>
     <script>
         window.GLOBAL_USER_LATITUDE = {{ session_user_latitude|default_if_none:"null" }};
         window.GLOBAL_USER_LONGITUDE = {{ session_user_longitude|default_if_none:"null" }};
@@ -79,12 +79,16 @@
         {% if request.user.is_staff %}
         <a href="{% url 'support:admin_chat_list' %}" class="chat-button" title="{% trans 'Admin Chats' %}">
             <i class="fa fa-comments"></i>
+            <span id="notification-dot" class="notification-dot"></span>
             <div id="notification-container" style="position: fixed; bottom: 70px; left: 10px; z-index: 1100;"></div>
+            <audio id="notification-sound" src="{% static 'sounds/notification.wav' %}" preload="auto"></audio>
         </a>
         {% else %}
         <a href="{% url 'support:user_chat_no_id' %}" class="chat-button" title="{% trans 'Support Chat' %}">
             <i class="fa fa-comments"></i>
+            <span id="notification-dot" class="notification-dot"></span>
             <div id="notification-container" style="position: fixed; bottom: 70px; left: 10px; z-index: 1100;"></div>
+            <audio id="notification-sound" src="{% static 'sounds/notification.wav' %}" preload="auto"></audio>
         </a>
         {% endif %}
         <div id="notification" style="position: fixed; bottom: 50px; left: 10px; background-color: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; display: none; z-index: 1000;">

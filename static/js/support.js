@@ -5,7 +5,6 @@
   let messagesContainer = null;
   let textarea = null;
   let form = null;
-  let notificationSound = null;
 
   // --- UI---
   function scrollToBottom() {
@@ -43,14 +42,6 @@
       addNewMessage(messageHtml);
 
       const content = data.message || "";
-
-      if (notificationSound) {
-        notificationSound
-          .play()
-          .catch((error) =>
-            console.error("Support: Audio play failed:", error),
-          );
-      }
     } else {
       console.log("Support: Received chat message, but not on a chat page.");
     }
@@ -75,7 +66,6 @@
     messagesContainer = document.getElementById("messages");
     textarea = document.querySelector(".chat-form textarea");
     form = document.getElementById("form");
-    notificationSound = document.getElementById("notification-sound");
 
     if (!messagesContainer) {
       console.log("Support: Messages container not found, chat UI disabled.");

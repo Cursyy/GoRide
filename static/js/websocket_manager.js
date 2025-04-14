@@ -18,6 +18,7 @@
   let tripButtonsContainer;
   let tripSummaryContainer;
   let notificationStack = [];
+  let notificationSound = null;
   // --- Additional functions ---
   function formatDuration(totalSeconds) {
     if (isNaN(totalSeconds) || totalSeconds < 0) {
@@ -408,29 +409,11 @@
 
     const container = document.getElementById("notification-container");
 
-    // Remove old one if stack is 3 already
-    if (notificationStack.length >= 3) {
-      const removed = notificationStack.shift();
-      removed.element.remove();
-      clearTimeout(removed.timeout);
-    }
+    const dot = document.getElementById("notification-dot");
+    if (dot) dot.style.display = "block";
 
-    // Create notification element
     const notif = document.createElement("div");
     notif.className = "notification-popup";
-    notif.style = `
-        background-color: #212529;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        max-width: 350px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.4);
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.5s ease;
-        cursor: pointer;
-    `;
     notif.innerHTML = `
         <strong><i class="fa fa-comment-alt"></i> New Message</strong>
         <div class="mt-2 small" style="line-height: 1.4;">${previewText}</div>
@@ -442,20 +425,35 @@
     };
 
     container.appendChild(notif);
-
-    // Trigger animation
     requestAnimationFrame(() => {
       notif.style.opacity = 1;
       notif.style.transform = "translateY(0)";
     });
 
-    // Set timeout to remove
+    const notificationSound = document.getElementById("notification-sound");
+    if (notificationSound) {
+      notificationSound.play().catch((error) => {
+        console.error("Support: Audio play failed:", error);
+      });
+    }
+
+    const chatButton = document.querySelector(".chat-button");
+    if (chatButton && dot) {
+      chatButton.addEventListener(
+        "click",
+        () => {
+          dot.style.display = "none";
+        },
+        { once: true },
+      );
+    }
+
     const timeout = setTimeout(() => {
       notif.style.opacity = 0;
       notif.style.transform = "translateY(-20px)";
       setTimeout(() => notif.remove(), 500);
       notificationStack = notificationStack.filter((n) => n.element !== notif);
-    }, 10000); // 10 секунд
+    }, 10000);
 
     notificationStack.push({ element: notif, timeout });
   }

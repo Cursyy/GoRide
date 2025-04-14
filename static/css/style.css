@@ -33,12 +33,12 @@ html {
   --second-bg-color: #000;
 }
 html.dark-mode {
-  --bg-light: #121212;           /* темний фон */
-  --text-dark: #ecf0f1;          /* світлий текст */
-  --main-bg-color: #1a2b2b;      /* темна варіація головного фону */
-  --second-bg-color: #1e1e1e;    /* темно-сірий додатковий фон */
-  --mint: #1e3d32;               /* темна м’ята */
-  --second-font-color: #bdc3c7;  /* світліший текст для вторинного використання */
+  --bg-light: #121212;          
+  --text-dark: #ecf0f1;         
+  --main-bg-color: #1a2b2b;    
+  --second-bg-color: #1e1e1e;   
+  --mint: #1e3d32;               
+  --second-font-color: #bdc3c7;  
 }
 /*///////////Light Theme/////////////*/
 body {
@@ -200,8 +200,43 @@ form select {
 
 form input[type="file"] {
   padding: 5px;
+}.custom-alert-container {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
+.alert-content {
+  background-color: var(--main-bg-color); /* Default background */
+  color: var(--main-font-color); /* Text color */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid var(--secondary-green); /* Accent border */
+  width: 45%;
+  border-radius: 8px;
+  height: auto;
+}
+
+.close {
+  color: var(--second-font-color); /* Default close button color */
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--accent-color); /* Hover effect for close button */
+  text-decoration: none;
+}
 .btn-secondary {
   background-color: var(--main-font-color);
   color: var(--main-bg-color);
@@ -229,7 +264,31 @@ form input[type="file"] {
   z-index: 1000;
   transition: all 0.5s ease;
 }
+.notification-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  z-index: 10;
+  display: none;
+}
 
+.notification-popup {
+  background-color: #212529;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  max-width: 350px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
 .chat-button:hover {
   background-color: var(--main-font-color);
   color: var(--main-bg-color);
@@ -1193,4 +1252,20 @@ html.dark-mode .dropdown-item {
 html.dark-mode .dropdown-item:hover {
   background-color: var(--accent-color);
   color: #000;
+}
+html.dark-mode .custom-alert-container {
+  background-color: rgba(0, 0, 0, 0.8); 
+}
+
+html.dark-mode .alert-content {
+  background-color: var(--second-bg-color);
+  color: var(--text-dark);
+}
+html.dark-mode .close {
+  color: var(--second-font-color); 
+}
+
+html.dark-mode .close:hover,
+html.dark-mode .close:focus {
+  color: var(--accent-color); 
 }
