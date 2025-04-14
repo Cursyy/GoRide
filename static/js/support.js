@@ -73,7 +73,6 @@
   function initializeChatLogic() {
     console.log("Support: Initializing chat logic...");
     messagesContainer = document.getElementById("messages");
-    console.log(messagesContainer);
     textarea = document.querySelector(".chat-form textarea");
     form = document.getElementById("form");
     notificationSound = document.getElementById("notification-sound");
@@ -144,7 +143,7 @@
 
       const currentSocket = WebSocketManager.getSocket
         ? WebSocketManager.getSocket()
-        : null; // Отримати сокет безпечно
+        : null;
       if (currentSocket && currentSocket.readyState === WebSocket.OPEN) {
         console.log("Support: Socket already open on init, attempting join.");
         joinChatRoom();

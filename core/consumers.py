@@ -5,6 +5,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from support.models import Message as ChatMessage
 from get_direction.models import Trip
+from support.models import Chat
 
 
 class UserActivityConsumer(AsyncWebsocketConsumer):
@@ -93,6 +94,8 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
                 await self.handle_join_chat(payload)
             elif message_type == "leave_chat":
                 await self.handle_leave_chat(payload)
+            elif message_type == "support_notification":
+                await self.handle_support_notification(payload)
             else:
                 await self.send_error(f"Unknown message type: {message_type}")
 
@@ -251,7 +254,9 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
             return
 
         message_data = await self._save_chat_message(chat_id_uuid, message_content)
-
+        receiver_user_id = await self._get_chat_ids(chat_id_uuid)
+        agent_group_name = f"user_{receiver_user_id['agent']}"
+        customer_group_name = f"user_{receiver_user_id['user']}"
         if message_data:
             chat_group_name = f"chat_{chat_id_str}"
             await self.channel_layer.group_send(
@@ -261,8 +266,26 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
                     "data": message_data,
                     "user": self.user.username,
                     "created_at": message_data["created_at"],
+                    "sender": self.channel_name,
                 },
             )
+            print(self.user_group_name == customer_group_name)
+            if self.user_group_name != customer_group_name:
+                await self.channel_layer.group_send(
+                    customer_group_name,
+                    {
+                        "type": "chat_notification",
+                        "message": message_data,
+                    },
+                )
+            elif self.user_group_name != agent_group_name:
+                await self.channel_layer.group_send(
+                    agent_group_name,
+                    {
+                        "type": "chat_notification",
+                        "message": message_data,
+                    },
+                )
         else:
             await self.send_error("Failed to save chat message.")
 
@@ -304,10 +327,6 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
         await self._leave_chat_group(chat_id_str)
 
     async def trip_status_update(self, event):
-        """
-        Обробляє зовнішнє оновлення статусу поїздки (надіслане до user_{id}).
-        Наприклад, якщо статус змінюється через дію адміністратора або інший процес.
-        """
         print(
             f"Received external trip_status_update event for user {self.user.user_id}"
         )
@@ -323,6 +342,7 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
             print(
                 f"Broadcasting chat message data to user {self.user.user_id}: {message_payload}"
             )
+
             await self.send_json({"type": "chat_message", "data": message_payload})
         except KeyError as e:
             print(
@@ -334,10 +354,9 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
 
             traceback.print_exc()
 
-    async def user_notification(self, event):
-        """Обробляє загальне сповіщення для користувача."""
-        print(f"Sending user_notification to user {self.user.user_id}")
-        await self.send_json({"type": "notification", "data": event["message"]})
+    async def chat_notification(self, event):
+        print(f"Sending chat_notification to user {self.user.user_id}")
+        await self.send_json({"type": "onchat_notification", "data": event["message"]})
 
     async def balance_update_notification(self, event):
         """Обробляє сповіщення про оновлення балансу."""
@@ -354,3 +373,8 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
 
     async def send_error(self, message):
         await self.send_json({"type": "error", "message": message})
+
+    @database_sync_to_async
+    def _get_chat_ids(self, chat_id):
+        chat = Chat.objects.get(id=chat_id)
+        return {"user": chat.user.user_id, "agent": chat.agent.user_id}

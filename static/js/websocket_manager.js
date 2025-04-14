@@ -17,7 +17,7 @@
   let tripTimerElement;
   let tripButtonsContainer;
   let tripSummaryContainer;
-
+  let notificationStack = [];
   // --- Additional functions ---
   function formatDuration(totalSeconds) {
     if (isNaN(totalSeconds) || totalSeconds < 0) {
@@ -395,11 +395,69 @@
     }
   }
 
-  function handleGenericNotification(data) {
+  function handleChatNotification(data) {
     console.log("Manager: Handling notification:", data);
-    const message =
+
+    const messageText =
       data.message || (typeof data === "string" ? data : JSON.stringify(data));
-    alert(`Notification: ${message}`);
+    const previewText = messageText.slice(0, 200);
+    const isAdmin = "{{ request.user.is_staff|yesno:'true,false' }}" === "true";
+    const targetUrl = isAdmin
+      ? "{% url 'support:admin_chat_list' %}"
+      : "{% url 'support:user_chat_no_id' %}";
+
+    const container = document.getElementById("notification-container");
+
+    // Remove old one if stack is 3 already
+    if (notificationStack.length >= 3) {
+      const removed = notificationStack.shift();
+      removed.element.remove();
+      clearTimeout(removed.timeout);
+    }
+
+    // Create notification element
+    const notif = document.createElement("div");
+    notif.className = "notification-popup";
+    notif.style = `
+        background-color: #212529;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        max-width: 350px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+        cursor: pointer;
+    `;
+    notif.innerHTML = `
+        <strong><i class="fa fa-comment-alt"></i> New Message</strong>
+        <div class="mt-2 small" style="line-height: 1.4;">${previewText}</div>
+        <div class="text-info small" style="margin-top: 5px;">Click to view</div>
+    `;
+
+    notif.onclick = () => {
+      window.location.href = targetUrl;
+    };
+
+    container.appendChild(notif);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+      notif.style.opacity = 1;
+      notif.style.transform = "translateY(0)";
+    });
+
+    // Set timeout to remove
+    const timeout = setTimeout(() => {
+      notif.style.opacity = 0;
+      notif.style.transform = "translateY(-20px)";
+      setTimeout(() => notif.remove(), 500);
+      notificationStack = notificationStack.filter((n) => n.element !== notif);
+    }, 10000); // 10 секунд
+
+    notificationStack.push({ element: notif, timeout });
   }
 
   function handleBalanceUpdate(data) {
@@ -429,7 +487,7 @@
     tripSummaryContainer = document.getElementById("trip-summary-container");
 
     registerMessageHandler("trip_status", handleTripStatusUpdate);
-    registerMessageHandler("notification", handleGenericNotification);
+    registerMessageHandler("onchat_notification", handleChatNotification);
     registerMessageHandler("balance_update", handleBalanceUpdate);
     registerMessageHandler("internal_socket_close", (event) => {
       console.log("Manager handling internal_socket_close.");
