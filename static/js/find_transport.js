@@ -3,13 +3,16 @@ let activeController = null;
 let routeLayer = null;
 let map = null;
 let price = null;
-let voucher = false;
 const vehiclesPerPage = 10;
 let currentPage = 1;
 let allVehicles = [];
 let baseLayer = null;
 let initialTilesLoaded = false;
 let allStationsData = [];
+let currentVehicle = null;
+let stationClusterGroup = null;
+let vehicleClusterGroup = null;
+let clickTimeout = null;
 
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("map")) {
@@ -38,44 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.addEventListener("submit", async function (event) {
-  if (!event.target.matches(".voucher-form")) return;
-
-  event.preventDefault();
-
-  const form = event.target;
-  const vehicleId = form.getAttribute("data-vehicle-id");
-  const voucherCode = form.querySelector("input[name='voucher']").value;
-  const voucherType = form.querySelector("input[name='voucher_type']").value;
-
-  try {
-    const response = await fetch(`api/voucher`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": getCookie("csrftoken"),
-      },
-      body: JSON.stringify({
-        vehicle_id: vehicleId,
-        code: voucherCode,
-        type: voucherType,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      alert(`Voucher applied successfully. New price: €${data.price}`);
-      price = data.price;
-      voucher = true;
-    } else {
-      alert(`Error: ${data.error}`);
-    }
-  } catch (error) {
-    alert("Something went wrong while applying the voucher. Please try again.");
-  }
-});
-
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== "") {
@@ -92,7 +57,11 @@ function getCookie(name) {
 }
 
 function initializeMap() {
-  map = L.map("map");
+  if (map) return;
+
+  map = L.map("map", {
+    doubleClickZoom: false,
+  });
 
   baseLayer = L.tileLayer(
     "https://maps.geoapify.com/v1/tile/klokantech-basic/{z}/{x}/{y}.png?apiKey=d16fda76e6fc4822bbc407474c620a8e",
@@ -108,10 +77,18 @@ function initializeMap() {
     initialTilesLoaded = true;
     showPosition();
     addStationMarkers(allStationsData);
+    if (document.getElementById("vehicle-container")) {
+      loadVehicles();
+    }
   });
 
   baseLayer.addTo(map);
-
+  stationClusterGroup = L.markerClusterGroup();
+  vehicleClusterGroup = L.markerClusterGroup({
+    maxClusterRadius: 160,
+  });
+  map.addLayer(stationClusterGroup);
+  map.addLayer(vehicleClusterGroup);
   if (window.GLOBAL_USER_LOCATION_AVAILABLE) {
     map.setView(
       [window.GLOBAL_USER_LATITUDE, window.GLOBAL_USER_LONGITUDE],
@@ -120,6 +97,31 @@ function initializeMap() {
   } else {
     map.setView([53.347854, -6.259504], 13);
   }
+  map.on("click", function (e) {
+    clickTimeout = setTimeout(() => {
+      console.log("Single click");
+      if (currentStation !== null || currentVehicle !== null) {
+        currentStation = null;
+        currentVehicle = null;
+        loadVehicles();
+        createButton();
+      }
+    }, 250);
+  });
+
+  map.on("dblclick", function (e) {
+    console.log("Double click");
+    currentStation = null;
+    currentVehicle = null;
+    if (routeLayer && map.hasLayer(routeLayer)) {
+      map.removeLayer(routeLayer);
+      routeLayer = null;
+    }
+    if (clickTimeout) {
+      clearTimeout(clickTimeout);
+      clickTimeout = null;
+    }
+  });
 }
 
 function showPosition() {
@@ -160,6 +162,7 @@ function addStationMarkers(stations) {
   if (!initialTilesLoaded || !map) {
     return;
   }
+  stationClusterGroup.clearLayers();
   stations.forEach((station) => {
     let stationIcon = L.icon({
       iconUrl: "/static/images/map-marker-2-64.png",
@@ -174,45 +177,59 @@ function addStationMarkers(stations) {
         `<b>Max spaces:</b> ${station.max_spaces}<br><b>Free spaces:</b> ${station.free_spaces}<br>${station.address}`,
       )
       .addTo(map);
+    stationClusterGroup.addLayer(marker);
     marker.on("click", function () {
       currentStation = station.id;
+      currentVehicle = null;
       loadVehicles(station.id);
-      createButton(station.id);
+      createButton();
     });
   });
 }
 
 async function loadVehicles(stationId = null) {
   try {
+    console.log(`Loading vehicles. Station ID: ${stationId}`);
     const response = await fetch("api/vehicles");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     let fetchedVehicles = await response.json();
+    console.log(`Workspaceed ${fetchedVehicles.length} vehicles total.`);
 
-    const typeFilterValue = document.getElementById("type-filter")
-      ? document.getElementById("type-filter").value
-      : "";
-    const batteryFilterValue = document.getElementById("battery-filter")
-      ? parseInt(document.getElementById("battery-filter").value)
-      : 0;
+    const typeFilterValue = document.getElementById("type-filter")?.value || "";
+    const batteryFilterValue = parseInt(
+      document.getElementById("battery-filter")?.value || "0",
+    );
 
-    if (stationId) {
-      allVehicles = fetchedVehicles.filter(
-        (v) =>
-          v.station_id === stationId &&
-          (typeFilterValue === "" || v.type === typeFilterValue) &&
-          (v.battery_percentage === null ||
-            v.battery_percentage >= batteryFilterValue),
+    let baseFilteredVehicles = fetchedVehicles.filter((v) => {
+      const matchType = !typeFilterValue || v.type === typeFilterValue;
+      const matchBattery =
+        v.battery_percentage === null ||
+        v.battery_percentage >= batteryFilterValue;
+      return matchType && matchBattery;
+    });
+    console.log(
+      `${baseFilteredVehicles.length} vehicles after type/battery filter.`,
+    );
+
+    displayVehiclesMap(baseFilteredVehicles);
+    console.log("Called displayVehiclesMap.");
+
+    if (stationId !== null) {
+      console.log(`Filtering list for station ${stationId}`);
+      allVehicles = baseFilteredVehicles.filter(
+        (v) => v.station_id === stationId,
       );
     } else {
-      allVehicles = fetchedVehicles.filter(
-        (v) =>
-          (typeFilterValue === "" || v.type === typeFilterValue) &&
-          (v.battery_percentage === null ||
-            v.battery_percentage >= batteryFilterValue),
+      console.log(
+        "Filtering list for free-floating vehicles (no station selected).",
       );
+      allVehicles = baseFilteredVehicles.filter((v) => v.station_id === null);
     }
+    console.log(
+      `${allVehicles.length} vehicles prepared for the list display.`,
+    );
 
     currentPage = 1;
     displayVehicles();
@@ -226,7 +243,71 @@ async function loadVehicles(stationId = null) {
     }
   }
 }
+function displayVehiclesMap(vehiclesToDisplay) {
+  if (!initialTilesLoaded || !map) {
+    console.error("Map or tiles haven't loaded yet for displayVehiclesMap");
+    return;
+  }
+  vehicleClusterGroup.clearLayers();
+  if (window.vehicleMarkersLayer && map.hasLayer(window.vehicleMarkersLayer)) {
+    window.vehicleMarkersLayer.clearLayers();
+  } else {
+    window.vehicleMarkersLayer = L.layerGroup().addTo(map);
+  }
 
+  let displayedCount = 0;
+  vehiclesToDisplay.forEach((vehicle) => {
+    if (vehicle.station_id !== null) return;
+
+    if (vehicle.latitude != null && vehicle.longitude != null) {
+      displayedCount++;
+      let iconUrl;
+      switch (vehicle.type) {
+        case "Bike":
+          iconUrl = "/static/images/bike.webp";
+          break;
+        case "E-Bike":
+          iconUrl = "/static/images/e-bike.jpg";
+          break;
+        case "E-Scooter":
+          iconUrl = "/static/images/e-scooter.jpg";
+          break;
+        default:
+          iconUrl = "/static/images/placeholder.jpg";
+      }
+
+      let vehicleIcon = L.divIcon({
+        html: `<div style="width: 32px; height: 32px; background-image: url('${iconUrl}'); background-size: cover; border-radius: 50%;"></div>`,
+        className: "",
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32],
+      });
+
+      let marker = L.marker([vehicle.latitude, vehicle.longitude], {
+        icon: vehicleIcon,
+      })
+        .bindPopup(
+          /* ... вміст попапу ... */
+          `<b>Battery charge:</b> ${
+            vehicle.battery_percentage !== null
+              ? vehicle.battery_percentage + "%"
+              : "N/A"
+          }<br><b>Type:</b> ${vehicle.type}`,
+        )
+        .addTo(window.vehicleMarkersLayer);
+      vehicleClusterGroup.addLayer(marker);
+      marker.on("click", function () {
+        currentVehicle = vehicle.id;
+        currentStation = null;
+        createButton();
+      });
+    }
+  });
+  console.log(
+    `Displayed ${displayedCount} free-floating vehicle markers on map.`,
+  );
+}
 function displayVehicles() {
   const container = document.getElementById("vehicle-container");
   if (!container) return;
@@ -263,14 +344,14 @@ function displayVehicles() {
     }
     const mapLink =
       vehicle.latitude != null && vehicle.longitude != null
-        ? `<a href="https://www.google.com/maps/search/?api=1&query=${vehicle.latitude},${vehicle.longitude}"
-                 target="_blank" class="map-link">Show on Map</a>`
-        : `<span class="map-link-na">Map N/A</span>`; // Or empty string
+        ? `<button onclick="focusOnVehicle(${vehicle.latitude}, ${vehicle.longitude})" class="map-link btn btn-sm btn-outline-primary">Show on Map</button>`
+        : `<span class="map-link-na text-muted">Map N/A</span>`;
 
     vehicleCard.innerHTML = `
             <div class="vehicle-image">
-                <img src="${imgSrc}" alt="${vehicle.type || "Vehicle"} image"/>
-            </div>
+                <img src="${imgSrc}" alt="${
+                  vehicle.type || "Vehicle"
+                } image" style="width: 106%; height: auto;"/>             </div>
             <div class="vehicle-details">
                 <h3>${vehicle.type || "Unknown Type"}</h3>
                 ${
@@ -288,13 +369,31 @@ function displayVehicles() {
                 }</p>
                 <a href="/booking/rent/${
                   vehicle.id
-                }/" class="rent-button w-100 text-center">Rent</a>
-            </div>`;
+                }/" class="rent-button btn btn-success w-100 text-center">Rent</a>             </div>`;
 
     container.appendChild(vehicleCard);
   });
 }
+function focusOnVehicle(lat, lon) {
+  if (map && lat != null && lon != null && vehicleClusterGroup) {
+    map.setView([lat, lon], 17);
 
+    vehicleClusterGroup.zoomToShowLayer(L.latLng(lat, lon), function () {
+      vehicleClusterGroup.eachLayer((marker) => {
+        const markerLatLng = marker.getLatLng();
+        if (markerLatLng.lat === lat && markerLatLng.lng === lon) {
+          setTimeout(() => {
+            marker.openPopup();
+          }, 100);
+        }
+      });
+    });
+  } else {
+    console.warn(
+      "Map, coordinates, or vehicleClusterGroup not ready for focus.",
+    );
+  }
+}
 function setupPagination() {
   const pageNumbersContainer = document.getElementById("page-numbers");
   const prevButton = document.getElementById("prev-page");
@@ -378,15 +477,27 @@ function createButton() {
   let button = document.getElementById("get-direction-button");
   const buttonContainer = document.getElementById("map");
 
-  if (currentStation === null || !buttonContainer) {
-    if (button) button.remove();
+  if (!buttonContainer) {
+    console.error("Button container ('map') not found.");
+    return;
+  }
+
+  if (currentStation === null && currentVehicle === null) {
+    if (button) {
+      button.remove();
+    }
+    return;
   }
 
   if (!button) {
     button = document.createElement("button");
     button.id = "get-direction-button";
     button.textContent = "Get Directions";
-    button.classList.add("direction-button-style");
+    button.classList.add("direction-button-style", "btn", "btn-primary");
+    button.style.position = "absolute";
+    button.style.top = "10px";
+    button.style.right = "10px";
+    button.style.zIndex = "1000";
     buttonContainer.appendChild(button);
   }
 
@@ -394,46 +505,82 @@ function createButton() {
   button.parentNode.replaceChild(newButton, button);
 
   newButton.addEventListener("click", function () {
-    getDirection(currentStation);
+    const stationTarget = currentStation;
+    const vehicleTarget = currentVehicle;
+    getDirection(stationTarget, vehicleTarget);
   });
 }
 
-async function getDirection(stationId = null) {
-  if (stationId === null || !window.GLOBAL_USER_LOCATION_AVAILABLE) {
-    alert("Please select a station and ensure location is enabled.");
+async function getDirection(targetStationId, targetVehicleId) {
+  if (
+    (targetStationId === null && targetVehicleId === null) ||
+    !window.GLOBAL_USER_LOCATION_AVAILABLE
+  ) {
+    alert(
+      "Please select a station or vehicle first, and ensure location is enabled.",
+    );
     return;
   }
+
+  let request_id = null;
+  let type = null;
+  if (targetVehicleId !== null) {
+    request_id = targetVehicleId;
+    type = "vehicle";
+    console.log(`Routing to vehicle ID: ${request_id}`);
+  } else if (targetStationId !== null) {
+    request_id = targetStationId;
+    type = "station";
+    console.log(`Routing to station ID: ${request_id}`);
+  } else {
+    console.error(
+      "No target ID found in getDirection, though button was clicked.",
+    );
+    return;
+  }
+
+  if (activeController) {
+    console.log("Aborting previous direction request.");
+    activeController.abort();
+  }
+
+  const currentAbortController = new AbortController();
+  const commonSignal = currentAbortController.signal;
+
+  activeController = currentAbortController;
+
   try {
-    if (activeController) {
-      activeController.abort();
-    }
-    activeController = new AbortController();
-    const commonSignal = activeController.signal;
-
-    const stationResponse = await fetch(`api/stations?id=${stationId}`, {
-      signal: commonSignal,
-    });
-    if (!stationResponse.ok) {
-      if (stationResponse.status === 404)
-        throw new Error("Selected station not found.");
-      throw new Error(
-        `Error fetching station details: ${stationResponse.statusText}`,
+    await apiRespond(request_id, type, commonSignal);
+  } catch (error) {
+    if (error.name === "AbortError") {
+      console.log(
+        "Direction request process (getDirection level) was aborted.",
       );
+    } else {
+      console.error("Error in getDirection process:", error);
+      alert(`Could not get directions: ${error.message}`);
+      if (routeLayer && map.hasLayer(routeLayer)) {
+        map.removeLayer(routeLayer);
+        routeLayer = null;
+      }
     }
-    const stationData = await stationResponse.json();
-    const station = stationData.station;
+  }
+}
 
-    if (!station || station.latitude == null || station.longitude == null) {
-      throw new Error("Invalid station data received.");
+async function apiRespond(request_id, type, commonSignal) {
+  try {
+    if (commonSignal.aborted) {
+      console.log("API request aborted before fetch.");
+      return;
     }
 
     const directionResponse = await fetch(
-      `api/get_direction/${station.id}/${window.GLOBAL_USER_LONGITUDE}/${window.GLOBAL_USER_LATITUDE}`,
+      `api/get_direction/${request_id}/${window.GLOBAL_USER_LONGITUDE}/${window.GLOBAL_USER_LATITUDE}/${type}`,
       { signal: commonSignal },
     );
     if (!directionResponse.ok) {
       throw new Error(
-        `Error fetching directions: ${directionResponse.statusText}`,
+        `Error fetching directions (${directionResponse.status}): ${directionResponse.statusText}`,
       );
     }
     const directionData = await directionResponse.json();
@@ -444,31 +591,64 @@ async function getDirection(stationId = null) {
       !directionData.features[0].geometry ||
       !directionData.features[0].geometry.coordinates
     ) {
-      throw new Error("Invalid direction data format received.");
+      throw new Error("Invalid direction data format received from API.");
     }
 
     const coordinates = directionData.features[0].geometry.coordinates;
     drawRouteOnMap(coordinates);
   } catch (error) {
     if (error.name === "AbortError") {
+      console.log("API fetch/process aborted.");
     } else {
-      console.error("Error in getDirection:", error);
-      alert(`Could not get directions: ${error.message}`);
+      console.error("Error during API response/processing:", error);
+      alert(`Could not process directions: ${error.message}`);
+      if (routeLayer && map.hasLayer(routeLayer)) {
+        map.removeLayer(routeLayer);
+        routeLayer = null;
+      }
     }
   } finally {
     activeController = null;
+    console.log("Global activeController reset in apiRespond finally.");
   }
 }
 
 function drawRouteOnMap(coordinates) {
-  if (!map) return;
+  if (!map) {
+    console.warn("Map not available for drawing route.");
+    return;
+  }
 
   if (routeLayer) {
     map.removeLayer(routeLayer);
+    routeLayer = null;
+    console.log("Previous route layer removed.");
   }
-  const latLngs = coordinates.map((coord) => [coord[1], coord[0]]);
-  if (latLngs.length === 0) return;
-  routeLayer = L.polyline(latLngs, { color: "blue", weight: 5 });
+
+  const latLngs = coordinates
+    .map((coord) => {
+      if (
+        Array.isArray(coord) &&
+        coord.length >= 2 &&
+        typeof coord[0] === "number" &&
+        typeof coord[1] === "number"
+      ) {
+        return [coord[1], coord[0]];
+      } else {
+        console.warn("Invalid coordinate format found:", coord);
+        return null;
+      }
+    })
+    .filter((coord) => coord !== null);
+
+  if (latLngs.length === 0) {
+    console.warn("No valid coordinates to draw route.");
+    return;
+  }
+
+  routeLayer = L.polyline(latLngs, { color: "blue", weight: 5, opacity: 0.7 });
   routeLayer.addTo(map);
+  console.log(`Route drawn with ${latLngs.length} points.`);
+
   map.fitBounds(routeLayer.getBounds().pad(0.1));
 }

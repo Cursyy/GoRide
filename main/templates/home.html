@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
 {%load cache%}
-{% cache 3600 main_page %}
 {% block title %}{% trans "Main page" %}{% endblock title %} 
 
 {% block content %}
@@ -94,4 +93,3 @@
     {% endfor %}
 </script>
 {% endblock content %}
-{% endcache %}
