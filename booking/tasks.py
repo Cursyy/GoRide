@@ -1,11 +1,23 @@
+from celery import shared_task
+from subscriptions.models import UserStatistics
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 
-template = "payment_success_email.html"
+
+@shared_task
+def update_stats(hours, total_amount, vehicle, user):
+    try:
+        stats = UserStatistics.objects.get(user=user)
+    except UserStatistics.DoesNotExist:
+        stats = UserStatistics.objects.create(user=user)
+    stats.update_stats(hours, total_amount, vehicle.type)
 
 
-def send_transaction_email(request, user, to_email, transaction_data):
+@shared_task
+def send_transaction_email(request, user, email, transaction_data):
+    template = "payment_success_email.html"
+
     """
     transaction_data: dict with next keys
         - transaction_id
@@ -36,7 +48,7 @@ def send_transaction_email(request, user, to_email, transaction_data):
         "protocol": "https" if request.is_secure() else "http",
     }
     message = render_to_string(template, context)
-    email = EmailMessage(mail_subject, message, to=[to_email])
+    email = EmailMessage(mail_subject, message, to=[email])
     if email.send():
         return True
     else:

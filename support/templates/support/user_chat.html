@@ -9,7 +9,8 @@
         <div class="card-header" style="background-color: #0E6655; color: white;">
             <h5 class="mb-0">{% trans "Chat History" %}</h5>
         </div>
-        <div class="card-body" style="max-height: 400px; overflow-y: auto;" id="messages">
+        
+        <div class="card-body" style="max-height: 400px; overflow-y: auto;" id="messages" data-chat-id="{{ chat.id }}">
             {% for message in messages %}
                 <div class="mb-3">
                     <strong style="color: #0E6655;">{{ message.sender.username }}:</strong>
@@ -21,7 +22,7 @@
             {% endfor %}
         </div>
     </div>
-    <audio id="notification-sound" src="{% static 'sounds/notification.wav' %}" preload="auto"></audio>
+    
 
     <form method="post" class="chat-form card shadow-sm" id="form">
         {% csrf_token %}
@@ -32,9 +33,6 @@
     </form>
 </div>
 
-<script>
-    let chatId = "{{ chat.id }}";
-</script>
 <script src="{% static 'js/support.js' %}" defer></script>
 
 {% endblock %}

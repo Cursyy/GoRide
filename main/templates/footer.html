@@ -1,5 +1,7 @@
 {% load static %}
 {% load i18n %}
+{% load cache %}
+{% cache 3600 footer_page %}
 <footer class="footer py-4">
     <div class="container text-white">
         <div class="row">
@@ -14,3 +16,4 @@
         </div>
     </div>
 </footer>
+{% endcache %}
