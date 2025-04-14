@@ -6,6 +6,8 @@ from channels.db import database_sync_to_async
 from support.models import Message as ChatMessage
 from get_direction.models import Trip
 from support.models import Chat
+from avatar.models import UserAvatar
+from avatar.models import AvatarItem
 
 
 class UserActivityConsumer(AsyncWebsocketConsumer):
@@ -96,6 +98,10 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
                 await self.handle_leave_chat(payload)
             elif message_type == "support_notification":
                 await self.handle_support_notification(payload)
+            elif message_type == "avatar_update":
+                await self.handle_avatar_update(data)
+            elif message_type == "balance_update":
+                pass
             else:
                 await self.send_error(f"Unknown message type: {message_type}")
 
@@ -378,3 +384,78 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
     def _get_chat_ids(self, chat_id):
         chat = Chat.objects.get(id=chat_id)
         return {"user": chat.user.user_id, "agent": chat.agent.user_id}
+    
+    # --- Avatar Update Handler ---
+
+    async def handle_avatar_update(self, data):
+        hat_id = data.get('hat')
+        shirt_id = data.get('shirt')
+        accessory_id = data.get('accessory')
+        background_id = data.get('background')
+
+        avatar = await self.get_user_avatar()
+
+        if hat_id:
+            hat = await self.get_awatar_item(hat_id, 'hat')
+            if hat in await self.get_unlocked_items(avatar):
+                avatar.equipped_hat = hat
+        else:
+            avatar.equipped_hat = None
+
+        if shirt_id:
+            shirt = await self.get_awatar_item(shirt_id, 'shirt')
+            if shirt in await self.get_unlocked_items(avatar):
+                avatar.equipped_shirt = shirt
+        else:
+            avatar.equipped_shirt = None
+        
+        if accessory_id:
+            accessory = await self.get_awatar_item(accessory_id, 'accessory')
+            if accessory in await self.get_unlocked_items(avatar):
+                avatar.equipped_accessory = accessory
+        else:
+            avatar.equipped_accessory = None
+        
+        if background_id:
+            background = await self.get_awatar_item(background_id, 'background')
+            if background in await self.get_unlocked_items(avatar):
+                avatar.equipped_background = background
+        else:
+            avatar.equipped_background = None
+
+        await self.save_avatar(avatar)
+
+        await self.channel_layer.group_send(
+            self.user_group_name,
+            {
+                "type": "avatar_update_message",
+                "avatar": {
+                    "hat": hat_id,
+                    "shirt": shirt_id,
+                    "accessory": accessory_id,
+                    "background": background_id,
+                }
+            }
+        )
+
+    async def avatar_update_message(self, event):
+        await self.send_json({
+            "type": "avatar_update",
+            "data": event["avatar"]
+        })
+        
+    @database_sync_to_async
+    def get_user_avatar(self):
+        return UserAvatar.objects.get(user=self.user)
+        
+    @database_sync_to_async
+    def get_awatar_item(self, item_id, item_type):
+        return AvatarItem.objects.get(id=item_id, item_type=item_type)
+    
+    @database_sync_to_async
+    def get_unlocked_items(self, avatar):
+        return list(avatar.unlocked_items.all())
+    
+    @database_sync_to_async
+    def save_avatar(self, avatar):
+        avatar.save()

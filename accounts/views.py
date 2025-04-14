@@ -83,19 +83,23 @@ def profile_view(request):
     subscription = UserSubscription.objects.filter(user=request.user).first()
     statistics = UserStatistics.objects.filter(user=request.user).first()
     bookings = Booking.objects.filter(user=request.user)
-    userAvatar = UserAvatar.objects.filter(user=request.user).first()
-    avatarItems = cache.get("all_avatar_items")
-    if avatarItems is None:
-        avatarItems = AvatarItem.objects.all()
-        cache.set("all_avatar_items", avatarItems, 60 * 60 * 24)
+    avatar, _ = UserAvatar.objects.get_or_create(user=request.user)
+    all_items = AvatarItem.objects.all()
+
+    unlocked_items = list(avatar.unlocked_items.values_list("id", flat=True))
+
+    print("Unlocked items:", unlocked_items)
+
 
     context = {
         "user": request.user,
         "subscription": subscription,
         "statistics": statistics,
         "bookings": bookings,
-        "userAvatar": userAvatar,
-        "items": avatarItems,
+        "userAvatar": avatar,
+        "all_items": all_items,
+        "unlocked_items": unlocked_items,
+        "base_avatar_url": "/static/images/avatar/avatar.png",
     }
 
     if subscription:
