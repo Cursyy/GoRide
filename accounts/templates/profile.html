@@ -114,17 +114,62 @@
                     </div>
                     <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 py-3">
                                 <div class="avatar-container w-100">
-                                    <img src="{% static '/images/avatar/avatar.png'%}" class="w-100" alt="avater">
+                                    <img src="{% static '/images/avatar/avatar.png'%}" class="w-100 avatar" alt="avatar">
+                                    <img src="{% static '/images/avatar/suit1.png'%}" alt="" class="avatar-suit">
+                                    <img src="{% static '/images/avatar/hat2.png'%}" alt="" class="avatar-hat">
+                                    <img src="{% static '/images/avatar/acc1.png'%}" alt="avatar-acc" class="avatar-acc"> >
+                                    <img src="{% static '/images/avatar/bg1.png'%}" alt="avatar-bg" class="avatar-bg">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <h2 class="text-center my-3 border-bottom">{% trans "Your inventory" %}</h2>
                                 <div class="inventory">
-                                    {% for item in items %}
-                                        <img style="width: 64px; height: 64px;" src="{{item.image.url}}" alt="{{ item.name }}">
-                                    {% endfor %}
+                                    <ul class="nav nav-tabs" id="inventoryTabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="hats-tab" data-bs-toggle="tab" data-bs-target="#hats" type="button" role="tab" aria-controls="hats" aria-selected="true">{% trans "Hats" %}</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="accessories-tab" data-bs-toggle="tab" data-bs-target="#accessories" type="button" role="tab" aria-controls="accessories" aria-selected="false">{% trans "Accessories" %}</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="suits-tab" data-bs-toggle="tab" data-bs-target="#suits" type="button" role="tab" aria-controls="suits" aria-selected="false">{% trans "Suits" %}</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="backgrounds-tab" data-bs-toggle="tab" data-bs-target="#backgrounds" type="button" role="tab" aria-controls="backgrounds" aria-selected="false">{% trans "Backgrounds" %}</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="inventoryTabsContent">
+                                        <div class="tab-pane fade show active" id="hats" role="tabpanel" aria-labelledby="hats-tab">
+                                            {% for item in items %}
+                                                {% if item.item_type == 'hat' %}
+                                                    <img style="width: 64px; height: 64px;" src="{{ item.image.url }}" alt="{{ item.name }}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="tab-pane fade" id="accessories" role="tabpanel" aria-labelledby="accessories-tab">
+                                            {% for item in items %}
+                                                {% if item.item_type == 'accessory' %}
+                                                    <img style="width: 64px; height: 64px;" src="{{ item.image.url }}" alt="{{ item.name }}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="tab-pane fade" id="suits" role="tabpanel" aria-labelledby="suits-tab">
+                                            {% for item in items %}
+                                                {% if item.item_type == 'shirt' %}
+                                                    <img style="width: 64px; height: 64px;" src="{{ item.image.url }}" alt="{{ item.name }}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="tab-pane fade" id="backgrounds" role="tabpanel" aria-labelledby="backgrounds-tab">
+                                            {% for item in items %}
+                                                {% if item.item_type == 'background' %}
+                                                    <img style="width: 64px; height: 64px;" src="{{ item.image.url }}" alt="{{ item.name }}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

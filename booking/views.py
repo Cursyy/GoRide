@@ -16,6 +16,8 @@ from get_direction.views import end_active_trip, start_trip
 from wallet.models import Wallet
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+
 @login_required
 def top_up_wallet(request):
     if request.method == "POST":

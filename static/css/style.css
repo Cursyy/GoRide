@@ -1175,3 +1175,54 @@ html.dark-mode .dropdown-item:hover {
   background-color: var(--accent-color);
   color: #000;
 }
+
+
+/* avatar */
+
+.avatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.avatar-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.avatar-suit{
+  width: 51%;
+  position: absolute;
+  top: 30%;
+  left: 24%;
+  z-index: 2;
+}
+
+.avatar-hat{
+  width: 35%;
+  position: absolute;
+  top: -5%;
+  left: 33%;
+  z-index: 2;
+}
+
+.avatar-acc{
+  width: 25%;
+  position: absolute;
+  top: 12%;
+  left: 41%;
+  z-index: 2;
+}
+
+.avatar-bg{
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+}

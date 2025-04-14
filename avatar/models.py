@@ -17,6 +17,22 @@ class AvatarItem(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.item_type})"
+    
+    def get_condition_text(self):
+        condition = self.condition.split("_")
+        condition_type, condition_value = condition[0], int(condition[1])
+
+        if condition_type == "total_rides":
+            return f"Complete {condition_value} rides"
+        elif condition_type == "bike_rides":
+            return f"Complete {condition_value} bike rides"
+        elif condition_type == "scooter_rides":
+            return f"Complete {condition_value} scooter rides"
+        elif condition_type == "total_hours":
+            return f"Spend {condition_value} hours riding"
+        elif condition_type == "total_spent":
+            return f"Spend €{condition_value}"
+        return "Unknown condition"
 
 class UserAvatar(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
