@@ -37,7 +37,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # project apps
-    "daphne",
+    "uvicorn",
     "channels",
     "accounts",
     # default apps
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "wallet.apps.WalletConfig",
     # project apps
+    "core",
     "main",
     "support",
     "find_transport",
@@ -119,17 +120,37 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get("POSTGRES_DB", "goride_db"),
+#         'USER': os.environ.get("POSTGRES_USER", "goride_user"),
+#         'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "yourpassword"),
+#         'HOST': os.environ.get("POSTGRES_HOST", "db"),
+#         'PORT': os.environ.get("POSTGRES_PORT", "5432"),
+#     }
+# }
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://redis:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },
     }
 }
 
+# celery config
+# https://docs.celeryq.dev/en/latest/django/first-steps-with-django.html
+CELERY_BROKER_URL = os.environ.get("REDIS_URL", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL", "redis://redis:6379/0")
 
+CELERY_BEAT_SCHEDULER = "django_celery_beat.scheduler:DatabaseScheduler"
+CELERY_ACCEPT_TOKEN = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["application/json"]
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -247,7 +268,11 @@ PASSWORD_RESET_TIMEOUT = 60 * 60 * 4
 
 CUSTOM_CSS_PATH = "admin/admin.css"
 SITE_LOGO_PATH = "admin/logo.png"
-# copied from jazzmin documentation
+
+
+# Jazzmin admin theme
+# https://django-jazzmin.readthedocs.io/configuration/
+
 JAZZMIN_SETTINGS = {
     "custom_css": CUSTOM_CSS_PATH,
     # Site name
@@ -322,6 +347,7 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
         # Link to the main site page (check the URL name 'main:home')
         {"name": "Back to Site", "url": "main:home", "new_window": False},
+        {"name": "Screening", "url": "/silk/", "new_window": True},
     ],
     #############
     # Forms     #
@@ -352,8 +378,8 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": False,
-    "theme": "flatly",
-    "dark_mode_theme": "darkly",
+    "theme": "cyborg",
+    "dark_mode_theme": "cyborg",
     "button_classes": {
         "primary": "btn-primary",
         "secondary": "btn-secondary",

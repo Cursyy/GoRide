@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
+{%load cache%}
 {% block title %}{% trans "Booking Successful" %}{% endblock title %}
 {% block content %}
+{%cache 1200 "success-booking"%}
     <div class="container my-5">
         <div class="card shadow-lg">
             <div class="card-body text-center">
@@ -19,4 +21,5 @@
             </div>
         </div>
     </div>
+{% endcache %}
 {% endblock %}

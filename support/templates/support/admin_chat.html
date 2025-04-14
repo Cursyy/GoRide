@@ -32,7 +32,7 @@
                     <div class="card-header" style="background-color: #0E6655; color: white;">
                         <h5>{% trans "Chat with" %} {{ chat.user.username }}</h5>
                     </div>
-                    <div class="card-body" style="max-height: 400px; overflow-y: auto;" id="messages">
+                    <div class="card-body" style="max-height: 400px; overflow-y: auto;" id="messages" data-chat-id="{{ chat.id }}">
                         {% for message in messages %}
                             <div class="mb-3">
                                 <strong style="color: #0E6655;">{{ message.sender.username }}:</strong>
@@ -57,8 +57,6 @@
         </div>
     </div>
 </div>
-<script>
-    let chatId = "{{ chat.id }}";
-</script>
+
 <script src="{% static 'js/support.js' %}" defer></script>
 {% endblock %}

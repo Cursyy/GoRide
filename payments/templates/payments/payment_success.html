@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
+{% load cache %}
+{% cache 3600 header_page %}
 {% block content %}
 
 <h2>{% trans "Payment Successful" %}</h2>
 <p>{% trans "Thank you for your payment!" %}</p>
 <a href="{% url 'find_transport:find_transport' %}">{% trans "Return to Transport" %}</a>
 {% endblock %}
+{% endcache %}

@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Chat, Message
 from .forms import MessageForm
-from channels.layers import get_channel_layer
-from asgiref.sync import async_to_sync
 from django.shortcuts import get_object_or_404
 
 
@@ -14,6 +12,8 @@ def user_chat_view(request, chat_id=None):
         if chat_id
         else Chat.objects.get_or_create(user=request.user, is_active=True)[0]
     )
+    chat.agent = request.user
+    chat.save()
     if not request.user.is_staff and chat.user != request.user:
         return redirect("support:user_chat")
     if request.method == "POST":
@@ -22,12 +22,9 @@ def user_chat_view(request, chat_id=None):
             message = form.save(commit=False)
             message.chat = chat
             message.sender = request.user
+            message.receiver = chat.agent
             message.save()
 
-            channel_layer = get_channel_layer()
-            async_to_sync(channel_layer.group_send)(
-                f"chat_{chat.id}", {"type": "chat_message", "message": message.content}
-            )
             return redirect("support:user_chat", chat_id=chat.id)
     else:
         form = MessageForm()
@@ -47,19 +44,16 @@ def admin_chat(request, chat_id=None):
 
     chat = get_object_or_404(Chat, id=chat_id) if chat_id else None
     active_chats = Chat.objects.filter(is_active=True)
-
+    chat.agent = request.user
+    chat.save()
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid() and chat:
             message = form.save(commit=False)
             message.chat = chat
             message.sender = request.user
+            message.receiver = chat.agent
             message.save()
-
-            channel_layer = get_channel_layer()
-            async_to_sync(channel_layer.group_send)(
-                f"chat_{chat.id}", {"type": "chat_message", "message": message.content}
-            )
 
             form = MessageForm()
 

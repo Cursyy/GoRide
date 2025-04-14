@@ -1,21 +1,21 @@
 from datetime import timedelta
 import json
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.http import JsonResponse
 from decimal import Decimal
 from booking.models import Booking
-from wallet.models import Wallet
 from find_transport.models import Vehicle
-from subscriptions.models import SubscriptionPlan, UserSubscription, UserStatistics
-from successful_booking import send_transaction_email
+from subscriptions.models import SubscriptionPlan, UserSubscription
 from vouchers.models import Voucher
 from get_direction.models import Trip
 from get_direction.views import end_active_trip, start_trip
 from wallet.models import Wallet
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from booking.tasks import update_stats, send_transaction_email
+
+
 @login_required
 def top_up_wallet(request):
     if request.method == "POST":
@@ -36,11 +36,16 @@ def top_up_wallet(request):
         )
 
         if payment_type == "Stripe":
-            return redirect("payments:process_stripe_payment", booking_id=booking.booking_id)
+            return redirect(
+                "payments:process_stripe_payment", booking_id=booking.booking_id
+            )
         elif payment_type == "Paypal":
-            return redirect("payments:process_paypal_payment", booking_id=booking.booking_id)
+            return redirect(
+                "payments:process_paypal_payment", booking_id=booking.booking_id
+            )
 
     return render(request, "top_up_wallet.html")
+
 
 @login_required
 def rent_vehicle(request, vehicle_id):
@@ -49,11 +54,10 @@ def rent_vehicle(request, vehicle_id):
 
     if not vehicle.status:
         return redirect("find_transport:find_transport")
-    
+
     if trip:
         messages.info(request, "You have not finished trip")
         return redirect("get_direction:map")
-
     subscription = None
     try:
         user_subscription = UserSubscription.objects.get(user=request.user)
@@ -78,7 +82,9 @@ def rent_vehicle(request, vehicle_id):
         if voucher_code:
             try:
                 voucher = Voucher.objects.get(code=voucher_code, active=True)
-                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (voucher.used or 0) < (voucher.max_use or float("inf")):
+                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (
+                    voucher.used or 0
+                ) < (voucher.max_use or float("inf")):
                     total_amount -= total_amount * Decimal(str(voucher.discount)) / 100
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
@@ -100,14 +106,23 @@ def rent_vehicle(request, vehicle_id):
         )
 
         if payment_type == "Stripe":
-            return redirect("payments:process_stripe_payment", booking_id=booking.booking_id)
+            return redirect(
+                "payments:process_stripe_payment", booking_id=booking.booking_id
+            )
         elif payment_type == "Paypal":
-            return redirect("payments:process_paypal_payment", booking_id=booking.booking_id)
+            return redirect(
+                "payments:process_paypal_payment", booking_id=booking.booking_id
+            )
         elif payment_type == "Subscription" and not voucher_code:
             if subscription:
-                if subscription.remaining_rides is None or subscription.remaining_rides >= hours:
+                if (
+                    subscription.remaining_rides is None
+                    or subscription.remaining_rides >= hours
+                ):
                     total_amount = Decimal("0")
-                    subscription.remaining_rides = (subscription.remaining_rides or 0) - hours
+                    subscription.remaining_rides = (
+                        subscription.remaining_rides or 0
+                    ) - hours
                     subscription.save()
                 else:
                     booking.status = "Cancelled"
@@ -124,16 +139,9 @@ def rent_vehicle(request, vehicle_id):
                 booking.status = "Cancelled"
                 booking.save()
                 return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
-
         vehicle.status = False
         vehicle.save()
-
-        try:
-            stats = UserStatistics.objects.get(user=request.user)
-        except UserStatistics.DoesNotExist:
-            stats = UserStatistics.objects.create(user=request.user)
-        stats.update_stats(hours, total_amount, vehicle.type)
-
+        update_stats(hours, total_amount, vehicle, request.user)
         transaction_data = {
             "transaction_id": booking.booking_id,
             "date": booking.booking_date,
@@ -160,18 +168,17 @@ def rent_vehicle(request, vehicle_id):
             )
 
             start_response = start_trip(request)
-
             try:
                 start_data = json.loads(start_response.content)
             except json.JSONDecodeError:
                 start_data = {}
 
             if start_response.status_code == 200 and "trip_id" in start_data:
-                print(
-                    f"Auto-start successful for trip id: {start_data.get('trip_id')}"
-                )
+                print(f"Auto-start successful for trip id: {start_data.get('trip_id')}")
 
-                send_transaction_email(request, request.user, request.user.email, transaction_data)
+                send_transaction_email(
+                    request, request.user, request.user.email, transaction_data
+                )
 
                 booking.status = "Paid"
                 booking.save()
@@ -193,8 +200,12 @@ def rent_vehicle(request, vehicle_id):
         except Exception as e:
             print(f"Error creating trip for user {request.user}: {e}")
             return JsonResponse({"error": "Failed to create the trip."}, status=500)
+    return render(
+        request,
+        "rental_booking.html",
+        {"vehicle": vehicle, "subscription": subscription},
+    )
 
-    return render(request, "rental_booking.html", {"vehicle": vehicle, "subscription": subscription})
 
 @login_required
 def subscribe(request, plan_id):
@@ -216,7 +227,9 @@ def subscribe(request, plan_id):
         if voucher_code:
             try:
                 voucher = Voucher.objects.get(code=voucher_code, active=True)
-                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (voucher.used or 0) < (voucher.max_use or float("inf")):
+                if voucher.valid_from <= timezone.now() <= voucher.valid_to and (
+                    voucher.used or 0
+                ) < (voucher.max_use or float("inf")):
                     total_amount -= total_amount * Decimal(str(voucher.discount)) / 100
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
@@ -235,9 +248,13 @@ def subscribe(request, plan_id):
         )
 
         if payment_type == "Stripe":
-            return redirect("payments:process_stripe_payment", booking_id=booking.booking_id)
+            return redirect(
+                "payments:process_stripe_payment", booking_id=booking.booking_id
+            )
         elif payment_type == "Paypal":
-            return redirect("payments:process_paypal_payment", booking_id=booking.booking_id)
+            return redirect(
+                "payments:process_paypal_payment", booking_id=booking.booking_id
+            )
         elif payment_type == "AppBalance":
             try:
                 wallet = Wallet.objects.get(user=request.user)
@@ -252,7 +269,9 @@ def subscribe(request, plan_id):
                 booking.save()
                 return redirect("booking:subscribe", plan_id=plan_id)
 
-        user_subscription, created = UserSubscription.objects.get_or_create(user=request.user)
+        user_subscription, created = UserSubscription.objects.get_or_create(
+            user=request.user
+        )
         user_subscription.activate(plan)
         transaction_data = {
             "transaction_id": booking.booking_id,
@@ -264,12 +283,15 @@ def subscribe(request, plan_id):
             "subscription_type": plan.type,
             "subscription_duration": plan.duration_days,
         }
-        send_transaction_email(request, request.user, request.user.email, transaction_data)
+        send_transaction_email(
+            request, request.user, request.user.email, transaction_data
+        )
         booking.status = "Paid"
         booking.save()
         return redirect("subscriptions:subscription_success")
 
     return render(request, "subscription_booking.html", {"plan": plan_id})
+
 
 @login_required
 def booking_success(request, booking_id):
@@ -288,18 +310,18 @@ def booking_success(request, booking_id):
             "payment_method": booking.payment_type,
             "payment_subject": booking.subject,
         }
-        send_transaction_email(request, request.user, request.user.email, transaction_data)
+        send_transaction_email(
+            request, request.user, request.user.email, transaction_data
+        )
         return render(request, "booking_success.html")
 
     elif booking.subject == "Rent":
         vehicle = booking.vehicle
         vehicle.status = False
         vehicle.save()
-        try:
-            stats = UserStatistics.objects.get(user=request.user)
-        except UserStatistics.DoesNotExist:
-            stats = UserStatistics.objects.create(user=request.user)
-        stats.update_stats(booking.hours, booking.amount, vehicle.type)
+        hours = booking.hours
+        total_amount = booking.amount
+        update_stats(hours, total_amount, vehicle, request.user)
         transaction_data = {
             "transaction_id": booking.booking_id,
             "date": booking.booking_date,
@@ -333,17 +355,22 @@ def booking_success(request, booking_id):
                 start_data = {}
 
             if start_response.status_code == 200 and "trip_id" in start_data:
-                print(
-                    f"Auto-start successful for trip id: {start_data.get('trip_id')}"
-                )
+                print(f"Auto-start successful for trip id: {start_data.get('trip_id')}")
 
-                send_transaction_email(request, request.user, request.user.email, transaction_data)
+                send_transaction_email(
+                    request, request.user, request.user.email, transaction_data
+                )
                 return render(request, "booking_success.html")
             else:
-                print(f"Error during auto-start for newly created trip {new_trip.id}. Response: {start_response.content}")
-                error_message = start_data.get("error", "Failed to auto-start the trip after creation.")
-                return JsonResponse( {"error": error_message}, status=start_response.status_code or 400)
-            
+                print(
+                    f"Error during auto-start for newly created trip {new_trip.id}. Response: {start_response.content}"
+                )
+                error_message = start_data.get(
+                    "error", "Failed to auto-start the trip after creation."
+                )
+                return JsonResponse(
+                    {"error": error_message}, status=start_response.status_code or 400
+                )
 
         except Exception as e:
             print(f"Error creating trip for user {request.user}: {e}")
@@ -351,7 +378,9 @@ def booking_success(request, booking_id):
 
     elif booking.subject == "Subscription":
         plan = SubscriptionPlan.objects.get(id=booking.plan_id)
-        user_subscription, created = UserSubscription.objects.get_or_create(user=request.user)
+        user_subscription, created = UserSubscription.objects.get_or_create(
+            user=request.user
+        )
         user_subscription.activate(plan)
         transaction_data = {
             "transaction_id": booking.booking_id,
@@ -363,5 +392,7 @@ def booking_success(request, booking_id):
             "subscription_type": plan.type,
             "subscription_duration": plan.duration_days,
         }
-        send_transaction_email(request, request.user, request.user.email, transaction_data)
+        send_transaction_email(
+            request, request.user, request.user.email, transaction_data
+        )
         return redirect("subscriptions:subscription_success")

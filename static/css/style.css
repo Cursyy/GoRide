@@ -33,12 +33,12 @@ html {
   --second-bg-color: #000;
 }
 html.dark-mode {
-  --bg-light: #121212;           /* темний фон */
-  --text-dark: #ecf0f1;          /* світлий текст */
-  --main-bg-color: #1a2b2b;      /* темна варіація головного фону */
-  --second-bg-color: #1e1e1e;    /* темно-сірий додатковий фон */
-  --mint: #1e3d32;               /* темна м’ята */
-  --second-font-color: #bdc3c7;  /* світліший текст для вторинного використання */
+  --bg-light: #121212;          
+  --text-dark: #ecf0f1;         
+  --main-bg-color: #1a2b2b;    
+  --second-bg-color: #1e1e1e;   
+  --mint: #1e3d32;               
+  --second-font-color: #bdc3c7;  
 }
 /*///////////Light Theme/////////////*/
 body {
@@ -200,8 +200,43 @@ form select {
 
 form input[type="file"] {
   padding: 5px;
+}.custom-alert-container {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
+.alert-content {
+  background-color: var(--main-bg-color); /* Default background */
+  color: var(--main-font-color); /* Text color */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid var(--secondary-green); /* Accent border */
+  width: 45%;
+  border-radius: 8px;
+  height: auto;
+}
+
+.close {
+  color: var(--second-font-color); /* Default close button color */
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--accent-color); /* Hover effect for close button */
+  text-decoration: none;
+}
 .btn-secondary {
   background-color: var(--main-font-color);
   color: var(--main-bg-color);
@@ -229,7 +264,31 @@ form input[type="file"] {
   z-index: 1000;
   transition: all 0.5s ease;
 }
+.notification-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  z-index: 10;
+  display: none;
+}
 
+.notification-popup {
+  background-color: #212529;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  max-width: 350px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
 .chat-button:hover {
   background-color: var(--main-font-color);
   color: var(--main-bg-color);
@@ -797,21 +856,39 @@ form input[type="file"] {
   color: white;
 }
 /*trip buttons*/
-#trip-controls button {
+
+#trip-buttons button{
+  outline-style: none;
   margin-right: 8px;
   padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
   font-size: 14px;
-}
-
-#trip-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  background-color: var(--accent-color);
+  color:var(--bs-body-bg);
 }
 
 #trip-timer {
   min-width: 120px;
   text-align: right;
+}
+
+#userLocation{
+  outline-style: none;
+  margin-right: 8px;
+  margin-left: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background-color: var(--accent-color);
+  color:var(--bs-body-bg);
 }
 /*trip buttons*/
 @media (max-width: 768px) {
@@ -844,11 +921,151 @@ form input[type="file"] {
   }
 }
 
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.contact-details {
+  padding: 1.5rem;
+  border-radius: 6px;
+  background-color: var(--mint);
+  color: var(--second-font-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+.contact-details h3 {
+  color: var(--primary-green);
+  margin-bottom: 0.5rem;
+}
+
+
+.contact-details p {
+  margin-bottom: 0;
+}
+
+.contact-details a {
+  color: var(--secondary-green);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+  color: var(--accent-color);
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 300px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  color: #777;
+  animation: fadeIn 0.5s ease-in-out 0.2s forwards;
+  opacity: 0;
+}
+
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 150px;
+  background-color: var(--light-green);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-font-color);
+  font-size: 1.2rem;
+  opacity: 0.8;
+  transition: transform 0.3s ease-in-out;
+}
+
+.photo-placeholder:hover {
+  transform: scale(1.05);
+}
+
+.contact-form {
+  padding: 1.5rem;
+  border-radius: 6px;
+  background-color: var(--mint);
+  color: var(--second-font-color);
+  animation: slideInRight 0.5s ease-in-out;
+}
+
+
+.contact-form h2 {
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+}
+
+
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: var(--second-font-color);
+}
+.form-group textarea {
+  resize: vertical;
+}
+
+.submit-button {
+  background-color: var(--primary-green);
+  color: var(--main-font-color);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: var(--dark-green);
+}
+
 /*////////////////////Dark theme////////////////////*/
 html.dark-mode body {
   background-color: var(--bg-light); /* темний фон */
   --bs-body-bg: #121212;
   --bs-body-color: #e0e0e0;
+  color:var(--bs-body-color);
 
   /* Перевизначення кнопок */
   .btn-light {
@@ -1174,4 +1391,102 @@ html.dark-mode .dropdown-item {
 html.dark-mode .dropdown-item:hover {
   background-color: var(--accent-color);
   color: #000;
+}
+html.dark-mode .custom-alert-container {
+  background-color: rgba(0, 0, 0, 0.8); 
+}
+
+html.dark-mode .alert-content {
+  background-color: var(--second-bg-color);
+  color: var(--text-dark);
+}
+html.dark-mode .close {
+  color: var(--second-font-color); 
+}
+
+html.dark-mode .close:hover,
+html.dark-mode .close:focus {
+  color: var(--accent-color); 
+}
+html.dark-mode .contact-container {
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+html.dark-mode .contact-details {
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+}
+
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+html.dark-mode .contact-details h3 {
+  color: var(--accent-color);
+}
+
+
+html.dark-mode .map-placeholder {
+  background-color: #333;
+  color: #bbb;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+
+html.dark-mode .contact-form {
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+}
+
+@keyframes slideInRight {
+  from {
+      opacity: 0;
+      transform: translateX(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+html.dark-mode .contact-form h2 {
+  color: var(--accent-color);
+}
+
+html.dark-mode .form-group input[type="text"],
+html.dark-mode .form-group input[type="email"],
+html.dark-mode .form-group textarea {
+  background-color: #222;
+  border-color: #555;
+  color: var(--main-font-color);
+}
+
+
+html.dark-mode .submit-button {
+  background-color: var(--accent-color);
+  color: var(--bs-body-bg);
+}
+
+html.dark-mode .submit-button:hover {
+  background-color: #e08a00;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+      grid-template-columns: 1fr;
+  }
 }

@@ -385,6 +385,8 @@ function clearRoute() {
   createButton("get-direction", "Get Direction");
 }
 function clearMarkers() {
+  const resultsContainer = document.getElementById("places-container");
+  resultsContainer.innerHTML = "";
   markers.forEach((marker) => map.removeLayer(marker));
   markers = [];
 }

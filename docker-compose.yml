@@ -1,0 +1,80 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  web:
+      build: .
+      container_name: django_web
+      command: >
+        uvicorn GoRide.asgi:application
+        --host 0.0.0.0
+        --port 8000
+        --reload
+      volumes:
+        - .:/code
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+        - redis
+      env_file:
+        - .env
+
+  celery:
+    build: .
+    container_name: celery_worker
+    command: celery -A GoRide worker -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+
+  celery-beat:
+    build: .
+    container_name: celery_beat
+    command: celery -A GoRide beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+
+  flower:
+    image: mher/flower:latest
+    container_name: flower
+    environment:
+      - CELERY_BROKER_URL=${REDIS_URL}
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+    env_file:
+      - .env
+
+
+
+volumes:
+  postgres_data:
+  static_volume:
