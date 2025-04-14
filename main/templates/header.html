@@ -27,6 +27,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'subscriptions:subscription_plans' %}">{% trans "Plans" %}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:contacts' %}">{% trans "Contacts" %}</a>
+                    </li>
                     {% if request.user.is_authenticated %}
                         {% if request.user.is_staff %}
                         <li class="nav-item">

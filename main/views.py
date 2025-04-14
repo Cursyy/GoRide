@@ -10,6 +10,10 @@ def home(request):
     return render(request, "home.html")
 
 
+def contacts(request):
+    return render(request, "contacts.html")
+
+
 @csrf_exempt
 def save_location(request):
     if request.method == "POST":
