@@ -1479,6 +1479,10 @@ html.dark-mode .dropdown-item:hover {
   height: 100%;
 }
 
+html.dark-mode .story-card{
+  color: var(--second-bg-color);
+}
+
 html.dark-mode .custom-alert-container {
   background-color: rgba(0, 0, 0, 0.8); 
 }
