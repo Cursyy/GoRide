@@ -22,6 +22,7 @@ urlpatterns += i18n_patterns(
     path("booking/", include("booking.urls")),
     path("payments/", include("payments.urls")),
     path("vouchers/", include("vouchers.urls")),
+    path("careers/", include("careers.urls")),
     path("", include("paypal.standard.ipn.urls")),
 )
 

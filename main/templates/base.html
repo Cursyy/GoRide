@@ -74,6 +74,7 @@
     </main>
 
     {% include "footer.html" %}
+    
     {% if request.user.is_authenticated %}
         {% if request.user.is_staff %}
         <a href="{% url 'support:admin_chat_list' %}" class="chat-button" title="{% trans 'Admin Chats' %}">

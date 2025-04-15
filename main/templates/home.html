@@ -5,15 +5,15 @@
 {% block title %}{% trans "Main page" %}{% endblock title %} 
 
 {% block content %}
-<section class="hero d-flex align-items-center py-5 px-0 px-lg-5">
+<section class="hero d-flex align-items-center p-5">
     <div class="container text-white">
         <div class="row align-items-center">
-            <div class="col-md-6 hero-text">
+            <div class="col-lg-6 hero-text">
                 <h1>{% trans "Modern electric bikes and scooters for the sustainable urban explorer" %}</h1>
                 <p>{% trans "GoRide offers a convenient, eco-friendly fleet of electric bikes and scooters available 24 hours to easily zip around the city." %}</p>
                 <a href="{% url 'find_transport:find_transport' %}" class="btn btn-light">{% trans "Rent Now" %}</a>
             </div>
-            <div class="col-md-6 d-flex justify-content-end align-items-center mt-4 mt-md-0">
+            <div class="col-lg-6 d-flex justify-content-end align-items-center mt-4">
                 <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo16852728301866aec2df5b1a5-NJacv.jpeg" alt="{% trans 'City Transport' %}" class="img-fluid rounded hero_img">
             </div>
         </div>
