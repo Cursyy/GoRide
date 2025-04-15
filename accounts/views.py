@@ -85,18 +85,15 @@ def profile_view(request):
     bookings = Booking.objects.filter(user=request.user)
     avatar, _ = UserAvatar.objects.get_or_create(user=request.user)
     all_items = AvatarItem.objects.all()
-
+    avatar.check_and_unlock_items()
     unlocked_items = list(avatar.unlocked_items.values_list("id", flat=True))
-
-    print("Unlocked items:", unlocked_items)
-
 
     context = {
         "user": request.user,
         "subscription": subscription,
         "statistics": statistics,
         "bookings": bookings,
-        "userAvatar": avatar,
+        "avatar": avatar,
         "all_items": all_items,
         "unlocked_items": unlocked_items,
         "base_avatar_url": "/static/images/avatar/avatar.png",

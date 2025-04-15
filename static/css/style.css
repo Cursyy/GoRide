@@ -675,6 +675,10 @@ form input[type="file"] {
   width: 100%;
 }
 
+.user-subscription > .no-sub-div{
+  height: 100%;
+}
+
 .bookings-history{
   overflow-y: auto;
 }
@@ -1398,13 +1402,11 @@ html.dark-mode .dropdown-item:hover {
 
 .items-container {
   display: flex;
-  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .item-card {
-  width: 70px;
   text-align: center;
-  margin: 5px;
 }
 
 .item-card img {
@@ -1417,6 +1419,13 @@ html.dark-mode .dropdown-item:hover {
 .item-card p {
   margin: 5px 0 0 0;
   font-size: 12px;
+}
+
+.items-container{
+  max-height: 80px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .base {

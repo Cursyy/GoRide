@@ -6,7 +6,7 @@
 <div class="container p-3">
     <div class="row shadow-lg p-3 rounded">
         <div class="col-md-4 p-3 my_custom_div border-end">
-            <div class="profile-card p-4 text-center">
+            <div class="profile-card p-2 p-lg-4 text-center">
                 <div class="profile-title">
                     <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/images/default-avatar.png{% endif %}"
                         alt="Profile Picture" class="rounded-circle border border-light mb-3" width="120" height="120">
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="col-md-8 p-3 my_custom_div">
-            <div class="profile-card p-4">
+            <div class="profile-card p-2 p-lg-4">
                 <ul class="nav nav-tabs" id="profileTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active w-100 text-dark" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="true">{% trans "Statistics" %}</button>
@@ -54,7 +54,7 @@
                 <div class="tab-content" id="profileTabsContent">
                     <div class="tab-pane fade show active" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
                         <div class="row">
-                            <div class="col-md-6 mt-3">
+                            <div class="col-lg-6 mt-3">
                                 <div class="user-statistics border rounded p-3">
                                     {% if statistics %}
                                         <p><strong>{% trans "Total Rides:" %}</strong> {{ statistics.total_rides }}</p>
@@ -66,7 +66,7 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-lg-6 mt-3">
                                 <div class="user-subscription rounded border p-3">
                                     {% if subscription and subscription.is_active %}
                                         <p><span class="w-25">{% trans "Subscription"%}:</span> <span class="text-muted">{{ subscription.plan.type }}</span></p>
@@ -80,16 +80,16 @@
                                         </div>
                                 
                                     {% else %}
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <p class="m-0">{% trans "Subscription" %}: <span class="text-muted">{% trans "You have no active subscriptions" %}</span></p>
-                                            <a href="{% url 'subscriptions:subscription_plans' %}" class="btn btn-secondary">{% trans "Choose plan" %}</a>
+                                        <div class="no-sub-div d-flex flex-column align-items-start w-100">
+                                            <p class="mb-2">{% trans "Subscription" %}: <span class="text-muted">{% trans "You have no active subscriptions" %}</span></p>
+                                            <a href="{% url 'subscriptions:subscription_plans' %}" class="btn btn-secondary mt-2 align-self-end">{% trans "Choose plan" %}</a>
                                         </div>
                                     {% endif %}
                                 </div>                                                   
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mt-3">
+                            <div class="col-lg-6 mt-3">
                                 <div class="bookings-history border rounded p-3">
                                     {% if bookings %}
                                         {% for booking in bookings %}
@@ -104,7 +104,7 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-lg-6 mt-3">
                                 <div class="balance border rounded p-3">
                                     <p><strong>{% trans "Balance" %}: € {{wallet_balance}}</strong></p>
                                     <a href="{%url 'booking:topup'%}" class="top-up-btn btn btn-success">{% trans "Top up" %}</a>
@@ -115,33 +115,33 @@
                     <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
                         <div class="row">
                             <div class="col-lg-6 py-3">
-                                <div class="avatar-container" style="position: relative; width: 300px; height: 300px;">
+                                <div class="avatar-container rounded" style="position: relative; width: 300px; height: 300px;">
                                     {% if avatar.equipped_background %}
-                                        <img src="{{ avatar.equipped_background.image.url }}" class="background" id="background" >
+                                        <img src="{{ avatar.equipped_background.image.url }}" class="background rounded" id="background" >
                                     {% else %}
-                                        <img src="" class="background" id="background">
+                                        <img src="" class="background rounded" id="background">
                                     {% endif %}
-                                    <img src="{{ base_avatar_url }}" class="base" id="base">
+                                    <img src="{{ base_avatar_url }}" class="base rounded" id="base">
                                     {% if avatar.equipped_shirt %}
-                                        <img src="{{ avatar.equipped_shirt.image.url }}" class="shirt" id="shirt" >
+                                        <img src="{{ avatar.equipped_shirt.image.url }}" class="shirt rounded" id="shirt" >
                                     {% else %}
-                                        <img src="" class="shirt" id="shirt">
+                                        <img src="" class="shirt rounded" id="shirt">
                                     {% endif %}
                                     {% if avatar.equipped_hat %}
-                                        <img src="{{ avatar.equipped_hat.image.url }}" class="hat" id="hat" >
+                                        <img src="{{ avatar.equipped_hat.image.url }}" class="hat rounded" id="hat" >
                                     {% else %}
-                                        <img src="" class="hat" id="hat">
+                                        <img src="" class="hat rounded" id="hat">
                                     {% endif %}
                                     {% if avatar.equipped_accessory %}
-                                        <img src="{{ avatar.equipped_accessory.image.url }}" class="accessory" id="accessory" >
+                                        <img src="{{ avatar.equipped_accessory.image.url }}" class="accessory rounded" id="accessory" >
                                     {% else %}
-                                        <img src="" class="accessory" id="accessory">
+                                        <img src="" class="accessory rounded" id="accessory">
                                     {% endif %}
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 py-3">
                                 <h4>{% trans "Hats" %}</h4>
-                                <div class="items-container d-flex flex-wrap">
+                                <div class="items-container d-flex">
                                     {% for item in all_items %}
                                         {% if item.item_type == "hat" %}
                                             <div class="item-card m-1" data-id="{{ item.id }}" data-type="hat" data-url="{{ item.image.url }}"
@@ -154,7 +154,7 @@
                                 </div>
 
                                 <h4>{% trans "Shirts" %}</h4>
-                                <div class="items-container d-flex flex-wrap">
+                                <div class="items-container d-flex">
                                     {% for item in all_items %}
                                         {% if item.item_type == "shirt" %}
                                             <div class="item-card m-1" data-id="{{ item.id }}" data-type="shirt" data-url="{{ item.image.url }}"
@@ -167,7 +167,7 @@
                                 </div>
 
                                 <h4>{% trans "Accessories" %}</h4>
-                                <div class="items-container d-flex flex-wrap">
+                                <div class="items-container d-flex">
                                     {% for item in all_items %}
                                         {% if item.item_type == "accessory" %}
                                             <div class="item-card m-1" data-id="{{ item.id }}" data-type="accessory" data-url="{{ item.image.url }}"
@@ -180,7 +180,7 @@
                                 </div>
 
                                 <h4>{% trans "Backgrounds" %}</h4>
-                                <div class="items-container d-flex flex-wrap">
+                                <div class="items-container d-flex">
                                     {% for item in all_items %}
                                         {% if item.item_type == "background" %}
                                             <div class="item-card m-1" data-id="{{ item.id }}" data-type="background" data-url="{{ item.image.url }}"
@@ -208,6 +208,7 @@
         accessory: {% if avatar.equipped_accessory %}"{{ avatar.equipped_accessory.id }}"{% else %}null{% endif %},
         background: {% if avatar.equipped_background %}"{{ avatar.equipped_background.id }}"{% else %}null{% endif %}
     };
+    console.log("Initial window.currentAvatar:", window.currentAvatar);
 </script>
 <script src="{% static 'js/avatar.js' %}"></script>
 {% endblock %}

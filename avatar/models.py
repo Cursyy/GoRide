@@ -23,7 +23,7 @@ class AvatarItem(models.Model):
             return "Unknown condition"
 
         condition = self.condition.split("_")
-        
+
         if len(condition) != 2:
             return "Invalid condition format"
 
@@ -70,8 +70,9 @@ class UserAvatar(models.Model):
             if item in self.unlocked_items.all():
                 continue
 
-            condition = item.condition.split("-")
+            condition = item.condition.split("__")
             if len(condition) != 2:
+                print(f"Invalid condition format for item {item.name}")
                 continue 
 
             condition_type, condition_value = condition[0], int(condition[1])

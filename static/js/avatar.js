@@ -1,13 +1,6 @@
 (function (){
     "use strict";
 
-    window.currentAvatar = {
-        hat: null,
-        shirt: null,
-        accessory: null,
-        background: null,
-    };
-
     function updateAvatar(){
         const hatImg = document.getElementById("hat");
         const shirtImg = document.getElementById("shirt");
@@ -82,9 +75,10 @@
             window.currentAvatar[type] = id;
         }
 
+        console.log("Equipping:", type, id);
         updateAvatar();
 
-        window.WebSocketManager.send("avatar_update", {
+        window.WebSocketManager.sendMessage("avatar_update", {
             hat: window.currentAvatar.hat,
             shirt: window.currentAvatar.shirt,
             accessory: window.currentAvatar.accessory,
