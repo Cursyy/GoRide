@@ -24,12 +24,12 @@
                 <hr>
                 {% if statistics %}
                     <div class="user-badges">
-                        {% with statistics.get_badges as badges %}
+                        {% with statistics.get_all_badges as badges %}
                             {% if badges %}
                                 <div class="badges-container">
                                     {% for badge in badges %}
                                         <div class="badge">
-                                            <img src="{{badge.src}}" alt="{{badge.name}}" class="badge-img">
+                                            <img src="{{badge.image.url}}" alt="{{badge.name}}" class="badge-img">
                                         </div>
                                     {% endfor %}
                                 </div>

@@ -13,7 +13,7 @@ from get_direction.views import end_active_trip, start_trip
 from wallet.models import Wallet
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from booking.tasks import update_stats, send_transaction_email
+from booking.tasks import send_transaction_email
 
 
 @login_required
@@ -141,7 +141,6 @@ def rent_vehicle(request, vehicle_id):
                 return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
         vehicle.status = False
         vehicle.save()
-        update_stats(hours, total_amount, vehicle, request.user)
         transaction_data = {
             "transaction_id": booking.booking_id,
             "date": booking.booking_date,
@@ -321,7 +320,7 @@ def booking_success(request, booking_id):
         vehicle.save()
         hours = booking.hours
         total_amount = booking.amount
-        update_stats(hours, total_amount, vehicle, request.user)
+
         transaction_data = {
             "transaction_id": booking.booking_id,
             "date": booking.booking_date,

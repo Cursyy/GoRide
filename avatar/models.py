@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from stats.models import UserStatistics
 
 class AvatarItem(models.Model):
     ITEM_TYPES = (
@@ -19,10 +20,10 @@ class AvatarItem(models.Model):
         return f"{self.name} ({self.item_type})"
     
     def get_condition_text(self):
-        if not self.condition or "_" not in self.condition:
+        if not self.condition or "__" not in self.condition:
             return "Unknown condition"
 
-        condition = self.condition.split("_")
+        condition = self.condition.split("__")
 
         if len(condition) != 2:
             return "Invalid condition format"
@@ -57,7 +58,7 @@ class UserAvatar(models.Model):
         return f"{self.user.username}'s Avatar"
     
     def check_and_unlock_items(self):
-        from subscriptions.models import UserStatistics
+        old_items = set(self.unlocked_items.values_list('id', flat=True))
 
         try:
             stats = UserStatistics.objects.get(user=self.user)
@@ -93,3 +94,6 @@ class UserAvatar(models.Model):
                 self.unlocked_items.add(item)
 
         self.save()
+
+        new_items = set(self.unlocked_items.values_list('id', flat=True)) - old_items
+        return AvatarItem.objects.filter(id__in=new_items)

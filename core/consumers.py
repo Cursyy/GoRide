@@ -366,7 +366,6 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
         await self.send_json({"type": "onchat_notification", "data": event["message"]})
 
     async def balance_update_notification(self, event):
-        """Обробляє сповіщення про оновлення балансу."""
         print(f"Sending balance_update_notification to user {self.user.user_id}")
         await self.send_json(
             {"type": "balance_update", "balance": str(event["balance"])}
@@ -494,3 +493,7 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
     def save_avatar(self, avatar):
         with transaction.atomic():
             avatar.save()
+    
+    async def rewards_notification(self, event):
+        print(f"Sending rewards_notification to user {self.user.user_id}")
+        await self.send_json({"type": "rewards_notification", "data": event["data"]})

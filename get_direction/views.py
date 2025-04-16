@@ -15,6 +15,9 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from wallet.models import Wallet
 from django.core.cache import cache
+from avatar.models import UserAvatar
+from stats.models import UserStatistics
+
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
@@ -214,6 +217,49 @@ def end_trip(request):
         wallet.top_up(charge)
         print(wallet.balance)
         trip.save()
+
+        try:
+            stats = UserStatistics.objects.get(user=user)
+        except UserStatistics.DoesNotExist:
+            stats = UserStatistics.objects.create(user=user)
+
+        duration_hours = total_minutes / 60
+        vehicle_type = trip.booking.vehicle.type if trip.booking and trip.booking.vehicle else "E-Scooter"
+        stats.update_stats(duration_hours, trip.total_amount, vehicle_type)
+
+        new_badges = stats.get_badges()
+
+        try:
+            avatar = UserAvatar.objects.get(user=user)
+        except UserAvatar.DoesNotExist:
+            avatar = UserAvatar.objects.create(user=user)
+        new_items = avatar.check_and_unlock_items()
+
+        if new_badges or new_items:
+            notifications = []
+            for badge in new_badges:
+                notifications.append({
+                    'type': 'badge',
+                    'name': badge.name,
+                    'image': badge.image.url if badge.image else '', 
+                })
+            for item in new_items:
+                notifications.append({
+                    'type': 'item',
+                    'name': item.name,
+                    'image': item.image.url,
+                })
+
+            channel_layer = get_channel_layer()
+            group_name = f"user_{user.user_id}"
+            async_to_sync(channel_layer.group_send)(
+                group_name,
+                {
+                    "type": "rewards_notification",
+                    "data": notifications,
+                }
+            )
+
         notify_trip_status(user)
         print(f"Trip ended: {trip.id}, Total cost: {trip.total_amount}")
         return JsonResponse(

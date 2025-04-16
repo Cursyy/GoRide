@@ -8,7 +8,8 @@ from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
-from subscriptions.models import UserStatistics, UserSubscription
+from subscriptions.models import UserSubscription
+from stats.models import UserStatistics
 from booking.models import Booking
 from avatar.models import UserAvatar, AvatarItem
 from django.views.decorators.cache import cache_page
@@ -85,7 +86,6 @@ def profile_view(request):
     bookings = Booking.objects.filter(user=request.user)
     avatar, _ = UserAvatar.objects.get_or_create(user=request.user)
     all_items = AvatarItem.objects.all()
-    avatar.check_and_unlock_items()
     unlocked_items = list(avatar.unlocked_items.values_list("id", flat=True))
 
     context = {
