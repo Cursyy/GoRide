@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "avatar",
     "careers",
     "stats",
+    "reviews",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",

@@ -2,12 +2,17 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+from reviews.models import Review
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, "home.html")
+    recent_reviews = Review.objects.all().order_by("-created_at")[:6]
+    context = {
+        "recent_reviews": recent_reviews,
+    }
+    return render(request, "home.html", context)
 
 
 def contacts(request):

@@ -1455,11 +1455,13 @@ html.dark-mode .dropdown-item:hover {
 }
 
 .hat{
-  width: 35%;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top: -5%;
-  left: 33%;
-  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
 }
 
 .accessory{
@@ -1580,4 +1582,73 @@ html.dark-mode .submit-button:hover {
   .contact-container {
       grid-template-columns: 1fr;
   }
+}
+
+
+.reviews-slider {
+  margin: 40px 0;
+}
+
+.review-card {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.rating {
+  margin: 10px 0;
+}
+
+.star {
+  font-size: 20px;
+}
+
+.swiper-container {
+  padding: 20px 0;
+}
+
+.swiper-slide {
+  width: 300px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #28a745;
+}
+
+.carousel-item .card {
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+}
+
+.review-card {
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+}
+
+/* Dark mode styles */
+html.dark-mode .review-card {
+  background-color: var(--second-font-color);
+  color: var(--text-dark);
+}
+
+html.dark-mode .swiper-button-next, 
+html.dark-mode .swiper-button-prev {
+  color: var(--accent-color);
+}
+
+html.dark-mode .carousel-item .card {
+  background-color: var(--second-bg-color);
+  color: var(--main-font-color);
 }

@@ -80,6 +80,55 @@
     </div>
 </section>
 
+<section class="reviews-slider py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">{% trans "Recent Reviews" %}</h2>
+        {% if recent_reviews %}
+            <div class="row">
+                <div class="col-12">
+                    <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner text-center">
+                            {% for review in recent_reviews %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <div class="card p-4 shadow-sm">
+                                        <div class="d-flex flex-column align-items-center mb-3">
+                                            <img src="{% if review.user.profile_pic.url %}{{ review.user.profile_pic.url }}{% else %}/static/images/default-avatar.png{% endif %}" 
+                                                 alt="{{ review.user.username }}" 
+                                                 class="rounded-circle mb-3" 
+                                                 style="width: 70px; height: 70px;">
+                                            <h5 class="mb-0">{{ review.user.username }}</h5>
+                                        </div>
+                                        <div class="rating mb-3">
+                                            {% for _ in "12345" %}
+                                                <span class="star" style="color: {% if forloop.counter <= review.rating %}#ffd700{% else %}#ccc{% endif %};">★</span>
+                                            {% endfor %}
+                                        </div>
+                                        <p class="mb-3">{{ review.text }}</p>
+                                        <small class="text-muted">{{ review.created_at|date:"F d, Y" }}</small>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev" style="top: 50%; transform: translateY(-50%);">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">{% trans "Previous" %}</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next" style="top: 50%; transform: translateY(-50%);">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">{% trans "Next" %}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-center">{% trans "No reviews yet. Be the first to leave one!" %}</p>
+        {% endif %}
+        <div class="text-center mt-4">
+            <a href="{% url 'reviews:review_list' %}" class="btn btn-light">{% trans "See All Reviews" %}</a>
+        </div>
+    </div>
+</section>
+
 <section class="cta text-center text-white py-5 mb-5 rounded">
     <div class="container">
         <h2>{% trans "Download the GoRide app and start riding" %}</h2>
@@ -92,6 +141,26 @@
     {% for message in messages %}
         alert("{{ message }}");
     {% endfor %}
+
+    const swiper = new Swiper('.swiper-container', {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+            },
+            768: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        },
+    });
 </script>
 {% endblock content %}
 {% endcache %}

@@ -53,6 +53,7 @@ def rent_vehicle(request, vehicle_id):
     trip = Trip.objects.filter(user=request.user, status="active").first()
 
     if not vehicle.status:
+        messages.info(request, "Vehicle is not available")
         return redirect("find_transport:find_transport")
 
     if trip:
@@ -64,13 +65,13 @@ def rent_vehicle(request, vehicle_id):
         if user_subscription.is_active() and user_subscription.can_use_vehicle(vehicle):
             subscription = user_subscription
     except UserSubscription.DoesNotExist:
-        pass
+        messages.info(request, "You don't have an active subscription.")
 
     wallet = None
     try:
         wallet = Wallet.objects.get(user=request.user)
     except Wallet.DoesNotExist:
-        pass
+        messages.info(request, "Wallet not found.")
 
     if request.method == "POST":
         hours = int(request.POST.get("hours", 0))
@@ -109,20 +110,18 @@ def rent_vehicle(request, vehicle_id):
             return redirect(
                 "payments:process_stripe_payment", booking_id=booking.booking_id
             )
+        
         elif payment_type == "Paypal":
             return redirect(
                 "payments:process_paypal_payment", booking_id=booking.booking_id
             )
+        
         elif payment_type == "Subscription" and not voucher_code:
             if subscription:
-                if (
-                    subscription.remaining_rides is None
-                    or subscription.remaining_rides >= hours
-                ):
+                if (subscription.remaining_rides is None or subscription.remaining_rides >= hours):
                     total_amount = Decimal("0")
                     subscription.remaining_rides = (
-                        subscription.remaining_rides or 0
-                    ) - hours
+                        subscription.remaining_rides or 0) - hours
                     subscription.save()
                 else:
                     booking.status = "Cancelled"
@@ -132,6 +131,7 @@ def rent_vehicle(request, vehicle_id):
                 booking.status = "Cancelled"
                 booking.save()
                 return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
+            
         elif payment_type == "AppBalance":
             if wallet and wallet.balance >= total_amount:
                 wallet.withdraw(total_amount)
@@ -139,6 +139,7 @@ def rent_vehicle(request, vehicle_id):
                 booking.status = "Cancelled"
                 booking.save()
                 return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
+            
         vehicle.status = False
         vehicle.save()
         transaction_data = {
@@ -233,6 +234,7 @@ def subscribe(request, plan_id):
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
             except Voucher.DoesNotExist:
+                messages.error(request, "Invalid voucher code.")
                 return redirect("booking:subscribe", plan_id=plan_id)
 
         booking = Booking.objects.create(
@@ -262,10 +264,12 @@ def subscribe(request, plan_id):
                 else:
                     booking.status = "Cancelled"
                     booking.save()
+                    messages.error(request, "Insufficient balance.")
                     return redirect("booking:subscribe", plan_id=plan_id)
             except Wallet.DoesNotExist:
                 booking.status = "Cancelled"
                 booking.save()
+                messages.error(request, "Wallet not found.")
                 return redirect("booking:subscribe", plan_id=plan_id)
 
         user_subscription, created = UserSubscription.objects.get_or_create(

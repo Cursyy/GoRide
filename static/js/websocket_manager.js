@@ -315,6 +315,12 @@
         const totalCost = data.total_cost ?? 0;
         if (isLocalTimerRunning) stopLocalTimer();
         showTripSummary(serverTotalTime, totalCost);
+
+        if (data.show_review_popup && typeof window.showReviewPopup === 'function') {
+          window.showReviewPopup();
+        } else if (data.show_review_popup) {
+            console.warn("showReviewPopup function is not available.");
+        }
       } else if (currentStatus === "active" || currentStatus === "resumed") {
         const newBaseTime = serverTotalTime;
         if (!isLocalTimerRunning) {

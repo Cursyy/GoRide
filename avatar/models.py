@@ -12,7 +12,8 @@ class AvatarItem(models.Model):
     )
     name = models.CharField(max_length=50)
     item_type = models.CharField(max_length=20, choices=ITEM_TYPES)
-    image = models.ImageField(upload_to='avatar_items/')
+    image = models.ImageField(upload_to='avatar_items/', blank=True)
+    preview_image = models.ImageField(upload_to='avatar_items/preview/', blank=True)
     description = models.CharField(max_length=200, blank=True)
     condition = models.CharField(max_length=100)
 

@@ -267,6 +267,7 @@ def end_trip(request):
                 "status": "finished",
                 "trip_id": trip.id,
                 "total_cost": str(trip.total_amount),
+                "show_review_popup": True,
             }
         )
 
@@ -322,6 +323,7 @@ def notify_trip_status(user):
                 "total_cost": str(last_finished.total_amount)
                 if last_finished.total_amount is not None
                 else None,
+                "show_review_popup": True,
             }
             print(
                 f"Notify: No active/paused trip found for user {user.user_id}, sending last finished."
