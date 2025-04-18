@@ -211,11 +211,16 @@ def end_trip(request):
         trip.total_amount = (Decimal(total_minutes) * trip.cost_per_minute) + (
             trip.pause_duration * trip.cost_per_minute / 2
         )
-        charge = trip.prepaid_minutes * trip.cost_per_minute - trip.total_amount
-        wallet = Wallet.objects.get(user=user)
-        print(wallet.balance)
-        wallet.top_up(charge)
-        print(wallet.balance)
+
+        if(trip.booking.payment_method != "Subscription"):
+            charge = trip.prepaid_minutes * trip.cost_per_minute - trip.total_amount
+            wallet = Wallet.objects.get(user=user)
+            print(wallet.balance)
+            wallet.top_up(charge)
+            print(wallet.balance)
+        else:
+            trip.total_amount = 0
+        
         trip.save()
 
         try:

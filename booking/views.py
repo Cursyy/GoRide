@@ -59,6 +59,7 @@ def rent_vehicle(request, vehicle_id):
     if trip:
         messages.info(request, "You have not finished trip")
         return redirect("get_direction:map")
+    
     subscription = None
     try:
         user_subscription = UserSubscription.objects.get(user=request.user)
@@ -117,16 +118,8 @@ def rent_vehicle(request, vehicle_id):
             )
         
         elif payment_type == "Subscription" and not voucher_code:
-            if subscription:
-                if (subscription.remaining_rides is None or subscription.remaining_rides >= hours):
-                    total_amount = Decimal("0")
-                    subscription.remaining_rides = (
-                        subscription.remaining_rides or 0) - hours
-                    subscription.save()
-                else:
-                    booking.status = "Cancelled"
-                    booking.save()
-                    return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
+            if subscription and subscription.is_active():
+                total_amount = Decimal("0")
             else:
                 booking.status = "Cancelled"
                 booking.save()
@@ -293,7 +286,7 @@ def subscribe(request, plan_id):
         booking.save()
         return redirect("subscriptions:subscription_success")
 
-    return render(request, "subscription_booking.html", {"plan": plan_id})
+    return render(request, "subscription_booking.html", {"plan": plan})
 
 
 @login_required

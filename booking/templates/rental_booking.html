@@ -15,12 +15,7 @@
 
             {% if subscription %}
             <div class="alert alert-info text-center">
-                {% trans "Your subscription" %}: {{ subscription.plan.get_type_display }} ({% trans "remaining hours" %}: 
-                {% if subscription.remaining_rides is not None %}
-                    {% if subscription.remaining_rides > 0 %} {{ subscription.remaining_rides }}
-                    {% else %} 0 {% endif %}
-                {% else %} {% trans "unlimited" %} {% endif %}
-                )
+                {% trans "Your subscription" %}: {{ subscription.plan.get_type_display }}
             </div>
             {% endif %}
 
@@ -42,7 +37,7 @@
                 <div class="mb-4">
                     <label class="form-label fw-bold">{% trans "Choose Payment Method" %}</label>
                     <div class="d-flex flex-column gap-2">
-                        {% if subscription and subscription.remaining_rides > 0 and subscription.remaining_rides is not null %}
+                        {% if subscription and subscription.is_active %}
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="payment_type" value="Subscription" id="subscription_radio" checked>
                                 <label class="form-check-label" for="subscription_radio">{% trans "Subscription" %}</label>
@@ -89,10 +84,9 @@
             document.getElementById('stripe').checked = true;
         } else {
             const subscriptionRadio = document.getElementById('subscription_radio');
-            if ((subscriptionRadio) && {{subscription|yesno:"true,false"}}) {
-                const remainingHours = {{ subscription.remaining_rides|default:0 }};
-                subscriptionRadio.disabled = remainingHours < hours;
-                subscriptionRadio.checked = !subscriptionRadio.disabled;
+            if (subscriptionRadio && {{ subscription|yesno:"true,false" }} && {{ subscription.is_active|yesno:"true,false" }}) {
+                subscriptionRadio.checked = true;
+                total = 0;
             }
         }
         if ({{wallet_balance}} <= total) {
@@ -155,6 +149,7 @@
                 applyVoucher('vehicle', {{ vehicle.id }}, null);
             });
         }
+        updateTotal();
     });
 </script>
 {% endblock %}

@@ -17,10 +17,6 @@
                         <h4 class="card-title text-center">{{ plan.get_type_display }}</h4>
                         <p class="card-text"><strong>{% trans "Price:" %}</strong> {{ plan.price }} €</p>
                         <p class="card-text">
-                            <strong>{% trans "Ride Limit:" %}</strong>
-                            {% if plan.max_ride_hours %}{{ plan.max_ride_hours }}{% else %}{% trans "Unlimited" %}{% endif %}
-                        </p>
-                        <p class="card-text">
                             <strong>{% trans "Transport type:" %}</strong>
                             {% if plan.type == "Athlete" %}
                             {% trans "Bike only" %}
