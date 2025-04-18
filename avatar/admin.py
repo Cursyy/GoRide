@@ -3,7 +3,7 @@ from .models import AvatarItem, UserAvatar
 # Register your models here.
 
 class AvatarItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'condition')
+    list_display = ('name', 'item_type', 'condition')
 
 class UserAvatarAdmin(admin.ModelAdmin):
     list_display = ('user', 'equipped_hat', 'equipped_shirt', 'equipped_accessory', 'equipped_background')

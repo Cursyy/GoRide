@@ -4,44 +4,6 @@
 
 {% block title %}{% trans "About GoRide" %}{% endblock title %}
 
-{% block extra_css %}
-<style>
-    .about-hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo16852728301866aec2df5b1a5-NJacv.jpeg');
-        background-size: cover;
-        background-position: center;
-        color: white;
-        min-height: 400px;
-    }
-
-    .team-photo {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #ddd;
-    }
-
-    .story-card {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 20px;
-        transition: transform 0.3s ease;
-    }
-
-    .story-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .cta-section {
-        background: #28a745;
-        color: white;
-        border-radius: 10px;
-    }
-</style>
-{% endblock extra_css %}
-
 {% block content %}
 <section class="about-hero rounded d-flex align-items-center py-5 px-0 px-lg-5">
     <div class="container text-center">

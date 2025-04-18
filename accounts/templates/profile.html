@@ -45,10 +45,10 @@
             <div class="profile-card p-2 p-lg-4">
                 <ul class="nav nav-tabs" id="profileTabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active w-100 text-dark" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="true">{% trans "Statistics" %}</button>
+                        <button class="nav-link active w-100" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="true">{% trans "Statistics" %}</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link w-100 text-dark" id="avatar-tab" data-bs-toggle="tab" data-bs-target="#avatar" type="button" role="tab" aria-controls="avatar" aria-selected="false">{% trans "Avatar" %}</button>
+                        <button class="nav-link w-100" id="avatar-tab" data-bs-toggle="tab" data-bs-target="#avatar" type="button" role="tab" aria-controls="avatar" aria-selected="false">{% trans "Avatar" %}</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="profileTabsContent">
@@ -159,7 +159,7 @@
                                         {% if item.item_type == "shirt" %}
                                             <div class="item-card m-1" data-id="{{ item.id }}" data-type="shirt" data-url="{{ item.image.url }}"
                                                 {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;" title="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}>
-                                                <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
                                                 <p>{{ item.name }}</p>
                                             </div>
                                         {% endif %}
@@ -172,7 +172,7 @@
                                         {% if item.item_type == "accessory" %}
                                             <div class="item-card m-1" data-id="{{ item.id }}" data-type="accessory" data-url="{{ item.image.url }}"
                                                 {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;" title="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}>
-                                                <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
                                                 <p>{{ item.name }}</p>
                                             </div>
                                         {% endif %}
@@ -185,7 +185,7 @@
                                         {% if item.item_type == "background" %}
                                             <div class="item-card m-1" data-id="{{ item.id }}" data-type="background" data-url="{{ item.image.url }}"
                                                 {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;" title="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}>
-                                                <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
                                                 <p>{{ item.name }}</p>
                                             </div>
                                         {% endif %}

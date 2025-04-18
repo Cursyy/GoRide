@@ -5,7 +5,7 @@
 {% block title %}{% trans "Main page" %}{% endblock title %} 
 
 {% block content %}
-<section class="hero d-flex align-items-center p-5">
+<section class="hero d-flex align-items-center p-5 rounded">
     <div class="container text-white">
         <div class="row align-items-center">
             <div class="col-lg-6 hero-text">
@@ -53,27 +53,42 @@
     </div>
 </section>
 
-<section class="benefits text-center py-5 pt-0 pt-lg-5">
+<section class="benefits text-center py-5">
     <div class="container">
-        <h2>{% trans "Exceptional Bike and Scooter Rentals" %}</h2>
-        <p>{% trans "GoRide offers on-demand access to our shared fleet of electric bikes and scooters." %}</p>
+        <h2 class="mb-3">{% trans "Ride the Future with GoRide!" %} 🚀</h2>
+        <p class="lead mb-5">{% trans "Hop on our electric bikes and scooters and zip through the city with style, speed, and zero hassle!" %} 🛵</p>
         <div class="row mt-4">
-            <div class="col-md-4 mb-4 mb-md-0"> 
-                <div class="card p-4">
-                    <h3>{% trans "Easy Rentals" %}</h3>
-                    <p class="m-0">{% trans "Locate and unlock vehicles with the GoRide app." %}</p>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="card p-4 h-100">
+                    <i class="fas fa-bolt benefit-icon"></i>
+                    <h3 class="mb-3">{% trans "Rent in a Snap" %}</h3>
+                    <p class="m-0">
+                        {% blocktrans %}
+                        Unlock your ride in seconds! Just scan a QR code or punch in a code in the GoRide app, and you're off to explore the city.
+                        {% endblocktrans %} ⚡
+                    </p>
                 </div>
             </div>
             <div class="col-md-4 mb-4 mb-md-0">
-                <div class="card p-4">
-                    <h3>{% trans "Affordable Pricing" %}</h3>
-                    <p class="m-0">{% trans "Pay by the minute or choose a membership." %}</p>
+                <div class="card p-4 h-100">
+                    <i class="fas fa-wallet benefit-icon"></i>
+                    <h3 class="mb-3">{% trans "Wallet-Friendly Vibes" %}</h3>
+                    <p class="m-0">
+                        {% blocktrans with price="0.1€/min" %}
+                        Ride from just <strong>{{ price }}</strong> or grab a subscription to save big. Pay your way, ride your day!
+                        {% endblocktrans %} 💸
+                    </p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card p-4">
-                    <h3>{% trans "Flexible Parking" %}</h3>
-                    <p class="m-0">{% trans "Conveniently park anywhere in designated areas." %}</p>
+                <div class="card p-4 h-100">
+                    <i class="fas fa-map-marker-alt benefit-icon"></i>
+                    <h3 class="mb-3">{% trans "Park Anywhere, Anytime" %}</h3>
+                    <p class="m-0">
+                        {% blocktrans with stations="20+" %}
+                        Drop your ride at any of our <strong>{{ stations }} stations</strong> across the city or park in designated zones. Freedom’s never been this easy!
+                        {% endblocktrans %} 🅿️
+                    </p>
                 </div>
             </div>
         </div>
@@ -85,12 +100,12 @@
         <h2 class="text-center mb-4">{% trans "Recent Reviews" %}</h2>
         {% if recent_reviews %}
             <div class="row">
-                <div class="col-12">
-                    <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="col-12 px-0">
+                    <div id="reviewsCarousel" class="carousel slide rounded" data-bs-ride="carousel">
                         <div class="carousel-inner text-center">
                             {% for review in recent_reviews %}
                                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                    <div class="card p-4 shadow-sm">
+                                    <div class="card-review p-4 shadow-sm rounded">
                                         <div class="d-flex flex-column align-items-center mb-3">
                                             <img src="{% if review.user.profile_pic.url %}{{ review.user.profile_pic.url }}{% else %}/static/images/default-avatar.png{% endif %}" 
                                                  alt="{{ review.user.username }}" 

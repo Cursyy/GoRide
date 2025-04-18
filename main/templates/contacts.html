@@ -4,12 +4,6 @@
 
 {% block title %}{% trans "Contact Us" %}{% endblock title %}
 
-{% block extra_css %}
-<style>
-    
-</style>
-{% endblock extra_css %}
-
 {% block content %}
 <section class="container my-5">
     <h1 class="mb-4 text-center">{% trans "Get in Touch with GoRide" %}</h1>
@@ -71,7 +65,6 @@
 </section>
 
 <script>
-    // Basic animation on page load (optional, can be enhanced)
     document.addEventListener('DOMContentLoaded', function() {
         const mapPlaceholder = document.querySelector('.map-placeholder');
         if (mapPlaceholder) {
