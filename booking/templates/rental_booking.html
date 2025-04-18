@@ -19,7 +19,7 @@
             </div>
             {% endif %}
 
-            <form id="voucher-form"  class="mb-3">
+            <form id="voucher-form" class="mb-3">
                 <div class="input-group">
                     <input type="text" class="form-control m-0" id="voucher_input" placeholder="{% trans 'Enter voucher code' %}">
                     <button type="button" class="btn btn-outline-secondary" id="apply-voucher-btn">{% trans "Apply" %}</button>
@@ -74,26 +74,37 @@
     let discount = 0;
 
     function updateTotal() {
-        const hours = document.getElementById('hours').value;
+        const hours = parseInt(document.getElementById('hours').value) || 1;
         const pricePerHour = parseFloat({{ vehicle.price_per_hour }});
-        let total =  hours * pricePerHour;
-        if (voucherApplied) {
-            total -= (total * discount / 100);
-            document.getElementById('subscription_radio').disabled = true;
-            document.getElementById('appbalance').disabled = true;
-            document.getElementById('stripe').checked = true;
-        } else {
-            const subscriptionRadio = document.getElementById('subscription_radio');
-            if (subscriptionRadio && {{ subscription|yesno:"true,false" }} && {{ subscription.is_active|yesno:"true,false" }}) {
-                subscriptionRadio.checked = true;
-                total = 0;
+        const subscriptionRadio = document.getElementById('subscription_radio');
+        const appBalanceRadio = document.getElementById('appbalance');
+        const stripeRadio = document.getElementById('stripe');
+
+        let total = hours * pricePerHour;
+
+        if (subscriptionRadio.checked && {{ subscription.is_active|yesno:"true,false" }}) {
+            total = 0;
+            voucherApplied = false; 
+            discount = 0;
+            document.getElementById('voucher_message').innerHTML = '';
+            document.getElementById('voucher_hidden').value = ''; 
+        } 
+        else if(total > {{ wallet_balance }}) {
+            appBalanceRadio.checked = false;
+            appBalanceRadio.disabled = true;
+        } 
+        else {
+            if (voucherApplied) {
+                total -= (total * discount / 100);
+                subscriptionRadio.disabled = true;
+                if (!stripeRadio.checked && !document.getElementById('paypal').checked) {
+                    stripeRadio.checked = true;
+                }
+            } else {
+                subscriptionRadio.disabled = !{{ subscription.is_active|yesno:"true,false" }};
             }
         }
-        if ({{wallet_balance}} <= total) {
-            document.getElementById('appbalance').disabled = true;
-        } else {
-            document.getElementById('appbalance').disabled = false;
-        }
+
         document.getElementById('total_amount').textContent = '€' + total.toFixed(2);
     }
 
@@ -138,12 +149,18 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         const applyVoucherBtn = document.getElementById('apply-voucher-btn');
-        const hours = document.getElementById('hours');
-        if (hours) {
-            hours.addEventListener('input', function() {
+        const hoursInput = document.getElementById('hours');
+        const paymentRadios = document.querySelectorAll('input[name="payment_type"]');
+        if (hoursInput) {
+            hoursInput.addEventListener('input', function() {
                 updateTotal();
             });
         }
+        paymentRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateTotal();
+            });
+        });
         if (applyVoucherBtn) {
             applyVoucherBtn.addEventListener('click', function() {
                 applyVoucher('vehicle', {{ vehicle.id }}, null);

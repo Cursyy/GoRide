@@ -24,7 +24,6 @@ urlpatterns += i18n_patterns(
     path("vouchers/", include("vouchers.urls")),
     path("careers/", include("careers.urls")),
     path("reviews/", include("reviews.urls")),
-    path("", include("paypal.standard.ipn.urls")),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
