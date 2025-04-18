@@ -79,21 +79,33 @@
         const subscriptionRadio = document.getElementById('subscription_radio');
         const appBalanceRadio = document.getElementById('appbalance');
         const stripeRadio = document.getElementById('stripe');
+        const voucherInput = document.getElementById('voucher_input');
+        const applyVoucherBtn = document.getElementById('apply-voucher-btn');
 
         let total = hours * pricePerHour;
 
+        if(total > {{ wallet_balance }}) {
+            appBalanceRadio.checked = false;
+            appBalanceRadio.disabled = true;
+        } 
+        else {
+            appBalanceRadio.disabled = false;
+        }
+
         if (subscriptionRadio.checked && {{ subscription.is_active|yesno:"true,false" }}) {
             total = 0;
+            voucherInput.disabled = true;
+            voucherInput.value = 'Voucher not applicable for subscription';
+            applyVoucherBtn.disabled = true;
             voucherApplied = false; 
             discount = 0;
             document.getElementById('voucher_message').innerHTML = '';
             document.getElementById('voucher_hidden').value = ''; 
         } 
-        else if(total > {{ wallet_balance }}) {
-            appBalanceRadio.checked = false;
-            appBalanceRadio.disabled = true;
-        } 
         else {
+            voucherInput.disabled = false;
+            voucherInput.value = '';
+            applyVoucherBtn.disabled = false;
             if (voucherApplied) {
                 total -= (total * discount / 100);
                 subscriptionRadio.disabled = true;
@@ -130,7 +142,7 @@
             console.log('Response data:', data);
             const messageDiv = document.getElementById('voucher_message');
             if (data.error) {
-                messageDiv.innerHTML = `<span class="text-danger">Something went wrong!</span>`;
+                messageDiv.innerHTML = `<span class="text-danger">Voucher is not valid!</span>`;
                 voucherApplied = false;
                 discount = 0;
             } else {
@@ -143,7 +155,7 @@
         })
         .catch(error => {
             console.error('Error:', error);
-            document.getElementById('voucher_message').innerHTML = `<span class="text-danger">Something went wrong!</span>`;
+            document.getElementById('voucher_message').innerHTML = `<span class="text-danger">Voucher is not valid!</span>`;
         });
     }
 
