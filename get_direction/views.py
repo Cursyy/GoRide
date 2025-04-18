@@ -17,6 +17,7 @@ from wallet.models import Wallet
 from django.core.cache import cache
 from avatar.models import UserAvatar
 from stats.models import UserStatistics
+from booking.models import Booking
 
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
@@ -200,6 +201,7 @@ def end_trip(request):
     user = request.user
     print(f"Ending trip for user: {user}")
     trip = Trip.objects.filter(user=user, status="active").first()
+    booking = Booking.objects.get(booking_id=trip.booking_id)
     if trip:
         trip.status = "finished"
         trip.ended_at = timezone.now()
@@ -211,15 +213,13 @@ def end_trip(request):
         trip.total_amount = (Decimal(total_minutes) * trip.cost_per_minute) + (
             trip.pause_duration * trip.cost_per_minute / 2
         )
-
-        if(trip.booking.payment_method != "Subscription"):
+        print(f"payment_method: {booking.payment_type}")
+        if(booking.payment_type != "Subscription"):
             charge = trip.prepaid_minutes * trip.cost_per_minute - trip.total_amount
             wallet = Wallet.objects.get(user=user)
             print(wallet.balance)
             wallet.top_up(charge)
             print(wallet.balance)
-        else:
-            trip.total_amount = 0
         
         trip.save()
 
@@ -229,7 +229,7 @@ def end_trip(request):
             stats = UserStatistics.objects.create(user=user)
 
         duration_hours = total_minutes / 60
-        vehicle_type = trip.booking.vehicle.type if trip.booking and trip.booking.vehicle else "E-Scooter"
+        vehicle_type = booking.vehicle.type if booking and booking.vehicle else "E-Scooter"
         stats.update_stats(duration_hours, trip.total_amount, vehicle_type)
 
         new_badges = stats.get_badges()

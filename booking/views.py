@@ -150,6 +150,7 @@ def rent_vehicle(request, vehicle_id):
         print(f"Previous trip ended (if any) for user: {request.user}")
         try:
             new_trip = Trip.objects.create(
+                booking_id=booking.booking_id,
                 user=request.user,
                 prepaid_minutes=minutes_paid,
                 cost_per_minute=Decimal(vehicle.price_per_hour) / 60,
@@ -333,6 +334,7 @@ def booking_success(request, booking_id):
         print(f"Previous trip ended (if any) for user: {request.user}")
         try:
             new_trip = Trip.objects.create(
+                booking_id=booking.booking_id,
                 user=request.user,
                 prepaid_minutes=minutes_paid,
                 cost_per_minute=Decimal(vehicle.price_per_hour) / 60,
