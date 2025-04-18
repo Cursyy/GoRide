@@ -1,7 +1,7 @@
 :root {
   /* General colors */
-  --primary-green: #409B65;
-  --secondary-green: #71BF95;
+  --primary-green: #409b65;
+  --secondary-green: #71bf95;
   --light-green: #75cd9a;
   --dark-green: #155933;
   --accent-color: #ffa726;
@@ -426,7 +426,6 @@ form input[type="file"] {
   box-shadow: 0 4px 6px var(--shadow-light);
   height: 10rem;
   background: var(--card-light);
-
 }
 .vehicle-card:hover {
   transform: scale(1.03);
@@ -778,7 +777,8 @@ form input[type="file"] {
 
 /* About page */
 .about-hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo16852728301866aec2df5b1a5-NJacv.jpeg');
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo16852728301866aec2df5b1a5-NJacv.jpeg");
   background-size: cover;
   background-position: center;
   color: var(--main-font-color);
@@ -966,10 +966,6 @@ form input[type="file"] {
 }
 
 /* Avatar */
-.items-container {
-  display: flex;
-  gap: 15px;
-}
 .item-card {
   text-align: center;
 }
@@ -984,10 +980,15 @@ form input[type="file"] {
   font-size: 12px;
 }
 .items-container {
-  max-height: 80px;
-  max-width: 100%;
+  display: flex;
+  gap: 15px;
+  max-width: none; 
+  overflow: visible !important;
+}
+.items-scroll-wrapper {
   overflow-x: auto;
   overflow-y: hidden;
+  max-width: 100%;
 }
 .avatar-container {
   position: relative;
@@ -1005,7 +1006,9 @@ form input[type="file"] {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
-.shirt {
+.shirt,
+.hat,
+.accessory{
   width: 100%;
   height: 100%;
   position: absolute;
@@ -1015,30 +1018,15 @@ form input[type="file"] {
   z-index: 2;
 }
 .hat {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 3;
 }
-.accessory {
+.background {
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-.background {
   top: 0;
   left: 0;
   z-index: 0;
-  width: 100%;
-  position: absolute;
-  height: 100%;
 }
 
 /* Media requests */

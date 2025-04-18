@@ -141,55 +141,76 @@
                             </div>
                             <div class="col-lg-6 py-3">
                                 <h4>{% trans "Hats" %}</h4>
-                                <div class="items-container d-flex">
-                                    {% for item in all_items %}
-                                        {% if item.item_type == "hat" %}
-                                            <div class="item-card m-1" data-id="{{ item.id }}" data-type="hat" data-url="{{ item.image.url }}"
-                                                {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %} style="opacity: 0.5; cursor: not-allowed;" title="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}>
-                                                <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
-                                                <p>{{ item.name }}</p>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
+                                <div class="items-scroll-wrapper">
+                                    <div class="items-container d-flex">
+                                        {% for item in all_items %}
+                                            {% if item.item_type == "hat" %}
+                                                <div class="item-card m-1 {% if item.id not in unlocked_items %}locked{% endif %}" 
+                                                     data-id="{{ item.id }}" 
+                                                     data-type="hat" 
+                                                     data-url="{{ item.image.url }}"
+                                                     {% if item.id not in unlocked_items %}data-tooltip="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}
+                                                     {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+                                                    <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                    <p>{{ item.name }}</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
-
                                 <h4>{% trans "Shirts" %}</h4>
-                                <div class="items-container d-flex">
-                                    {% for item in all_items %}
-                                        {% if item.item_type == "shirt" %}
-                                            <div class="item-card m-1" data-id="{{ item.id }}" data-type="shirt" data-url="{{ item.image.url }}"
-                                                {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;" title="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}>
-                                                <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
-                                                <p>{{ item.name }}</p>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
+                                <div class="items-scroll-wrapper">
+                                    <div class="items-container d-flex">
+                                        {% for item in all_items %}
+                                            {% if item.item_type == "shirt" %}
+                                                <div class="item-card m-1 {% if item.id not in unlocked_items %}locked{% endif %}" 
+                                                     data-id="{{ item.id }}" 
+                                                     data-type="shirt" 
+                                                     data-url="{{ item.image.url }}"
+                                                     {% if item.id not in unlocked_items %}data-tooltip="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}
+                                                     {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+                                                    <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                    <p>{{ item.name }}</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
-
                                 <h4>{% trans "Accessories" %}</h4>
-                                <div class="items-container d-flex">
-                                    {% for item in all_items %}
-                                        {% if item.item_type == "accessory" %}
-                                            <div class="item-card m-1" data-id="{{ item.id }}" data-type="accessory" data-url="{{ item.image.url }}"
-                                                {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;" title="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}>
-                                                <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
-                                                <p>{{ item.name }}</p>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
+                                <div class="items-scroll-wrapper">
+                                    <div class="items-container d-flex">
+                                        {% for item in all_items %}
+                                            {% if item.item_type == "accessory" %}
+                                                <div class="item-card m-1 {% if item.id not in unlocked_items %}locked{% endif %}" 
+                                                     data-id="{{ item.id }}" 
+                                                     data-type="accessory" 
+                                                     data-url="{{ item.image.url }}"
+                                                     {% if item.id not in unlocked_items %}data-tooltip="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}
+                                                     {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+                                                    <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                    <p>{{ item.name }}</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
-
                                 <h4>{% trans "Backgrounds" %}</h4>
-                                <div class="items-container d-flex">
-                                    {% for item in all_items %}
-                                        {% if item.item_type == "background" %}
-                                            <div class="item-card m-1" data-id="{{ item.id }}" data-type="background" data-url="{{ item.image.url }}"
-                                                {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;" title="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}>
-                                                <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
-                                                <p>{{ item.name }}</p>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
+                                <div class="items-scroll-wrapper">
+                                    <div class="items-container d-flex">
+                                        {% for item in all_items %}
+                                            {% if item.item_type == "background" %}
+                                                <div class="item-card m-1 {% if item.id not in unlocked_items %}locked{% endif %}" 
+                                                     data-id="{{ item.id }}" 
+                                                     data-type="background" 
+                                                     data-url="{{ item.image.url }}"
+                                                     {% if item.id not in unlocked_items %}data-tooltip="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}
+                                                     {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+                                                    <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                    <p>{{ item.name }}</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -209,6 +230,32 @@
         background: {% if avatar.equipped_background %}"{{ avatar.equipped_background.id }}"{% else %}null{% endif %}
     };
     console.log("Initial window.currentAvatar:", window.currentAvatar);
+
+    document.querySelectorAll('.item-card.locked').forEach(card => {
+        card.addEventListener('click', function() {
+            const message = this.getAttribute('data-tooltip');
+            if (message) {
+                Toastify({
+                    text: message,
+                    duration: 5000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true,
+                    style: {
+                        background: "var(--main-bg-color)",
+                        color: "var(--main-font-color)",
+                        border: "1px solid var(--accent-color)",
+                        borderRadius: "5px",
+                        fontSize: "14px",
+                        padding: "10px 15px",
+                        boxShadow: "0 2px 5px var(--shadow-light)"
+                    },
+                    onClick: function() {}
+                }).showToast();
+            }
+        });
+    });
 </script>
 <script src="{% static 'js/avatar.js' %}"></script>
 {% endblock %}
