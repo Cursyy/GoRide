@@ -368,7 +368,13 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
     async def balance_update_notification(self, event):
         print(f"Sending balance_update_notification to user {self.user.user_id}")
         await self.send_json(
-            {"type": "balance_update", "balance": str(event["balance"])}
+            {
+                "type": "balance_update",
+                "data": {
+                    "balance": str(event["balance"]),
+                    "cashback": str(event.get("cashback", "0")),  # Додаємо cashback
+                }
+            }
         )
 
     async def send_json(self, data):
@@ -497,3 +503,5 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
     async def rewards_notification(self, event):
         print(f"Sending rewards_notification to user {self.user.user_id}")
         await self.send_json({"type": "rewards_notification", "data": event["data"]})
+    
+    

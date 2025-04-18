@@ -512,6 +512,30 @@
     }
   }
 
+  function handleBalanceUpdate(data) {
+    console.log("Manager: Handling balance_update:", data);
+    const balanceElement = document.getElementById("user-balance-display");
+    if (balanceElement && data.balance !== undefined) {
+      try {
+        balanceElement.textContent = `€${parseFloat(data.balance).toFixed(2)}`;
+      } catch (e) {
+        console.error("Failed to update balance display:", e);
+        balanceElement.textContent = `€ --.--`;
+      }
+    }
+    if (data.cashback && parseFloat(data.cashback) > 0) {
+      Toastify({
+        text: `🎉 Cashback: +€${parseFloat(data.cashback).toFixed(2)}!`,
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#28a745",
+        stopOnFocus: true,
+      }).showToast();
+    }
+  }
+
   // --- ІManager Init---
 
   function initializeManager() {

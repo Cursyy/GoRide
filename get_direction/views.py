@@ -213,13 +213,31 @@ def end_trip(request):
         trip.total_amount = (Decimal(total_minutes) * trip.cost_per_minute) + (
             trip.pause_duration * trip.cost_per_minute / 2
         )
-        print(f"payment_method: {booking.payment_type}")
-        if(booking.payment_type != "Subscription"):
+
+        cashback = Decimal(0)
+        if booking and booking.payment_type != "Subscription":
             charge = trip.prepaid_minutes * trip.cost_per_minute - trip.total_amount
-            wallet = Wallet.objects.get(user=user)
-            print(wallet.balance)
-            wallet.top_up(charge)
-            print(wallet.balance)
+            try:
+                wallet = Wallet.objects.get(user=user)
+                print(f"Before refund: Wallet balance = {wallet.balance}")
+                if charge > 0: 
+                    cashback = charge
+                    wallet.top_up(cashback)
+                    print(f"After refund: Wallet balance = {wallet.balance}")
+                    channel_layer = get_channel_layer()
+                    group_name = f"user_{user.user_id}" 
+                    async_to_sync(channel_layer.group_send)(
+                        group_name,
+                        {
+                            "type": "balance_update_notification",
+                            "balance": str(wallet.balance),
+                            "cashback": str(cashback),
+                        }
+                    )
+            except Wallet.DoesNotExist:
+                print(f"Wallet not found for user {user}")
+        else:
+            print("Subscription payment or no booking: No refund applied")
         
         trip.save()
 

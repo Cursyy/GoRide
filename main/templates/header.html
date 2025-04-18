@@ -64,7 +64,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                             <li>
-                                <a class="dropdown-item d-flex justify-content-between align-items-center" href="{% url 'booking:topup' %}">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center" href="{% url 'booking:topup' %}" id="user-balance-display">
                                     {{ wallet_balance }}€
                                     <span class="badge bg-success rounded-pill float-end">
                                         {% trans "Top Up" %}
