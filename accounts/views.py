@@ -8,7 +8,8 @@ from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
-from subscriptions.models import UserStatistics, UserSubscription
+from subscriptions.models import UserSubscription
+from stats.models import UserStatistics
 from booking.models import Booking
 from avatar.models import UserAvatar, AvatarItem
 from django.views.decorators.cache import cache_page
@@ -83,19 +84,19 @@ def profile_view(request):
     subscription = UserSubscription.objects.filter(user=request.user).first()
     statistics = UserStatistics.objects.filter(user=request.user).first()
     bookings = Booking.objects.filter(user=request.user)
-    userAvatar = UserAvatar.objects.filter(user=request.user).first()
-    avatarItems = cache.get("all_avatar_items")
-    if avatarItems is None:
-        avatarItems = AvatarItem.objects.all()
-        cache.set("all_avatar_items", avatarItems, 60 * 60 * 24)
+    avatar, _ = UserAvatar.objects.get_or_create(user=request.user)
+    all_items = AvatarItem.objects.all()
+    unlocked_items = list(avatar.unlocked_items.values_list("id", flat=True))
 
     context = {
         "user": request.user,
         "subscription": subscription,
         "statistics": statistics,
         "bookings": bookings,
-        "userAvatar": userAvatar,
-        "items": avatarItems,
+        "avatar": avatar,
+        "all_items": all_items,
+        "unlocked_items": unlocked_items,
+        "base_avatar_url": "/static/images/avatar/avatar.png",
     }
 
     if subscription:

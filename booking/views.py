@@ -13,7 +13,7 @@ from get_direction.views import end_active_trip, start_trip
 from wallet.models import Wallet
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from booking.tasks import update_stats, send_transaction_email
+from booking.tasks import send_transaction_email
 
 
 @login_required
@@ -53,24 +53,26 @@ def rent_vehicle(request, vehicle_id):
     trip = Trip.objects.filter(user=request.user, status="active").first()
 
     if not vehicle.status:
+        messages.info(request, "Vehicle is not available")
         return redirect("find_transport:find_transport")
 
     if trip:
         messages.info(request, "You have not finished trip")
         return redirect("get_direction:map")
+    
     subscription = None
     try:
         user_subscription = UserSubscription.objects.get(user=request.user)
         if user_subscription.is_active() and user_subscription.can_use_vehicle(vehicle):
             subscription = user_subscription
     except UserSubscription.DoesNotExist:
-        pass
+        messages.info(request, "You don't have an active subscription.")
 
     wallet = None
     try:
         wallet = Wallet.objects.get(user=request.user)
     except Wallet.DoesNotExist:
-        pass
+        messages.info(request, "Wallet not found.")
 
     if request.method == "POST":
         hours = int(request.POST.get("hours", 0))
@@ -109,29 +111,20 @@ def rent_vehicle(request, vehicle_id):
             return redirect(
                 "payments:process_stripe_payment", booking_id=booking.booking_id
             )
+        
         elif payment_type == "Paypal":
             return redirect(
                 "payments:process_paypal_payment", booking_id=booking.booking_id
             )
+        
         elif payment_type == "Subscription" and not voucher_code:
-            if subscription:
-                if (
-                    subscription.remaining_rides is None
-                    or subscription.remaining_rides >= hours
-                ):
-                    total_amount = Decimal("0")
-                    subscription.remaining_rides = (
-                        subscription.remaining_rides or 0
-                    ) - hours
-                    subscription.save()
-                else:
-                    booking.status = "Cancelled"
-                    booking.save()
-                    return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
+            if subscription and subscription.is_active():
+                total_amount = Decimal("0")
             else:
                 booking.status = "Cancelled"
                 booking.save()
                 return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
+            
         elif payment_type == "AppBalance":
             if wallet and wallet.balance >= total_amount:
                 wallet.withdraw(total_amount)
@@ -139,9 +132,9 @@ def rent_vehicle(request, vehicle_id):
                 booking.status = "Cancelled"
                 booking.save()
                 return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
+            
         vehicle.status = False
         vehicle.save()
-        update_stats(hours, total_amount, vehicle, request.user)
         transaction_data = {
             "transaction_id": booking.booking_id,
             "date": booking.booking_date,
@@ -157,6 +150,7 @@ def rent_vehicle(request, vehicle_id):
         print(f"Previous trip ended (if any) for user: {request.user}")
         try:
             new_trip = Trip.objects.create(
+                booking_id=booking.booking_id,
                 user=request.user,
                 prepaid_minutes=minutes_paid,
                 cost_per_minute=Decimal(vehicle.price_per_hour) / 60,
@@ -234,6 +228,7 @@ def subscribe(request, plan_id):
                     voucher.used = (voucher.used or 0) + 1
                     voucher.save()
             except Voucher.DoesNotExist:
+                messages.error(request, "Invalid voucher code.")
                 return redirect("booking:subscribe", plan_id=plan_id)
 
         booking = Booking.objects.create(
@@ -263,10 +258,12 @@ def subscribe(request, plan_id):
                 else:
                     booking.status = "Cancelled"
                     booking.save()
+                    messages.error(request, "Insufficient balance.")
                     return redirect("booking:subscribe", plan_id=plan_id)
             except Wallet.DoesNotExist:
                 booking.status = "Cancelled"
                 booking.save()
+                messages.error(request, "Wallet not found.")
                 return redirect("booking:subscribe", plan_id=plan_id)
 
         user_subscription, created = UserSubscription.objects.get_or_create(
@@ -290,7 +287,7 @@ def subscribe(request, plan_id):
         booking.save()
         return redirect("subscriptions:subscription_success")
 
-    return render(request, "subscription_booking.html", {"plan": plan_id})
+    return render(request, "subscription_booking.html", {"plan": plan})
 
 
 @login_required
@@ -321,7 +318,7 @@ def booking_success(request, booking_id):
         vehicle.save()
         hours = booking.hours
         total_amount = booking.amount
-        update_stats(hours, total_amount, vehicle, request.user)
+
         transaction_data = {
             "transaction_id": booking.booking_id,
             "date": booking.booking_date,
@@ -337,6 +334,7 @@ def booking_success(request, booking_id):
         print(f"Previous trip ended (if any) for user: {request.user}")
         try:
             new_trip = Trip.objects.create(
+                booking_id=booking.booking_id,
                 user=request.user,
                 prepaid_minutes=minutes_paid,
                 cost_per_minute=Decimal(vehicle.price_per_hour) / 60,

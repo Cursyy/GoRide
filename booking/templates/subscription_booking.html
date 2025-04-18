@@ -11,7 +11,6 @@
         </div>
         <div class="card-body">
             <p class="lead text-center">{% trans "Duration" %}: {{ plan.duration_days }}</p>
-            <p class="lead text-center">{% trans "Ride Limit" %}: {{ plan.max_ride_hours }}</p>
             <p class="lead text-center">{% trans "Price" %}: <span id="total_amount">€{{ plan.price }}</span></p>
             <form id="voucher-form" class="mb-3">
                 <div class="input-group">

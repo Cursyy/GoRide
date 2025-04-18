@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Careers at GoRide" %}{% endblock title %}
+
+{% block extra_css %}
+<style>
+    .careers-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo16852728301866aec2df5b1a5-NJacv.jpeg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        min-height: 400px;
+    }
+
+    .careers-form {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .careers-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .careers-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+
+    .careers-form label,h2{
+        color: #333;
+    }
+
+    .careers-form input,
+    .careers-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .careers-form input[type="file"] {
+        padding: 3px;
+    }
+
+    .careers-form .submit-button {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .careers-form .submit-button:hover {
+        background: #218838;
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<section class="careers-hero d-flex align-items-center py-5 px-0 px-lg-5">
+    <div class="container text-center">
+        <h1>{% trans "Join the GoRide Team!" %}</h1>
+        <p>{% trans "We’re a small student startup with big dreams. Help us make urban travel greener and more fun!" %}</p>
+    </div>
+</section>
+
+<section class="container my-5">
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <h2>{% trans "Why Work With Us?" %}</h2>
+            <p>
+                {% trans "GoRide was started by two Ukrainian students, Alex and Oleksandr, with a mission to transform urban mobility. We’re passionate about sustainability, innovation, and having a good time while we’re at it. Join us to be part of a fun, young team that’s making a real difference in Dublin!" %}
+            </p>
+            <p>
+                {% trans "We might be small now, but we’re dreaming big. If you love tech, green solutions, or just want to work with two guys who code while eating borscht, we’d love to hear from you!" %}
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <div class="careers-form">
+                <h2>{% trans "Apply Now" %}</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_first_name">{% trans "First Name" %}</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_last_name">{% trans "Last Name" %}</label>
+                        {{ form.last_name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_email">{% trans "Email Address" %}</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_phone">{% trans "Phone Number" %}</label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_position">{% trans "Desired Position" %}</label>
+                        {{ form.position }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_message">{% trans "Tell Us About Yourself" %}</label>
+                        {{ form.message }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_resume">{% trans "Upload Resume (optional)" %}</label>
+                        {{ form.resume }}
+                    </div>
+                    <button type="submit" class="submit-button">{% trans "Submit Application" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section text-center py-5 mb-5">
+    <div class="container">
+        <h2>{% trans "Ready to Make a Difference?" %}</h2>
+        <p>{% trans "We can’t wait to meet you! Submit your application, and let’s build a greener future together." %}</p>
+    </div>
+</section>
+
+<script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+</script>
+{% endblock content %}

@@ -5,7 +5,8 @@ from django.core import mail
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from .models import CustomUser
-from subscriptions.models import UserStatistics, UserSubscription
+from subscriptions.models import  UserSubscription
+from stats.models import UserStatistics
 from django.contrib.auth.models import Group
 
 CustomUser = get_user_model()

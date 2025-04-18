@@ -23,9 +23,7 @@ class Trip(models.Model):
         ("paused", "Paused"),
         ("finished", "Finished"),
     )
-    booking = models.OneToOneField(
-        "booking.Booking", null=True, blank=True, on_delete=models.SET_NULL
-    )
+    booking_id = models.CharField(max_length=255, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=20, choices=STATUS_CHOICES, default="not_started"

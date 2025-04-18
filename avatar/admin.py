@@ -2,5 +2,11 @@ from django.contrib import admin
 from .models import AvatarItem, UserAvatar
 # Register your models here.
 
-admin.site.register(AvatarItem)
-admin.site.register(UserAvatar)
+class AvatarItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'item_type', 'condition')
+
+class UserAvatarAdmin(admin.ModelAdmin):
+    list_display = ('user', 'equipped_hat', 'equipped_shirt', 'equipped_accessory', 'equipped_background')
+
+admin.site.register(AvatarItem, AvatarItemAdmin)
+admin.site.register(UserAvatar, UserAvatarAdmin)

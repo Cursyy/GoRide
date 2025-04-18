@@ -15,6 +15,10 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from wallet.models import Wallet
 from django.core.cache import cache
+from avatar.models import UserAvatar
+from stats.models import UserStatistics
+from booking.models import Booking
+
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
@@ -197,6 +201,7 @@ def end_trip(request):
     user = request.user
     print(f"Ending trip for user: {user}")
     trip = Trip.objects.filter(user=user, status="active").first()
+    booking = Booking.objects.get(booking_id=trip.booking_id)
     if trip:
         trip.status = "finished"
         trip.ended_at = timezone.now()
@@ -208,12 +213,76 @@ def end_trip(request):
         trip.total_amount = (Decimal(total_minutes) * trip.cost_per_minute) + (
             trip.pause_duration * trip.cost_per_minute / 2
         )
-        charge = trip.prepaid_minutes * trip.cost_per_minute - trip.total_amount
-        wallet = Wallet.objects.get(user=user)
-        print(wallet.balance)
-        wallet.top_up(charge)
-        print(wallet.balance)
+
+        cashback = Decimal(0)
+        if booking and booking.payment_type != "Subscription":
+            charge = trip.prepaid_minutes * trip.cost_per_minute - trip.total_amount
+            try:
+                wallet = Wallet.objects.get(user=user)
+                print(f"Before refund: Wallet balance = {wallet.balance}")
+                if charge > 0: 
+                    cashback = charge
+                    wallet.top_up(cashback)
+                    print(f"After refund: Wallet balance = {wallet.balance}")
+                    channel_layer = get_channel_layer()
+                    group_name = f"user_{user.user_id}" 
+                    async_to_sync(channel_layer.group_send)(
+                        group_name,
+                        {
+                            "type": "balance_update_notification",
+                            "balance": str(wallet.balance),
+                            "cashback": str(cashback),
+                        }
+                    )
+            except Wallet.DoesNotExist:
+                print(f"Wallet not found for user {user}")
+        else:
+            print("Subscription payment or no booking: No refund applied")
+        
         trip.save()
+
+        try:
+            stats = UserStatistics.objects.get(user=user)
+        except UserStatistics.DoesNotExist:
+            stats = UserStatistics.objects.create(user=user)
+
+        duration_hours = total_minutes / 60
+        vehicle_type = booking.vehicle.type if booking and booking.vehicle else "E-Scooter"
+        stats.update_stats(duration_hours, trip.total_amount, vehicle_type)
+
+        new_badges = stats.get_badges()
+
+        try:
+            avatar = UserAvatar.objects.get(user=user)
+        except UserAvatar.DoesNotExist:
+            avatar = UserAvatar.objects.create(user=user)
+        new_items = avatar.check_and_unlock_items()
+
+        if new_badges or new_items:
+            notifications = []
+            for badge in new_badges:
+                notifications.append({
+                    'type': 'badge',
+                    'name': badge.name,
+                    'image': badge.image.url if badge.image else '', 
+                })
+            for item in new_items:
+                notifications.append({
+                    'type': 'item',
+                    'name': item.name,
+                    'image': item.image.url,
+                })
+
+            channel_layer = get_channel_layer()
+            group_name = f"user_{user.user_id}"
+            async_to_sync(channel_layer.group_send)(
+                group_name,
+                {
+                    "type": "rewards_notification",
+                    "data": notifications,
+                }
+            )
+
         notify_trip_status(user)
         print(f"Trip ended: {trip.id}, Total cost: {trip.total_amount}")
         return JsonResponse(
@@ -221,6 +290,7 @@ def end_trip(request):
                 "status": "finished",
                 "trip_id": trip.id,
                 "total_cost": str(trip.total_amount),
+                "show_review_popup": True,
             }
         )
 
@@ -276,6 +346,7 @@ def notify_trip_status(user):
                 "total_cost": str(last_finished.total_amount)
                 if last_finished.total_amount is not None
                 else None,
+                "show_review_popup": True,
             }
             print(
                 f"Notify: No active/paused trip found for user {user.user_id}, sending last finished."
