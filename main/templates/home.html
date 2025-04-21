@@ -55,7 +55,7 @@
 
 <section class="benefits text-center py-5">
     <div class="container">
-        <h2 class="mb-3">{% trans "Ride the Future with GoRide!" %} 🚀</h2>
+        <h2 class="mb-4 block-title">{% trans "Ride the Future with GoRide!" %} 🚀</h2>
         <p class="lead mb-5">{% trans "Hop on our electric bikes and scooters and zip through the city with style, speed, and zero hassle!" %} 🛵</p>
         <div class="row mt-4">
             <div class="col-md-4 mb-4 mb-md-0">
@@ -97,7 +97,7 @@
 
 <section class="reviews-slider py-5">
     <div class="container">
-        <h2 class="text-center mb-4">{% trans "Recent Reviews" %}</h2>
+        <h2 class="text-center mb-5 block-title">{% trans "What People Are Saying About Us! " %}🌟💬</h2>
         {% if recent_reviews %}
             <div class="row">
                 <div class="col-12 px-0">
@@ -144,9 +144,37 @@
     </div>
 </section>
 
-<section class="cta text-center text-white py-5 mb-5 rounded">
+<section class="stats py-5">
+    <div class="container px-0">
+        <h2 class="text-center mb-5 block-title">{% trans "Discover Amazing Stats " %}🚴‍♂️📊</h2>
+        <div class="stats-container d-flex justify-content-around align-items-center row">
+            <div class="col-md-4">
+                <div class="stats-item">
+                    <h3>{{ total_users }}</h3>
+                    <p>{% trans "Total Users" %}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-item stats-center">
+                    <div class="circle">
+                        <h3>{{ average_rating }}</h3>
+                    </div>
+                    <p>{% trans "Average raiting" %}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-item">
+                    <h3>{{ total_trips }}</h3>
+                    <p>{% trans "Completed Trips" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta text-center text-white py-5 my-5 rounded">
     <div class="container">
-        <h2>{% trans "Download the GoRide app and start riding" %}</h2>
+        <h2>{% trans "Download the GoRide app and start riding " %}🚴‍♀️📱</h2>
         <p>{% trans "With just a few taps, you can locate, unlock, and ride." %}</p>
         <a href="#" class="btn btn-light">{% trans "Get Started" %}</a>
     </div>

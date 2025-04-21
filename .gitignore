@@ -31,3 +31,5 @@ cache
 .docx
 
 staticfiles/
+
+go_ride_app/
