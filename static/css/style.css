@@ -1490,3 +1490,296 @@ html.dark-mode .submit-button:hover {
       grid-template-columns: 1fr;
   }
 }
+
+.events-section {
+  padding: 2rem 1rem;
+}
+
+.section-title {
+  color: var(--primary-green);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+/* --- Стилі для фільтрів --- */
+.filters-wrapper.event-filters {
+  background-color: var(--mint);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+html.dark-mode .filters-wrapper.event-filters {
+    background-color: var(--second-bg-color); /* Використовуємо темний фон */
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.filter-form .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Адаптивна сітка */
+    gap: 1.5rem;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--second-font-color);
+}
+html:not(.dark-mode) .filter-item label {
+    color: var(--text-dark); /* Темніший текст для світлої теми */
+}
+
+
+/* Стилізація інпутів (використовуйте ваші класи Bootstrap або кастомні) */
+.filter-item .form-control,
+.filter-item .form-select,
+.filter-item .form-range {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--secondary-green);
+  border-radius: 4px;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.filter-item .form-control:focus,
+.filter-item .form-select:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 0.2rem rgba(64, 155, 101, 0.25);
+    outline: none;
+}
+html.dark-mode .filter-item .form-control,
+html.dark-mode .filter-item .form-select,
+html.dark-mode .filter-item .form-range {
+    background-color: var(--second-bg-color);
+    border-color: var(--secondary-green);
+    color: var(--text-dark);
+}
+html.dark-mode .filter-item .form-control::placeholder {
+    color: #889; /* Світліший placeholder для темної теми */
+}
+
+
+.filter-item input[type="range"] {
+    padding: 0; /* Рейндж не потребує падінгу */
+}
+.filter-item #radius-display {
+    margin-top: 0.3rem;
+    font-size: 0.9em;
+    color: var(--second-font-color);
+    text-align: right;
+}
+
+#use-my-location-btn {
+    margin-top: 0.5rem;
+    background-color: var(--secondary-green);
+    border-color: var(--secondary-green);
+    color: var(--main-font-color);
+    font-size: 0.85em;
+}
+#use-my-location-btn:hover {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+html.dark-mode #use-my-location-btn {
+     background-color: var(--secondary-green);
+     border-color: var(--secondary-green);
+     color: var(--bg-light); /* Темний текст на зеленому */
+}
+html.dark-mode #use-my-location-btn:hover {
+     background-color: var(--light-green);
+     border-color: var(--light-green);
+}
+
+
+.filter-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.filter-actions .btn-primary {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+    color: var(--main-font-color);
+}
+.filter-actions .btn-primary:hover {
+    background-color: var(--dark-green);
+    border-color: var(--dark-green);
+}
+html.dark-mode .filter-actions .btn-primary {
+     color: var(--bg-light);
+}
+
+
+.filter-actions .btn-outline-secondary {
+    border-color: var(--secondary-green);
+    color: var(--primary-green);
+}
+.filter-actions .btn-outline-secondary:hover {
+    background-color: var(--secondary-green);
+    color: var(--main-font-color);
+}
+html.dark-mode .filter-actions .btn-outline-secondary {
+    border-color: var(--secondary-green);
+    color: var(--secondary-green);
+}
+html.dark-mode .filter-actions .btn-outline-secondary:hover {
+    background-color: var(--secondary-green);
+    color: var(--bg-light);
+}
+
+/* --- Стилі для результатів --- */
+.results-section {
+  margin-top: 2rem;
+  position: relative; /* Для позиціонування індикатора */
+  min-height: 200px; /* Мінімальна висота під час завантаження */
+}
+
+.events-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Адаптивна сітка карток */
+  gap: 1.5rem;
+}
+
+/* --- Стилі для картки події --- */
+.event-card {
+  background-color: var(--bg-light);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+html.dark-mode .event-card {
+    background-color: var(--second-bg-color);
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.08);
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+html.dark-mode .event-card:hover {
+     box-shadow: 0 6px 12px rgba(255, 255, 255, 0.12);
+}
+
+.event-card__image {
+  width: 100%;
+  height: 160px; /* Фіксована висота зображення */
+  object-fit: cover; /* Масштабування із збереженням пропорцій */
+  display: block; /* Забрати зайвий відступ під зображенням */
+}
+
+.event-card__content {
+  padding: 1rem;
+  flex-grow: 1; /* Щоб контент займав доступний простір */
+  display: flex;
+  flex-direction: column;
+}
+
+.event-card__title {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--primary-green);
+  /* Обмеження тексту в 2 рядки */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.6em; /* Приблизна висота для 2 рядків */
+}
+html.dark-mode .event-card__title {
+    color: var(--light-green);
+}
+
+
+.event-card__info {
+  font-size: 0.9em;
+  color: var(--second-font-color);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+/* Додайте іконки (наприклад, Font Awesome або SVG) */
+.event-card__info i {
+    color: var(--secondary-green);
+    font-size: 1.1em;
+    min-width: 16px; /* Ширина іконки */
+}
+
+.event-card__footer {
+  margin-top: auto; /* Притискає футер до низу картки */
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--mint);
+}
+html.dark-mode .event-card__footer {
+     border-top: 1px solid var(--main-bg-color); /* Темніший розділювач */
+}
+
+.event-card__link {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: #fff; /* Білий текст на помаранчевому */
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.event-card__link:hover {
+  background-color: #fb8c00; /* Темніший помаранчевий */
+  color: #fff;
+}
+
+/* --- Індикатор завантаження --- */
+.loading-indicator {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--secondary-green);
+  position: absolute; /* По центру контейнера */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.spinner {
+  border: 4px solid var(--mint);
+  border-top: 4px solid var(--primary-green);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem auto;
+}
+html.dark-mode .spinner {
+    border-color: var(--main-bg-color);
+    border-top-color: var(--light-green);
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Повідомлення "Нічого не знайдено" --- */
+.no-results-message {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--second-font-color);
+}

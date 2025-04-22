@@ -1,4 +1,3 @@
-{% autoescape off %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,8 +51,6 @@
         Subscription Duration: <strong>{{ subscription_duration }}</strong>.</p>
       {% elif payment_subject == "Wallet" %}
         <p style="color: #155933;">You have successfully added funds to your wallet.</p>
-        {# Wallet Top-Up Amount: {{ wallet_top_up_amount }} #}
-        {# Current Wallet Balance: {{ wallet_balance }} #}
       {% endif %}
 
       <p>Thank you for choosing our bike rental service. <br>
@@ -70,4 +67,3 @@
 
 </body>
 </html>
-{% endautoescape %}

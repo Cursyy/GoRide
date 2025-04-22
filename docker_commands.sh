@@ -37,3 +37,7 @@ docker-compose logs web
 # 9. Restart containers (if needed)
 # This command restarts all services in containers after code changes.
 docker-compose restart
+
+# 10. Open Redis CLI
+# This command opens the Redis CLI for debugging or monitoring Redis on docker.
+docker exec -it redis redis-cli
