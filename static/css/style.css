@@ -163,8 +163,11 @@ a {
 }
 
 .hero_img {
-  width: 400px;
-  height: 400px;
+  aspect-ratio: 1/1;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 450px;
+  max-height: 450px;
 }
 
 /* Features section */
@@ -193,7 +196,7 @@ a {
   font-weight: 700;
   color: var(--second-bg-color);
 }
-.benefits .lead {
+.lead {
   font-size: 1.25rem;
   color: var(--text-dark);
 }
@@ -1142,6 +1145,7 @@ form input[type="file"] {
   }
   .hero_img {
     width: 100%;
+    margin: auto;
   }
   .card {
     min-height: 195px;
@@ -1182,7 +1186,7 @@ form input[type="file"] {
   .card {
     min-height: 140px;
   }
-  .stats-item{
+  .stats-item {
     margin: 2rem 0;
   }
   .stats-item:nth-child(2) {
@@ -1455,7 +1459,7 @@ html.dark-mode {
     background-color: var(--main-bg-color);
     color: var(--main-font-color);
   }
-  .benefits .lead {
+  .lead {
     color: var(--second-font-color);
   }
   .benefits .card {
@@ -1502,13 +1506,13 @@ html.dark-mode {
     color: var(--main-font-color);
   }
 
-  .cta{
+  .cta {
     background-color: var(--main-bg-color);
     color: var(--main-font-color);
   }
 
-  .block-title{
-    color: var(--accent-color)
+  .block-title {
+    color: var(--accent-color);
   }
 }
 
@@ -1605,7 +1609,7 @@ html[data-accessibility="on"] .block-title {
   color: var(--high-contrast-text);
 }
 
-html[data-accessibility="on"] .benefits .lead {
+html[data-accessibility="on"] .lead {
   color: var(--high-contrast-text);
 }
 
