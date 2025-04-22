@@ -57,6 +57,13 @@ html.dark-mode {
   --second-font-color: #bdc3c7;
 }
 
+html[data-accessibility="on"] {
+  --high-contrast-bg: #000;
+  --high-contrast-text: #fff;
+  --high-contrast-accent: #00f;
+  --high-contrast-border: #666;
+}
+
 /* Basic styles */
 body {
   margin: 0;
@@ -1453,7 +1460,7 @@ html.dark-mode {
   }
   .benefits .card {
     background-color: var(--second-bg-color);
-    border: 1px solid var(--accent-color);
+    border: 1px solid var(--border-dark);
   }
   .benefits .card:hover {
     box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);
@@ -1503,6 +1510,491 @@ html.dark-mode {
   .block-title{
     color: var(--accent-color)
   }
+}
+
+/* High contrast mode */
+
+html[data-accessibility="on"] body {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] a {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .my_custom_div {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .form-text,
+html[data-accessibility="on"] .form-text li {
+  color: var(--high-contrast-text);
+}
+
+/* Header */
+html[data-accessibility="on"] .bg-custom {
+  background-color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .navbar-dark .navbar-nav .nav-link {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--high-contrast-accent);
+}
+
+html[data-accessibility="on"] .btn-outline-light {
+  border-color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .btn-outline-light:hover {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .btn-light {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .btn-light:hover {
+  background-color: var(--high-contrast-accent);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .dropdown-menu {
+  background-color: var(--high-contrast-bg);
+  border-color: var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .dropdown-item {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .dropdown-item:hover {
+  background-color: var(--high-contrast-accent);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .dropdown-divider {
+  border-top-color: var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .form-select-sm {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  border: 1px solid var(--high-contrast-border);
+}
+
+/* Hero section */
+html[data-accessibility="on"] .hero {
+  background-color: var(--high-contrast-bg);
+}
+
+/* Features section */
+html[data-accessibility="on"] .feature-text {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+/* Benefits section */
+html[data-accessibility="on"] .block-title {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .benefits .lead {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .benefits .card {
+  background-color: var(--high-contrast-bg);
+  border: 1px solid var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .benefits .benefit-icon {
+  color: var(--high-contrast-accent);
+}
+
+html[data-accessibility="on"] .benefits .card h3 {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .benefits .card p {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .benefits .card p strong {
+  color: var(--high-contrast-text);
+}
+
+/* CTA */
+html[data-accessibility="on"] .cta {
+  background-color: var(--high-contrast-bg);
+}
+
+/* Footer */
+html[data-accessibility="on"] .footer {
+  background-color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .footer a {
+  color: var(--high-contrast-text);
+}
+
+/* Profile page */
+html[data-accessibility="on"] .my_title {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .my_label {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .nav-tabs .nav-link {
+  color: var(--high-contrast-accent);
+}
+
+html[data-accessibility="on"] form input,
+html[data-accessibility="on"] form select {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  border: 1px solid var(--high-contrast-border);
+}
+
+/* Custom alert */
+html[data-accessibility="on"] .custom-alert-container {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+html[data-accessibility="on"] .alert-content {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  border: 1px solid var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .close {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .close:hover,
+html[data-accessibility="on"] .close:focus {
+  color: var(--high-contrast-accent);
+}
+
+/* Buttons */
+html[data-accessibility="on"] .btn-secondary {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .btn-secondary:hover {
+  background-color: var(--high-contrast-accent);
+  color: var(--high-contrast-bg);
+}
+
+/* Chat button */
+html[data-accessibility="on"] .chat-button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+  box-shadow: none;
+}
+
+html[data-accessibility="on"] .chat-button:hover {
+  background-color: var(--high-contrast-accent);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .chat-link {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .chat-link:hover {
+  color: var(--high-contrast-accent);
+}
+
+html[data-accessibility="on"] .notification-popup {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  box-shadow: none;
+}
+
+/* Chat form */
+html[data-accessibility="on"] .chat-form textarea {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  border: 1px solid var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .chat-form button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .chat-form button:hover {
+  background-color: var(--high-contrast-accent);
+  color: var(--high-contrast-bg);
+  border: 1px solid var(--high-contrast-border);
+}
+
+/* Transport section */
+html[data-accessibility="on"] .vehicle-section {
+  background-color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .section-title {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .vehicle-card {
+  background-color: var(--high-contrast-bg);
+  border: 1px solid var(--high-contrast-border);
+  box-shadow: none;
+}
+
+html[data-accessibility="on"] .vehicle-details h3 {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .vehicle-details p,
+html[data-accessibility="on"] .vehicle-price {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .vehicle-details a {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .rent-button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .rent-button:hover {
+  background-color: var(--high-contrast-accent);
+}
+
+/* Pagination section */
+html[data-accessibility="on"] .pagination-arrow,
+html[data-accessibility="on"] .page-numbers button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .pagination-arrow:hover,
+html[data-accessibility="on"] .page-numbers button:hover,
+html[data-accessibility="on"] .page-numbers button.active {
+  background-color: var(--high-contrast-accent);
+}
+
+/* Filters */
+html[data-accessibility="on"] .filter-form {
+  background-color: var(--high-contrast-bg);
+  border: 1px solid var(--high-contrast-border);
+  box-shadow: none;
+}
+
+html[data-accessibility="on"] .filter-item label {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .filter-item select,
+html[data-accessibility="on"] .filter-item input {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  border: 1px solid var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .filter-button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .filter-button:hover {
+  background-color: var(--high-contrast-accent);
+  color: var(--high-contrast-bg);
+}
+
+/* Subscriptions */
+html[data-accessibility="on"] .subscriptions .card-body > a {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .progress-container {
+  background-color: var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .progress-bar {
+  background-color: var(--high-contrast-accent);
+  color: var(--high-contrast-bg);
+}
+
+/* Map */
+html[data-accessibility="on"] .map-button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+  border: 1px solid var(--high-contrast-border);
+  box-shadow: none;
+}
+
+html[data-accessibility="on"] .map-button:hover {
+  background-color: var(--high-contrast-accent);
+}
+
+html[data-accessibility="on"] #get-direction,
+html[data-accessibility="on"] #add-stops-button,
+html[data-accessibility="on"] #delete-markers-button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] #search-input {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  border: 1px solid var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] #search-button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .categories-sidebar {
+  background-color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .result-item {
+  background-color: var(--high-contrast-bg);
+  border: 1px solid var(--high-contrast-border);
+  box-shadow: none;
+}
+
+html[data-accessibility="on"] .result-title {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .result-item p {
+  color: var(--high-contrast-text);
+}
+
+/* About page */
+html[data-accessibility="on"] .about-hero {
+  background: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .story-card {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .cta-section {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+/* Contacts page */
+html[data-accessibility="on"] .contact-container {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  box-shadow: none;
+}
+
+html[data-accessibility="on"] .contact-details {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .contact-details h3 {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .contact-details a {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .contact-details a:hover {
+  color: var(--high-contrast-accent);
+}
+
+html[data-accessibility="on"] .map-placeholder {
+  background-color: var(--high-contrast-border);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .contact-form {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .contact-form h2 {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .form-group input[type="text"],
+html[data-accessibility="on"] .form-group input[type="email"],
+html[data-accessibility="on"] .form-group textarea {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+  border: 1px solid var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .submit-button {
+  background-color: var(--high-contrast-text);
+  color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .submit-button:hover {
+  background-color: var(--high-contrast-accent);
+}
+
+/* Reviews */
+html[data-accessibility="on"] .review-card {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .swiper-button-next,
+html[data-accessibility="on"] .swiper-button-prev {
+  color: var(--high-contrast-accent);
+}
+
+html[data-accessibility="on"] .carousel-item .card-review {
+  background-color: var(--high-contrast-bg);
+  color: var(--high-contrast-text);
+}
+
+/* Statistics */
+html[data-accessibility="on"] .stats-container {
+  background-color: var(--high-contrast-bg);
+  border: 1px solid var(--high-contrast-border);
+  box-shadow: none;
+}
+
+html[data-accessibility="on"] .stats-item h3 {
+  color: var(--high-contrast-text);
+}
+
+html[data-accessibility="on"] .stats-item p {
+  color: var(--high-contrast-text);
+  opacity: 1;
+}
+
+html[data-accessibility="on"] .stats-center::before,
+html[data-accessibility="on"] .stats-center::after {
+  background-color: var(--high-contrast-border);
+}
+
+html[data-accessibility="on"] .circle {
+  border-color: var(--high-contrast-accent);
+  background-color: var(--high-contrast-bg);
+}
+
+html[data-accessibility="on"] .circle h3 {
+  color: var(--high-contrast-text);
 }
 
 /* Animations */
