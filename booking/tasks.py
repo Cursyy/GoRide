@@ -1,5 +1,5 @@
 from celery import shared_task
-from subscriptions.models import UserStatistics
+from stats.models import UserStatistics
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage

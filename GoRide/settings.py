@@ -63,6 +63,9 @@ INSTALLED_APPS = [
     "get_direction",
     "events_near_me",
     "avatar",
+    "careers",
+    "stats",
+    "reviews",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",

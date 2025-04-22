@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "About GoRide" %}{% endblock title %}
+
+{% block content %}
+<section class="about-hero rounded d-flex align-items-center py-5 px-0 px-lg-5">
+    <div class="container text-center">
+        <h1>{% trans "GoRide: A Journey by Two Ukrainian Students" %}</h1>
+        <p>{% trans "We’re Alex and Oleksandr, two friends from Ukraine, building a greener way to explore the city." %}</p>
+    </div>
+</section>
+
+<section class="story container py-5">
+    <h2 class="text-center mb-4">{% trans "Our Story" %}</h2>
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="story-card">
+                <h3>{% trans "The Struggle That Sparked GoRide" %}</h3>
+                <p>
+                    {% trans "Back in 2023, we were just two Ukrainian students at TU Dublin, Tallaght Campus, trying to survive university life. The campus was far from our place, and relying on public transport was a nightmare – buses were late, overcrowded, and it took ages to get anywhere. We knew there had to be a better way, so we decided to create one ourselves." %}
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="story-card">
+                <h3>{% trans "From Late-Night Coding to Real Rides" %}</h3>
+                <p>
+                    {% trans "We spent countless nights coding GoRide in our dorms, fueled by borscht, coffee, and Ukrainian grit. Our first bike test ended with Oleksandr stuck in a puddle – we laughed so hard we forgot how to code for a day! But by 2025, GoRide was live, helping people zip around Dublin on electric bikes and scooters, all while keeping the planet green." %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="team container py-5 text-center">
+    <h2 class="mb-4">{% trans "The GoRide Team" %}</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+            <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo15718471404711d7766e825ea-A2Tes.jpeg" alt="{% trans 'Alex' %}" class="team-photo mb-3">
+            <h4>{% trans "Alex – The Full Stack Enthusiast" %}</h4>
+            <p>
+                {% trans "I’m Oleksandr, but everyone calls me Alex. Together with my friend, I worked on the backend to make GoRide run smoothly. But I also poured my heart into the design – creating the app’s look and the avatar system, so you can ride in style!" %}
+            </p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo15874857158175e8c6fa2a903-XLtmj.jpeg" alt="{% trans 'Oleksandr' %}" class="team-photo mb-3">
+            <h4>{% trans "Oleksandr – The Server Master" %}</h4>
+            <p>
+                {% trans "I’m Oleksandr, the other half of GoRide. I teamed up with Alex on the backend, but I also focused on setting up the servers and APIs to keep everything running like a dream. We both gave our all to make GoRide happen!" %}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="mission container py-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6 mb-4">
+            <h2>{% trans "Our Mission" %}</h2>
+            <p>
+                {% trans "GoRide is more than just a rental service – it’s our way of making city travel eco-friendly, affordable, and fun. We want to help people explore Dublin without the hassle of unreliable transport, all while reducing emissions. And yeah, we added a cool avatar system because we believe even your virtual self deserves to look awesome!" %}
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <img src="https://cdn.cmsfly.com/67c6c79f47be450012e04116/images/photo153001470898955a898ad9552-jqd2o.jpeg" alt="{% trans 'Urban Scene' %}" class="img-fluid rounded shadow">
+        </div>
+    </div>
+</section>
+
+<section class="cta-section text-center py-5 mb-5">
+    <div class="container">
+        <h2>{% trans "Join the GoRide Revolution!" %}</h2>
+        <p>{% trans "We’re two Ukrainian students with a big dream, and we’d love for you to be part of it. Download the app, rent a ride, and let’s make cities greener together!" %}</p>
+        <a href="{% url 'find_transport:find_transport' %}" class="btn btn-light">{% trans "Start Riding Now" %}</a>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const storyCards = document.querySelectorAll('.story-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.3 });
+
+        storyCards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock content %}

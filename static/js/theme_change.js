@@ -3,6 +3,8 @@
 (function () {
   const themeToggleButton = document.getElementById("theme-toggle");
   const themeIcon = document.getElementById("theme-icon");
+  const accessibilityToggle = document.getElementById("accessibility-toggle");
+  const accessibilityIcon = document.getElementById("accessibility-icon");
   // Перевіряємо наявність елементів перед роботою з ними
   if (!themeToggleButton || !themeIcon) {
     console.warn("Theme toggle button or icon not found.");
@@ -81,4 +83,43 @@
       setTheme(e.matches);
     }
   });
+
+  if (accessibilityToggle) {
+    const savedAccessibility = localStorage.getItem("accessibility") || "off";
+    document.documentElement.setAttribute("data-accessibility", savedAccessibility);
+    if (savedAccessibility === "on") {
+      if (accessibilityIcon) {
+        accessibilityIcon.classList.remove("fa-universal-access");
+        accessibilityIcon.classList.add("fa-eye-slash");
+      }
+      accessibilityToggle.setAttribute("title", "Disable Accessibility Mode");
+    } else {
+      if (accessibilityIcon) {
+        accessibilityIcon.classList.remove("fa-eye-slash");
+        accessibilityIcon.classList.add("fa-universal-access");
+      }
+      accessibilityToggle.setAttribute("title", "Enable Accessibility Mode");
+    }
+
+    accessibilityToggle.addEventListener("click", () => {
+      const isAccessibilityOn = document.documentElement.getAttribute("data-accessibility") === "on";
+      const newAccessibility = isAccessibilityOn ? "off" : "on";
+      document.documentElement.setAttribute("data-accessibility", newAccessibility);
+      localStorage.setItem("accessibility", newAccessibility);
+
+      if (newAccessibility === "on") {
+        if (accessibilityIcon) {
+          accessibilityIcon.classList.remove("fa-universal-access");
+          accessibilityIcon.classList.add("fa-eye-slash");
+        }
+        accessibilityToggle.setAttribute("title", "Disable Accessibility Mode");
+      } else {
+        if (accessibilityIcon) {
+          accessibilityIcon.classList.remove("fa-eye-slash");
+          accessibilityIcon.classList.add("fa-universal-access");
+        }
+        accessibilityToggle.setAttribute("title", "Enable Accessibility Mode");
+      }
+    });
+  }
 })();
