@@ -23,11 +23,12 @@ media/
 #Cache files
 cache
 
-#fixtures
+#json files
 *.json
-
 
 .env
 .docx
 
 staticfiles/
+
+go_ride_app/

@@ -12,14 +12,10 @@
             {% for plan in plans %}
             {% if plan %}
             <div class="col-md-4">
-                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card shadow-lg p-3 mb-5 rounded">
                     <div class="card-body">
                         <h4 class="card-title text-center">{{ plan.get_type_display }}</h4>
                         <p class="card-text"><strong>{% trans "Price:" %}</strong> {{ plan.price }} €</p>
-                        <p class="card-text">
-                            <strong>{% trans "Ride Limit:" %}</strong>
-                            {% if plan.max_ride_hours %}{{ plan.max_ride_hours }}{% else %}{% trans "Unlimited" %}{% endif %}
-                        </p>
                         <p class="card-text">
                             <strong>{% trans "Transport type:" %}</strong>
                             {% if plan.type == "Athlete" %}
@@ -37,4 +33,19 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card, index) => {
+            card.style.opacity = 0;
+            card.style.transform = "translateY(20px)";
+            setTimeout(() => {
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                card.style.opacity = 1;
+                card.style.transform = "translateY(0)";
+            }, index * 100);
+        });
+    });
+</script>
 {% endblock %}

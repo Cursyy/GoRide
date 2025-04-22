@@ -61,6 +61,9 @@ INSTALLED_APPS = [
     "booking",
     "get_direction",
     "avatar",
+    "careers",
+    "stats",
+    "reviews",
     # third party apps
     "crispy_forms",
     "crispy_bootstrap5",

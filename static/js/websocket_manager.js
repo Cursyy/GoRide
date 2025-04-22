@@ -315,6 +315,12 @@
         const totalCost = data.total_cost ?? 0;
         if (isLocalTimerRunning) stopLocalTimer();
         showTripSummary(serverTotalTime, totalCost);
+
+        if (data.show_review_popup && typeof window.showReviewPopup === 'function') {
+          window.showReviewPopup();
+        } else if (data.show_review_popup) {
+            console.warn("showReviewPopup function is not available.");
+        }
       } else if (currentStatus === "active" || currentStatus === "resumed") {
         const newBaseTime = serverTotalTime;
         if (!isLocalTimerRunning) {
@@ -458,6 +464,7 @@
     notificationStack.push({ element: notif, timeout });
   }
 
+
   function handleBalanceUpdate(data) {
     console.log("Manager: Handling balance_update:", data);
     const balanceElement = document.getElementById("user-balance-display");
@@ -468,6 +475,64 @@
         console.error("Failed to update balance display:", e);
         balanceElement.textContent = `€ --.--`;
       }
+    }
+  }
+
+  function handleRewardsNotification(data) {
+    console.log("Manager: Handling rewards_notification:", data);
+
+    if (!data || !Array.isArray(data)) {
+      console.warn("Invalid rewards_notification data:", data);
+      return;
+    }
+
+    data.forEach(reward => {
+      Toastify({
+        text: `🎉 You've unlocked a new ${reward.type}: ${reward.name}!`,
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#28a745",
+        stopOnFocus: true,
+        onClick: function() {
+            window.location.href = "/accounts/profile/";
+        },
+        callback: function() {
+            console.log(`Closed notification for ${reward.type}: ${reward.name}`);
+        }
+    }).showToast();
+    });
+
+    const notificationSound = document.getElementById("notification-sound");
+    if (notificationSound) {
+      notificationSound.play().catch((error) => {
+        console.error("Rewards: Audio play failed:", error);
+      });
+    }
+  }
+
+  function handleBalanceUpdate(data) {
+    console.log("Manager: Handling balance_update:", data);
+    const balanceElement = document.getElementById("user-balance-display");
+    if (balanceElement && data.balance !== undefined) {
+      try {
+        balanceElement.textContent = `€${parseFloat(data.balance).toFixed(2)}`;
+      } catch (e) {
+        console.error("Failed to update balance display:", e);
+        balanceElement.textContent = `€ --.--`;
+      }
+    }
+    if (data.cashback && parseFloat(data.cashback) > 0) {
+      Toastify({
+        text: `🎉 Cashback: +€${parseFloat(data.cashback).toFixed(2)}!`,
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#28a745",
+        stopOnFocus: true,
+      }).showToast();
     }
   }
 
@@ -487,6 +552,7 @@
     registerMessageHandler("trip_status", handleTripStatusUpdate);
     registerMessageHandler("onchat_notification", handleChatNotification);
     registerMessageHandler("balance_update", handleBalanceUpdate);
+    registerMessageHandler("rewards_notification", handleRewardsNotification);
     registerMessageHandler("internal_socket_close", (event) => {
       console.log("Manager handling internal_socket_close.");
       stopLocalTimer("Connection closed.");

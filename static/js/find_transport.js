@@ -245,7 +245,7 @@ function displayVehicles() {
 
   vehiclesToShow.forEach((vehicle) => {
     const vehicleCard = document.createElement("div");
-    vehicleCard.classList.add("vehicle-card");
+    vehicleCard.classList.add("vehicle-card", "mb-4");
 
     let imgSrc;
     switch (vehicle.type) {
