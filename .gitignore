@@ -23,9 +23,8 @@ media/
 #Cache files
 cache
 
-#fixtures
+#json files
 *.json
-
 
 .env
 .docx
