@@ -7,20 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const radiusDisplay = document.getElementById("radius-display");
   const latInput = document.getElementById("lat-filter");
   const lonInput = document.getElementById("lon-filter");
-  const locationInput = document.getElementById("location-filter"); // Поле для введення локації (не використовується для API напряму)
+  const locationInput = document.getElementById("location-filter");
   const useMyLocationBtn = document.getElementById("use-my-location-btn");
   const resetFiltersBtn = document.getElementById("reset-filters-btn");
 
-  // --- Оновлення відображення радіусу ---
   if (radiusSlider && radiusDisplay) {
     radiusSlider.addEventListener("input", () => {
       radiusDisplay.textContent = `${radiusSlider.value} km`;
     });
-    // Ініціалізація початкового значення
     radiusDisplay.textContent = `${radiusSlider.value} km`;
   }
 
-  // --- Функція для отримання та відображення подій ---
   const fetchAndDisplayEvents = async (params = {}) => {
     loadingIndicator.style.display = "block";
     eventsContainer.innerHTML = "";
@@ -29,22 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let apiUrl;
     const queryParams = new URLSearchParams();
 
-    // --- ВИЗНАЧЕННЯ API ЕНДПОІНТУ ---
     if (params.lat && params.lon) {
-      // Якщо є координати - використовуємо nearby ендпоінт
       apiUrl = "api/search/nearby/";
       console.log("Using NEARBY API endpoint");
-      // Додаємо всі параметри
       for (const key in params) {
         if (params[key]) {
           queryParams.append(key, params[key]);
         }
       }
     } else {
-      // Якщо координат немає - використовуємо default ендпоінт
       apiUrl = "api/search/default/";
       console.log("Using DEFAULT API endpoint");
-      // Додаємо тільки не-локаційні параметри
       for (const key in params) {
         if (
           key !== "lat" &&
@@ -58,17 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // --- ВИПРАВЛЕННЯ: Формуємо ПОВНИЙ URL з параметрами ---
-    const queryString = queryParams.toString(); // Перетворюємо параметри в рядок "key=value&key2=value2"
-    // Додаємо рядок параметрів до базового URL, тільки якщо він не порожній
+    const queryString = queryParams.toString();
     const fullUrl = queryString ? `${apiUrl}?${queryString}` : apiUrl;
-    // --- КІНЕЦЬ ВИПРАВЛЕННЯ ---
     console.log("Fetching events from:", fullUrl);
 
     try {
       const response = await fetch(fullUrl);
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({})); // Спробувати отримати тіло помилки
+        const errorData = await response.json().catch(() => ({}));
         console.error("API Error Response:", errorData);
         throw new Error(
           `HTTP error! status: ${response.status} - ${
@@ -87,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // --- Функція для відображення карток подій ---
   const displayEvents = (events) => {
     if (!events || events.length === 0) {
       noResultsMessage.style.display = "block";
@@ -95,9 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     events.forEach((event) => {
-      // Безпечне отримання даних (з перевірками)
-      const imageUrl =
-        event.images?.[0]?.url || "/static/images/placeholder.jpg"; // Шлях до заглушки
+      const imageUrl = event.images?.[0]?.url;
       const eventName = event.name || "Unnamed Event";
       const eventUrl = event.url || "#";
       const startDate = event.dates?.start?.localDate;
@@ -108,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const countryName = venueData?.country?.name || "";
       const genre = event.classifications?.[0]?.genre?.name || "";
 
-      // Форматування дати і часу (можна використати бібліотеку типу date-fns або moment.js)
       let displayDate = "Date N/A";
       if (startDate) {
         try {
@@ -123,9 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
               minute: "2-digit",
               hour12: false,
             };
-            // Додаємо 'T' для коректного парсингу часу в деяких браузерах
             const timeStr =
-              startTime.length === 5 ? startTime + ":00" : startTime; // Додаємо секунди, якщо їх немає
+              startTime.length === 5 ? startTime + ":00" : startTime;
             displayDate += ` - ${new Date(
               `${startDate}T${timeStr}`,
             ).toLocaleTimeString(undefined, timeOpts)}`;
@@ -170,30 +154,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // --- Обробник відправки форми фільтрів ---
   filterForm.addEventListener("submit", (e) => {
-    e.preventDefault(); // Заборонити стандартну відправку
+    e.preventDefault();
     const formData = new FormData(filterForm);
     const params = {};
-    // Перебираємо дані форми і додаємо до об'єкту параметрів
     for (const [key, value] of formData.entries()) {
       if (value) {
-        // Додаємо тільки якщо значення не порожнє
         params[key] = value;
       }
       console.log(`Filter param: ${key} = ${value}`);
     }
-    // Переконуємось, що lat/lon передаються, тільки якщо вони встановлені
     if (!latInput.value || !lonInput.value) {
       delete params.lat;
       delete params.lon;
-      delete params.radius; // Можливо, не варто передавати радіус без координат
+      delete params.radius;
     }
 
     fetchAndDisplayEvents(params);
   });
 
-  // --- Обробник кнопки "Використати мою локацію" ---
   useMyLocationBtn.addEventListener("click", () => {
     if (navigator.geolocation) {
       useMyLocationBtn.disabled = true;
@@ -202,16 +181,12 @@ document.addEventListener("DOMContentLoaded", () => {
         (position) => {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
-          latInput.value = lat.toFixed(6); // Зберігаємо координати в прихованих полях
+          latInput.value = lat.toFixed(6);
           lonInput.value = lon.toFixed(6);
-          locationInput.value = `My Location (${lat.toFixed(3)}, ${lon.toFixed(
-            3,
-          )})`; // Показуємо користувачу
+          locationInput.value = "My Location";
           console.log(`Location acquired: ${lat}, ${lon}`);
           useMyLocationBtn.disabled = false;
-          useMyLocationBtn.textContent = `{% trans "Use My Location" %}`;
-          // Опціонально: одразу запустити пошук
-          // filterForm.dispatchEvent(new Event('submit'));
+          useMyLocationBtn.textContent = '{% trans "Use My Location" %}';
         },
         (error) => {
           console.error("Error getting geolocation:", error);
@@ -221,40 +196,31 @@ document.addEventListener("DOMContentLoaded", () => {
           useMyLocationBtn.disabled = false;
           useMyLocationBtn.textContent = `{% trans "Use My Location" %}`;
         },
-        { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 }, // Опції геолокації
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 },
       );
     } else {
       alert(`{% trans "Geolocation is not supported by your browser." %}`);
     }
   });
 
-  // --- Обробник кнопки скидання фільтрів ---
   resetFiltersBtn.addEventListener("click", () => {
-    filterForm.reset(); // Скидає значення полів форми
-    latInput.value = ""; // Очищуємо приховані поля координат
+    filterForm.reset();
+    latInput.value = "";
     lonInput.value = "";
-    // Оновлюємо відображення радіусу
     if (radiusSlider && radiusDisplay) {
       radiusDisplay.textContent = `${radiusSlider.value} km`;
     }
-    // Запускаємо пошук з порожніми фільтрами (покаже дефолтні результати)
     fetchAndDisplayEvents();
   });
 
-  // --- Початкове завантаження подій ---
-  // Можна спробувати отримати локацію користувача при завантаженні
-  // або просто завантажити дефолтні події (без параметрів lat/lon)
-  //const initialParams = {};
-  // Тут можна додати логіку для отримання дефолтної локації, якщо потрібно
   fetchAndDisplayEvents(initialParams);
 
-  // Або, якщо хочемо спробувати отримати локацію користувача одразу:
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         initialParams.lat = position.coords.latitude.toFixed(6);
         initialParams.lon = position.coords.longitude.toFixed(6);
-        initialParams.radius = radiusSlider ? radiusSlider.value : "15"; // Використовуємо поточний радіус
+        initialParams.radius = radiusSlider ? radiusSlider.value : "15";
         console.log("Initial load with user location.");
         fetchAndDisplayEvents(initialParams);
       },
@@ -263,12 +229,12 @@ document.addEventListener("DOMContentLoaded", () => {
           "Could not get initial location, loading default events.",
           error.message,
         );
-        fetchAndDisplayEvents(); // Завантажуємо без локації при помилці
+        fetchAndDisplayEvents();
       },
-      { timeout: 5000 }, // Короткий таймаут для початкової спроби
+      { timeout: 5000 },
     );
   } else {
     console.log("Geolocation not supported, loading default events.");
-    fetchAndDisplayEvents(); // Завантажуємо без локації, якщо геолокація не підтримується
+    fetchAndDisplayEvents();
   }
 });

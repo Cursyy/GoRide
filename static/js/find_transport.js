@@ -272,8 +272,6 @@ function displayVehiclesMap(vehiclesToDisplay) {
         case "E-Scooter":
           iconUrl = "/static/images/e-scooter.jpg";
           break;
-        default:
-          iconUrl = "/static/images/placeholder.jpg";
       }
 
       let vehicleIcon = L.divIcon({
@@ -287,14 +285,18 @@ function displayVehiclesMap(vehiclesToDisplay) {
       let marker = L.marker([vehicle.latitude, vehicle.longitude], {
         icon: vehicleIcon,
       })
-        .bindPopup(
-          /* ... вміст попапу ... */
-          `<b>Battery charge:</b> ${
-            vehicle.battery_percentage !== null
-              ? vehicle.battery_percentage + "%"
-              : "N/A"
-          }<br><b>Type:</b> ${vehicle.type}`,
-        )
+        .bindPopup(function () {
+          switch (vehicle.type) {
+            case "Bike":
+              return `<b>Type:</b> ${vehicle.type}`;
+            default:
+              return `<b>Battery charge:</b> ${
+                vehicle.battery_percentage !== null
+                  ? vehicle.battery_percentage + "%"
+                  : "N/A"
+              }<br><b>Type:</b> ${vehicle.type}`;
+          }
+        })
         .addTo(window.vehicleMarkersLayer);
       vehicleClusterGroup.addLayer(marker);
       marker.on("click", function () {
@@ -342,10 +344,20 @@ function displayVehicles() {
       default:
         imgSrc = "/static/images/placeholder.jpg";
     }
-    const mapLink =
-      vehicle.latitude != null && vehicle.longitude != null
-        ? `<button onclick="focusOnVehicle(${vehicle.latitude}, ${vehicle.longitude})" class="map-link btn btn-sm btn-outline-primary">Show on Map</button>`
-        : `<span class="map-link-na text-muted">Map N/A</span>`;
+    const mapLink = (function () {
+      if (vehicle.station_id === null) {
+        return vehicle.latitude != null && vehicle.longitude != null
+          ? `<button onclick="focusOnVehicle(${vehicle.latitude}, ${vehicle.longitude})" class="map-link btn btn-sm btn-outline-primary">Show on Map</button>`
+          : `<span class="map-link-na text-muted">Map N/A</span>`;
+      } else {
+        const station = allStationsData.find(
+          (station) => station.id === vehicle.station_id,
+        );
+        return vehicle.latitude != null && vehicle.longitude != null
+          ? `<button onclick="focusOnVehicle(${station.latitude}, ${station.longitude})" class="map-link btn btn-sm btn-outline-primary">Show on Map</button>`
+          : `<span class="map-link-na text-muted">Map N/A</span>`;
+      }
+    })();
 
     vehicleCard.innerHTML = `
             <div class="vehicle-image">
@@ -354,11 +366,16 @@ function displayVehicles() {
                 } image" style="width: 106%; height: auto;"/>             </div>
             <div class="vehicle-details">
                 <h3>${vehicle.type || "Unknown Type"}</h3>
-                ${
-                  vehicle.battery_percentage !== null
-                    ? `<p>Battery: ${vehicle.battery_percentage}%</p>`
-                    : "<p>Battery: N/A</p>"
-                }
+                ${(function () {
+                  switch (vehicle.type) {
+                    case "Bike":
+                      return "";
+                    default:
+                      return vehicle.battery_percentage !== null
+                        ? `<p>Battery: ${vehicle.battery_percentage}%</p>`
+                        : "<p>Battery: N/A</p>";
+                  }
+                })()}
                 ${mapLink}
             </div>
             <div class="vehicle-price">
