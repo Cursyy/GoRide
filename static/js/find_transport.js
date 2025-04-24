@@ -314,79 +314,85 @@ function displayVehicles() {
   const container = document.getElementById("vehicle-container");
   if (!container) return;
   container.innerHTML = "";
-
   const start = (currentPage - 1) * vehiclesPerPage;
   const end = start + vehiclesPerPage;
-  const vehiclesToShow = allVehicles.slice(start, end);
+  const vehiclesToShow = Array.isArray(allVehicles)
+    ? allVehicles.slice(start, end)
+    : [];
 
   if (vehiclesToShow.length === 0) {
-    container.innerHTML = "<p>No vehicles match the current criteria.</p>";
+    container.innerHTML =
+      '<p class="text-center text-muted mt-4">No vehicles match the current criteria.</p>';
     const paginationContainer = document.getElementById("pagination-controls");
     if (paginationContainer) paginationContainer.innerHTML = "";
     return;
   }
-
+  const isCurrentlyDark =
+    document.documentElement.classList.contains("dark-mode");
   vehiclesToShow.forEach((vehicle) => {
     const vehicleCard = document.createElement("div");
     vehicleCard.classList.add("vehicle-card", "mb-4");
 
-    let imgSrc;
+    let baseImgSrc;
     switch (vehicle.type) {
       case "Bike":
-        imgSrc = "/static/images/bike.webp";
+        baseImgSrc = "/static/images/bike";
         break;
       case "E-Bike":
-        imgSrc = "/static/images/e-bike.jpg";
+        baseImgSrc = "/static/images/e-bike";
         break;
       case "E-Scooter":
-        imgSrc = "/static/images/e-scooter.jpg";
+        baseImgSrc = "/static/images/e-scooter";
         break;
-      default:
-        imgSrc = "/static/images/placeholder.jpg";
     }
-    const mapLink = (function () {
-      if (vehicle.station_id === null) {
-        return vehicle.latitude != null && vehicle.longitude != null
-          ? `<button onclick="focusOnVehicle(${vehicle.latitude}, ${vehicle.longitude})" class="map-link btn btn-sm btn-outline-primary">Show on Map</button>`
-          : `<span class="map-link-na text-muted">Map N/A</span>`;
-      } else {
-        const station = allStationsData.find(
-          (station) => station.id === vehicle.station_id,
-        );
-        return vehicle.latitude != null && vehicle.longitude != null
-          ? `<button onclick="focusOnVehicle(${station.latitude}, ${station.longitude})" class="map-link btn btn-sm btn-outline-primary">Show on Map</button>`
-          : `<span class="map-link-na text-muted">Map N/A</span>`;
-      }
-    })();
+    const lightSrc = `${baseImgSrc}.jpeg`;
+    const darkSrc = `${baseImgSrc}-dark.jpeg`;
+    const imgSrc = isCurrentlyDark ? darkSrc : lightSrc;
+    let mapButtonHTML;
+    const station =
+      vehicle.station_id !== null && Array.isArray(allStationsData)
+        ? allStationsData.find((s) => s.id === vehicle.station_id)
+        : null;
+    const lat = station ? station.latitude : vehicle.latitude;
+    const lon = station ? station.longitude : vehicle.longitude;
+
+    if (lat != null && lon != null) {
+      mapButtonHTML = `<button onclick="focusOnVehicle(${lat}, ${lon})" class="map-link">
+                           <i class="fas fa-map-marker-alt"></i>Show on Map
+                         </button>`;
+    } else {
+      mapButtonHTML = `<span class="map-link-na text-muted">Map N/A</span>`;
+    }
+
+    let batteryInfoHTML = "";
+    if (vehicle.type !== "Bike") {
+      batteryInfoHTML =
+        vehicle.battery_percentage !== null
+          ? `<p>Battery: ${vehicle.battery_percentage}%</p>`
+          : `<p>Battery: N/A</p>`;
+    }
+
+    const priceHTML =
+      vehicle.price_per_hour != null
+        ? `€${vehicle.price_per_hour.toFixed(2)}`
+        : "N/A";
 
     vehicleCard.innerHTML = `
-            <div class="vehicle-image">
-                <img src="${imgSrc}" alt="${
-                  vehicle.type || "Vehicle"
-                } image" style="width: 106%; height: auto;"/>             </div>
-            <div class="vehicle-details">
-                <h3>${vehicle.type || "Unknown Type"}</h3>
-                ${(function () {
-                  switch (vehicle.type) {
-                    case "Bike":
-                      return "";
-                    default:
-                      return vehicle.battery_percentage !== null
-                        ? `<p>Battery: ${vehicle.battery_percentage}%</p>`
-                        : "<p>Battery: N/A</p>";
-                  }
-                })()}
-                ${mapLink}
-            </div>
-            <div class="vehicle-price">
-                <p>Price per hour: €${
-                  vehicle.price_per_hour != null
-                    ? vehicle.price_per_hour.toFixed(2)
-                    : "N/A"
-                }</p>
-                <a href="/booking/rent/${
-                  vehicle.id
-                }/" class="rent-button btn btn-success w-100 text-center">Rent</a>             </div>`;
+        <div class="vehicle-image">
+            <img data-img-light="${lightSrc}"
+                 data-img-dark="${darkSrc}" src="${imgSrc}" alt="${
+                   vehicle.type || "Vehicle"
+                 } image" loading="lazy" />
+        </div>
+        <div class="vehicle-info-main">
+            <h3>${vehicle.type || "Unknown Type"}</h3>
+            ${batteryInfoHTML}
+            ${mapButtonHTML}
+        </div>
+        <div class="vehicle-actions">
+            <p>Price per hour: ${priceHTML}</p>
+            <a href="/booking/rent/${vehicle.id}/" class="rent-button">Rent</a>
+        </div>`;
 
     container.appendChild(vehicleCard);
   });
@@ -510,11 +516,6 @@ function createButton() {
     button = document.createElement("button");
     button.id = "get-direction-button";
     button.textContent = "Get Directions";
-    button.classList.add("direction-button-style", "btn", "btn-primary");
-    button.style.position = "absolute";
-    button.style.top = "10px";
-    button.style.right = "10px";
-    button.style.zIndex = "1000";
     buttonContainer.appendChild(button);
   }
 

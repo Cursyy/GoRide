@@ -21,14 +21,19 @@
     {% block extra_css %}{% endblock extra_css %} 
     <script>
         (function() {
-            const theme = localStorage.getItem('theme');
-            if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark-mode'); 
-            } else {
-                document.documentElement.classList.remove('dark-mode');
-            }
+        const theme = localStorage.getItem('theme');
+        const isDark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+            document.documentElement.classList.add('dark-mode'); 
+        } else {
+            document.documentElement.classList.remove('dark-mode');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateThemedImages(isDark);
+        });
         })();
-    </script>
+        </script>
     <script src="{% static 'js/alert.js' %}"></script>
     <script>
         window.GLOBAL_USER_LATITUDE = {{ session_user_latitude|default_if_none:"null" }};
