@@ -93,6 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const cityName = venueData?.city?.name || "";
       const countryName = venueData?.country?.name || "";
       const genre = event.classifications?.[0]?.genre?.name || "";
+      const longitude = venueData?.location?.longitude || "";
+      const latitude = venueData?.location?.latitude || "";
 
       let displayDate = "Date N/A";
       if (startDate) {
@@ -145,11 +147,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="event-card__footer">
                         <a href="${eventUrl}" target="_blank" rel="noopener noreferrer" class="event-card__link">
-                            {% trans "View Event" %} <i class="fas fa-external-link-alt"></i>
+                            View Event  <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
+                    <div class="event-card__directions">
+                        
                 </div>
             `;
+      const directionsContainer = card.querySelector(".event-card__directions");
+
+      if (latitude && longitude && directionsContainer) {
+        const directionsButton = document.createElement("button");
+        directionsButton.className = "event-card__directions-button";
+        directionsButton.innerHTML = `<i class="fas fa-directions"></i> Get Directions`;
+
+        directionsButton.addEventListener("click", () => {
+          const mapPageUrl = "/en/get_direction/";
+
+          const urlWithParams = `${mapPageUrl}?lat=${latitude}&lon=${longitude}`;
+
+          window.location.href = urlWithParams;
+        });
+
+        directionsContainer.appendChild(directionsButton);
+      } else if (directionsContainer) {
+        directionsContainer.innerHTML = `<p class="event-card__info--small">Directions unavailable</p>`;
+      }
+
       eventsContainer.appendChild(card);
     });
   };

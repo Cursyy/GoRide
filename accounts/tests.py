@@ -5,11 +5,10 @@ from django.core import mail
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from .models import CustomUser
-from subscriptions.models import  UserSubscription
 from stats.models import UserStatistics
-from django.contrib.auth.models import Group
 
 CustomUser = get_user_model()
+
 
 class AccountsTestCase(TestCase):
     def setUp(self):
@@ -17,7 +16,6 @@ class AccountsTestCase(TestCase):
         self.user = CustomUser.objects.create_user(
             username="testuser", email="test@example.com", password="password123"
         )
-        # Використовуємо force_login для гарантії аутентифікації
         self.client.force_login(self.user)
 
     def test_signup_view_get(self):
@@ -28,12 +26,15 @@ class AccountsTestCase(TestCase):
 
     def test_signup_view_post_success(self):
         self.client.logout()
-        response = self.client.post(reverse("accounts:signup"), {
-            "username": "newuser",
-            "email": "newuser@example.com",
-            "password1": "strongpassword123",
-            "password2": "strongpassword123",
-        })
+        response = self.client.post(
+            reverse("accounts:signup"),
+            {
+                "username": "newuser",
+                "email": "newuser@example.com",
+                "password1": "strongpassword123",
+                "password2": "strongpassword123",
+            },
+        )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("accounts:email_sent"))
         user = CustomUser.objects.get(username="newuser")
@@ -43,12 +44,15 @@ class AccountsTestCase(TestCase):
 
     def test_signup_view_existing_email(self):
         self.client.logout()
-        response = self.client.post(reverse("accounts:signup"), {
-            "username": "anotheruser",
-            "email": "test@example.com",
-            "password1": "strongpassword123",
-            "password2": "strongpassword123",
-        })
+        response = self.client.post(
+            reverse("accounts:signup"),
+            {
+                "username": "anotheruser",
+                "email": "test@example.com",
+                "password1": "strongpassword123",
+                "password2": "strongpassword123",
+            },
+        )
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Custom user with this Email already exists")
 
@@ -58,7 +62,7 @@ class AccountsTestCase(TestCase):
             username="inactive",
             email="inactive@example.com",
             password="password123",
-            is_active=False
+            is_active=False,
         )
         token = urlsafe_base64_encode(force_bytes(inactive_user.pk))
         response = self.client.get(reverse("accounts:confirm_email", args=[token]))
@@ -66,13 +70,17 @@ class AccountsTestCase(TestCase):
         self.assertRedirects(response, reverse("main:home"))
         inactive_user.refresh_from_db()
         self.assertTrue(inactive_user.is_active)
-        self.assertTrue(self.client.session.get('_auth_user_id'))
-        self.assertTrue(inactive_user.groups.filter(name="Customer").exists())  # Перевірка через groups
+        self.assertTrue(self.client.session.get("_auth_user_id"))
+        self.assertTrue(
+            inactive_user.groups.filter(name="Customer").exists()
+        )  # Перевірка через groups
         self.assertTrue(UserStatistics.objects.filter(user=inactive_user).exists())
 
     def test_confirm_email_invalid_token(self):
         self.client.logout()
-        response = self.client.get(reverse("accounts:confirm_email", args=["invalidtoken"]))
+        response = self.client.get(
+            reverse("accounts:confirm_email", args=["invalidtoken"])
+        )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("main:home"))
 
@@ -95,11 +103,14 @@ class AccountsTestCase(TestCase):
         self.assertIn("form", response.context)
 
     def test_profile_edit_post(self):
-        response = self.client.post(reverse("accounts:profile_edit"), {
-            "username": "updateduser",
-            "email": "updated@example.com",
-            "phone_num": "123456789"
-        })
+        response = self.client.post(
+            reverse("accounts:profile_edit"),
+            {
+                "username": "updateduser",
+                "email": "updated@example.com",
+                "phone_num": "123456789",
+            },
+        )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("accounts:profile"))
         self.user.refresh_from_db()

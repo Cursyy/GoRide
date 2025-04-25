@@ -75,7 +75,7 @@ function updateTripButtons(status) {
     console.error("trip_controls.js: Cannot find #trip-buttons container!");
     return;
   }
-  buttonsContainer.innerHTML = ""; // Очищення
+  buttonsContainer.innerHTML = "";
 
   if (status === "not_started" || status === "none") {
     buttonsContainer.innerHTML = `<button onclick="startTrip()">Start</button>`;
@@ -211,8 +211,29 @@ function endTrip() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Control page specific JS loaded after DOM ready.");
-  if (typeof updateTripButtons === "function") {
+  const urlParams = new URLSearchParams(window.location.search);
+  const eventLat = urlParams.get("lat");
+  const eventLon = urlParams.get("lon");
+
+  if (eventLat && eventLon) {
+    const destLat = parseFloat(eventLat);
+    const destLon = parseFloat(eventLon);
+
+    if (!isNaN(destLat) && !isNaN(destLon)) {
+      const waypoints = [[destLat, destLon]];
+
+      if (typeof getRoute === "function") {
+        getRoute(waypoints);
+      } else {
+        console.error("getRoute function is not defined!");
+      }
+    } else {
+      console.error("Invalid latitude or longitude parameters in URL.");
+    }
+  } else {
+    console.log(
+      "No event coordinates found in URL, map loaded without specific route.",
+    );
   }
 });
 
@@ -249,7 +270,10 @@ async function searchLocations() {
       markers.push(marker);
       marker.on("click", () => {
         waypoints.push([lat, lon]);
-        createButton("get-direction-button", "Get Direction");
+        createButton(
+          "get-direction-button",
+          `<i class="fa-solid fa-route"></i>`,
+        );
       });
     }
   });
@@ -284,7 +308,7 @@ async function searchPlaces(value) {
     markers.push(marker);
     marker.on("click", () => {
       waypoints.push([lat, lon]);
-      createButton("get-direction-button", "Get Direction");
+      createButton("get-direction-button", `<i class="fa-solid fa-route"></i>`);
     });
   });
 }
@@ -382,7 +406,7 @@ function clearRoute() {
   }
 
   waypoints = [];
-  createButton("get-direction", "Get Direction");
+  createButton("get-direction", `<i class="fa-solid fa-route"></i>`);
 }
 function clearMarkers() {
   const resultsContainer = document.getElementById("places-container");
@@ -477,7 +501,7 @@ function createButton(buttonId, buttonText) {
   if (!button) {
     button = document.createElement("button");
     button.id = buttonId;
-    button.textContent = buttonText;
+    button.innerHTML = buttonText;
     button.classList.add("map-button");
   }
 
@@ -508,8 +532,14 @@ function createButton(buttonId, buttonText) {
           if (waypoints.length > 1) {
             getRoute(waypoints);
           }
-          createButton("add-stops-button", "Add more stops");
-          createButton("delete-markers-button", "Delete my markers");
+          createButton(
+            "add-stops-button",
+            `<i class="fa-solid fa-thumbtack"></i>`,
+          );
+          createButton(
+            "delete-markers-button",
+            `<i class="fa-solid fa-thumbtack-slash"></i>`,
+          );
         } catch (error) {
           console.error("Error:", error);
         }
@@ -525,10 +555,17 @@ function addMapControls() {
 
   controlDiv.onAdd = function () {
     const container = L.DomUtil.create("div", "map-buttons-container");
-    container.appendChild(createButton("get-direction", "Get Directions"));
-    container.appendChild(createButton("add-stops-button", "Add more stops"));
     container.appendChild(
-      createButton("delete-markers-button", "Delete my markers"),
+      createButton("get-direction", `<i class="fa-solid fa-route"></i>`),
+    );
+    container.appendChild(
+      createButton("add-stops-button", `<i class="fa-solid fa-thumbtack"></i>`),
+    );
+    container.appendChild(
+      createButton(
+        "delete-markers-button",
+        `<i class="fa-solid fa-thumbtack-slash"></i>`,
+      ),
     );
     return container;
   };
