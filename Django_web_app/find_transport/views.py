@@ -5,7 +5,6 @@ import requests
 from django.db.models import Count
 from django.forms.models import model_to_dict
 from decouple import config
-from vouchers.views import voucher_apply
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 
@@ -49,9 +48,22 @@ def find_transport(request):
 
 
 def get_vehicles(request):
+    vehicle_id = request.GET.get("id")
     vehicle_type = request.GET.get("type")
     min_battery = request.GET.get("min_battery")
     vehicles = Vehicle.objects.filter(status=True)
+    cache_key = f"vehicle_{vehicle_id}"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return JsonResponse({"vehicle": model_to_dict(cached_data)})
+    if vehicle_id and not vehicle_id.isdigit():
+        return JsonResponse({"error": "Invalid ID"}, status=404)
+    if vehicle_id:
+        vehicle = EVStation.objects.filter(id=vehicle_id).first()
+        if vehicle:
+            cache.set(cache_key, vehicle, timeout=60 * 10)
+            return JsonResponse({"vehicle": model_to_dict(vehicle)})
+        return JsonResponse({"error": "Vehicle not found"}, status=404)
     if vehicle_type:
         vehicles = vehicles.filter(type=vehicle_type)
     if min_battery:
@@ -63,7 +75,13 @@ def get_vehicles(request):
     return JsonResponse(
         list(
             vehicles.values(
-                "id", "type", "battery_percentage", "price_per_hour", "station_id"
+                "id",
+                "type",
+                "battery_percentage",
+                "price_per_hour",
+                "station_id",
+                "latitude",
+                "longitude",
             )
         ),
         safe=False,
@@ -86,7 +104,7 @@ def get_station(request):
             cache.set(cache_key, station, timeout=60 * 10)
             return JsonResponse({"station": model_to_dict(station)})
         return JsonResponse({"error": "Station not found"}, status=404)
-    cache_key = f"stations"
+    cache_key = "stations"
     cached_data = cache.get(cache_key)
     if cached_data:
         return JsonResponse(cached_data, safe=False)
@@ -107,8 +125,9 @@ def get_station(request):
     return JsonResponse(stations_data, safe=False)
 
 
-def get_direction(request, station_id, lon, lat):
-    cache_key = f"direction_{lat}_{lon}_{station_id}"
+def get_direction(request, request_id, lon, lat, type):
+    print("init direction")
+    cache_key = f"direction_{lat}_{lon}_{request_id}_{type}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return JsonResponse(cached_data)
@@ -116,15 +135,19 @@ def get_direction(request, station_id, lon, lat):
         "Accept": "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8",
     }
     api_key = config("OPENROUTE_API_KEY")
-
-    station = EVStation.objects.filter(id=station_id).first()
+    if type == "station":
+        goal_destination = EVStation.objects.filter(id=request_id).first()
+    elif type == "vehicle":
+        goal_destination = Vehicle.objects.filter(id=request_id).first()
+    if not goal_destination:
+        return JsonResponse({"error": "Destination not found"}, status=404)
     start = f"{lon},{lat}"
-    end = f"{station.longitude},{station.latitude}"
+    end = f"{goal_destination.longitude},{goal_destination.latitude}"
     url = f"https://api.openrouteservice.org/v2/directions/foot-walking?api_key={api_key}&start={start}&end={end}"
-    if station_id and lon and lat:
+    if request_id and lon and lat:
         call = requests.get(f"{url}", headers=headers)
         if call.is_redirect or call.status_code == 301:
-            call = request.get(call.headers["Location"], headers=headers)
+            call = requests.get(call.headers["Location"], headers=headers)
         if call.status_code != 200:
             return JsonResponse(
                 {"error": "API request failed", "details": call.text},
@@ -134,8 +157,3 @@ def get_direction(request, station_id, lon, lat):
         response = call.json()
         cache.set(cache_key, response, timeout=60 * 60 * 24)  # one day cache
         return JsonResponse(response, safe=False)
-
-
-def get_voucher(request):
-    print("Request body:", request.body)
-    return voucher_apply(request)

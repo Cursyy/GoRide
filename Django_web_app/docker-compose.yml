@@ -1,17 +1,17 @@
 version: '3.9'
 
 services:
-  db:
-    image: postgres:15
-    container_name: postgres_db
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+  # db:
+  #   image: postgres:15
+  #   container_name: postgres_db
+  #   environment:
+  #     - POSTGRES_DB=${POSTGRES_DB}
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
 
   redis:
     image: redis:7
@@ -32,7 +32,6 @@ services:
       ports:
         - "8000:8000"
       depends_on:
-        - db
         - redis
       env_file:
         - .env
@@ -44,7 +43,6 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - db
       - redis
     env_file:
       - .env
@@ -56,25 +54,24 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - db
       - redis
     env_file:
       - .env
 
-  flower:
-    image: mher/flower:latest
-    container_name: flower
-    environment:
-      - CELERY_BROKER_URL=${REDIS_URL}
-    ports:
-      - "5555:5555"
-    depends_on:
-      - redis
-    env_file:
-      - .env
+  # flower:
+  #   image: mher/flower:latest
+  #   container_name: flower
+  #   environment:
+  #     - CELERY_BROKER_URL=${REDIS_URL}
+  #   ports:
+  #     - "5555:5555"
+  #   depends_on:
+  #     - redis
+  #   env_file:
+  #     - .env
 
 
 
 volumes:
-  postgres_data:
+  #postgres_data:
   static_volume:

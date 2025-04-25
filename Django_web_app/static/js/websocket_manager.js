@@ -316,10 +316,13 @@
         if (isLocalTimerRunning) stopLocalTimer();
         showTripSummary(serverTotalTime, totalCost);
 
-        if (data.show_review_popup && typeof window.showReviewPopup === 'function') {
+        if (
+          data.show_review_popup &&
+          typeof window.showReviewPopup === "function"
+        ) {
           window.showReviewPopup();
         } else if (data.show_review_popup) {
-            console.warn("showReviewPopup function is not available.");
+          console.warn("showReviewPopup function is not available.");
         }
       } else if (currentStatus === "active" || currentStatus === "resumed") {
         const newBaseTime = serverTotalTime;
@@ -464,20 +467,6 @@
     notificationStack.push({ element: notif, timeout });
   }
 
-
-  function handleBalanceUpdate(data) {
-    console.log("Manager: Handling balance_update:", data);
-    const balanceElement = document.getElementById("user-balance-display");
-    if (balanceElement && data.balance !== undefined) {
-      try {
-        balanceElement.textContent = `€${parseFloat(data.balance).toFixed(2)}`;
-      } catch (e) {
-        console.error("Failed to update balance display:", e);
-        balanceElement.textContent = `€ --.--`;
-      }
-    }
-  }
-
   function handleRewardsNotification(data) {
     console.log("Manager: Handling rewards_notification:", data);
 
@@ -486,7 +475,7 @@
       return;
     }
 
-    data.forEach(reward => {
+    data.forEach((reward) => {
       Toastify({
         text: `🎉 You've unlocked a new ${reward.type}: ${reward.name}!`,
         duration: 5000,
@@ -495,13 +484,13 @@
         position: "right",
         backgroundColor: "#28a745",
         stopOnFocus: true,
-        onClick: function() {
-            window.location.href = "/accounts/profile/";
+        onClick: function () {
+          window.location.href = "/accounts/profile/";
         },
-        callback: function() {
-            console.log(`Closed notification for ${reward.type}: ${reward.name}`);
-        }
-    }).showToast();
+        callback: function () {
+          console.log(`Closed notification for ${reward.type}: ${reward.name}`);
+        },
+      }).showToast();
     });
 
     const notificationSound = document.getElementById("notification-sound");

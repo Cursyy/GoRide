@@ -18,7 +18,7 @@ from django.core.cache import cache
 from avatar.models import UserAvatar
 from stats.models import UserStatistics
 from booking.models import Booking
-
+from find_transport.models import Vehicle
 
 GEOAPIFY_API_KEY = config("GEOAPIFY_API_KEY")
 
@@ -202,6 +202,7 @@ def end_trip(request):
     print(f"Ending trip for user: {user}")
     trip = Trip.objects.filter(user=user, status="active").first()
     booking = Booking.objects.get(booking_id=trip.booking_id)
+    vehicle = Vehicle.objects.get(id=booking.vehicle_id)
     if trip:
         trip.status = "finished"
         trip.ended_at = timezone.now()
@@ -213,32 +214,35 @@ def end_trip(request):
         trip.total_amount = (Decimal(total_minutes) * trip.cost_per_minute) + (
             trip.pause_duration * trip.cost_per_minute / 2
         )
-
+        vehicle.longitude = request.session.get("user_longitude")
+        vehicle.latitude = request.session.get("user_latitude")
+        vehicle.status = True
+        vehicle.save()
         cashback = Decimal(0)
         if booking and booking.payment_type != "Subscription":
             charge = trip.prepaid_minutes * trip.cost_per_minute - trip.total_amount
             try:
                 wallet = Wallet.objects.get(user=user)
                 print(f"Before refund: Wallet balance = {wallet.balance}")
-                if charge > 0: 
+                if charge > 0:
                     cashback = charge
                     wallet.top_up(cashback)
                     print(f"After refund: Wallet balance = {wallet.balance}")
                     channel_layer = get_channel_layer()
-                    group_name = f"user_{user.user_id}" 
+                    group_name = f"user_{user.user_id}"
                     async_to_sync(channel_layer.group_send)(
                         group_name,
                         {
                             "type": "balance_update_notification",
                             "balance": str(wallet.balance),
                             "cashback": str(cashback),
-                        }
+                        },
                     )
             except Wallet.DoesNotExist:
                 print(f"Wallet not found for user {user}")
         else:
             print("Subscription payment or no booking: No refund applied")
-        
+
         trip.save()
 
         try:
@@ -247,7 +251,9 @@ def end_trip(request):
             stats = UserStatistics.objects.create(user=user)
 
         duration_hours = total_minutes / 60
-        vehicle_type = booking.vehicle.type if booking and booking.vehicle else "E-Scooter"
+        vehicle_type = (
+            booking.vehicle.type if booking and booking.vehicle else "E-Scooter"
+        )
         stats.update_stats(duration_hours, trip.total_amount, vehicle_type)
 
         new_badges = stats.get_badges()
@@ -261,17 +267,21 @@ def end_trip(request):
         if new_badges or new_items:
             notifications = []
             for badge in new_badges:
-                notifications.append({
-                    'type': 'badge',
-                    'name': badge.name,
-                    'image': badge.image.url if badge.image else '', 
-                })
+                notifications.append(
+                    {
+                        "type": "badge",
+                        "name": badge.name,
+                        "image": badge.image.url if badge.image else "",
+                    }
+                )
             for item in new_items:
-                notifications.append({
-                    'type': 'item',
-                    'name': item.name,
-                    'image': item.image.url,
-                })
+                notifications.append(
+                    {
+                        "type": "item",
+                        "name": item.name,
+                        "image": item.image.url,
+                    }
+                )
 
             channel_layer = get_channel_layer()
             group_name = f"user_{user.user_id}"
@@ -280,7 +290,7 @@ def end_trip(request):
                 {
                     "type": "rewards_notification",
                     "data": notifications,
-                }
+                },
             )
 
         notify_trip_status(user)

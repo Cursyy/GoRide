@@ -2,76 +2,112 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}{% trans "Contact Us" %}{% endblock title %}
+{% block title %}{% trans "Contact Us" %} - GoRide{% endblock title %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/custom_contact.css' %}">
+{% endblock extra_styles %}
+
 
 {% block content %}
-<section class="container my-5">
-    <h1 class="mb-4 text-center">{% trans "Get in Touch with GoRide" %}</h1>
+<div class="contact-page-wrapper">
 
-    <div class="contact-container">
-        <div class="contact-details">
-            <h3>{% trans "Our Main Office" %}</h3>
-            <p>Blessington Rd, Tallaght, Dublin 24, D24 FKT9</p>
-            <p><i class="fas fa-phone"></i> <a href="tel:+353879288373">+353879288373</a></p>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:tud.goride@gmail.com">tud.goride@gmail.com</a></p>
-            <p><i class="fas fa-clock"></i> {% trans "Monday - Friday: 9:00 AM - 6:00 PM" %}</p>
+    <section class="scroll-section sticky-section theme-dark" id="section-intro">
+        <div class="content-wrapper intro-content ">
+            <h1 class="animate-on-scroll">{% trans "Get in Touch with GoRide" %}</h1>
+            <p class="animate-on-scroll">{% trans "We're here to help. Find our details below or send us a message." %}</p>
+             <div class="scroll-down-indicator animate-on-scroll">
+                 <i class="fas fa-chevron-down"></i> {% trans "Scroll Down" %}
+             </div>
         </div>
-        <div class="map-placeholder">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3092.8279706352478!2d-6.364615805655909!3d53.291393689226354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670b4b8ec071f5%3A0xb6cf7501e0d9522a!2sTU%20Dublin%2C%20Tallaght%20Campus!5e0!3m2!1suk!2sie!4v1744606858429!5m2!1suk!2sie" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </div>
+    </section>
 
-    <div class="contact-container">
-        <div class="contact-form">
-            <h2>{% trans "Send Us a Message" %}</h2>
-            <form action="#" method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="name">{% trans "Name" %}</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">{% trans "Email Address" %}</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">{% trans "Subject" %}</label>
-                    <input type="text" id="subject" name="subject">
-                </div>
-                <div class="form-group">
-                    <label for="message">{% trans "Message" %}</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-button">{% trans "Send Message" %}</button>
-            </form>
+    <section class="scroll-section sticky-section theme-dark" id="section-office">
+        <div class="content-wrapper layout-alternating">
+            <div class="text-content animate-on-scroll">
+                <h3>{% trans "Our Main Office" %}</h3>
+                <p>Blessington Rd, Tallaght, Dublin 24, D24 FKT9</p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+353879288373">+353 87 928 83 73</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:tud.goride@gmail.com">tud.goride@gmail.com</a></p>
+                <p><i class="fas fa-clock"></i> {% trans "Monday - Friday: 9:00 AM - 6:00 PM" %}</p>
+            </div>
+            <div class="visual-content map-container animate-on-scroll">
+                 <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2385.899119938773!2d-6.378986184197335!3d53.28448377996563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670b1e8f7b6f9f%3A0x9b8a6c1b3f4f7f0!2sTechnological%20University%20Dublin%20-%20Tallaght%20Campus!5e0!3m2!1sen!2sie!4v1678886111111!5m2!1sen!2sie"
+                    width="100%"
+                    height="400"
+                    style="border:0; border-radius: 8px;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </div>
-        <div class="contact-details">
-            <h3>{% trans "Customer Support" %}</h3>
-            <p>{% trans "Need help with a rental? Contact our support team." %}</p>
-            <p><i class="fas fa-phone"></i> <a href="tel:+353879288373">+353 87 928 83 73</a></p>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:tud.goride@gmail.com">tud.goride@gmail.com</a></p>
+    </section>
+
+    <section class="scroll-section sticky-section theme-dark" id="section-form">
+        <div class="content-wrapper layout-alternating layout-reverse">
+            <div class="visual-content contact-illustration animate-on-scroll">
+                 <img src="{% static 'images/contact/letter.jpeg' %}" alt="Contact Us Illustration">
+            </div>
+             <div class="text-content contact-form-container animate-on-scroll">
+                <h2>{% trans "Send Us a Message" %}</h2>
+                <form action="#" method="post" id="contactForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">{% trans "Name" %}</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">{% trans "Email Address" %}</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">{% trans "Subject" %}</label>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">{% trans "Message" %}</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">{% trans "Send Message" %}</button>
+                </form>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <h2 class="mt-5 mb-3 text-center">{% trans "Our Team in Action" %}</h2>
-    <div class="photo-grid">
-        <div class="photo-placeholder">{% trans "Team Photo 1" %}</div>
-        <div class="photo-placeholder">{% trans "Bike Maintenance" %}</div>
-        <div class="photo-placeholder">{% trans "Scooter Check" %}</div>
-        <div class="photo-placeholder">{% trans "Happy Riders" %}</div>
-        <div class="photo-placeholder">{% trans "City View" %}</div>
-        <div class="photo-placeholder">{% trans "GoRide Event" %}</div>
-    </div>
-</section>
+    <section class="scroll-section sticky-section theme-dark" id="section-support">
+        <div class="content-wrapper layout-alternating">
+            <div class="text-content animate-on-scroll">
+                 <h3>{% trans "Customer Support" %}</h3>
+                 <p>{% trans "Need help with a rental, your account, or have any questions? Our team is ready to assist." %}</p>
+                 <p><i class="fas fa-headset"></i> {% trans "Reach out for quick help:" %}</p>
+                 <p><i class="fas fa-phone"></i> <a href="tel:+353879288373">+353 87 928 83 73</a></p>
+                 <p><i class="fas fa-envelope"></i> <a href="mailto:tud.goride@gmail.com">tud.goride@gmail.com</a></p>
+            </div>
+            <div class="visual-content support-illustration animate-on-scroll">
+                <img src="{% static 'images/contact/support.webp' %}" alt="Customer Support Illustration">
+            </div>
+        </div>
+    </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const mapPlaceholder = document.querySelector('.map-placeholder');
-        if (mapPlaceholder) {
-            setTimeout(() => {
-                mapPlaceholder.style.opacity = 1;
-            }, 700);
-        }
-    });
-</script>
+     <section class="scroll-section theme-light" id="section-team">
+         <div class="content-wrapper team-content">
+            <h2 class="text-center animate-on-scroll">{% trans "Our Team in Action" %}</h2>
+            <div class="photo-grid">
+                <div class="photo-item animate-on-scroll"><img src="{% static 'images/contact/team_photo.jpeg' %}" alt="Team Photo 1"></div>
+                <div class="photo-item animate-on-scroll"><img src="{% static 'images/contact/e-scooter.jpeg' %}" alt="Scooter"></div>
+                <div class="photo-item animate-on-scroll"><img src="{% static 'images/contact/happy-riders.jpeg' %}" alt="Happy Riders"></div>
+                <div class="photo-item animate-on-scroll"><img src="{% static 'images/contact/scenic_view.jpeg' %}" alt="Scenic View"></div>
+            </div>
+        </div>
+    </section>
+
+</div>
 {% endblock content %}
+
+{% block extra_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="{% static 'js/custom_contact.js' %}"></script>
+{% endblock extra_scripts %}

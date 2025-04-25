@@ -221,7 +221,7 @@
     </div>
 </div>
 
-{% block extra_scripts %}
+
 <script>
     window.currentAvatar = {
         hat: {% if avatar.equipped_hat %}"{{ avatar.equipped_hat.id }}"{% else %}null{% endif %},
@@ -232,31 +232,34 @@
     console.log("Initial window.currentAvatar:", window.currentAvatar);
 
     document.querySelectorAll('.item-card.locked').forEach(card => {
-        card.addEventListener('click', function() {
-            const message = this.getAttribute('data-tooltip');
-            if (message) {
-                Toastify({
-                    text: message,
-                    duration: 5000,
-                    close: true,
-                    gravity: "top",
-                    position: "right",
-                    stopOnFocus: true,
-                    style: {
-                        background: "var(--main-bg-color)",
-                        color: "var(--main-font-color)",
-                        border: "1px solid var(--accent-color)",
-                        borderRadius: "5px",
-                        fontSize: "14px",
-                        padding: "10px 15px",
-                        boxShadow: "0 2px 5px var(--shadow-light)"
-                    },
-                    onClick: function() {}
-                }).showToast();
-            }
-        });
+        if (!card.dataset.lockedListenerAdded) {
+            card.addEventListener('click', function() {
+                const message = this.getAttribute('data-tooltip');
+                if (message) {
+                    Toastify({
+                        text: message,
+                        duration: 5000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                        style: {
+                            background: "var(--main-bg-color)",
+                            color: "var(--main-font-color)",
+                            border: "1px solid var(--accent-color)",
+                            borderRadius: "5px",
+                            fontSize: "14px",
+                            padding: "10px 15px",
+                            boxShadow: "0 2px 5px var(--shadow-light)"
+                        },
+                        onClick: function() {}
+                    }).showToast();
+                }
+            });
+            card.dataset.lockedListenerAdded = 'true';
+        }
     });
 </script>
 <script src="{% static 'js/avatar.js' %}"></script>
-{% endblock %}
+
 {% endblock %}

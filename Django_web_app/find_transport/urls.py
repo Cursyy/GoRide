@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import find_transport, get_vehicles, get_station, get_direction, get_voucher
+from .views import find_transport, get_vehicles, get_station, get_direction
 
 app_name = "find_transport"
 
@@ -8,9 +8,8 @@ urlpatterns = [
     path("api/vehicles", get_vehicles, name="get_vehicles"),
     path("api/stations", get_station, name="get_station"),
     path(
-        "api/get_direction/<int:station_id>/<str:lon>/<str:lat>/",
+        "api/get_direction/<int:request_id>/<str:lon>/<str:lat>/<str:type>",
         get_direction,
         name="get_direction",
     ),
-    path("api/voucher", get_voucher, name="get_voucher"),
 ]
