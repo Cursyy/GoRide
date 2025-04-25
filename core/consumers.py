@@ -102,7 +102,8 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
             elif message_type == "avatar_update":
                 await self.handle_avatar_update(data)
             elif message_type == "balance_update":
-                pass
+                await self.balance_update_notification(payload)
+                # pass
             else:
                 await self.send_error(f"Unknown message type: {message_type}")
 
@@ -372,8 +373,8 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
                 "type": "balance_update",
                 "data": {
                     "balance": str(event["balance"]),
-                    "cashback": str(event.get("cashback", "0")),  # Додаємо cashback
-                }
+                    "cashback": str(event.get("cashback", "0")),
+                },
             }
         )
 
@@ -390,21 +391,21 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
     def _get_chat_ids(self, chat_id):
         chat = Chat.objects.get(id=chat_id)
         return {"user": chat.user.user_id, "agent": chat.agent.user_id}
-    
+
     # --- Avatar Update Handler ---
 
     async def handle_avatar_update(self, data):
         print("Received avatar_update:", data)
-        payload = data.get('payload', {})
-        hat_id = payload.get('hat')
-        shirt_id = payload.get('shirt')
-        accessory_id = payload.get('accessory')
-        background_id = payload.get('background')
+        payload = data.get("payload", {})
+        hat_id = payload.get("hat")
+        shirt_id = payload.get("shirt")
+        accessory_id = payload.get("accessory")
+        background_id = payload.get("background")
 
         avatar = await self.get_user_avatar()
 
         if hat_id:
-            hat = await self.get_avatar_item(hat_id, 'hat')
+            hat = await self.get_avatar_item(hat_id, "hat")
             if hat:
                 unlocked_items = await self.get_unlocked_items(avatar)
                 if hat in unlocked_items:
@@ -417,7 +418,7 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
             avatar.equipped_hat = None
 
         if shirt_id:
-            shirt = await self.get_avatar_item(shirt_id, 'shirt')
+            shirt = await self.get_avatar_item(shirt_id, "shirt")
             if shirt:
                 unlocked_items = await self.get_unlocked_items(avatar)
                 if shirt in unlocked_items:
@@ -430,7 +431,7 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
             avatar.equipped_shirt = None
 
         if accessory_id:
-            accessory = await self.get_avatar_item(accessory_id, 'accessory')
+            accessory = await self.get_avatar_item(accessory_id, "accessory")
             if accessory:
                 unlocked_items = await self.get_unlocked_items(avatar)
                 if accessory in unlocked_items:
@@ -443,7 +444,7 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
             avatar.equipped_accessory = None
 
         if background_id:
-            background = await self.get_avatar_item(background_id, 'background')
+            background = await self.get_avatar_item(background_id, "background")
             if background:
                 unlocked_items = await self.get_unlocked_items(avatar)
                 if background in unlocked_items:
@@ -460,21 +461,31 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
         await self.channel_layer.group_send(
             self.user_group_name,
             {
-                'type': 'avatar_update_message',
-                'avatar': {
-                    'hat': str(avatar.equipped_hat.id) if avatar.equipped_hat else None,
-                    'shirt': str(avatar.equipped_shirt.id) if avatar.equipped_shirt else None,
-                    'accessory': str(avatar.equipped_accessory.id) if avatar.equipped_accessory else None,
-                    'background': str(avatar.equipped_background.id) if avatar.equipped_background else None,
-                }
-            }
+                "type": "avatar_update_message",
+                "avatar": {
+                    "hat": str(avatar.equipped_hat.id) if avatar.equipped_hat else None,
+                    "shirt": str(avatar.equipped_shirt.id)
+                    if avatar.equipped_shirt
+                    else None,
+                    "accessory": str(avatar.equipped_accessory.id)
+                    if avatar.equipped_accessory
+                    else None,
+                    "background": str(avatar.equipped_background.id)
+                    if avatar.equipped_background
+                    else None,
+                },
+            },
         )
 
     async def avatar_update_message(self, event):
-        await self.send(text_data=json.dumps({
-            'type': 'avatar_update',
-            'avatar': event['avatar'],
-        }))
+        await self.send(
+            text_data=json.dumps(
+                {
+                    "type": "avatar_update",
+                    "avatar": event["avatar"],
+                }
+            )
+        )
 
     @database_sync_to_async
     def get_user_avatar(self):
@@ -487,7 +498,9 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
             item = AvatarItem.objects.get(id=item_id, item_type=item_type)
             return item
         except (ValueError, AvatarItem.DoesNotExist) as e:
-            print(f"No AvatarItem found with id={item_id} and type={item_type}: {str(e)}")
+            print(
+                f"No AvatarItem found with id={item_id} and type={item_type}: {str(e)}"
+            )
             return None
 
     @database_sync_to_async
@@ -499,9 +512,7 @@ class UserActivityConsumer(AsyncWebsocketConsumer):
     def save_avatar(self, avatar):
         with transaction.atomic():
             avatar.save()
-    
+
     async def rewards_notification(self, event):
         print(f"Sending rewards_notification to user {self.user.user_id}")
         await self.send_json({"type": "rewards_notification", "data": event["data"]})
-    
-    

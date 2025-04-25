@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Upcoming Events" %}
+{% endblock %}
+
+{% block content %}
+<section class="container events-section">
+    <h2 class="section-title">{% trans "Find Events" %}</h2>
+
+    <div class="filters-wrapper event-filters">
+        <form id="event-filter-form" class="filter-form">
+            <div class="filter-grid">
+                <div class="filter-item">
+                    <label for="keyword-filter">{% trans "Keyword:" %}</label>
+                    <input type="text" id="keyword-filter" name="keyword" class="form-control" placeholder="{% trans "Concert, festival, artist..." %}">
+                </div>
+
+                <div class="filter-item">
+                    <label for="location-filter">{% trans "Near Location (Optional):" %}</label>
+                    <input type="text" id="location-filter" name="location" class="form-control" placeholder="{% trans "e.g., Dublin City Centre" %}">
+                    <input type="hidden" id="lat-filter" name="lat">
+                    <input type="hidden" id="lon-filter" name="lon">
+                    <button type="button" id="use-my-location-btn" class="btn btn-secondary btn-sm">{% trans "Use My Location" %}</button>
+                </div>
+
+                 <div class="filter-item">
+                    <label for="radius-filter">{% trans "Radius (km):" %}</label>
+                    <input type="range" name="radius" id="radius-filter" min="1" max="100" value="15" class="form-range">
+                    <span id="radius-display">15 km</span>
+                </div>
+
+                 <div class="filter-item">
+                    <label for="start-date-filter">{% trans "Start Date:" %}</label>
+                    <input type="date" id="start-date-filter" name="startDate" class="form-control">
+                </div>
+
+                <div class="filter-item">
+                    <label for="end-date-filter">{% trans "End Date:" %}</label>
+                    <input type="date" id="end-date-filter" name="endDate" class="form-control">
+                </div>
+
+                </div>
+             <div class="filter-actions">
+                <button type="submit" class="btn btn-primary">{% trans "Search Events" %}</button>
+                 <button type="reset" id="reset-filters-btn" class="btn btn-outline-secondary">{% trans "Reset Filters" %}</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="results-section">
+        <div id="loading-indicator" class="loading-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <p>{% trans "Loading events..." %}</p>
+        </div>
+        <div id="events-container" class="events-list">
+            </div>
+        <p id="no-results" class="no-results-message" style="display: none;">{% trans "No events found matching your criteria." %}</p>
+    </div>
+
+</section>
+
+<script src="{% static 'js/events.js' %}" defer></script>
+{% endblock %}

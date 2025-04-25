@@ -59,7 +59,7 @@ def rent_vehicle(request, vehicle_id):
     if trip:
         messages.info(request, "You have not finished trip")
         return redirect("get_direction:map")
-    
+
     subscription = None
     try:
         user_subscription = UserSubscription.objects.get(user=request.user)
@@ -111,12 +111,12 @@ def rent_vehicle(request, vehicle_id):
             return redirect(
                 "payments:process_stripe_payment", booking_id=booking.booking_id
             )
-        
+
         elif payment_type == "Paypal":
             return redirect(
                 "payments:process_paypal_payment", booking_id=booking.booking_id
             )
-        
+
         elif payment_type == "Subscription" and not voucher_code:
             if subscription and subscription.is_active():
                 total_amount = Decimal("0")
@@ -124,7 +124,7 @@ def rent_vehicle(request, vehicle_id):
                 booking.status = "Cancelled"
                 booking.save()
                 return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
-            
+
         elif payment_type == "AppBalance":
             if wallet and wallet.balance >= total_amount:
                 wallet.withdraw(total_amount)
@@ -132,8 +132,9 @@ def rent_vehicle(request, vehicle_id):
                 booking.status = "Cancelled"
                 booking.save()
                 return redirect("booking:rent_vehicle", vehicle_id=vehicle_id)
-            
+
         vehicle.status = False
+        vehicle.station = None
         vehicle.save()
         transaction_data = {
             "transaction_id": booking.booking_id,
@@ -316,8 +317,8 @@ def booking_success(request, booking_id):
         vehicle = booking.vehicle
         vehicle.status = False
         vehicle.save()
-        hours = booking.hours
-        total_amount = booking.amount
+        # hours = booking.hours
+        # total_amount = booking.amount
 
         transaction_data = {
             "transaction_id": booking.booking_id,

@@ -49,6 +49,7 @@ def send_transaction_email(request, user, email, transaction_data):
     }
     message = render_to_string(template, context)
     email = EmailMessage(mail_subject, message, to=[email])
+    email.content_subtype = "html"
     if email.send():
         return True
     else:

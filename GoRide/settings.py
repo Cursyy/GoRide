@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "wallet.apps.WalletConfig",
+    "django_celery_beat",
     # project apps
     "core",
     "main",
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     "vouchers",
     "booking",
     "get_direction",
+    "events_near_me",
     "avatar",
     "careers",
     "stats",
@@ -124,16 +126,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ.get("POSTGRES_DB", "goride_db"),
-#         'USER': os.environ.get("POSTGRES_USER", "goride_user"),
-#         'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "yourpassword"),
-#         'HOST': os.environ.get("POSTGRES_HOST", "db"),
-#         'PORT': os.environ.get("POSTGRES_PORT", "5432"),
-#     }
-# }
 
 CACHES = {
     "default": {
@@ -147,10 +139,14 @@ CACHES = {
 
 # celery config
 # https://docs.celeryq.dev/en/latest/django/first-steps-with-django.html
+CELERY_TIMEZONE = "Europe/Dublin"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
 CELERY_BROKER_URL = os.environ.get("REDIS_URL", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL", "redis://redis:6379/0")
 
-CELERY_BEAT_SCHEDULER = "django_celery_beat.scheduler:DatabaseScheduler"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_ACCEPT_TOKEN = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_ACCEPT_CONTENT = ["application/json"]
