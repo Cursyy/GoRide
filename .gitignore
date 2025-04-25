@@ -30,3 +30,5 @@ cache
 .docx
 
 staticfiles/
+
+go_ride_app/build/ go_ride_app/.dart_tool/ go_ride_app/.flutter-plugins go_ride_app/.flutter-plugins-dependencies go_ride_app/.idea/ go_ride_app/*.iml go_ride_app/.packages go_ride_app/.metadata go_ride_app/flutter_export_environment.sh
