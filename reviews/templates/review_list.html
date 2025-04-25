@@ -4,17 +4,17 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="my-4 text-center">All Reviews</h1>
+    <h1 class="my-4 text-center">{% trans "All Reviews" %}</h1>
 
     <div id="reviews-list" class="reviews-list row">
     </div>
 
     <div class="pagination d-flex justify-content-center align-items-center" style="margin-top: 20px;">
-        <a id="first-page" class="btn btn-secondary mx-1" style="display: none;">&laquo; First</a>
-        <a id="prev-page" class="btn btn-secondary mx-1" style="display: none;">Previous</a>
+        <a id="first-page" class="btn btn-secondary mx-1" style="display: none;">&laquo;{% trans "First" %}</a>
+        <a id="prev-page" class="btn btn-secondary mx-1" style="display: none;">{% trans "Previous" %}</a>
         <span id="page-info" class="mx-2"></span>
-        <a id="next-page" class="btn btn-secondary mx-1" style="display: none;">Next</a>
-        <a id="last-page" class="btn btn-secondary mx-1" style="display: none;">Last &raquo;</a>
+        <a id="next-page" class="btn btn-secondary mx-1" style="display: none;">{% trans "Next" %}</a>
+        <a id="last-page" class="btn btn-secondary mx-1" style="display: none;">{% trans "Last" %} &raquo;</a>
     </div>
 </div>
 

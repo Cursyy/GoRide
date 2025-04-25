@@ -8,18 +8,18 @@
 {% block content %}
 <div class="container get-direction my-4">
     <div class="search-container">
-        <input type="text" id="search-input" placeholder="{% trans 'Search locations...' %}">
+        <input type="text" id="search-input" placeholder="{% trans 'Search locations' %}...">
         <button id="search-button" onclick="searchLocations()">{% trans 'Search' %}</button>
-        <button id="userLocation">My Location</button>
+        <button id="userLocation">{% trans "My Location" %}</button>
     </div>
    
     <div id="map" class="my-4" style="position: relative; height: 500px;"></div>
-    <h1>Trip Management</h1>
+    <h1>{% trans "Trip Management" %}</h1>
     <div id="trip-status-details">
-         <p>Current Status: <span id="trip-timer">Loading...</span></p>
+         <p>{% trans "Current Status" %}: <span id="trip-timer">{% trans "Loading" %}...</span></p>
     </div>
     <div id="trip-buttons">
-        Loading controls...
+        {% trans "Loading controls" %}...
     </div>
     <div id="trip-summary-container" style="display: none;"></div>
     <div class="categories-sidebar">

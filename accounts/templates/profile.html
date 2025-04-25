@@ -9,7 +9,7 @@
             <div class="profile-card p-2 p-lg-4 text-center">
                 <div class="profile-title">
                     <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/images/default-avatar.png{% endif %}"
-                        alt="Profile Picture" class="rounded-circle border border-light mb-3" width="120" height="120">
+                        alt="{% trans "Profile Picture"%}" class="rounded-circle border border-light mb-3" width="120" height="120">
                     <h2 class="my_title">{{ user.username }}</h2>
                 </div>
                 <hr>
@@ -117,25 +117,25 @@
                             <div class="col-lg-6 py-3">
                                 <div class="avatar-container rounded" style="position: relative; width: 300px; height: 300px;">
                                     {% if avatar.equipped_background %}
-                                        <img src="{{ avatar.equipped_background.image.url }}" class="background rounded" id="background" >
+                                        <img src="{{ avatar.equipped_background.image.url }}" class="background rounded" id="background" alt="{% trans "Background image" %}">
                                     {% else %}
-                                        <img src="" class="background rounded" id="background">
+                                        <img src="" class="background rounded" id="background" alt="{% trans "Background image" %}">
                                     {% endif %}
-                                    <img src="{{ base_avatar_url }}" class="base rounded" id="base">
+                                    <img src="{{ base_avatar_url }}" class="base rounded" id="base" alt="{% trans "Avatar image" %}">
                                     {% if avatar.equipped_shirt %}
-                                        <img src="{{ avatar.equipped_shirt.image.url }}" class="shirt rounded" id="shirt" >
+                                        <img src="{{ avatar.equipped_shirt.image.url }}" class="shirt rounded" id="shirt" alt="{% trans "Shirt image" %}">
                                     {% else %}
-                                        <img src="" class="shirt rounded" id="shirt">
+                                        <img src="" class="shirt rounded" id="shirt" alt="{% trans "Shirt image" %}">
                                     {% endif %}
                                     {% if avatar.equipped_hat %}
-                                        <img src="{{ avatar.equipped_hat.image.url }}" class="hat rounded" id="hat" >
+                                        <img src="{{ avatar.equipped_hat.image.url }}" class="hat rounded" id="hat" alt="{% trans "Hat image" %}">
                                     {% else %}
-                                        <img src="" class="hat rounded" id="hat">
+                                        <img src="" class="hat rounded" id="hat" alt="{% trans "Hat image" %}">
                                     {% endif %}
                                     {% if avatar.equipped_accessory %}
-                                        <img src="{{ avatar.equipped_accessory.image.url }}" class="accessory rounded" id="accessory" >
+                                        <img src="{{ avatar.equipped_accessory.image.url }}" class="accessory rounded" id="accessory" alt="{% trans "Accessory image" %}">
                                     {% else %}
-                                        <img src="" class="accessory rounded" id="accessory">
+                                        <img src="" class="accessory rounded" id="accessory" alt="{% trans "Accessory image" %}">
                                     {% endif %}
                                 </div>
                             </div>

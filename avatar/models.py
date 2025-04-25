@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from stats.models import UserStatistics
+from django.utils.translation import gettext_lazy as _
 
 class AvatarItem(models.Model):
     ITEM_TYPES = (
@@ -35,16 +36,16 @@ class AvatarItem(models.Model):
             return "Invalid condition value"
 
         if condition_type == "total_rides":
-            return f"Complete {condition_value} rides"
+            return _("Complete %(value)s rides") % {'value': condition_value}
         elif condition_type == "bike_rides":
-            return f"Complete {condition_value} bike rides"
+            return _("Complete %(value)s bike rides") % {'value': condition_value}
         elif condition_type == "scooter_rides":
-            return f"Complete {condition_value} scooter rides"
+            return _("Complete %(value)s scooter rides") % {'value': condition_value}
         elif condition_type == "total_hours":
-            return f"Spend {condition_value} hours riding"
+            return _("Spend %(value)s hours riding") % {'value': condition_value}
         elif condition_type == "total_spent":
-            return f"Spend €{condition_value}"
-        return "Unknown condition"
+            return _("Spend €%(value)s") % {'value': condition_value}
+        return _("Unknown condition")
 
 
 class UserAvatar(models.Model):
