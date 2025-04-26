@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
   useMyLocationBtn.addEventListener("click", () => {
     if (navigator.geolocation) {
       useMyLocationBtn.disabled = true;
-      useMyLocationBtn.textContent = `{% trans "Getting location..." %}`;
+      useMyLocationBtn.textContent = `Getting location...`;
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const lat = position.coords.latitude;
@@ -210,20 +210,20 @@ document.addEventListener("DOMContentLoaded", () => {
           locationInput.value = "My Location";
           console.log(`Location acquired: ${lat}, ${lon}`);
           useMyLocationBtn.disabled = false;
-          useMyLocationBtn.textContent = '{% trans "Use My Location" %}';
+          useMyLocationBtn.textContent = "Use My Location";
         },
         (error) => {
           console.error("Error getting geolocation:", error);
           alert(
-            `{% trans "Could not get your location. Please ensure location services are enabled and permissions are granted." %}`,
+            `Could not get your location. Please ensure location services are enabled and permissions are granted.`,
           );
           useMyLocationBtn.disabled = false;
-          useMyLocationBtn.textContent = `{% trans "Use My Location" %}`;
+          useMyLocationBtn.textContent = `Use My Location`;
         },
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 },
       );
     } else {
-      alert(`{% trans "Geolocation is not supported by your browser." %}`);
+      alert(`Geolocation is not supported by your browser.`);
     }
   });
 
