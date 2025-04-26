@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "Profile" %} {% endblock%}
+{% block content %}
+<div class="container p-3">
+    <div class="row shadow-lg p-3 rounded">
+        <div class="col-md-4 p-3 my_custom_div border-end">
+            <div class="profile-card p-2 p-lg-4 text-center">
+                <div class="profile-title">
+                    <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}/static/images/default-avatar.png{% endif %}"
+                        alt="{% trans "Profile Picture"%}" class="rounded-circle border border-light mb-3" width="120" height="120">
+                    <h2 class="my_title">{{ user.username }}</h2>
+                </div>
+                <hr>
+                <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary w-100">{% trans "Edit Profile" %}</a>
+                <hr>
+                <div class="user-information text-start">
+                    <p>{% trans "Email" %}: <span class="text-muted">{{ user.email }}</span></p>
+                    {% if user.phone_num %}
+                        <p>{% trans "Phone" %}: <span class="text-muted">{{ user.phone_num}}</span></p>
+                    {% endif %}
+                </div>
+                <hr>
+                {% if statistics %}
+                    <div class="user-badges">
+                        {% with statistics.get_all_badges as badges %}
+                            {% if badges %}
+                                <div class="badges-container">
+                                    {% for badge in badges %}
+                                        <div class="badge">
+                                            <img src="{{badge.image.url}}" alt="{{badge.name}}" class="badge-img">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p>{% trans "No achievements yet. Keep riding!" %}</p>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-8 p-3 my_custom_div">
+            <div class="profile-card p-2 p-lg-4">
+                <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active w-100" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="true">{% trans "Statistics" %}</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link w-100" id="avatar-tab" data-bs-toggle="tab" data-bs-target="#avatar" type="button" role="tab" aria-controls="avatar" aria-selected="false">{% trans "Avatar" %}</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="profileTabsContent">
+                    <div class="tab-pane fade show active" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
+                        <div class="row">
+                            <div class="col-lg-6 mt-3">
+                                <div class="user-statistics border rounded p-3">
+                                    {% if statistics %}
+                                        <p><strong>{% trans "Total Rides:" %}</strong> {{ statistics.total_rides }}</p>
+                                        <p><strong>{% trans "Total Hours:" %}</strong> {{ statistics.total_hours|floatformat:2 }}</p>
+                                        <p><strong>{% trans "Total Spent:" %}</strong> € {{ statistics.total_spent|floatformat:2 }}</p>
+                                        <p class="m-0"><strong>{% trans "Most Used Vehicle:" %}</strong> {{ statistics.most_used_vehicle|default:_("N/A") }}</p>
+                                    {% else %}
+                                        <p>{% trans "No statistics available." %}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mt-3">
+                                <div class="user-subscription rounded border p-3">
+                                    {% if subscription and subscription.is_active %}
+                                        <p><span class="w-25">{% trans "Subscription"%}:</span> <span class="text-muted">{{ subscription.plan.type }}</span></p>
+                                        <p><span class="w-25">{% trans "Start date" %}: </span> <span class="text-muted">{{ subscription.start_date }}</span></p>
+                                        <p><span class="w-25">{% trans "End date" %}: </span> <span class="text-muted">{{ subscription.end_date }}</span></p>
+                                        
+                                        <div class="progress-container">
+                                            <div class="progress-bar" style="width: {{ subscription_progress }}%;" data-progress="{{ subscription_progress }}">
+                                                {{ subscription_progress|floatformat:0 }}%
+                                            </div>
+                                        </div>
+                                
+                                    {% else %}
+                                        <div class="no-sub-div d-flex flex-column align-items-start w-100">
+                                            <p class="mb-2">{% trans "Subscription" %}: <span class="text-muted">{% trans "You have no active subscriptions" %}</span></p>
+                                            <a href="{% url 'subscriptions:subscription_plans' %}" class="btn btn-secondary mt-2 align-self-end">{% trans "Choose plan" %}</a>
+                                        </div>
+                                    {% endif %}
+                                </div>                                                   
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mt-3">
+                                <div class="bookings-history border rounded p-3">
+                                    {% if bookings %}
+                                        {% for booking in bookings %}
+                                            <p class="d-flex justify-content-between align-items-center">
+                                                <span>{{booking.booking_date}}</span>
+                                                <span>{{booking.subject}}</span>
+                                                <span>€{{booking.amount}}</span>
+                                            </p>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>{% trans "No statistics available." %}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mt-3">
+                                <div class="balance border rounded p-3">
+                                    <p><strong id="user-balance-display">{% trans "Balance" %}: € {{wallet_balance}}</strong></p>
+                                    <a href="{%url 'booking:topup'%}" class="top-up-btn btn btn-success">{% trans "Top up" %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
+                        <div class="row">
+                            <div class="col-lg-6 py-3">
+                                <div class="avatar-container rounded" style="position: relative; width: 300px; height: 300px;">
+                                    {% if avatar.equipped_background %}
+                                        <img src="{{ avatar.equipped_background.image.url }}" class="background rounded" id="background" alt="{% trans "Background image" %}">
+                                    {% else %}
+                                        <img src="" class="background rounded" id="background" alt="{% trans "Background image" %}">
+                                    {% endif %}
+                                    <img src="{{ base_avatar_url }}" class="base rounded" id="base" alt="{% trans "Avatar image" %}">
+                                    {% if avatar.equipped_shirt %}
+                                        <img src="{{ avatar.equipped_shirt.image.url }}" class="shirt rounded" id="shirt" alt="{% trans "Shirt image" %}">
+                                    {% else %}
+                                        <img src="" class="shirt rounded" id="shirt" alt="{% trans "Shirt image" %}">
+                                    {% endif %}
+                                    {% if avatar.equipped_hat %}
+                                        <img src="{{ avatar.equipped_hat.image.url }}" class="hat rounded" id="hat" alt="{% trans "Hat image" %}">
+                                    {% else %}
+                                        <img src="" class="hat rounded" id="hat" alt="{% trans "Hat image" %}">
+                                    {% endif %}
+                                    {% if avatar.equipped_accessory %}
+                                        <img src="{{ avatar.equipped_accessory.image.url }}" class="accessory rounded" id="accessory" alt="{% trans "Accessory image" %}">
+                                    {% else %}
+                                        <img src="" class="accessory rounded" id="accessory" alt="{% trans "Accessory image" %}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 py-3">
+                                <h4>{% trans "Hats" %}</h4>
+                                <div class="items-scroll-wrapper">
+                                    <div class="items-container d-flex">
+                                        {% for item in all_items %}
+                                            {% if item.item_type == "hat" %}
+                                                <div class="item-card m-1 {% if item.id not in unlocked_items %}locked{% endif %}" 
+                                                     data-id="{{ item.id }}" 
+                                                     data-type="hat" 
+                                                     data-url="{{ item.image.url }}"
+                                                     {% if item.id not in unlocked_items %}data-tooltip="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}
+                                                     {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+                                                    <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                    <p>{{ item.name }}</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <h4>{% trans "Shirts" %}</h4>
+                                <div class="items-scroll-wrapper">
+                                    <div class="items-container d-flex">
+                                        {% for item in all_items %}
+                                            {% if item.item_type == "shirt" %}
+                                                <div class="item-card m-1 {% if item.id not in unlocked_items %}locked{% endif %}" 
+                                                     data-id="{{ item.id }}" 
+                                                     data-type="shirt" 
+                                                     data-url="{{ item.image.url }}"
+                                                     {% if item.id not in unlocked_items %}data-tooltip="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}
+                                                     {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+                                                    <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                    <p>{{ item.name }}</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <h4>{% trans "Accessories" %}</h4>
+                                <div class="items-scroll-wrapper">
+                                    <div class="items-container d-flex">
+                                        {% for item in all_items %}
+                                            {% if item.item_type == "accessory" %}
+                                                <div class="item-card m-1 {% if item.id not in unlocked_items %}locked{% endif %}" 
+                                                     data-id="{{ item.id }}" 
+                                                     data-type="accessory" 
+                                                     data-url="{{ item.image.url }}"
+                                                     {% if item.id not in unlocked_items %}data-tooltip="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}
+                                                     {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+                                                    <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                    <p>{{ item.name }}</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <h4>{% trans "Backgrounds" %}</h4>
+                                <div class="items-scroll-wrapper">
+                                    <div class="items-container d-flex">
+                                        {% for item in all_items %}
+                                            {% if item.item_type == "background" %}
+                                                <div class="item-card m-1 {% if item.id not in unlocked_items %}locked{% endif %}" 
+                                                     data-id="{{ item.id }}" 
+                                                     data-type="background" 
+                                                     data-url="{{ item.image.url }}"
+                                                     {% if item.id not in unlocked_items %}data-tooltip="{% trans 'Unlock by' %} {{ item.get_condition_text }}"{% endif %}
+                                                     {% if item.id in unlocked_items %} onclick="equipItem(this)" style="cursor: pointer;"{% else %}style="opacity: 0.5; cursor: not-allowed;"{% endif %}>
+                                                    <img src="{{ item.preview_image.url }}" alt="{{ item.name }}" style="width: 50px; height: 50px;">
+                                                    <p>{{ item.name }}</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    window.currentAvatar = {
+        hat: {% if avatar.equipped_hat %}"{{ avatar.equipped_hat.id }}"{% else %}null{% endif %},
+        shirt: {% if avatar.equipped_shirt %}"{{ avatar.equipped_shirt.id }}"{% else %}null{% endif %},
+        accessory: {% if avatar.equipped_accessory %}"{{ avatar.equipped_accessory.id }}"{% else %}null{% endif %},
+        background: {% if avatar.equipped_background %}"{{ avatar.equipped_background.id }}"{% else %}null{% endif %}
+    };
+    console.log("Initial window.currentAvatar:", window.currentAvatar);
+
+    document.querySelectorAll('.item-card.locked').forEach(card => {
+        if (!card.dataset.lockedListenerAdded) {
+            card.addEventListener('click', function() {
+                const message = this.getAttribute('data-tooltip');
+                if (message) {
+                    Toastify({
+                        text: message,
+                        duration: 5000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                        style: {
+                            background: "var(--main-bg-color)",
+                            color: "var(--main-font-color)",
+                            border: "1px solid var(--accent-color)",
+                            borderRadius: "5px",
+                            fontSize: "14px",
+                            padding: "10px 15px",
+                            boxShadow: "0 2px 5px var(--shadow-light)"
+                        },
+                        onClick: function() {}
+                    }).showToast();
+                }
+            });
+            card.dataset.lockedListenerAdded = 'true';
+        }
+    });
+</script>
+<script src="{% static 'js/avatar.js' %}"></script>
+
+{% endblock %}

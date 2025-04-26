@@ -1,0 +1,103 @@
+{% load static %}
+{% load i18n %}
+{% load cache %}
+
+<header class="p-4 bg-custom">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'main:home' %}">
+                <img src="{% static "/images/logo.png" %}" alt="GoRide" width="120"> 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:home' %}">{% trans "Home" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:about' %}">{% trans "About" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'find_transport:find_transport' %}">{% trans "Rentals" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'subscriptions:subscription_plans' %}">{% trans "Plans" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:contacts' %}">{% trans "Contacts" %}</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin:index' %}">{% trans "Admin Panel" %}</a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div>
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        <form action="{% url 'set_language' %}" method="POST" class="d-flex align-items-center">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.get_full_path|urlencode }}"> 
+                            <select name="language" class="form-select form-select-sm me-3" onchange="this.form.submit()"> 
+                                {% for language in languages %}
+                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                    {{ language.name_local }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="dropdown ms-2">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ user.username }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <li>
+                                <a class="dropdown-item d-flex justify-content-between align-items-center" href="{% url 'booking:topup' %}" id="user-balance-display">
+                                    {{ wallet_balance }}€
+                                    <span class="badge bg-success rounded-pill float-end">
+                                        {% trans "Top Up" %}
+                                    </span>
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'password_change' %}">{% trans "Change Password" %}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form id="logout-form" method="post" action="{% url 'logout' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item text-danger">{% trans "Logout" %}</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-light me-2">{% trans "Login" %}</a>
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-light">{% trans "Sign Up" %}</a>
+                    {% endif %}
+                    <button id="theme-toggle" class="btn btn-outline-light ms-3" type="button" title="{% trans 'Switch theme' %}">
+                        <i id="theme-icon" class="fas fa-sun"></i>
+                    </button>
+                    <button id="accessibility-toggle" title="Enable Accessibility Mode" class="btn btn-outline-light ms-3" type="button" title="{% trans "Accessibility mode button" %}">
+                        <i id="accessibility-icon" class="fa fa-universal-access"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="global-trip-status" class="trip-status-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+        <span id="base-timer-display">Connecting...</span>
+        <a href="{% url 'get_direction:map' %}" class="manage-link">Manage</a>
+    </div>
+    </div>
+</header>

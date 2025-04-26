@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+ {% trans "Find your way" %}
+{% endblock %}
+   
+{% block content %}
+<div class="container get-direction my-4">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="{% trans 'Search locations' %}...">
+        <button id="search-button" onclick="searchLocations()">{% trans 'Search' %}</button>
+        <button id="userLocation">{% trans "My Location" %}</button>
+    </div>
+   
+    <div id="map" class="my-4" style="position: relative; height: 500px;"></div>
+    <h1>{% trans "Trip Management" %}</h1>
+    <div id="trip-status-details">
+         <p>{% trans "Current Status" %}: <span id="trip-timer">{% trans "Loading" %}...</span></p>
+    </div>
+    <div id="trip-buttons">
+        {% trans "Loading controls" %}...
+    </div>
+    <div id="trip-summary-container" style="display: none;"></div>
+    <div class="categories-sidebar">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle w-100 mb-2" type="button" id="mainCategoriesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                {% trans "Select Categories" %}
+            </button>
+            <ul class="dropdown-menu w-100" aria-labelledby="mainCategoriesDropdown" id="categories-container">
+            </ul>
+        </div>
+    </div>
+
+    <div id="places-container" class="places-list"></div>
+    {% comment %} <script src="{% static 'js/websocket_manager.js' %}" defer></script> {% endcomment %}
+    <script src="{% static 'js/get_direction.js' %}" defer></script>
+</div>
+<script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+</script>
+{% endblock %}
