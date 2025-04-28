@@ -2,13 +2,13 @@ import requests
 from django.http import JsonResponse
 from django.core.cache import cache
 from django.shortcuts import render
-from dateutil.parser import parse  # Для дат
+from dateutil.parser import parse
 from .tasks import (
     DEFAULT_EVENTS_CACHE_KEY,
     TICKETMASTER_API_KEY,
-)  # Імпортуємо дефолтний ключ
+)
 
-NEARBY_CACHE_TTL_SECONDS = 10 * 60  # Кеш для nearby запитів – 10 хвилин
+NEARBY_CACHE_TTL_SECONDS = 10 * 60
 NEARBY_BASE_CACHE_KEY = "ticketmaster_events_nearby"
 
 
@@ -35,16 +35,13 @@ def get_default_events(request):
     start_date_str = request.GET.get("startDate")
     end_date_str = request.GET.get("endDate")
 
-    # Фільтрація за ключовим словом
     if keyword:
         filtered_by_keyword = []
         for event in events:
-            # Перевірка назви події
             if keyword in event.get("name", "").lower():
                 filtered_by_keyword.append(event)
                 continue
 
-            # Перевірка жанру в класифікаціях (якщо genre є словником або списком)
             classifications = event.get("classifications", [])
             genre_match = False
             for classification in classifications:
@@ -65,7 +62,6 @@ def get_default_events(request):
                 filtered_by_keyword.append(event)
                 continue
 
-            # Перевірка назви міста для кожного місця проведення події
             venues = event.get("_embedded", {}).get("venues", [])
             for venue in venues:
                 city = venue.get("city", {}).get("name", "").lower()
@@ -75,7 +71,6 @@ def get_default_events(request):
 
         events = filtered_by_keyword
 
-    # Фільтрація за датою
     start_date_filter = None
     end_date_filter = None
     if start_date_str:
@@ -96,11 +91,11 @@ def get_default_events(request):
         for event in events:
             event_date_str = event.get("dates", {}).get("start", {}).get("localDate")
             if not event_date_str:
-                continue  # Пропускаємо події без дати
+                continue
             try:
                 event_date = parse(event_date_str).date()
             except ValueError:
-                continue  # Пропускаємо події з невірним форматом дати
+                continue
 
             if start_date_filter and event_date < start_date_filter:
                 continue
@@ -115,24 +110,12 @@ def get_default_events(request):
 
 
 def search_events_near_location(request):
-    """
-    Шукає події за конкретною локацією (lat, lon, radius).
-    Спочатку перевіряє кеш для цієї локації.
-    Якщо кешу немає – робить СИНХРОННИЙ запит до Ticketmaster API,
-    кешує результат і повертає його.
-
-    Оскільки API Ticketmaster не підтримує фільтр keyword,
-    якщо користувач передає ключове слово, ми спочатку отримуємо всі події,
-    а потім фільтруємо їх за ключовим словом (наприклад, перевіряючи назву події,
-    жанр та назву міста у місцях проведення).
-    """
     print("Request received for nearby events.")
     try:
         lat = request.GET.get("lat")
         lon = request.GET.get("lon")
         radius = request.GET.get("radius", "15")
         unit = request.GET.get("unit", "km")
-        # Keyword будемо застосовувати пізніше, після отримання даних з API
         keyword = request.GET.get("keyword", "").lower()
         start_date_str = request.GET.get("startDate")
         end_date_str = request.GET.get("endDate")
@@ -165,7 +148,6 @@ def search_events_near_location(request):
                 f"Cache MISS for nearby key: {cache_key}. Fetching SYNCHRONOUSLY from Ticketmaster..."
             )
             url = "https://app.ticketmaster.com/discovery/v2/events.json"
-            # Не передаємо keyword у запит, оскільки API його не підтримує.
             params = {
                 "apikey": TICKETMASTER_API_KEY,
                 "latlong": latlong,
@@ -214,17 +196,14 @@ def search_events_near_location(request):
                     {"error": "An internal error occurred."}, status=500
                 )
 
-        # Якщо ключове слово задане, застосовуємо фільтрацію локально:
         if keyword:
             filtered_events = []
             for event in events:
-                # Перевірка за назвою події
                 name = event.get("name", "").lower()
                 if keyword in name:
                     filtered_events.append(event)
                     continue
 
-                # Перевірка жанру у класифікаціях
                 classifications = event.get("classifications", [])
                 genre_found = False
                 for classification in classifications:
@@ -244,7 +223,6 @@ def search_events_near_location(request):
                     filtered_events.append(event)
                     continue
 
-                # Перевірка назви міста у місцях проведення
                 venues = event.get("_embedded", {}).get("venues", [])
                 for venue in venues:
                     city = venue.get("city", {}).get("name", "").lower()

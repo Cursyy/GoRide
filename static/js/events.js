@@ -93,6 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const cityName = venueData?.city?.name || "";
       const countryName = venueData?.country?.name || "";
       const genre = event.classifications?.[0]?.genre?.name || "";
+      const longitude = venueData?.location?.longitude || "";
+      const latitude = venueData?.location?.latitude || "";
 
       let displayDate = "Date N/A";
       if (startDate) {
@@ -145,11 +147,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="event-card__footer">
                         <a href="${eventUrl}" target="_blank" rel="noopener noreferrer" class="event-card__link">
-                            {% trans "View Event" %} <i class="fas fa-external-link-alt"></i>
+                            View Event  <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
+                    <div class="event-card__directions">
+                        
                 </div>
             `;
+      const directionsContainer = card.querySelector(".event-card__directions");
+
+      if (latitude && longitude && directionsContainer) {
+        const directionsButton = document.createElement("button");
+        directionsButton.className = "event-card__directions-button";
+        directionsButton.innerHTML = `<i class="fas fa-directions"></i> Get Directions`;
+
+        directionsButton.addEventListener("click", () => {
+          const mapPageUrl = "/en/get_direction/";
+
+          const urlWithParams = `${mapPageUrl}?lat=${latitude}&lon=${longitude}`;
+
+          window.location.href = urlWithParams;
+        });
+
+        directionsContainer.appendChild(directionsButton);
+      } else if (directionsContainer) {
+        directionsContainer.innerHTML = `<p class="event-card__info--small">Directions unavailable</p>`;
+      }
+
       eventsContainer.appendChild(card);
     });
   };
@@ -176,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
   useMyLocationBtn.addEventListener("click", () => {
     if (navigator.geolocation) {
       useMyLocationBtn.disabled = true;
-      useMyLocationBtn.textContent = `{% trans "Getting location..." %}`;
+      useMyLocationBtn.textContent = `Getting location...`;
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const lat = position.coords.latitude;
@@ -186,20 +210,20 @@ document.addEventListener("DOMContentLoaded", () => {
           locationInput.value = "My Location";
           console.log(`Location acquired: ${lat}, ${lon}`);
           useMyLocationBtn.disabled = false;
-          useMyLocationBtn.textContent = '{% trans "Use My Location" %}';
+          useMyLocationBtn.textContent = "Use My Location";
         },
         (error) => {
           console.error("Error getting geolocation:", error);
           alert(
-            `{% trans "Could not get your location. Please ensure location services are enabled and permissions are granted." %}`,
+            `Could not get your location. Please ensure location services are enabled and permissions are granted.`,
           );
           useMyLocationBtn.disabled = false;
-          useMyLocationBtn.textContent = `{% trans "Use My Location" %}`;
+          useMyLocationBtn.textContent = `Use My Location`;
         },
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 },
       );
     } else {
-      alert(`{% trans "Geolocation is not supported by your browser." %}`);
+      alert(`Geolocation is not supported by your browser.`);
     }
   });
 

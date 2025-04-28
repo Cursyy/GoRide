@@ -25,7 +25,6 @@ for i in range(20):
     }
     objects.append(obj)
 
-# Збереження об'єктів у JSON файл
 with open("EV_stations.json", "w") as json_file:
     json.dump(objects, json_file, indent=4)
 
