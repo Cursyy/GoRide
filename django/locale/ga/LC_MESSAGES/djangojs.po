@@ -314,3 +314,7 @@ msgstr "Díghlasáil tú nua"
 #: static/js/websocket_manager.js:521
 msgid "Cashback"
 msgstr "Aisairgead"
+
+#: static/js/find_transport.js:394
+msgid "Rent"
+msgstr "Cíos"

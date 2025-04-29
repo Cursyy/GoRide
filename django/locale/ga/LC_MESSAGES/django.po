@@ -4052,3 +4052,11 @@ msgstr "Comhrá le tacaíocht"
 #: support/templates/support/user_chat.html:10
 msgid "Chat History"
 msgstr "Stair comhrá"
+
+#: support/forms.py:12
+msgid "Write your message..."
+msgstr "Scríobh do theachtaireacht..."
+
+#: support/forms.py:16
+msgid "Content"
+msgstr "Ábhar"

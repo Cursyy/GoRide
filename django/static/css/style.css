@@ -339,6 +339,11 @@ a {
   padding: 80px 0;
 }
 
+.cta .block-title,
+.cta .lead{
+  color: var(--main-font-color);
+}
+
 /* Footer */
 .footer {
   background-color: var(--main-bg-color);
@@ -2059,6 +2064,9 @@ html.dark-mode {
   .benefits .card {
     background-color: var(--second-bg-color);
     border: 1px solid var(--border-dark);
+  }
+  .benefits .lead{
+    color: var(--second-font-color);
   }
   .benefits .card:hover {
     box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);

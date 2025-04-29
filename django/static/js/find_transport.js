@@ -391,7 +391,7 @@ function displayVehicles() {
         </div>
         <div class="vehicle-actions">
             <p>${gettext("Price per hour")}: ${priceHTML}</p>
-            <a href="/booking/rent/${vehicle.id}/" class="rent-button">Rent</a>
+            <a href="/booking/rent/${vehicle.id}/" class="rent-button">${gettext("Rent")}</a>
         </div>`;
 
     container.appendChild(vehicleCard);

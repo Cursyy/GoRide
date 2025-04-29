@@ -314,3 +314,7 @@ msgstr "Ви розблокували нове"
 #: static/js/websocket_manager.js:521
 msgid "Cashback"
 msgstr "Повернення коштів"
+
+#: static/js/find_transport.js:394
+msgid "Rent"
+msgstr "Орендувати"

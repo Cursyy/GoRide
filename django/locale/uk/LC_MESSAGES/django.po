@@ -4000,7 +4000,7 @@ msgstr "Повідомлення ще немає.Почніть розмову!"
 #: support/templates/support/admin_chat.html:53
 #: support/templates/support/user_chat.html:31
 msgid "Send"
-msgstr "Надсилати"
+msgstr "Надіслати"
 
 #: support/templates/support/admin_chat_detail.html:3
 msgid "Admin chat details"
@@ -4037,3 +4037,11 @@ msgstr "Поспілкуватися з підтримкою"
 #: support/templates/support/user_chat.html:10
 msgid "Chat History"
 msgstr "Історія чату"
+
+#: support/forms.py:12
+msgid "Write your message..."
+msgstr "Введіть своє повідомлення..."
+
+#: support/forms.py:16
+msgid "Content"
+msgstr "Вміст"
