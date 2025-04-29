@@ -69,7 +69,7 @@
                             <div class="col-lg-6 mt-3">
                                 <div class="user-subscription rounded border p-3">
                                     {% if subscription and subscription.is_active %}
-                                        <p><span class="w-25">{% trans "Subscription"%}:</span> <span class="text-muted">{{ subscription.plan.type }}</span></p>
+                                        <p><span class="w-25">{% trans "Subscription"%}:</span> <span class="text-muted">{{ subscription.plan.get_type_display }}</span></p>
                                         <p><span class="w-25">{% trans "Start date" %}: </span> <span class="text-muted">{{ subscription.start_date }}</span></p>
                                         <p><span class="w-25">{% trans "End date" %}: </span> <span class="text-muted">{{ subscription.end_date }}</span></p>
                                         

@@ -242,13 +242,13 @@
 
 
 # payments/views.py
-import stripe
-import paypalrestsdk
-from django.conf import settings
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-from booking.models import Booking
-from django.urls import reverse
+import stripe # type: ignore
+import paypalrestsdk # type: ignore
+from django.conf import settings # type: ignore
+from django.shortcuts import redirect # type: ignore
+from django.contrib.auth.decorators import login_required # type: ignore
+from booking.models import Booking # type: ignore
+from django.urls import reverse # type: ignore
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 paypalrestsdk.configure({

@@ -83,7 +83,7 @@ def email_sent(request):
 def profile_view(request):
     subscription = UserSubscription.objects.filter(user=request.user).first()
     statistics = UserStatistics.objects.filter(user=request.user).first()
-    bookings = Booking.objects.filter(user=request.user)
+    bookings = Booking.objects.filter(user=request.user, status="Paid")
     avatar, _ = UserAvatar.objects.get_or_create(user=request.user)
     all_items = AvatarItem.objects.all()
     unlocked_items = list(avatar.unlocked_items.values_list("id", flat=True))
