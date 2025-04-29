@@ -27,7 +27,7 @@
     const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
     const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
       2,
-      "0",
+      "0"
     );
     const seconds = String(Math.floor(totalSeconds % 60)).padStart(2, "0");
     return `${hours}:${minutes}:${seconds}`;
@@ -67,19 +67,19 @@
     if (timerInterval) clearInterval(timerInterval);
     if (startedAt === null) {
       console.error("startLocalTimer: startedAt is null.");
-      updateTimerDisplay("Timer Sync Error");
+      updateTimerDisplay(`${gettext("Timer Sync Error")}`);
       isLocalTimerRunning = false;
       return;
     }
     console.log(
       `Starting local timer. baseTime: ${baseTime}, startedAt: ${new Date(
-        startedAt,
-      ).toISOString()}, serverCurrentTime: ${serverCurrentTime}`,
+        startedAt
+      ).toISOString()}, serverCurrentTime: ${serverCurrentTime}`
     );
     isLocalTimerRunning = true;
 
     updateTimerDisplay(
-      `${formatDuration(serverCurrentTime)} Trip in progress...`,
+      `${formatDuration(serverCurrentTime)} ${gettext("Trip in progress")}...`
     );
     showGlobalTripStatus(true);
 
@@ -92,7 +92,7 @@
       }
       const elapsedSinceStart = Math.floor((now - startedAt) / 1000);
       const totalElapsed = baseTime + elapsedSinceStart;
-      updateTimerDisplay(`${formatDuration(totalElapsed)} Trip in progress...`);
+      updateTimerDisplay(`${formatDuration(totalElapsed)} ${gettext("Trip in progress")}...`);
     }, 1000);
     console.log("Local timer running.");
   }
@@ -148,7 +148,7 @@
     const handlers = messageHandlers[data.type];
     if (handlers && handlers.length > 0) {
       console.log(
-        `Dispatching message type ${data.type} to ${handlers.length} handler(s).`,
+        `Dispatching message type ${data.type} to ${handlers.length} handler(s).`
       );
       const payload = data.data || data.payload || data;
       handlers.forEach((handler) => {
@@ -159,7 +159,7 @@
             `Error in handler for type ${data.type}:`,
             handlerError,
             "Payload:",
-            payload,
+            payload
           );
         }
       });
@@ -194,7 +194,7 @@
   function initializeSharedWebSocket() {
     if (!isInitialized) {
       console.log(
-        "WebSocket Manager initialization deferred until DOMContentLoaded.",
+        "WebSocket Manager initialization deferred until DOMContentLoaded."
       );
       return;
     }
@@ -208,10 +208,10 @@
     }
 
     console.log("Initializing Shared WebSocket connection...");
-    updateTimerDisplay("Connecting...");
+    updateTimerDisplay(`${gettext("Connecting")}...`);
 
     sharedSocket = new WebSocket(
-      `ws://${window.location.host}/ws/user/activity/`,
+      `ws://${window.location.host}/ws/user/activity/`
     );
 
     sharedSocket.onopen = function () {
@@ -220,7 +220,7 @@
         clearTimeout(reconnectTimeout);
         reconnectTimeout = null;
       }
-      updateTimerDisplay("Connected");
+      updateTimerDisplay(`${gettext("Connected")}`);
 
       dispatchMessage({ type: "internal_socket_open" });
 
@@ -236,7 +236,7 @@
           "Failed to parse WebSocket message:",
           e,
           "Raw Data:",
-          event.data,
+          event.data
         );
         return;
       }
@@ -253,7 +253,7 @@
       console.log(
         `Shared WebSocket connection closed: Code=${event.code}, Reason=${
           event.reason || "N/A"
-        }, Clean=${event.wasClean}`,
+        }, Clean=${event.wasClean}`
       );
       const wasClean = event.wasClean;
       const code = event.code;
@@ -267,7 +267,7 @@
         tryReconnect();
       } else {
         console.log(
-          "WebSocket closed cleanly or due to non-recoverable error. No automatic reconnect.",
+          "WebSocket closed cleanly or due to non-recoverable error. No automatic reconnect."
         );
       }
     };
@@ -276,7 +276,7 @@
   function sendMessage(type, payload = {}) {
     if (!sharedSocket || sharedSocket.readyState !== WebSocket.OPEN) {
       console.error(
-        `Cannot send message of type "${type}". WebSocket is not open. State: ${sharedSocket?.readyState}`,
+        `Cannot send message of type "${type}". WebSocket is not open. State: ${sharedSocket?.readyState}`
       );
       return false;
     }
@@ -287,7 +287,7 @@
     } catch (e) {
       console.error(
         `Failed to stringify or send message of type "${type}":`,
-        e,
+        e
       );
       return false;
     }
@@ -335,31 +335,31 @@
           if (startedAt) {
             const localElapsedSinceStart = Math.max(
               0,
-              Math.floor((Date.now() - startedAt) / 1000),
+              Math.floor((Date.now() - startedAt) / 1000)
             );
             const localTotalElapsed = baseTime + localElapsedSinceStart;
             const drift = Math.abs(localTotalElapsed - serverCurrentTime);
 
             if (drift > 2) {
               console.warn(
-                `Shared: Correcting time drift of ${drift.toFixed(1)}s.`,
+                `Shared: Correcting time drift of ${drift.toFixed(1)}s.`
               );
               const expectedElapsedSeconds = Math.max(
                 0,
-                serverCurrentTime - baseTime,
+                serverCurrentTime - baseTime
               );
               startedAt = Date.now() - expectedElapsedSeconds * 1000;
               updateTimerDisplay(
-                `${formatDuration(serverCurrentTime)} Trip in progress...`,
+                `${formatDuration(serverCurrentTime)} ${gettext("Trip in progress")}...`
               );
             } else {
               updateTimerDisplay(
-                `${formatDuration(localTotalElapsed)} Trip in progress...`,
+                `${formatDuration(localTotalElapsed)} ${gettext("Trip in progress")}...`
               );
             }
           } else {
             console.warn(
-              "Timer running but startedAt is null. Attempting restart.",
+              "Timer running but startedAt is null. Attempting restart."
             );
             startedAt =
               Date.now() - Math.max(0, serverCurrentTime - baseTime) * 1000;
@@ -369,7 +369,7 @@
         showGlobalTripStatus(true);
       } else if (currentStatus === "paused") {
         baseTime = serverTotalTime;
-        timerText = `${formatDuration(baseTime)} (Paused)`;
+        timerText = `${formatDuration(baseTime)} (${gettext("Paused")})`;
         if (isLocalTimerRunning) stopLocalTimer(timerText);
         else updateTimerDisplay(timerText);
         startedAt = null;
@@ -377,15 +377,15 @@
       } else {
         timerText =
           currentStatus === "none" || currentStatus === null
-            ? "No current trip"
-            : "Trip not started";
+            ? `${gettext("No current trip")}`
+            : `${gettext("Trip not started")}`;
         if (
           currentStatus !== "not_started" &&
           currentStatus !== "none" &&
           currentStatus !== null
         ) {
           console.warn("Received unknown trip status:", currentStatus);
-          timerText = "Trip status: Unknown";
+          timerText = `${gettext("Trip status: Unknown")}`;
         }
         if (isLocalTimerRunning) stopLocalTimer(timerText);
         else updateTimerDisplay(timerText);
@@ -424,9 +424,13 @@
     const notif = document.createElement("div");
     notif.className = "notification-popup";
     notif.innerHTML = `
-        <strong><i class="fa fa-comment-alt"></i> New Message</strong>
+        <strong><i class="fa fa-comment-alt"></i> ${gettext(
+          "New Message"
+        )}</strong>
         <div class="mt-2 small" style="line-height: 1.4;">${previewText}</div>
-        <div class="text-info small" style="margin-top: 5px;">Click to view</div>
+        <div class="text-info small" style="margin-top: 5px;">${gettext(
+          "Click to view"
+        )}</div>
     `;
 
     notif.onclick = () => {
@@ -453,7 +457,7 @@
         () => {
           dot.style.display = "none";
         },
-        { once: true },
+        { once: true }
       );
     }
 
@@ -477,7 +481,7 @@
 
     data.forEach((reward) => {
       Toastify({
-        text: `🎉 You've unlocked a new ${reward.type}: ${reward.name}!`,
+        text: `🎉 ${gettext("You've unlocked a new")} ${reward.type}: ${reward.name}!`,
         duration: 5000,
         close: true,
         gravity: "top",
@@ -514,7 +518,7 @@
     }
     if (data.cashback && parseFloat(data.cashback) > 0) {
       Toastify({
-        text: `🎉 Cashback: +€${parseFloat(data.cashback).toFixed(2)}!`,
+        text: `🎉 ${gettext("Cashback")}: +€${parseFloat(data.cashback).toFixed(2)}!`,
         duration: 5000,
         close: true,
         gravity: "top",
@@ -554,7 +558,7 @@
     initializeSharedWebSocket();
 
     showGlobalTripStatus(false);
-    updateTimerDisplay("Connecting...");
+    updateTimerDisplay(`${gettext("Connecting")}...`);
   }
 
   // --- Global Manager Interface ---

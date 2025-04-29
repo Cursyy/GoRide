@@ -174,7 +174,7 @@ function addStationMarkers(stations) {
       icon: stationIcon,
     })
       .bindPopup(
-        `<b>Max spaces:</b> ${station.max_spaces}<br><b>Free spaces:</b> ${station.free_spaces}<br>${station.address}`,
+        `<b>${gettext("Max spaces")}:</b> ${station.max_spaces}<br><b>${gettext("Free spaces")}:</b> ${station.free_spaces}<br>${station.address}`,
       )
       .addTo(map);
     stationClusterGroup.addLayer(marker);
@@ -239,7 +239,7 @@ async function loadVehicles(stationId = null) {
     const container = document.getElementById("vehicle-container");
     if (container) {
       container.innerHTML =
-        "<p>Error loading vehicles. Please try again later.</p>";
+        `<p>${gettext("Error loading vehicles. Please try again later.")}</p>`;
     }
   }
 }
@@ -288,13 +288,13 @@ function displayVehiclesMap(vehiclesToDisplay) {
         .bindPopup(function () {
           switch (vehicle.type) {
             case "Bike":
-              return `<b>Type:</b> ${vehicle.type}`;
+              return `<b>${gettext("Type")}:</b> ${vehicle.type}`;
             default:
-              return `<b>Battery charge:</b> ${
+              return `<b>${gettext("Battery charge")}:</b> ${
                 vehicle.battery_percentage !== null
                   ? vehicle.battery_percentage + "%"
                   : "N/A"
-              }<br><b>Type:</b> ${vehicle.type}`;
+              }<br><b>${gettext("Type")}:</b> ${vehicle.type}`;
           }
         })
         .addTo(window.vehicleMarkersLayer);
@@ -322,7 +322,7 @@ function displayVehicles() {
 
   if (vehiclesToShow.length === 0) {
     container.innerHTML =
-      '<p class="text-center text-muted mt-4">No vehicles match the current criteria.</p>';
+      `<p class="text-center text-muted mt-4">${gettext("No vehicles match the current criteria")}.</p>`;
     const paginationContainer = document.getElementById("pagination-controls");
     if (paginationContainer) paginationContainer.innerHTML = "";
     return;
@@ -358,18 +358,18 @@ function displayVehicles() {
 
     if (lat != null && lon != null) {
       mapButtonHTML = `<button onclick="focusOnVehicle(${lat}, ${lon})" class="map-link">
-                           <i class="fas fa-map-marker-alt"></i>Show on Map
+                           <i class="fas fa-map-marker-alt"></i>${gettext("Show on Map")}
                          </button>`;
     } else {
-      mapButtonHTML = `<span class="map-link-na text-muted">Map N/A</span>`;
+      mapButtonHTML = `<span class="map-link-na text-muted">${gettext("Map N/A")}</span>`;
     }
 
     let batteryInfoHTML = "";
     if (vehicle.type !== "Bike") {
       batteryInfoHTML =
         vehicle.battery_percentage !== null
-          ? `<p>Battery: ${vehicle.battery_percentage}%</p>`
-          : `<p>Battery: N/A</p>`;
+          ? `<p>${gettext("Battery")}: ${vehicle.battery_percentage}%</p>`
+          : `<p>${gettext("Battery")}: N/A</p>`;
     }
 
     const priceHTML =
@@ -390,7 +390,7 @@ function displayVehicles() {
             ${mapButtonHTML}
         </div>
         <div class="vehicle-actions">
-            <p>Price per hour: ${priceHTML}</p>
+            <p>${gettext("Price per hour")}: ${priceHTML}</p>
             <a href="/booking/rent/${vehicle.id}/" class="rent-button">Rent</a>
         </div>`;
 
@@ -535,7 +535,7 @@ async function getDirection(targetStationId, targetVehicleId) {
     !window.GLOBAL_USER_LOCATION_AVAILABLE
   ) {
     alert(
-      "Please select a station or vehicle first, and ensure location is enabled.",
+      `${gettext("Please select a station or vehicle first, and ensure location is enabled")}.`,
     );
     return;
   }
@@ -576,7 +576,7 @@ async function getDirection(targetStationId, targetVehicleId) {
       );
     } else {
       console.error("Error in getDirection process:", error);
-      alert(`Could not get directions: ${error.message}`);
+      alert(`${gettext("Could not get directions")}: ${error.message}`);
       if (routeLayer && map.hasLayer(routeLayer)) {
         map.removeLayer(routeLayer);
         routeLayer = null;
@@ -619,7 +619,7 @@ async function apiRespond(request_id, type, commonSignal) {
       console.log("API fetch/process aborted.");
     } else {
       console.error("Error during API response/processing:", error);
-      alert(`Could not process directions: ${error.message}`);
+      alert(`${gettext("Could not process directions")}: ${error.message}`);
       if (routeLayer && map.hasLayer(routeLayer)) {
         map.removeLayer(routeLayer);
         routeLayer = null;

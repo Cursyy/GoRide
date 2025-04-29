@@ -18,7 +18,7 @@
       }
       localStorage.setItem("theme", "dark");
       if (themeToggleButton)
-        themeToggleButton.setAttribute("title", "Switch to light theme");
+        themeToggleButton.setAttribute("title", `${gettext("Switch to light theme")}`);
     } else {
       rootElement.classList.remove("dark-mode");
       if (themeIcon) {
@@ -27,7 +27,7 @@
       }
       localStorage.setItem("theme", "light");
       if (themeToggleButton)
-        themeToggleButton.setAttribute("title", "Switch to dark theme");
+        themeToggleButton.setAttribute("title", `${gettext("Switch to dark theme")}`);
     }
     updateThemedImages(isDark);
   }
@@ -38,14 +38,14 @@
       themeIcon.classList.add("fa-moon");
     }
     if (themeToggleButton)
-      themeToggleButton.setAttribute("title", "Switch to light theme");
+      themeToggleButton.setAttribute("title", `${gettext("Switch to light theme")}`);
   } else {
     if (themeIcon) {
       themeIcon.classList.remove("fa-moon");
       themeIcon.classList.add("fa-sun");
     }
     if (themeToggleButton)
-      themeToggleButton.setAttribute("title", "Switch to dark theme");
+      themeToggleButton.setAttribute("title", `${gettext("Switch to dark theme")}`);
   }
 
   if (themeToggleButton) {
@@ -71,13 +71,13 @@
         accessibilityIcon.classList.remove("fa-universal-access");
         accessibilityIcon.classList.add("fa-eye-slash");
       }
-      accessibilityToggle.setAttribute("title", "Disable Accessibility Mode");
+      accessibilityToggle.setAttribute("title", `${gettext("Disable Accessibility Mode")}`);
     } else {
       if (accessibilityIcon) {
         accessibilityIcon.classList.remove("fa-eye-slash");
         accessibilityIcon.classList.add("fa-universal-access");
       }
-      accessibilityToggle.setAttribute("title", "Enable Accessibility Mode");
+      accessibilityToggle.setAttribute("title", `${gettext("Enable Accessibility Mode")}`);
     }
 
     accessibilityToggle.addEventListener("click", () => {
@@ -95,13 +95,13 @@
           accessibilityIcon.classList.remove("fa-universal-access");
           accessibilityIcon.classList.add("fa-eye-slash");
         }
-        accessibilityToggle.setAttribute("title", "Disable Accessibility Mode");
+        accessibilityToggle.setAttribute("title", `${gettext("Disable Accessibility Mode")}`);
       } else {
         if (accessibilityIcon) {
           accessibilityIcon.classList.remove("fa-eye-slash");
           accessibilityIcon.classList.add("fa-universal-access");
         }
-        accessibilityToggle.setAttribute("title", "Enable Accessibility Mode");
+        accessibilityToggle.setAttribute("title", `${gettext("Enable Accessibility Mode")}`);
       }
     });
   }

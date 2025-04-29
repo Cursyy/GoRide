@@ -28,7 +28,7 @@ function showReviewPopup() {
   popup.style.width = "90%";
 
   popup.innerHTML = `
-        <h3 class="card-title text-center mb-4">Leave a Review</h3>
+        <h3 class="card-title text-center mb-4">${gettext("Leave a Review")}</h3>
         <div id="rating-stars" class="text-center mb-4">
             <span class="star" data-value="1">★</span>
             <span class="star" data-value="2">★</span>
@@ -36,10 +36,10 @@ function showReviewPopup() {
             <span class="star" data-value="4">★</span>
             <span class="star" data-value="5">★</span>
         </div>
-        <textarea id="review-text" class="form-control mb-4" placeholder="Write your review..." style="height: 100px;"></textarea>
+        <textarea id="review-text" class="form-control mb-4" placeholder=${gettext("Write your review...")} style="height: 100px;"></textarea>
         <div class="d-flex justify-content-center gap-2">
-            <button id="submit-review-btn" class="btn btn-success">Submit</button>
-            <button id="close-review-btn" class="btn btn-danger">Close</button>
+            <button id="submit-review-btn" class="btn btn-success">${gettext("Submit")}</button>
+            <button id="close-review-btn" class="btn btn-danger">${gettext("Close")}</button>
         </div>
     `;
 
@@ -69,7 +69,7 @@ function showReviewPopup() {
     const reviewText = document.getElementById("review-text").value.trim();
     if (!reviewText) {
       Toastify({
-        text: "Please write a review before submitting.",
+        text: `${gettext("Please write a review before submitting.")}`,
         duration: 3000,
         style: { background: "#dc3545" },
       }).showToast();
@@ -103,7 +103,7 @@ function showReviewPopup() {
         console.log("Response data:", data);
         if (data.success) {
           Toastify({
-            text: "Thank you for your review!",
+            text: `${gettext("Thank you for your review!")}`,
             duration: 3000,
             style: { background: "#28a745" },
           }).showToast();
@@ -111,7 +111,7 @@ function showReviewPopup() {
           popup.remove();
         } else {
           Toastify({
-            text: "Error submitting review. Please try again.",
+            text: `${gettext("Error submitting review. Please try again.")}`,
             duration: 3000,
             style: { background: "#dc3545" },
           }).showToast();
@@ -120,7 +120,7 @@ function showReviewPopup() {
       .catch((error) => {
         console.error("Error submitting review:", error);
         Toastify({
-          text: "Error submitting review. Please try again.",
+          text: `${gettext("Error submitting review. Please try again.")}`,
           duration: 3000,
           style: { background: "#dc3545" },
         }).showToast();

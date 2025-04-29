@@ -100,11 +100,11 @@
             form.reset();
             textarea.style.height = "auto";
           } else {
-            alert("Failed to send message. Connection might be down.");
+            alert(`${gettext("Failed to send message. Connection might be down.")}`);
           }
         } else {
           console.error("Support: Cannot send message: chatId is missing.");
-          alert("Error: Chat ID is missing.");
+          alert(`${gettext("Error: Chat ID is missing.")}`);
         }
       });
     } else {

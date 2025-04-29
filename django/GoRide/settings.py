@@ -192,6 +192,11 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, "locale"),
 ]
 
+MAKEMESSAGES_IGNORES = [
+    'requirements.txt',
+    'env/*',
+    'static/*',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

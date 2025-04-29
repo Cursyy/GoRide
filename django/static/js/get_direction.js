@@ -36,15 +36,15 @@ function renderResults(results) {
                         <h5 class="result-title">${
                           result.name || "No name available"
                         }</h5>
-                        <p><strong>Address:</strong> ${
+                        <p><strong>${gettext("Address")}:</strong> ${
                           result.address_line2 || ""
                         }</p>
-                        <p><strong>Distance:</strong> ${
+                        <p><strong>${gettext("Distance")}:</strong> ${
                           result.distance
-                        } meters</p>
-                        <p><strong>Estimated Time:</strong> ${Math.ceil(
+                        } ${gettext("meters")}</p>
+                        <p><strong>${gettext("Estimated Time")}:</strong> ${Math.ceil(
                           result.distance / 5.5 / 60,
-                        )} minutes</p>
+                        )} ${gettext("minutes")}</p>
                     </div>
                 </div>
         `;
@@ -78,21 +78,21 @@ function updateTripButtons(status) {
   buttonsContainer.innerHTML = "";
 
   if (status === "not_started" || status === "none") {
-    buttonsContainer.innerHTML = `<button onclick="startTrip()">Start</button>`;
+    buttonsContainer.innerHTML = `<button onclick="startTrip()">${gettext("Start")}</button>`;
   } else if (status === "active") {
     buttonsContainer.innerHTML = `
-          <button onclick="pauseTrip()">Pause</button>
-          <button onclick="endTrip()">Finish</button>
+          <button onclick="pauseTrip()">${gettext("Pause")}</button>
+          <button onclick="endTrip()">${gettext("Finish")}</button>
       `;
   } else if (status === "paused") {
     buttonsContainer.innerHTML = `
-          <button onclick="resumeTrip()">Resume</button>
-          <button onclick="endTrip()">Finish</button>
+          <button onclick="resumeTrip()">${gettext("Resume")}</button>
+          <button onclick="endTrip()">${gettext("Finish")}</button>
       `;
   } else if (status === "finished") {
-    buttonsContainer.innerHTML = "Trip finished.";
+    buttonsContainer.innerHTML = `${gettext("Trip finished")}.`;
   } else {
-    buttonsContainer.innerHTML = "Loading...";
+    buttonsContainer.innerHTML = `${gettext("Loading")}...`;
   }
 }
 
@@ -127,16 +127,16 @@ function startTrip() {
     .then((data) => {
       console.log("Control page: Start trip response:", data);
       if (data.error) {
-        alert("Start error: " + data.error);
+        alert(`${gettext("Start error")}: ` + data.error);
       } else {
         console.log(
-          "Control page: Trip start requested. Waiting for WebSocket.",
+          "Control page: Trip start requested. Waiting for WebSocket."
         );
       }
     })
     .catch((error) => {
       console.error("Fetch startTrip error:", error);
-      alert("Network error starting trip.");
+      alert(`${gettext("Network error starting trip")}.`);
     });
 }
 
@@ -150,7 +150,7 @@ function pauseTrip() {
     .then((data) => {
       console.log("Control page: Pause trip response:", data);
       if (data.error) {
-        alert("Pause error: " + data.error);
+        alert(`${gettext("Pause error")}: ` + data.error);
       } else {
         console.log(
           "Control page: Trip pause requested. Waiting for WebSocket.",
@@ -159,7 +159,7 @@ function pauseTrip() {
     })
     .catch((error) => {
       console.error("Fetch pauseTrip error:", error);
-      alert("Network error pausing trip.");
+      alert(`${gettext("Network error pausing trip.")}`);
     });
 }
 
@@ -173,7 +173,7 @@ function resumeTrip() {
     .then((data) => {
       console.log("Control page: Resume trip response:", data);
       if (data.error) {
-        alert("Resume error: " + data.error);
+        alert(`${gettext("Resume error")}: ` + data.error);
       } else {
         console.log(
           "Control page: Trip resume requested. Waiting for WebSocket.",
@@ -182,12 +182,12 @@ function resumeTrip() {
     })
     .catch((error) => {
       console.error("Fetch resumeTrip error:", error);
-      alert("Network error resuming trip.");
+      alert(`${gettext("Network error resuming trip.")}`);
     });
 }
 
 function endTrip() {
-  if (!confirm("Are you sure you want to end the current trip?")) {
+  if (!confirm(`${gettext("Are you sure you want to end the current trip?")}`)) {
     return;
   }
   console.log("Control page: Requesting END trip...");
@@ -199,14 +199,14 @@ function endTrip() {
     .then((data) => {
       console.log("Control page: End trip response:", data);
       if (data.error) {
-        alert("End error: " + data.error);
+        alert(`${gettext("End error")}: ` + data.error);
       } else {
         console.log("Control page: Trip end requested. Waiting for WebSocket.");
       }
     })
     .catch((error) => {
       console.error("Fetch endTrip error:", error);
-      alert("Network error ending trip.");
+      alert(`${gettext("Network error ending trip")}.`);
     });
 }
 

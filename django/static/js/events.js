@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (radiusSlider && radiusDisplay) {
     radiusSlider.addEventListener("input", () => {
-      radiusDisplay.textContent = `${radiusSlider.value} km`;
+      radiusDisplay.textContent = `${radiusSlider.value} ${gettext("km")}`;
     });
-    radiusDisplay.textContent = `${radiusSlider.value} km`;
+    radiusDisplay.textContent = `${radiusSlider.value} ${gettext("km")}`;
   }
 
   const fetchAndDisplayEvents = async (params = {}) => {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       displayEvents(data.events || []);
     } catch (error) {
       console.error("Error fetching events:", error);
-      eventsContainer.innerHTML = `<p class="error-message">Could not load events: ${error.message}. Please try again later.</p>`;
+      eventsContainer.innerHTML = `<p class="error-message">${gettext("Could not load events:")} ${error.message}. ${gettext("Please try again later.")}</p>`;
     } finally {
       loadingIndicator.style.display = "none";
     }
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     events.forEach((event) => {
       const imageUrl = event.images?.[0]?.url;
-      const eventName = event.name || "Unnamed Event";
+      const eventName = event.name || gettext("Unnamed Event");
       const eventUrl = event.url || "#";
       const startDate = event.dates?.start?.localDate;
       const startTime = event.dates?.start?.localTime;
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const longitude = venueData?.location?.longitude || "";
       const latitude = venueData?.location?.latitude || "";
 
-      let displayDate = "Date N/A";
+      let displayDate = gettext("Date N/A");
       if (startDate) {
         try {
           const dateOpts = { year: "numeric", month: "long", day: "numeric" };
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let displayVenue = [venueName, cityName, countryName]
         .filter(Boolean)
         .join(", ");
-      if (!displayVenue) displayVenue = "Venue N/A";
+      if (!displayVenue) displayVenue = gettext("Venue N/A");
 
       const card = document.createElement("article");
       card.className = "event-card";
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="event-card__footer">
                         <a href="${eventUrl}" target="_blank" rel="noopener noreferrer" class="event-card__link">
-                            View Event  <i class="fas fa-external-link-alt"></i>
+                            ${gettext("View Event")}  <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
                     <div class="event-card__directions">
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (latitude && longitude && directionsContainer) {
         const directionsButton = document.createElement("button");
         directionsButton.className = "event-card__directions-button";
-        directionsButton.innerHTML = `<i class="fas fa-directions"></i> Get Directions`;
+        directionsButton.innerHTML = `<i class="fas fa-directions"></i> ${gettext("Get Directions")}`;
 
         directionsButton.addEventListener("click", () => {
           const mapPageUrl = "/en/get_direction/";
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         directionsContainer.appendChild(directionsButton);
       } else if (directionsContainer) {
-        directionsContainer.innerHTML = `<p class="event-card__info--small">Directions unavailable</p>`;
+        directionsContainer.innerHTML = `<p class="event-card__info--small">${gettext("Directions unavailable")}</p>`;
       }
 
       eventsContainer.appendChild(card);
@@ -200,30 +200,30 @@ document.addEventListener("DOMContentLoaded", () => {
   useMyLocationBtn.addEventListener("click", () => {
     if (navigator.geolocation) {
       useMyLocationBtn.disabled = true;
-      useMyLocationBtn.textContent = `Getting location...`;
+      useMyLocationBtn.textContent = gettext("Getting location...");
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
           latInput.value = lat.toFixed(6);
           lonInput.value = lon.toFixed(6);
-          locationInput.value = "My Location";
+          locationInput.value = gettext("My Location");
           console.log(`Location acquired: ${lat}, ${lon}`);
           useMyLocationBtn.disabled = false;
-          useMyLocationBtn.textContent = "Use My Location";
+          useMyLocationBtn.textContent = gettext("Use My Location");
         },
         (error) => {
           console.error("Error getting geolocation:", error);
           alert(
-            `Could not get your location. Please ensure location services are enabled and permissions are granted.`,
+            gettext("Could not get your location. Please ensure location services are enabled and permissions are granted."),
           );
           useMyLocationBtn.disabled = false;
-          useMyLocationBtn.textContent = `Use My Location`;
+          useMyLocationBtn.textContent = gettext("Use My Location");
         },
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 },
       );
     } else {
-      alert(`Geolocation is not supported by your browser.`);
+      alert(gettext("Geolocation is not supported by your browser."));
     }
   });
 
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     latInput.value = "";
     lonInput.value = "";
     if (radiusSlider && radiusDisplay) {
-      radiusDisplay.textContent = `${radiusSlider.value} km`;
+      radiusDisplay.textContent = `${radiusSlider.value} ${gettext("km")}`;
     }
     fetchAndDisplayEvents();
   });

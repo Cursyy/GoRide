@@ -96,8 +96,8 @@
     </nav>
     <div id="global-trip-status" class="trip-status-bar">
         <div class="container d-flex justify-content-between align-items-center">
-        <span id="base-timer-display">Connecting...</span>
-        <a href="{% url 'get_direction:map' %}" class="manage-link">Manage</a>
+        <span id="base-timer-display">{% trans "Connecting" %}...</span>
+        <a href="{% url 'get_direction:map' %}" class="manage-link">{% trans "Manage" %}</a>
     </div>
     </div>
 </header>
