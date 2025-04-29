@@ -1,0 +1,4062 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-29 11:15+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);\n"
+
+#: accounts/templates/profile.html:4 main/templates/header.html:72
+msgid "Profile"
+msgstr "Cuir i bpróifíl"
+
+#: accounts/templates/profile.html:12 accounts/templates/profile_edit.html:28
+msgid "Profile Picture"
+msgstr "Pictiúr próifíle"
+
+#: accounts/templates/profile.html:16 accounts/templates/profile_edit.html:5
+#: accounts/templates/profile_edit.html:9
+msgid "Edit Profile"
+msgstr "Próifíl eagarthóireachta"
+
+#: accounts/templates/profile.html:19 accounts/templates/profile_edit.html:20
+msgid "Email"
+msgstr "Ríomhphost a chur"
+
+#: accounts/templates/profile.html:21
+msgid "Phone"
+msgstr "Glao gutháin a chur ar"
+
+#: accounts/templates/profile.html:37
+msgid "No achievements yet. Keep riding!"
+msgstr "Gan aon éachtaí fós.Coinnigh marcaíocht!"
+
+#: accounts/templates/profile.html:48
+msgid "Statistics"
+msgstr "Staidreamh"
+
+#: accounts/templates/profile.html:51
+msgid "Avatar"
+msgstr "Avatar"
+
+#: accounts/templates/profile.html:60
+msgid "Total Rides:"
+msgstr "Rides Iomlán:"
+
+#: accounts/templates/profile.html:61
+msgid "Total Hours:"
+msgstr "Uaireanta Iomlán:"
+
+#: accounts/templates/profile.html:62
+msgid "Total Spent:"
+msgstr "Iomlán caite:"
+
+#: accounts/templates/profile.html:63
+msgid "Most Used Vehicle:"
+msgstr "Feithicil is mó a úsáidtear:"
+
+#: accounts/templates/profile.html:63
+msgid "N/A"
+msgstr "N/A."
+
+#: accounts/templates/profile.html:65 accounts/templates/profile.html:103
+msgid "No statistics available."
+msgstr "Níl aon staitisticí ar fáil."
+
+#: accounts/templates/profile.html:72 accounts/templates/profile.html:84
+#: booking/templates/rental_booking.html:43
+#: booking/templates/rental_booking.html:48
+msgid "Subscription"
+msgstr "Síntiús"
+
+#: accounts/templates/profile.html:73
+msgid "Start date"
+msgstr "Dáta tosaithe"
+
+#: accounts/templates/profile.html:74
+msgid "End date"
+msgstr "Dáta deiridh"
+
+#: accounts/templates/profile.html:84
+msgid "You have no active subscriptions"
+msgstr "Níl aon síntiúis ghníomhacha agat"
+
+#: accounts/templates/profile.html:85
+msgid "Choose plan"
+msgstr "Roghnaigh plean"
+
+#: accounts/templates/profile.html:109
+#: booking/templates/rental_booking.html:61
+#: booking/templates/subscription_booking.html:38
+msgid "Balance"
+msgstr "Cothromaigh"
+
+#: accounts/templates/profile.html:110
+msgid "Top up"
+msgstr "Bunstaisigh"
+
+#: accounts/templates/profile.html:120 accounts/templates/profile.html:122
+msgid "Background image"
+msgstr "Íomhá chúlra"
+
+#: accounts/templates/profile.html:124
+msgid "Avatar image"
+msgstr "Íomhá Avatar"
+
+#: accounts/templates/profile.html:126 accounts/templates/profile.html:128
+msgid "Shirt image"
+msgstr "Íomhá léine"
+
+#: accounts/templates/profile.html:131 accounts/templates/profile.html:133
+msgid "Hat image"
+msgstr "Íomhá hata"
+
+#: accounts/templates/profile.html:136 accounts/templates/profile.html:138
+msgid "Accessory image"
+msgstr "Íomhá ghabhálas"
+
+#: accounts/templates/profile.html:143
+msgid "Hats"
+msgstr "Hataí"
+
+#: accounts/templates/profile.html:152 accounts/templates/profile.html:170
+#: accounts/templates/profile.html:188 accounts/templates/profile.html:206
+msgid "Unlock by"
+msgstr "Díghlasáil le"
+
+#: accounts/templates/profile.html:161
+msgid "Shirts"
+msgstr "Léinte"
+
+#: accounts/templates/profile.html:179
+msgid "Accessories"
+msgstr "Gabh gabhálais"
+
+#: accounts/templates/profile.html:197
+msgid "Backgrounds"
+msgstr "Cúlra"
+
+#: accounts/templates/profile_edit.html:16
+msgid "Username"
+msgstr "Ainm úsáideora"
+
+#: accounts/templates/profile_edit.html:24 careers/templates/careers.html:104
+msgid "Phone Number"
+msgstr "Uimhir ghutháin"
+
+#: accounts/templates/profile_edit.html:31
+msgid "Save Changes"
+msgstr "Athruithe a shábháil"
+
+#: accounts/templates/registration/email_sent.html:4
+msgid "Email sent"
+msgstr "Ríomhphost seolta"
+
+#: accounts/templates/registration/email_sent.html:11
+msgid "Email Sent"
+msgstr "Ríomhphost seolta"
+
+#: accounts/templates/registration/email_sent.html:14
+msgid ""
+"A confirmation email has been sent to your email address. Please check your "
+"inbox (and spam folder) to confirm your account."
+msgstr ""
+"Tá ríomhphost dearbhaithe curtha chuig do sheoladh ríomhphoist.Seiceáil do "
+"bhosca isteach (agus an fillteán spam) le do thoil chun do chuntas a "
+"dheimhniú."
+
+#: accounts/templates/registration/email_sent.html:15
+#: careers/templates/careers_thank_you.html:53
+msgid "Back to Home"
+msgstr "Ar ais ar an mbaile"
+
+#: accounts/templates/registration/login.html:7
+#: accounts/templates/registration/login.html:26
+#: accounts/templates/registration/password_reset_complete.html:13
+#: accounts/templates/registration/signup.html:17
+#: main/templates/header.html:84
+msgid "Login"
+msgstr "Logáil isteach"
+
+#: accounts/templates/registration/login.html:12
+msgid "Login or Create a New Account"
+msgstr "Logáil isteach nó cruthaigh cuntas nua"
+
+#: accounts/templates/registration/login.html:16
+msgid "New Customer?"
+msgstr "Custaiméir nua?"
+
+#: accounts/templates/registration/login.html:17
+msgid "Create New Account"
+msgstr "Cuntas nua a chruthú"
+
+#: accounts/templates/registration/login.html:22
+msgid "Registered Customers Only"
+msgstr "Custaiméirí cláraithe amháin"
+
+#: accounts/templates/registration/login.html:28
+msgid "Forgot your password?"
+msgstr "An ndearna tú dearmad ar do phasfhocal?"
+
+#: accounts/templates/registration/password_change_done.html:6
+msgid "Password Changed"
+msgstr "Athraíodh pasfhocal"
+
+#: accounts/templates/registration/password_change_done.html:11
+msgid "Password Changed Successfully"
+msgstr "D'athraigh pasfhocal go rathúil"
+
+#: accounts/templates/registration/password_change_done.html:15
+msgid "Your password has been updated successfully."
+msgstr "Rinneadh do phasfhocal a nuashonrú go rathúil."
+
+#: accounts/templates/registration/password_change_done.html:16
+msgid "Return to Homepage"
+msgstr "Filleadh ar an leathanach baile"
+
+#: accounts/templates/registration/password_change_form.html:7
+#: accounts/templates/registration/password_change_form.html:21
+#: accounts/templates/registration/password_reset_confirm.html:21
+#: main/templates/header.html:73
+msgid "Change Password"
+msgstr "Athraigh pasfhocal"
+
+#: accounts/templates/registration/password_change_form.html:12
+msgid "Change Your Password"
+msgstr "Athraigh do phasfhocal"
+
+#: accounts/templates/registration/password_change_form.html:16
+msgid "Secure Your Account"
+msgstr "Faigh do chuntas"
+
+#: accounts/templates/registration/password_change_form.html:17
+msgid "Enter your current password and choose a new one."
+msgstr "Iontráil do phasfhocal reatha agus roghnaigh ceann nua."
+
+#: accounts/templates/registration/password_reset_complete.html:6
+msgid "Password Reset Complete"
+msgstr "Athshocraigh Pasfhocal Comhlánaigh"
+
+#: accounts/templates/registration/password_reset_complete.html:11
+msgid "Password Reset Successful"
+msgstr "Athshocraigh pasfhocal rathúil"
+
+#: accounts/templates/registration/password_reset_complete.html:12
+msgid "Your password has been reset successfully."
+msgstr "Athshocraigh do phasfhocal go rathúil."
+
+#: accounts/templates/registration/password_reset_confirm.html:7
+#: accounts/templates/registration/password_reset_confirm.html:12
+msgid "Set a New Password"
+msgstr "Socraigh pasfhocal nua"
+
+#: accounts/templates/registration/password_reset_confirm.html:16
+msgid "Create a New Password"
+msgstr "Cruthaigh pasfhocal nua"
+
+#: accounts/templates/registration/password_reset_confirm.html:17
+msgid "Enter your new password below."
+msgstr "Iontráil do phasfhocal nua thíos."
+
+#: accounts/templates/registration/password_reset_done.html:6
+#: accounts/templates/registration/password_reset_done.html:11
+msgid "Check Your Email"
+msgstr "Seiceáil do r -phost"
+
+#: accounts/templates/registration/password_reset_done.html:12
+msgid ""
+"If an account exists with the email you entered, you will receive a password"
+" reset link."
+msgstr ""
+"Má tá cuntas ann leis an ríomhphost a chuir tú isteach, gheobhaidh tú nasc "
+"athshocraithe pasfhocal."
+
+#: accounts/templates/registration/password_reset_done.html:13
+msgid "Back to Login"
+msgstr "Ar ais chuig Logáil Isteach"
+
+#: accounts/templates/registration/password_reset_form.html:7
+msgid "Reset Password"
+msgstr "Pasfhocal athshocraithe"
+
+#: accounts/templates/registration/password_reset_form.html:12
+msgid "Forgot Your Password?"
+msgstr "An ndearna tú dearmad ar do phasfhocal?"
+
+#: accounts/templates/registration/password_reset_form.html:16
+msgid "Reset Your Password"
+msgstr "Athshocraigh do phasfhocal"
+
+#: accounts/templates/registration/password_reset_form.html:17
+msgid "Enter your email, and we’ll send you a link to reset your password."
+msgstr ""
+"Cuir isteach do r -phost, agus seolfaimid nasc chugat chun do phasfhocal a "
+"athshocrú."
+
+#: accounts/templates/registration/password_reset_form.html:21
+msgid "Send Reset Link"
+msgstr "Seol nasc athshocraithe"
+
+#: accounts/templates/registration/signup.html:7
+#: accounts/templates/registration/signup.html:12
+#: accounts/templates/registration/signup.html:22
+msgid "Create a New Account"
+msgstr "Cruthaigh cuntas nua"
+
+#: accounts/templates/registration/signup.html:16
+msgid "Already have an account?"
+msgstr "An bhfuil cuntas agat cheana féin?"
+
+#: accounts/templates/registration/signup.html:23
+msgid "Enter the following information to create a new account."
+msgstr "Cuir isteach an fhaisnéis seo a leanas chun cuntas nua a chruthú."
+
+#: accounts/templates/registration/signup.html:27
+msgid "Register Account"
+msgstr "Cuntas cláraithe"
+
+#: avatar/models.py:39
+#, python-format
+msgid "Complete %(value)s rides"
+msgstr "Turais iomlána %(value)s"
+
+#: avatar/models.py:41
+#, python-format
+msgid "Complete %(value)s bike rides"
+msgstr "Turais rothar iomlán %(value)s"
+
+#: avatar/models.py:43
+#, python-format
+msgid "Complete %(value)s scooter rides"
+msgstr "Críochnaigh %(value)s turais scútar"
+
+#: avatar/models.py:45
+#, python-format
+msgid "Spend %(value)s hours riding"
+msgstr "Caith %(value)s uaireanta marcaíocht"
+
+#: avatar/models.py:47
+#, python-format
+msgid "Spend €%(value)s"
+msgstr "Caith €%(value)s"
+
+#: avatar/models.py:48
+msgid "Unknown condition"
+msgstr "Coinníoll Anaithnid"
+
+#: booking/templates/booking_success.html:5
+msgid "Booking Successful"
+msgstr "Rathúil in áirithe"
+
+#: booking/templates/booking_success.html:11
+msgid "Booking Successful!"
+msgstr "Áirithint rathúil!"
+
+#: booking/templates/booking_success.html:12
+msgid "Thank you for booking with"
+msgstr "Go raibh maith agat as áirithint a dhéanamh leis"
+
+#: booking/templates/booking_success.html:12
+msgid "Your booking has been confirmed."
+msgstr "Deimhníodh d’áirithint."
+
+#: booking/templates/booking_success.html:15
+msgid "Return to Home"
+msgstr "Filleadh ar an mbaile"
+
+#: booking/templates/booking_success.html:18
+msgid "Find Your Way"
+msgstr "Faigh do bhealach"
+
+#: booking/templates/rental_booking.html:4
+#: booking/templates/rental_booking.html:10
+msgid "Rent"
+msgstr "Cíos"
+
+#: booking/templates/rental_booking.html:13
+msgid "Price per hour"
+msgstr "Praghas in aghaidh na huaire"
+
+#: booking/templates/rental_booking.html:14
+msgid "Total amount"
+msgstr "An méid iomlán"
+
+#: booking/templates/rental_booking.html:18
+msgid "Your subscription"
+msgstr "Do shuibscríobh"
+
+#: booking/templates/rental_booking.html:24
+#: booking/templates/subscription_booking.html:17
+msgid "Enter voucher code"
+msgstr "Iontráil cód dearbhán"
+
+#: booking/templates/rental_booking.html:25
+#: booking/templates/subscription_booking.html:18
+msgid "Apply"
+msgstr "Feidhmigh"
+
+#: booking/templates/rental_booking.html:33
+msgid "Number of Hours"
+msgstr "Líon uaireanta"
+
+#: booking/templates/rental_booking.html:38
+#: booking/templates/subscription_booking.html:26
+#: booking/templates/top_up_wallet.html:22
+msgid "Choose Payment Method"
+msgstr "Roghnaigh modh íocaíochta"
+
+#: booking/templates/rental_booking.html:53
+#: booking/templates/subscription_booking.html:30
+#: booking/templates/top_up_wallet.html:26
+msgid "Stripe"
+msgstr "Strácáil"
+
+#: booking/templates/rental_booking.html:57
+#: booking/templates/subscription_booking.html:34
+#: booking/templates/top_up_wallet.html:30
+msgid "Paypal"
+msgstr "Pá"
+
+#: booking/templates/rental_booking.html:67 main/templates/home.html:13
+msgid "Rent Now"
+msgstr "Cíos anois"
+
+#: booking/templates/subscription_booking.html:4
+#: subscriptions/templates/plans.html:27
+msgid "Subscribe"
+msgstr "Suibscríobh"
+
+#: booking/templates/subscription_booking.html:10
+msgid "Subscribe to"
+msgstr "Liostáil le"
+
+#: booking/templates/subscription_booking.html:13
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1863
+msgid "Duration"
+msgstr "Fadfhad"
+
+#: booking/templates/subscription_booking.html:14
+#: booking/templates/top_up_wallet.html:14
+msgid "Price"
+msgstr "Praghas a fháil amach"
+
+#: booking/templates/subscription_booking.html:44
+#: booking/templates/top_up_wallet.html:34
+msgid "Proceed to Pay"
+msgstr "Lean ar aghaidh ag íoc"
+
+#: booking/templates/top_up_wallet.html:4 main/templates/header.html:68
+msgid "Top Up"
+msgstr "Bunstaisigh"
+
+#: booking/templates/top_up_wallet.html:10
+msgid "Top up your wallet"
+msgstr "TOP SPORT do sparán"
+
+#: booking/templates/top_up_wallet.html:13
+msgid "Current balance"
+msgstr "Cothromaíocht reatha"
+
+#: booking/templates/top_up_wallet.html:18
+msgid "Top up amount"
+msgstr "Méid breise"
+
+#: careers/templates/careers.html:5
+msgid "Careers at GoRide"
+msgstr "Gairmeacha ag Goride"
+
+#: careers/templates/careers.html:70
+msgid "Join the GoRide Team!"
+msgstr "Bí ar an bhfoireann Goride!"
+
+#: careers/templates/careers.html:71
+msgid ""
+"We’re a small student startup with big dreams. Help us make urban travel "
+"greener and more fun!"
+msgstr ""
+"Is tosaithe mac léinn beag muid le brionglóidí móra.Cuidigh linn taisteal "
+"uirbeach a dhéanamh níos glaise agus níos mó spraoi!"
+
+#: careers/templates/careers.html:78
+msgid "Why Work With Us?"
+msgstr "Cén fáth a n -oibríonn muid linn?"
+
+#: careers/templates/careers.html:80
+msgid ""
+"GoRide was started by two Ukrainian students, Alex and Oleksandr, with a "
+"mission to transform urban mobility. We’re passionate about sustainability, "
+"innovation, and having a good time while we’re at it. Join us to be part of "
+"a fun, young team that’s making a real difference in Dublin!"
+msgstr ""
+"Thosaigh beirt mhac léinn Úcráinis, Alex agus Oleksandr, Goride, le misean "
+"chun soghluaisteacht uirbeach a athrú.Táimid an -bhródúil as "
+"inbhuanaitheacht, nuálaíocht, agus am maith a bheith againn agus muid ag "
+"obair.Bí linn le bheith mar chuid d'fhoireann spraoi, óg atá ag déanamh "
+"fíordhifríochta i mBaile Átha Cliath!"
+
+#: careers/templates/careers.html:83
+msgid ""
+"We might be small now, but we’re dreaming big. If you love tech, green "
+"solutions, or just want to work with two guys who code while eating borscht,"
+" we’d love to hear from you!"
+msgstr ""
+"D'fhéadfaimis a bheith beag anois, ach táimid ag brionglóid mhór.Má tá grá "
+"agat do theicneolaíocht, réitigh ghlasa, nó más mian leat a bheith ag obair "
+"le beirt fhear a chód agus tú ag ithe borscht, ba bhreá linn cloisteáil "
+"uait!"
+
+#: careers/templates/careers.html:88
+msgid "Apply Now"
+msgstr "Iarratas a dhéanamh anois"
+
+#: careers/templates/careers.html:92
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:14
+msgid "First Name"
+msgstr "Céadainm"
+
+#: careers/templates/careers.html:96
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:15
+msgid "Last Name"
+msgstr "An t -ainm deireanach"
+
+#: careers/templates/careers.html:100 main/templates/contacts.html:62
+msgid "Email Address"
+msgstr "Seoladh ríomhphoist"
+
+#: careers/templates/careers.html:108
+msgid "Desired Position"
+msgstr "Seasamh inmhianaithe"
+
+#: careers/templates/careers.html:112
+msgid "Tell Us About Yourself"
+msgstr "Inis dúinn fút féin"
+
+#: careers/templates/careers.html:116
+msgid "Upload Resume (optional)"
+msgstr "Uaslódáil atosú (roghnach)"
+
+#: careers/templates/careers.html:119
+msgid "Submit Application"
+msgstr "Iarratas a chur isteach"
+
+#: careers/templates/careers.html:128
+msgid "Ready to Make a Difference?"
+msgstr "Réidh chun difríocht a dhéanamh?"
+
+#: careers/templates/careers.html:129
+msgid ""
+"We can’t wait to meet you! Submit your application, and let’s build a "
+"greener future together."
+msgstr ""
+"Ní féidir linn fanacht le bualadh leat!Cuir isteach d'iarratas, agus "
+"déanaimis todhchaí níos glaise a thógáil le chéile."
+
+#: careers/templates/careers_thank_you.html:5
+#: careers/templates/careers_thank_you.html:49
+msgid "Thank You for Applying!"
+msgstr "Go raibh maith agat as iarratas a dhéanamh!"
+
+#: careers/templates/careers_thank_you.html:51
+msgid ""
+"We’ve received your application and are super excited to learn more about "
+"you! Alex and Oleksandr will take a look soon – probably over a bowl of "
+"borscht. We’ll get back to you as soon as we can."
+msgstr ""
+"Tá d'iarratas faighte againn agus táimid an -tógtha le níos mó a fhoghlaim "
+"fút!Beidh Alex agus Oleksandr ag breathnú go luath - is dócha thar bhabhla "
+"Borscht.Rachaimid ar ais chugat chomh luath agus is féidir linn."
+
+#: careers/templates/careers_thank_you.html:60
+msgid "Explore GoRide While You Wait"
+msgstr "Déan iniúchadh ar Goride agus tú ag fanacht"
+
+#: careers/templates/careers_thank_you.html:61
+msgid ""
+"Why not take a ride on one of our electric bikes or scooters? It’s the best "
+"way to get around Dublin!"
+msgstr ""
+"Cén fáth nach dtógfaidh tú turas ar cheann dár rothair nó scútair "
+"leictreacha?Is é an bealach is fearr chun dul timpeall ar Bhaile Átha "
+"Cliath!"
+
+#: careers/templates/careers_thank_you.html:62 main/templates/about.html:75
+msgid "Start Riding Now"
+msgstr "Tosaigh ag marcaíocht anois"
+
+#: env/lib/python3.13/site-packages/click/_termui_impl.py:556
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr "{editor}: Theip ar editoreacht"
+
+#: env/lib/python3.13/site-packages/click/_termui_impl.py:560
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr "{editor}: Theip ar eagarthóireacht: {e}"
+
+#: env/lib/python3.13/site-packages/click/core.py:1124
+msgid "Aborted!"
+msgstr "Gorm!"
+
+#: env/lib/python3.13/site-packages/click/core.py:1349
+#: env/lib/python3.13/site-packages/click/core.py:1379
+#, python-brace-format
+msgid "(Deprecated) {text}"
+msgstr "(Dímheas) {text}"
+
+#: env/lib/python3.13/site-packages/click/core.py:1396
+msgid "Options"
+msgstr "Roghanna"
+
+#: env/lib/python3.13/site-packages/click/core.py:1422
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/core.py:1438
+msgid "DeprecationWarning: The command {name!r} is deprecated."
+msgstr "Dímheasúnú: Tá an t -ordú {name!r} neamhchoitianta."
+
+#: env/lib/python3.13/site-packages/click/core.py:1645
+msgid "Commands"
+msgstr "Ord"
+
+#: env/lib/python3.13/site-packages/click/core.py:1677
+msgid "Missing command."
+msgstr "Ordú ar iarraidh."
+
+#: env/lib/python3.13/site-packages/click/core.py:1755
+msgid "No such command {name!r}."
+msgstr "Níl aon ordú den sórt sin {name!r}."
+
+#: env/lib/python3.13/site-packages/click/core.py:2313
+msgid "Value must be an iterable."
+msgstr "Ní mór go mbeadh luach in ann a bheith in ann."
+
+#: env/lib/python3.13/site-packages/click/core.py:2334
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/core.py:2783
+#, python-brace-format
+msgid "env var: {var}"
+msgstr "env var: {var}"
+
+#: env/lib/python3.13/site-packages/click/core.py:2813
+msgid "(dynamic)"
+msgstr "(dinimiciúil)"
+
+#: env/lib/python3.13/site-packages/click/core.py:2828
+#, python-brace-format
+msgid "default: {default}"
+msgstr "Réamhshocrú: {default}"
+
+#: env/lib/python3.13/site-packages/click/core.py:2841
+msgid "required"
+msgstr "gá"
+
+#: env/lib/python3.13/site-packages/click/decorators.py:457
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr "%(prog)s, leagan %(version)s"
+
+#: env/lib/python3.13/site-packages/click/decorators.py:520
+msgid "Show the version and exit."
+msgstr "Taispeáin an leagan agus an bealach amach."
+
+#: env/lib/python3.13/site-packages/click/decorators.py:541
+msgid "Show this message and exit."
+msgstr "Taispeáin an teachtaireacht seo agus an bealach amach."
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:49
+#: env/lib/python3.13/site-packages/click/exceptions.py:88
+#, python-brace-format
+msgid "Error: {message}"
+msgstr "Earráid: {message}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:80
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr "Bain triail as '{command} {option}' chun cabhair a fháil."
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:129
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr "Luach neamhbhailí: {message}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:131
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr "Luach neamhbhailí do {param_hint}: {message}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:187
+msgid "Missing argument"
+msgstr "Argóint ar iarraidh"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:189
+msgid "Missing option"
+msgstr "Rogha atá ar iarraidh"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:191
+msgid "Missing parameter"
+msgstr "Paraiméadar ar iarraidh"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:193
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr "Ar iarraidh {param_type}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:200
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr "Paraiméadar ar iarraidh: {param_name}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:220
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr "Gan aon rogha den sórt sin: {name}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:232
+#, python-brace-format
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:270
+msgid "unknown error"
+msgstr "Earráid anaithnid"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:277
+msgid "Could not open file {filename!r}: {message}"
+msgstr "Níorbh fhéidir an comhad {filename!r} a oscailt: {message}"
+
+#: env/lib/python3.13/site-packages/click/formatting.py:156
+msgid "Usage:"
+msgstr "Úsáid:"
+
+#: env/lib/python3.13/site-packages/click/parser.py:233
+msgid "Argument {name!r} takes {nargs} values."
+msgstr "Glacann argóint {name!r} luachanna {nargs}."
+
+#: env/lib/python3.13/site-packages/click/parser.py:415
+msgid "Option {name!r} does not take a value."
+msgstr "Ní ghlacann rogha {name!r} luach."
+
+#: env/lib/python3.13/site-packages/click/parser.py:476
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/shell_completion.py:326
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+"Ní thacaítear le críochnú na mblaosc do leaganacha Bash níos sine ná 4.4."
+
+#: env/lib/python3.13/site-packages/click/shell_completion.py:333
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+"Níorbh fhéidir leagan Bash a bhrath, ní thacaítear le críochnú na mblaosc."
+
+#: env/lib/python3.13/site-packages/click/termui.py:158
+msgid "Repeat for confirmation"
+msgstr "Déan arís le haghaidh deimhnithe"
+
+#: env/lib/python3.13/site-packages/click/termui.py:174
+msgid "Error: The value you entered was invalid."
+msgstr "Earráid: Bhí an luach a chuir tú isteach neamhbhailí."
+
+#: env/lib/python3.13/site-packages/click/termui.py:176
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr "Earráid: {e.message}"
+
+#: env/lib/python3.13/site-packages/click/termui.py:187
+msgid "Error: The two entered values do not match."
+msgstr "Earráid: Ní mheaitseálann an dá luach iontráilte."
+
+#: env/lib/python3.13/site-packages/click/termui.py:243
+msgid "Error: invalid input"
+msgstr "Earráid: Ionchur neamhbhailí"
+
+#: env/lib/python3.13/site-packages/click/termui.py:773
+msgid "Press any key to continue..."
+msgstr "Brúigh aon eochair chun leanúint ar aghaidh ..."
+
+#: env/lib/python3.13/site-packages/click/types.py:267
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+"Roghnaigh ó:\n"
+"{choices}"
+
+#: env/lib/python3.13/site-packages/click/types.py:299
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/types.py:393
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/types.py:415
+msgid "{value!r} is not a valid {number_type}."
+msgstr "{value!r} Níl sé bailí {number_type}."
+
+#: env/lib/python3.13/site-packages/click/types.py:471
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr "Níl {value} sa raon {range}."
+
+#: env/lib/python3.13/site-packages/click/types.py:612
+msgid "{value!r} is not a valid boolean."
+msgstr "{value!r} Ní boolean bailí é."
+
+#: env/lib/python3.13/site-packages/click/types.py:636
+msgid "{value!r} is not a valid UUID."
+msgstr "{value!r} Ní UUID bailí é."
+
+#: env/lib/python3.13/site-packages/click/types.py:826
+msgid "file"
+msgstr "comhad"
+
+#: env/lib/python3.13/site-packages/click/types.py:828
+msgid "directory"
+msgstr "eolaire"
+
+#: env/lib/python3.13/site-packages/click/types.py:830
+msgid "path"
+msgstr "cosú"
+
+#: env/lib/python3.13/site-packages/click/types.py:881
+msgid "{name} {filename!r} does not exist."
+msgstr "{name} {filename!r} Níl ann."
+
+#: env/lib/python3.13/site-packages/click/types.py:890
+msgid "{name} {filename!r} is a file."
+msgstr "Is comhad é {name} {filename!r}."
+
+#: env/lib/python3.13/site-packages/click/types.py:898
+msgid "{name} {filename!r} is a directory."
+msgstr "Is eolaire é {name} {filename!r}."
+
+#: env/lib/python3.13/site-packages/click/types.py:907
+msgid "{name} {filename!r} is not readable."
+msgstr "Níl {name} {filename!r} inléite."
+
+#: env/lib/python3.13/site-packages/click/types.py:916
+msgid "{name} {filename!r} is not writable."
+msgstr "{ainm} {filename!r} Níl sé inscríofa."
+
+#: env/lib/python3.13/site-packages/click/types.py:925
+msgid "{name} {filename!r} is not executable."
+msgstr "Níl {name} {filename!r} inrite."
+
+#: env/lib/python3.13/site-packages/click/types.py:992
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/contrib/messages/apps.py:16
+msgid "Messages"
+msgstr "Blas"
+
+#: env/lib/python3.13/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr "Léarscáileanna suímh"
+
+#: env/lib/python3.13/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr "Comhaid statacha"
+
+#: env/lib/python3.13/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr "Sinsectication"
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: env/lib/python3.13/site-packages/django/core/paginator.py:30
+msgid "…"
+msgstr "…"
+
+#: env/lib/python3.13/site-packages/django/core/paginator.py:32
+msgid "That page number is not an integer"
+msgstr "Ní slánuimhir é an uimhir leathanaigh sin"
+
+#: env/lib/python3.13/site-packages/django/core/paginator.py:33
+msgid "That page number is less than 1"
+msgstr "Tá an uimhir leathanaigh sin níos lú ná 1"
+
+#: env/lib/python3.13/site-packages/django/core/paginator.py:34
+msgid "That page contains no results"
+msgstr "Níl aon torthaí sa leathanach sin"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr "Iontráil luach bailí."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:70
+msgid "Enter a valid domain name."
+msgstr "Cuir isteach ainm fearainn bailí."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:155
+#: env/lib/python3.13/site-packages/django/forms/fields.py:768
+msgid "Enter a valid URL."
+msgstr "Iontráil URL bailí."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:216
+msgid "Enter a valid integer."
+msgstr "Iontráil slánuimhir bhailí."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:227
+msgid "Enter a valid email address."
+msgstr "Cuir isteach seoladh ríomhphoist bailí."
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: env/lib/python3.13/site-packages/django/core/validators.py:310
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+"Cuir isteach “seilide” bailí ina bhfuil litreacha, uimhreacha, béim nó "
+"fleiscín."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:318
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or"
+" hyphens."
+msgstr ""
+"Cuir isteach “seilide” bailí ina bhfuil litreacha, uimhreacha, béim, nó "
+"fleiscín unicode."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:330
+#: env/lib/python3.13/site-packages/django/core/validators.py:339
+#: env/lib/python3.13/site-packages/django/core/validators.py:353
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2215
+#, python-format
+msgid "Enter a valid %(protocol)s address."
+msgstr "Cuir isteach seoladh bailí %(protocol)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:332
+msgid "IPv4"
+msgstr "IPv4"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:341
+#: env/lib/python3.13/site-packages/django/utils/ipv6.py:43
+msgid "IPv6"
+msgstr "IPv6"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:355
+msgid "IPv4 or IPv6"
+msgstr "IPv4 nó IPv6"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:396
+msgid "Enter only digits separated by commas."
+msgstr "Cuir isteach ach digití atá scartha ag camóga."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:402
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+"Cinntigh go bhfuil an luach seo %(limit_value)s (tá sé %(show_value)s)."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:437
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+"Cinntigh go bhfuil an luach seo níos lú ná nó cothrom le %(limit_value)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:446
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+"Cinntigh go bhfuil an luach seo níos mó ná nó cothrom le %(limit_value)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:455
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+"Cinntigh go bhfuil an luach seo iolrach de mhéid céim %(limit_value)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:462
+#, python-format
+msgid ""
+"Ensure this value is a multiple of step size %(limit_value)s, starting from "
+"%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
+msgstr ""
+"Cinntigh go bhfuil an luach seo iolrach de mhéid céim %(limit_value)s, ag"
+" tosú ó %(offset)s, e.e.%(offset)s, %(valid_value1)s, "
+"%(valid_value2) s, agus mar sin de."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:494
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:512
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:535
+#: env/lib/python3.13/site-packages/django/forms/fields.py:359
+#: env/lib/python3.13/site-packages/django/forms/fields.py:398
+msgid "Enter a number."
+msgstr "Iontráil uimhir."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:537
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:542
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:547
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:618
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+"Ní cheadaítear síneadh comhaid “%(extension)s”.Is iad na síntí ceadaithe ná: "
+"%(allowed_extensions)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:680
+msgid "Null characters are not allowed."
+msgstr "Ní cheadaítear carachtair null."
+
+#: env/lib/python3.13/site-packages/django/db/models/base.py:1572
+#: env/lib/python3.13/site-packages/django/forms/models.py:908
+msgid "and"
+msgstr "is"
+
+#: env/lib/python3.13/site-packages/django/db/models/base.py:1574
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr "%(model_name)s leis an %(field_labels)s ann cheana féin."
+
+#: env/lib/python3.13/site-packages/django/db/models/constraints.py:22
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr "Sáraítear srian “%(name)s”."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:134
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr "Ní rogha bailí é luach %(value)r."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:135
+msgid "This field cannot be null."
+msgstr "Ní féidir an réimse seo a bheith ar neamhní."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:136
+msgid "This field cannot be blank."
+msgstr "Ní féidir leis an réimse seo a bheith folamh."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:137
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr "%(model_name)s leis an %(field_label)s ann cheana féin."
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:141
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+"%(field_label)s bheith uathúil do %(date_field_label)s %(lookup_type)s."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:180
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr "Réimse an chineáil: %(field_type) s"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1156
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr "Caithfidh luach “%(value)s” a bheith fíor nó bréagach."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1157
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+"Ní mór go mbeadh luach “%(value)s” fíor, bréagach, nó gan aon cheann."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1159
+msgid "Boolean (Either True or False)"
+msgstr "Boole (fíor nó bréagach)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1209
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr "Teaghrán (suas le %(max_length) s)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1211
+msgid "String (unlimited)"
+msgstr "Teaghrán (Neamhtheoranta)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1320
+msgid "Comma-separated integers"
+msgstr "Slánuimhreacha scartha camóga"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1421
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+"Tá formáid dáta neamhbhailí ag luach “%(value)s”.Caithfidh sé a bheith i "
+"bhformáid Yyyy-MM-DD."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1425
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1560
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+"Tá an fhormáid cheart ag luach “%(value)s” (yyyy-mm-dd) ach is dáta "
+"neamhbhailí é."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1429
+msgid "Date (without time)"
+msgstr "Dáta (gan am)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1556
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+"Tá formáid neamhbhailí ag luach “%(value)s”.Caithfidh sé a bheith i "
+"bhformáid yyyy-mm-dd HH: mm [: ss [.uuuuuu]] [Tz]."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1564
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ]) but it is an invalid date/time."
+msgstr ""
+"Tá an fhormáid cheart ag luach “%(value)s” (yyyy-mm-dd: mm [: ss [.uuuuuu]]"
+" [TZ]) ach is dáta/am neamhbhailí é."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1569
+msgid "Date (with time)"
+msgstr "Dáta (le ham)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1696
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr "Caithfidh luach “%(value)s” a bheith ina uimhir deachúil."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1698
+msgid "Decimal number"
+msgstr "Uimhir deachúil"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1859
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+"Tá formáid neamhbhailí ag luach “%(value)s”.Caithfidh sé a bheith i "
+"bhformáid [dd] [[hh:] mm:] ss [.uuuuuuu]."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1915
+msgid "Email address"
+msgstr "Seoladh ríomhphoist"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1940
+msgid "File path"
+msgstr "Cosán comhad"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2018
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr "Caithfidh luach “%(value)s” a bheith ina snámh."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2020
+msgid "Floating point number"
+msgstr "Uimhir phointe ar snámh"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2060
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr "Ní mór go mbeadh luach “%(value)s” ina slánuimhir."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2062
+msgid "Integer"
+msgstr "Slánuimhir"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2158
+msgid "Big (8 byte) integer"
+msgstr "Slánuimhir mhór (8 beart)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2175
+msgid "Small integer"
+msgstr "Slánuimhir bheag"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2183
+msgid "IPv4 address"
+msgstr "Seoladh IPv4"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2214
+msgid "IP address"
+msgstr "Seoladh IP"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2305
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2306
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr "Ní mór go mbeadh luach “%(value)s” ar aon cheann, fíor nó bréagach."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2308
+msgid "Boolean (Either True, False or None)"
+msgstr "Boole (fíor, bréagach nó gan aon cheann)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2359
+msgid "Positive big integer"
+msgstr "Slánuimhir mhór dhearfach"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2374
+msgid "Positive integer"
+msgstr "Slánuimhir dhearfach"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2389
+msgid "Positive small integer"
+msgstr "Slánuimhir bheag dhearfach"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2405
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr "Slug (suas le %(max_length) s)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2441
+msgid "Text"
+msgstr "Téacs"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2521
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+"Tá formáid neamhbhailí ag luach “%(value)s”.Caithfidh sé a bheith i "
+"bhformáid hh: mm [: ss [.uuuuuu]]."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2525
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+"Tá an fhormáid cheart ag luach “%(value)s” (hh: mm [: ss [.uuuuuu]]) ach is"
+" am neamhbhailí é."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2529
+msgid "Time"
+msgstr "Am"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2637
+msgid "URL"
+msgstr "Url"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2661
+msgid "Raw binary data"
+msgstr "Sonraí dénártha amh"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2726
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr "Ní UUID bailí é “%(value)s”."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2728
+msgid "Universally unique identifier"
+msgstr "Aitheantóir uathúil go huilíoch"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/files.py:244
+msgid "File"
+msgstr "Comhad"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/files.py:420
+msgid "Image"
+msgstr "Íomhá"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/json.py:24
+msgid "A JSON object"
+msgstr "Cuspóir JSON"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/json.py:26
+msgid "Value must be valid JSON."
+msgstr "Caithfidh luach a bheith bailí JSON."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:932
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr "%(model)s gcás le %(field)s %(value)r ann."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:934
+msgid "Foreign Key (type determined by related field)"
+msgstr "Eochair eachtrach (cineál arna chinneadh ag an réimse gaolmhar)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:1228
+msgid "One-to-one relationship"
+msgstr "Caidreamh duine le duine"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:1285
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr "%(from)s-%(to)s caidreamh"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:1287
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr "%(from)s-%(to)s caidrimh s"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:1335
+msgid "Many-to-many relationship"
+msgstr "Caidreamh go leor le go leor"
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the
+#. label
+#: env/lib/python3.13/site-packages/django/forms/boundfield.py:185
+msgid ":?.!"
+msgstr ":?!!"
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:95
+msgid "This field is required."
+msgstr "Teastaíonn an réimse seo."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:308
+msgid "Enter a whole number."
+msgstr "Iontráil uimhir iomlán."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:479
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1260
+msgid "Enter a valid date."
+msgstr "Iontráil dáta bailí."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:502
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1261
+msgid "Enter a valid time."
+msgstr "Cuir isteach am bailí."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:529
+msgid "Enter a valid date/time."
+msgstr "Iontráil dáta/am bailí."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:563
+msgid "Enter a valid duration."
+msgstr "Iontráil ré bailí."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:564
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr "Caithfidh líon na laethanta a bheith idir {min_days} agus {max_days}."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:633
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+"Níor cuireadh aon chomhad isteach.Seiceáil an cineál ionchódú ar an bhfoirm."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:634
+msgid "No file was submitted."
+msgstr "Níor cuireadh aon chomhad isteach."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:635
+msgid "The submitted file is empty."
+msgstr "Tá an comhad a chuirtear isteach folamh."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:637
+#, python-format
+msgid ""
+"Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:642
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+"Cuir isteach comhad le do thoil nó seiceáil an ticbhosca soiléir, ní an dá "
+"rud."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:710
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+"Uaslódáil íomhá bhailí.Ní íomhá ná íomhá truaillithe a bhí sa chomhad a "
+"uaslódáil tú."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:882
+#: env/lib/python3.13/site-packages/django/forms/fields.py:968
+#: env/lib/python3.13/site-packages/django/forms/models.py:1592
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+"Roghnaigh rogha bailí.Níl %(value)s ar cheann de na roghanna atá ar fáil."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:970
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1089
+#: env/lib/python3.13/site-packages/django/forms/models.py:1590
+msgid "Enter a list of values."
+msgstr "Cuir isteach liosta luachanna."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1090
+msgid "Enter a complete value."
+msgstr "Iontráil luach iomlán."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1332
+msgid "Enter a valid UUID."
+msgstr "Iontráil UUID bailí."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1362
+msgid "Enter a valid JSON."
+msgstr "Cuir isteach JSON bailí."
+
+#. Translators: This is the default suffix added to form field labels
+#: env/lib/python3.13/site-packages/django/forms/forms.py:94
+msgid ":"
+msgstr ":"
+
+#: env/lib/python3.13/site-packages/django/forms/forms.py:230
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr "(Réimse i bhfolach %(name)s) %(error)s"
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:61
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+"Tá sonraí bainistíochta ar iarraidh nó tá cur isteach orthu.Réimsí ar "
+"iarraidh: %(field_names) s.B'fhéidir go mbeidh ort tuarascáil fabht a "
+"chomhdú má mhaireann an tsaincheist."
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:65
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:70
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:484
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:491
+msgid "Order"
+msgstr "Éide"
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:499
+msgid "Delete"
+msgstr "Scrios amach"
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:901
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr "Ceartaigh na sonraí dúblacha le haghaidh %(field)s."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:906
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+"Ceartaigh na sonraí dúblacha le haghaidh %(field)s le do thoil, rud a "
+"chaithfidh a bheith uathúil."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:913
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+"Ceartaigh na sonraí dúblacha le haghaidh %(field_name) s le do thoil a "
+"chaithfidh a bheith uathúil don %(lookup) s i %(date_field) s."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:922
+msgid "Please correct the duplicate values below."
+msgstr "Ceartaigh na luachanna dúblacha thíos le do thoil."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:1359
+msgid "The inline value did not match the parent instance."
+msgstr "Ní raibh an luach inlíne comhoiriúnach leis an gcás tuismitheora."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:1450
+msgid ""
+"Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+"Roghnaigh rogha bailí.Níl an rogha sin ar cheann de na roghanna atá ar fáil."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:1594
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr "Ní luach bailí é “%(pk)s”."
+
+#: env/lib/python3.13/site-packages/django/forms/utils.py:227
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+"Ní fhéadfaí %(datetime)s a léirmhíniú i gcrios ama %(current_timezone)s; "
+"D'fhéadfadh sé a bheith débhríoch nó b'fhéidir nach bhfuil sé ann."
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:461
+msgid "Clear"
+msgstr "Glan amach"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:462
+msgid "Currently"
+msgstr "Faoi láthair"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:463
+msgid "Change"
+msgstr "Athrú"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:800
+msgid "Unknown"
+msgstr "Anaithnid"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:801
+msgid "Yes"
+msgstr "Tá"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:802
+msgid "No"
+msgstr "Ar bith"
+
+#. Translators: Please do not add spaces around commas.
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:873
+msgid "yes,no,maybe"
+msgstr "Sea, níl, b’fhéidir"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:903
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:920
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:922
+#, python-format
+msgid "%s KB"
+msgstr "%s kb"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:924
+#, python-format
+msgid "%s MB"
+msgstr "%s MB"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:926
+#, python-format
+msgid "%s GB"
+msgstr "%s GB"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:928
+#, python-format
+msgid "%s TB"
+msgstr "%s tb"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:930
+#, python-format
+msgid "%s PB"
+msgstr "%s PB"
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:74
+msgid "p.m."
+msgstr "p.m."
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:75
+msgid "a.m."
+msgstr "A.M."
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:80
+msgid "PM"
+msgstr "In."
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:81
+msgid "AM"
+msgstr "Im"
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:153
+msgid "midnight"
+msgstr "meán oíche"
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:155
+msgid "noon"
+msgstr "an meán lae"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:7
+#: env/lib/python3.13/site-packages/tornado/locale.py:295
+msgid "Monday"
+msgstr "An Luan"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:8
+#: env/lib/python3.13/site-packages/tornado/locale.py:296
+msgid "Tuesday"
+msgstr "Dé Máirt"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:9
+#: env/lib/python3.13/site-packages/tornado/locale.py:297
+msgid "Wednesday"
+msgstr "An Chéadaoin"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:10
+#: env/lib/python3.13/site-packages/tornado/locale.py:298
+msgid "Thursday"
+msgstr "Déardaoin"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:11
+#: env/lib/python3.13/site-packages/tornado/locale.py:299
+msgid "Friday"
+msgstr "An Aoine"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:12
+#: env/lib/python3.13/site-packages/tornado/locale.py:300
+msgid "Saturday"
+msgstr "An Satharn"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:13
+#: env/lib/python3.13/site-packages/tornado/locale.py:301
+msgid "Sunday"
+msgstr "An Domhnach"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:16
+msgid "Mon"
+msgstr "Duine"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:17
+msgid "Tue"
+msgstr "An"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:18
+msgid "Wed"
+msgstr "Meon"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:19
+msgid "Thu"
+msgstr "Thú"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:20
+msgid "Fri"
+msgstr "Dé Aoine"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:21
+msgid "Sat"
+msgstr "Suí"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:22
+msgid "Sun"
+msgstr "Grian"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:25
+#: env/lib/python3.13/site-packages/tornado/locale.py:281
+msgid "January"
+msgstr "Mí Eanáir"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:26
+#: env/lib/python3.13/site-packages/tornado/locale.py:282
+msgid "February"
+msgstr "Mí Feabhra"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:27
+#: env/lib/python3.13/site-packages/tornado/locale.py:283
+msgid "March"
+msgstr "Mí an Mhárta"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:28
+#: env/lib/python3.13/site-packages/tornado/locale.py:284
+msgid "April"
+msgstr "Mí Aibreáin"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:29
+#: env/lib/python3.13/site-packages/tornado/locale.py:285
+msgid "May"
+msgstr "Ar mhiste leat?"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:30
+#: env/lib/python3.13/site-packages/tornado/locale.py:286
+msgid "June"
+msgstr "Mí an Mheithimh"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:31
+#: env/lib/python3.13/site-packages/tornado/locale.py:287
+msgid "July"
+msgstr "Mí Iúil"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:32
+#: env/lib/python3.13/site-packages/tornado/locale.py:288
+msgid "August"
+msgstr "Mí Lúnasa"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:33
+#: env/lib/python3.13/site-packages/tornado/locale.py:289
+msgid "September"
+msgstr "Mí Mheán Fómhair"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:34
+#: env/lib/python3.13/site-packages/tornado/locale.py:290
+msgid "October"
+msgstr "Deireadh Fómhair"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:35
+#: env/lib/python3.13/site-packages/tornado/locale.py:291
+msgid "November"
+msgstr "Mí na Samhna"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:36
+#: env/lib/python3.13/site-packages/tornado/locale.py:292
+msgid "December"
+msgstr "Mí na Nollag"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:39
+msgid "jan"
+msgstr "Ean"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:40
+msgid "feb"
+msgstr "mí Feabhra"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:41
+msgid "mar"
+msgstr "mar"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:42
+msgid "apr"
+msgstr "an Aibreán"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:43
+msgid "may"
+msgstr "ar mhiste leat?"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:44
+msgid "jun"
+msgstr "ream"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:45
+msgid "jul"
+msgstr "an Iúil"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:46
+msgid "aug"
+msgstr "chomh fada"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:47
+msgid "sep"
+msgstr "seip sin"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:48
+msgid "oct"
+msgstr "in Deireadh Fómhair"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:49
+msgid "nov"
+msgstr "Nochta"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:50
+msgid "dec"
+msgstr "bonnbhonn"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr "Eanáir."
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr "Feabhra."
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr "Mí an Mhárta"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr "Mí Aibreáin"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr "Ar mhiste leat?"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr "Mí an Mheithimh"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr "Mí Iúil"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr "Lúnasa."
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr "Meán Fómhair."
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr "Deireadh Fómhair."
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr "Samhain."
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr "Nollaig."
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr "Mí Eanáir"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr "Mí Feabhra"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr "Mí an Mhárta"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr "Mí Aibreáin"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr "Ar mhiste leat?"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr "Mí an Mheithimh"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr "Mí Iúil"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr "Mí Lúnasa"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr "Mí Mheán Fómhair"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr "Deireadh Fómhair"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr "Mí na Samhna"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr "Mí na Nollag"
+
+#: env/lib/python3.13/site-packages/django/utils/ipv6.py:20
+msgid "This is not a valid IPv6 address."
+msgstr "Ní seoladh bailí IPv6 é seo."
+
+#: env/lib/python3.13/site-packages/django/utils/text.py:75
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr "%(truncated_text) s…"
+
+#: env/lib/python3.13/site-packages/django/utils/text.py:286
+msgid "or"
+msgstr "nó"
+
+#. Translators: This string is used as a separator between list elements
+#: env/lib/python3.13/site-packages/django/utils/text.py:305
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:135
+msgid ", "
+msgstr ","
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:29
+msgid "Forbidden"
+msgstr "Toirmiscilte"
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:30
+msgid "CSRF verification failed. Request aborted."
+msgstr "Theip ar fhíorú CSRF.Iarratas ar a."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:34
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+"Tá an teachtaireacht seo á fheiceáil agat mar go n -éilíonn an suíomh HTTPS "
+"seo “ceanntásc Reisire” le seoladh ag do bhrabhsálaí gréasáin, ach níor "
+"seoladh aon cheann.Tá an ceanntásc seo ag teastáil ar chúiseanna slándála, "
+"chun a chinntiú nach bhfuil tríú páirtithe ag fuadach do bhrabhsálaí."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:40
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+"Má tá do bhrabhsálaí cumraithe agat chun ceanntásca “Radharc” a dhíchumasú, "
+"déan iad a athchumasú le do thoil, ar a laghad don láithreán seo, nó do "
+"naisc HTTPS, nó le haghaidh iarratais “tionscnaimh chéanna”."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:45
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or"
+" including the “Referrer-Policy: no-referrer” header, please remove them. "
+"The CSRF protection requires the “Referer” header to do strict referer "
+"checking. If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+"Má tá tú ag baint úsáide as an <meta name = \"Refriter\" Content = \"No-"
+"Referrer\"> nó an ceanntásc “Policy Policy: No-Referrer” san áireamh, bain "
+"iad le do thoil.Éilíonn an chosaint CSRF go ndéanfadh an ceanntásc "
+"“Refarter” seiceáil dhian -remerter.Má tá imní ort faoi phríobháideacht, "
+"bain úsáid as roghanna eile cosúil le <a rel = \"noreferrer\"…> le haghaidh "
+"naisc le suíomhanna tríú páirtí."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:54
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+"Tá an teachtaireacht seo á fheiceáil agat mar go n -éilíonn an suíomh seo "
+"fianán CSRF agus foirmeacha á gcur isteach.Tá an fianán seo ag teastáil ar "
+"chúiseanna slándála, chun a chinntiú nach bhfuil tríú páirtithe ag fuadach "
+"do bhrabhsálaí."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:60
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+"Má tá do bhrabhsálaí cumraithe agat chun fianáin a dhíchumasú, le do thoil "
+"iad a athchumasú, ar a laghad don láithreán seo, nó le haghaidh iarratais "
+"“tionscnaimh chéanna”."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:66
+msgid "More information is available with DEBUG=True."
+msgstr "Tá tuilleadh eolais ar fáil le dífhabhtaithe = fíor."
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:44
+msgid "No year specified"
+msgstr "Níl aon bhliain sonraithe"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:64
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:115
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:214
+msgid "Date out of range"
+msgstr "Dáta as raon"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:94
+msgid "No month specified"
+msgstr "Gan aon mhí sonraithe"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:147
+msgid "No day specified"
+msgstr "Aon lá sonraithe"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:194
+msgid "No week specified"
+msgstr "Gan aon seachtain sonraithe"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:349
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr "Níl %(verbose_name_plural) s ar fáil"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+"Níl an todhchaí %(verbose_name_plural)s ar fáil mar gheall go bhfuil "
+"%(class_name)s.allow_future bréagach."
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr "Teaghrán Dáta Neamhbhailí “%(datestr)s” formáid “%(format)s”"
+
+#: env/lib/python3.13/site-packages/django/views/generic/detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "Ní bhfuarthas aon %(verbose_name) s ag meaitseáil an cheist"
+
+#: env/lib/python3.13/site-packages/django/views/generic/list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr "Níl an leathanach “deireanach”, ná ní féidir é a thiontú go int."
+
+#: env/lib/python3.13/site-packages/django/views/generic/list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr "Leathanach neamhbhailí ( %(page_number)s): %(message)s"
+
+#: env/lib/python3.13/site-packages/django/views/generic/list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr "Tá an liosta folamh agus “%(class_name)s.allow_empty” bréagach."
+
+#: env/lib/python3.13/site-packages/django/views/static.py:49
+msgid "Directory indexes are not allowed here."
+msgstr "Ní cheadaítear innéacsanna eolaire anseo."
+
+#: env/lib/python3.13/site-packages/django/views/static.py:51
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr "Níl “%(path)s” ann"
+
+#: env/lib/python3.13/site-packages/django/views/static.py:68
+#: env/lib/python3.13/site-packages/django/views/templates/directory_index.html:8
+#: env/lib/python3.13/site-packages/django/views/templates/directory_index.html:11
+#, python-format
+msgid "Index of %(directory)s"
+msgstr "Innéacs %(directory)s"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:7
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:204
+msgid "The install worked successfully! Congratulations!"
+msgstr "D'oibrigh an suiteáil go rathúil!Comhghairdeas!"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+"Féach ar <a href = "
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:208
+#, python-format
+msgid ""
+"You are seeing this page because <a "
+"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
+"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> is in your settings file "
+"and you have not configured any URLs."
+msgstr ""
+"You are seeing this page because <a "
+"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
+"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> is in your settings file "
+"and you have not configured any URLs."
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:217
+msgid "Django Documentation"
+msgstr "Doiciméadú Django"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:218
+msgid "Topics, references, &amp; how-to’s"
+msgstr "Topaicí, tagairtí, agus amp;Conas a's"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:226
+msgid "Tutorial: A Polling App"
+msgstr "Teagaisc: Aip vótaíochta"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:227
+msgid "Get started with Django"
+msgstr "Tosaigh le Django"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:235
+msgid "Django Community"
+msgstr "Pobal django"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:236
+msgid "Connect, get help, or contribute"
+msgstr "Ceangail, faigh cabhair, nó rannchuidiú"
+
+#: env/lib/python3.13/site-packages/kombu/transport/qpid.py:1311
+#, python-format
+msgid "Attempting to connect to qpid with SASL mechanism %s"
+msgstr "Ag iarraidh ceangal le QPID le meicníocht SASL %s"
+
+#: env/lib/python3.13/site-packages/kombu/transport/qpid.py:1316
+#, python-format
+msgid "Connected to qpid with SASL mechanism %s"
+msgstr "Ceangailte le QPID le meicníocht SASL %s"
+
+#: env/lib/python3.13/site-packages/kombu/transport/qpid.py:1334
+#, python-format
+msgid "Unable to connect to qpid with SASL mechanism %s"
+msgstr "Ní féidir ceangal le QPID le meicníocht SASL %s"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:110
+msgid "United States of America"
+msgstr "Stáit Aontaithe Mheiriceá i Meiriceá"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:111
+msgid "Canada"
+msgstr "Ceanada"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:112
+msgid "Afghanistan"
+msgstr "An Afganastáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:113
+msgid "Albania"
+msgstr "An Albáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:114
+msgid "Algeria"
+msgstr "An Ailgéir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:115
+msgid "American Samoa"
+msgstr "Samó Meiriceánach"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:116
+msgid "Andorra"
+msgstr "Andóra"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:117
+msgid "Angola"
+msgstr "Angóla"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:118
+msgid "Anguilla"
+msgstr "Angise"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:119
+msgid "Antarctica"
+msgstr "Antartaice"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:120
+msgid "Antigua & Barbuda"
+msgstr "Antigua & Barbúda"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:121
+msgid "Argentina"
+msgstr "An Airgintín"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:122
+msgid "Armenia"
+msgstr "An Airméin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:123
+msgid "Aruba"
+msgstr "Aruba"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:124
+msgid "Australia"
+msgstr "An Astráil"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:125
+msgid "Austria"
+msgstr "An Ostair"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:126
+msgid "Azerbaijan"
+msgstr "An Asarbaiseáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:127
+msgid "Bahama"
+msgstr "Bahámá"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:128
+msgid "Bahrain"
+msgstr "Bairéin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:129
+msgid "Bangladesh"
+msgstr "An Bhanglaidéis"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:130
+msgid "Barbados"
+msgstr "Barbadós"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:131
+msgid "Belarus"
+msgstr "An Bhealarúis"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:132
+msgid "Belgium"
+msgstr "An Bheilg"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:133
+msgid "Belize"
+msgstr "An Bheilís"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:134
+msgid "Benin"
+msgstr "Beinin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:135
+msgid "Bermuda"
+msgstr "Beirmiúda"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:136
+msgid "Bhutan"
+msgstr "An Bhútáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:137
+msgid "Bolivia"
+msgstr "An Bholaiv"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:138
+msgid "Bosnia and Herzegovina"
+msgstr "An Bhoisnia agus Heirseagaivéin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:139
+msgid "Botswana"
+msgstr "An Bhotsuáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:140
+msgid "Bouvet Island"
+msgstr "Bouvet"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:141
+msgid "Brazil"
+msgstr "An Bhrasaíl"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:142
+msgid "British Indian Ocean Territory"
+msgstr "Críoch Aigéan Indiach na Breataine"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:143
+msgid "British Virgin Islands"
+msgstr "Oileáin Mhaighdean na Breataine"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:144
+msgid "Brunei Darussalam"
+msgstr "Brunei darussalam"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:145
+msgid "Bulgaria"
+msgstr "An Bhulgáir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:146
+msgid "Burkina Faso"
+msgstr "Buircíne Fasó"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:147
+msgid "Burundi"
+msgstr "An Bhurúin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:148
+msgid "Cambodia"
+msgstr "An Chambóid"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:149
+msgid "Cameroon"
+msgstr "Camarún"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:150
+msgid "Cape Verde"
+msgstr "Rinn Verde"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:151
+msgid "Cayman Islands"
+msgstr "Oileáin Cayman"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:152
+msgid "Central African Republic"
+msgstr "Poblacht na hAfraice Láir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:153
+msgid "Chad"
+msgstr "Sead"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:154
+msgid "Chile"
+msgstr "An tSile"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:155
+msgid "China"
+msgstr "Poirceallán"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:156
+msgid "Christmas Island"
+msgstr "Oileán na Nollag"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:157
+msgid "Cocos (Keeling) Islands"
+msgstr "Oileáin Cocos (Keeling)"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:158
+msgid "Colombia"
+msgstr "An Cholóim"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:159
+msgid "Comoros"
+msgstr "Comoros"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:160
+msgid "Congo"
+msgstr "An Congó"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:161
+msgid "Cook Iislands"
+msgstr "Oileáin Cócaireachta"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:162
+msgid "Costa Rica"
+msgstr "Cósta Ríce"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:163
+msgid "Croatia"
+msgstr "An Chróit"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:164
+msgid "Cuba"
+msgstr "Cúba"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:165
+msgid "Cyprus"
+msgstr "An Chipir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:166
+msgid "Czech Republic"
+msgstr "Poblacht na Seice"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:167
+msgid "Denmark"
+msgstr "An Danmhairg"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:168
+msgid "Djibouti"
+msgstr "Djibouti"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:169
+msgid "Dominica"
+msgstr "Doiminice"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:170
+msgid "Dominican Republic"
+msgstr "Poblacht Dhoiminiceach"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:171
+msgid "East Timor"
+msgstr "Tíomór Thoir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:172
+msgid "Ecuador"
+msgstr "Eacuadór"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:173
+msgid "Egypt"
+msgstr "An Éigipt"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:174
+msgid "El Salvador"
+msgstr "An tSalvadóir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:175
+msgid "Equatorial Guinea"
+msgstr "Guine batearach"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:176
+msgid "Eritrea"
+msgstr "An Eiritré"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:177
+msgid "Estonia"
+msgstr "An Eastóin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:178
+msgid "Ethiopia"
+msgstr "An Aetóip"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:179
+msgid "Falkland Islands (Malvinas)"
+msgstr "Oileáin Fháclainne (Malvinas)"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:180
+msgid "Faroe Islands"
+msgstr "Oileáin Fharó"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:181
+msgid "Fiji"
+msgstr "Fidsí"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:182
+msgid "Finland"
+msgstr "An Fhionlainn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:183
+msgid "France"
+msgstr "An Fhrainc"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:184
+msgid "France, Metropolitan"
+msgstr "An Fhrainc, Metropolitan"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:185
+msgid "French Guiana"
+msgstr "Guáin na Fraince"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:186
+msgid "French Polynesia"
+msgstr "Polainéis na Fraince"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:187
+msgid "French Southern Territories"
+msgstr "Críocha an Deiscirt Fraincise"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:188
+msgid "Gabon"
+msgstr "An Ghabúin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:189
+msgid "Gambia"
+msgstr "An Ghaimbia"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:190
+msgid "Georgia"
+msgstr "An tSeoirsia"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:191
+msgid "Germany"
+msgstr "An Ghearmáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:192
+msgid "Ghana"
+msgstr "Gána"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:193
+msgid "Gibraltar"
+msgstr "(De chuid) na nGiobrálta"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:194
+msgid "Greece"
+msgstr "An Ghréig"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:195
+msgid "Greenland"
+msgstr "An Ghraonlainn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:196
+msgid "Grenada"
+msgstr "Greanáda"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:197
+msgid "Guadeloupe"
+msgstr "Guahadalúip"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:198
+msgid "Guam"
+msgstr "Guam"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:199
+msgid "Guatemala"
+msgstr "Guatamala"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:200
+msgid "Guinea"
+msgstr "An Ghuine"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:201
+msgid "Guinea-Bissau"
+msgstr "Guine Bissau"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:202
+msgid "Guyana"
+msgstr "An Ghuáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:203
+msgid "Haiti"
+msgstr "Háítí"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:204
+msgid "Heard & McDonald Islands"
+msgstr "Oileáin Heard & McDonald"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:205
+msgid "Honduras"
+msgstr "Hondúras"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:206
+msgid "Hong Kong"
+msgstr "Hong Cong"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:207
+msgid "Hungary"
+msgstr "An Ungáir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:208
+msgid "Iceland"
+msgstr "An Íoslainn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:209
+msgid "India"
+msgstr "An India"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:210
+msgid "Indonesia"
+msgstr "An Indinéis"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:211
+msgid "Iraq"
+msgstr "An Iaráic"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:212
+msgid "Ireland"
+msgstr "Éire"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:213
+msgid "Islamic Republic of Iran"
+msgstr "Poblacht Ioslamach na hIaráine"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:214
+msgid "Israel"
+msgstr "Iosrael"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:215
+msgid "Italy"
+msgstr "An Iodáil"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:216
+msgid "Ivory Coast"
+msgstr "Cósta Eabhair"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:217
+msgid "Jamaica"
+msgstr "Iamáice"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:218
+msgid "Japan"
+msgstr "An tSeapáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:219
+msgid "Jordan"
+msgstr "An Iordáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:220
+msgid "Kazakhstan"
+msgstr "An Chasacstáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:221
+msgid "Kenya"
+msgstr "An Chéinia"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:222
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:223
+msgid "Korea, Democratic People's Republic of"
+msgstr "An Chóiré, Poblacht na nDaoine Daonlathach de"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:224
+msgid "Korea, Republic of"
+msgstr "An Chóiré, Poblacht na"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:225
+msgid "Kuwait"
+msgstr "Cuáit"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:226
+msgid "Kyrgyzstan"
+msgstr "An Chirgeastáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:227
+msgid "Lao People's Democratic Republic"
+msgstr "Poblacht Dhaonlathach Lao People"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:228
+msgid "Latvia"
+msgstr "An Laitvia"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:229
+msgid "Lebanon"
+msgstr "An Liobáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:230
+msgid "Lesotho"
+msgstr "Leosóta"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:231
+msgid "Liberia"
+msgstr "An Libéir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:232
+msgid "Libyan Arab Jamahiriya"
+msgstr "Jamahiriya Arabach Libyan Libyan"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:233
+msgid "Liechtenstein"
+msgstr "Lichtinstéin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:234
+msgid "Lithuania"
+msgstr "An Liotuáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:235
+msgid "Luxembourg"
+msgstr "Lucsamburg"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:236
+msgid "Macau"
+msgstr "Marain"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:237
+msgid "Madagascar"
+msgstr "Madagascar"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:238
+msgid "Malawi"
+msgstr "An Mhaláiv"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:239
+msgid "Malaysia"
+msgstr "An Mhalaeisia"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:240
+msgid "Maldives"
+msgstr "Oileáin Mhaildíve"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:241
+msgid "Mali"
+msgstr "Mailí"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:242
+msgid "Malta"
+msgstr "Málta"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:243
+msgid "Marshall Islands"
+msgstr "Oileáin Marshall"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:244
+msgid "Martinique"
+msgstr "Martinique"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:245
+msgid "Mauritania"
+msgstr "An Mháratáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:246
+msgid "Mauritius"
+msgstr "Oileán Mhuirís"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:247
+msgid "Mayotte"
+msgstr "Múibhheit"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:248
+msgid "Mexico"
+msgstr "Meicsiceo"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:249
+msgid "Micronesia"
+msgstr "An Mhicrinéis"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:250
+msgid "Moldova, Republic of"
+msgstr "An Mholdóiv, Poblacht na"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:251
+msgid "Monaco"
+msgstr "Monacó"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:252
+msgid "Mongolia"
+msgstr "An Mhongóil"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:253
+msgid "Monserrat"
+msgstr "Monserrat"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:254
+msgid "Morocco"
+msgstr "Maracó"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:255
+msgid "Mozambique"
+msgstr "Mósaimbíc"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:256
+msgid "Myanmar"
+msgstr "Maenmar"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:257
+msgid "Namibia"
+msgstr "An Namaib"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:258
+msgid "Nauru"
+msgstr "Nárús"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:259
+msgid "Nepal"
+msgstr "Neipeal"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:260
+msgid "Netherlands"
+msgstr "Ísiltír"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:261
+msgid "Netherlands Antilles"
+msgstr "Aintillí na hÍsiltíre"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:262
+msgid "New Caledonia"
+msgstr "An Nua -Chaladóin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:263
+msgid "New Zealand"
+msgstr "An Nua -Shéalainn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:264
+msgid "Nicaragua"
+msgstr "Nicearagua"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:265
+msgid "Niger"
+msgstr "An Nígir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:266
+msgid "Nigeria"
+msgstr "An Nigéir"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:267
+msgid "Niue"
+msgstr "Niue"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:268
+msgid "Norfolk Island"
+msgstr "Oileán Norfolk"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:269
+msgid "Northern Mariana Islands"
+msgstr "Oileáin Mariana Thuaidh"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:270
+msgid "Norway"
+msgstr "An Iorua"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:271
+msgid "Oman"
+msgstr "Óman"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:272
+msgid "Pakistan"
+msgstr "An Phacastáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:273
+msgid "Palau"
+msgstr "Palau"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:274
+msgid "Panama"
+msgstr "Panama"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:275
+msgid "Papua New Guinea"
+msgstr "Nua -Ghuine Phapua"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:276
+msgid "Paraguay"
+msgstr "Paragua"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:277
+msgid "Peru"
+msgstr "Peiriú"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:278
+msgid "Philippines"
+msgstr "Na hOileáin Dhuige"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:279
+msgid "Pitcairn"
+msgstr "Pollcairtí"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:280
+msgid "Poland"
+msgstr "An Pholainn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:281
+msgid "Portugal"
+msgstr "An Phortaingéil"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:282
+msgid "Puerto Rico"
+msgstr "Pórtó Ríce"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:283
+msgid "Qatar"
+msgstr "Catar"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:284
+msgid "Reunion"
+msgstr "Athaontú"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:285
+msgid "Romania"
+msgstr "An Rómáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:286
+msgid "Russian Federation"
+msgstr "Cónaidhm na Rúise"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:287
+msgid "Rwanda"
+msgstr "Ruanda"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:288
+msgid "Saint Lucia"
+msgstr "Naomh Lucia"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:289
+msgid "Samoa"
+msgstr "Samó"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:290
+msgid "San Marino"
+msgstr "San Mairíne"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:291
+msgid "Sao Tome & Principe"
+msgstr "Sao Tome & Principe"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:292
+msgid "Saudi Arabia"
+msgstr "An Araib Shádach"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:293
+msgid "Senegal"
+msgstr "An tSeineagáil"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:294
+msgid "Seychelles"
+msgstr "Séiséil"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:295
+msgid "Sierra Leone"
+msgstr "Siarra Leon"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:296
+msgid "Singapore"
+msgstr "Singeapór"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:297
+msgid "Slovakia"
+msgstr "An tSlóvaic"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:298
+msgid "Slovenia"
+msgstr "An tSlóivéin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:299
+msgid "Solomon Islands"
+msgstr "Oileáin Sholomón"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:300
+msgid "Somalia"
+msgstr "An tSomáil"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:301
+msgid "South Africa"
+msgstr "An Afraic Theas"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:302
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "An tSeoirsia Theas agus na hOileáin Sandwich Theas"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:303
+msgid "Spain"
+msgstr "An Spáinn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:304
+msgid "Sri Lanka"
+msgstr "Srí Lanca"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:305
+msgid "St. Helena"
+msgstr "Naomh Helena"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:306
+msgid "St. Kitts and Nevis"
+msgstr "Naomh Kitts agus Nevis"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:307
+msgid "St. Pierre & Miquelon"
+msgstr "Naomh Pierre & Miquelon"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:308
+msgid "St. Vincent & the Grenadines"
+msgstr "Naomh Uinseann & na Grenadines"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:309
+msgid "Sudan"
+msgstr "An tSúdáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:310
+msgid "Suriname"
+msgstr "Suranam"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:311
+msgid "Svalbard & Jan Mayen Islands"
+msgstr "Oileáin Svalbard & Jan Mayen"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:312
+msgid "Swaziland"
+msgstr "An tSuasalainn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:313
+msgid "Sweden"
+msgstr "An tSualainn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:314
+msgid "Switzerland"
+msgstr "An Eilvéis"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:315
+msgid "Syrian Arab Republic"
+msgstr "Poblacht Arabach na Siria"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:316
+msgid "Taiwan, Province of China"
+msgstr "Taiwan, Cúige na Síne"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:317
+msgid "Tajikistan"
+msgstr "An Táidsíceastáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:318
+msgid "Tanzania, United Republic of"
+msgstr "An Tansáin, Poblacht Aontaithe na"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:319
+msgid "Thailand"
+msgstr "An Téalainn"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:320
+msgid "Togo"
+msgstr "Tóga"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:321
+msgid "Tokelau"
+msgstr "Tokelau"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:322
+msgid "Tonga"
+msgstr "Tonga"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:323
+msgid "Trinidad & Tobago"
+msgstr "Oileán na Tríonóide & Tobága"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:324
+msgid "Tunisia"
+msgstr "An Túinéis"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:325
+msgid "Turkey"
+msgstr "An Tuirc"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:326
+msgid "Turkmenistan"
+msgstr "An Tuircméanastáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:327
+msgid "Turks & Caicos Islands"
+msgstr "Oileáin na dTurcach & Caicos"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:328
+msgid "Tuvalu"
+msgstr "Túvalú"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:329
+msgid "Uganda"
+msgstr "Uganda"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:330
+msgid "Ukraine"
+msgstr "An Úcráin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:331
+msgid "United Arab Emirates"
+msgstr "Aontas na nÉimíríochtaí Arabacha"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:332
+msgid "United Kingdom (Great Britain)"
+msgstr "An Ríocht Aontaithe (an Bhreatain Mhór)"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:333
+msgid "United States Minor Outlying Islands"
+msgstr "Oileáin mhion -imeallacha na Stát Aontaithe"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:334
+msgid "United States Virgin Islands"
+msgstr "Oileáin Mhaighdean na Stát Aontaithe"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:335
+msgid "Unknown or unspecified country"
+msgstr "Tír anaithnid nó neamhshonraithe"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:336
+msgid "Uruguay"
+msgstr "Uragua"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:337
+msgid "Uzbekistan"
+msgstr "An Úisbéiceastáin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:338
+msgid "Vanuatu"
+msgstr "Vanuatú"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:339
+msgid "Vatican City State (Holy See)"
+msgstr "Stát Cathrach na Vatacáine (See Naofa)"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:340
+msgid "Venezuela"
+msgstr "Veiniséala"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:341
+msgid "Viet Nam"
+msgstr "Viet Nam"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:342
+msgid "Wallis & Futuna Islands"
+msgstr "Oileáin Wallis & Futuna"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:343
+msgid "Western Sahara"
+msgstr "Sahára an Iarthair"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:344
+msgid "Yemen"
+msgstr "Éimin"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:345
+msgid "Yugoslavia"
+msgstr "An Iúgslaiv"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:346
+msgid "Zaire"
+msgstr "An tSaír"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:347
+msgid "Zambia"
+msgstr "An tSaimbia"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:348
+msgid "Zimbabwe"
+msgstr "An tSiombáib"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:16
+msgid "Street Address"
+msgstr "Seoladh sráide"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:17
+msgid "City"
+msgstr "Cathair"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:18
+msgid "State"
+msgstr "Staid"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:19
+msgid "Country"
+msgstr "Tuath"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:20
+msgid "Postal / Zip Code"
+msgstr "Cód poist / zip"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:21
+msgid "Credit Card Number"
+msgstr "Uimhir chárta creidmheasa"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:22
+msgid "Expiration Date"
+msgstr "Dáta éagtha"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:23
+msgid "Card Security Code"
+msgstr "Cód Slándála Cárta"
+
+#: env/lib/python3.13/site-packages/paypal/standard/forms.py:83
+#, python-format
+msgid "Invalid date format %(value)s: %(e)s"
+msgstr "Data neamhbhailí formáid %(value)s: %(e)s"
+
+#: env/lib/python3.13/site-packages/silk/middleware.py:79
+msgid ""
+"SILKY_AUTHENTICATION can not be enabled without Session, Authentication or "
+"Message Django's middlewares"
+msgstr ""
+"Ní féidir Silky_Authentication a chumasú gan seisiún, fíordheimhniú nó "
+"teachtaireacht Django's Middlewares"
+
+#: env/lib/python3.13/site-packages/timezone_field/rest_framework.py:10
+msgid "A valid timezone is required."
+msgstr "Teastaíonn crios ama bailí."
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:377
+msgid "1 second ago"
+msgstr "1 soicind ó shin"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:383
+msgid "1 minute ago"
+msgstr "1 nóiméad ó shin"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:388
+msgid "1 hour ago"
+msgstr "1 uair ó shin"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:391
+#, python-format
+msgid "%(time)s"
+msgstr "%(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:393
+msgid "yesterday"
+msgstr "an lá inné"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:393
+#, python-format
+msgid "yesterday at %(time)s"
+msgstr "Inné ag %(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:395
+#, python-format
+msgid "%(weekday)s"
+msgstr "%(weekday)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:395
+#, python-format
+msgid "%(weekday)s at %(time)s"
+msgstr "%(weekday)s ag %(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:398
+#: env/lib/python3.13/site-packages/tornado/locale.py:451
+#, python-format
+msgid "%(month_name)s %(day)s"
+msgstr "%(month_name)s %(day)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:400
+#, python-format
+msgid "%(month_name)s %(day)s at %(time)s"
+msgstr "%(month_name)s %(day)s ag %(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:405
+#, python-format
+msgid "%(month_name)s %(day)s, %(year)s"
+msgstr "%(month_name)s %(day)s, %(year)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:407
+#, python-format
+msgid "%(month_name)s %(day)s, %(year)s at %(time)s"
+msgstr "%(month_name)s %(day) s, %(year)s ag %(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:445
+#, python-format
+msgid "%(weekday)s, %(month_name)s %(day)s"
+msgstr "%(weekday)s, %(month_name)s %(day)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:468
+#, python-format
+msgid "%(commas)s and %(last)s"
+msgstr "%(commas)s agus %(last)s"
+
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:68
+msgctxt "law"
+msgid "right"
+msgstr "Ar an gceart"
+
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:69
+msgctxt "good"
+msgid "right"
+msgstr "Ar an gceart"
+
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:70
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:72
+msgctxt "organization"
+msgid "club"
+msgstr "club"
+
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:74
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:75
+msgctxt "stick"
+msgid "club"
+msgstr "club"
+
+#: events_near_me/templates/events_page.html:6
+msgid "Upcoming Events"
+msgstr "Imeachtaí atá le teacht"
+
+#: events_near_me/templates/events_page.html:11
+msgid "Find Events"
+msgstr "Faigh Imeachtaí"
+
+#: events_near_me/templates/events_page.html:17
+msgid "Keyword:"
+msgstr "Eochairfhocal:"
+
+#: events_near_me/templates/events_page.html:18
+msgid "Concert, festival, artist..."
+msgstr "Ceolchoirm, Féile, Ealaíontóir ..."
+
+#: events_near_me/templates/events_page.html:22
+msgid "Near Location (Optional):"
+msgstr "In aice le suíomh (roghnach):"
+
+#: events_near_me/templates/events_page.html:23
+msgid "e.g., Dublin City Centre"
+msgstr "e.e., lár chathair Bhaile Átha Cliath"
+
+#: events_near_me/templates/events_page.html:26
+msgid "Use My Location"
+msgstr "Úsáid mo shuíomh"
+
+#: events_near_me/templates/events_page.html:30
+msgid "Radius (km):"
+msgstr "Ga (km):"
+
+#: events_near_me/templates/events_page.html:36
+msgid "Start Date:"
+msgstr "Dáta Tosaigh:"
+
+#: events_near_me/templates/events_page.html:41
+msgid "End Date:"
+msgstr "Dáta deiridh:"
+
+#: events_near_me/templates/events_page.html:47
+msgid "Search Events"
+msgstr "Imeachtaí Cuardaigh"
+
+#: events_near_me/templates/events_page.html:48
+msgid "Reset Filters"
+msgstr "Scagairí athshocraithe"
+
+#: events_near_me/templates/events_page.html:56
+msgid "Loading events..."
+msgstr "Imeachtaí a luchtú ..."
+
+#: events_near_me/templates/events_page.html:60
+msgid "No events found matching your criteria."
+msgstr "Níor aimsíodh aon imeachtaí a mheaitseálann do chritéir."
+
+#: find_transport/models.py:17 find_transport/templates/find_transport.html:22
+msgid "Bike"
+msgstr "Rosca"
+
+#: find_transport/models.py:18 find_transport/templates/find_transport.html:20
+msgid "E-Bike"
+msgstr "R-rothair"
+
+#: find_transport/models.py:19 find_transport/templates/find_transport.html:21
+msgid "E-Scooter"
+msgstr "R-scútar"
+
+#: find_transport/templates/find_transport.html:6
+#: find_transport/templates/find_transport.html:11
+msgid "Available Transport"
+msgstr "An t -iompar atá ar fáil"
+
+#: find_transport/templates/find_transport.html:17
+msgid "Type:"
+msgstr "Cineál:"
+
+#: find_transport/templates/find_transport.html:19
+msgid "All"
+msgstr "Gach"
+
+#: find_transport/templates/find_transport.html:27
+msgid "Minimum Battery:"
+msgstr "Ceallraí íosta:"
+
+#: find_transport/templates/find_transport.html:38
+msgid "Get Direction"
+msgstr "Faigh Treoir"
+
+#: get_direction/templates/get_direction/get_direction.html:5
+msgid "Find your way"
+msgstr "Faigh do bhealach"
+
+#: get_direction/templates/get_direction/get_direction.html:11
+msgid "Search locations"
+msgstr "Suíomhanna cuardaigh"
+
+#: get_direction/templates/get_direction/get_direction.html:12
+msgid "Search"
+msgstr "Cuardach"
+
+#: get_direction/templates/get_direction/get_direction.html:13
+msgid "My Location"
+msgstr "Mo Suíomh"
+
+#: get_direction/templates/get_direction/get_direction.html:16
+msgid "Trip Management"
+msgstr "Bainistíocht turais"
+
+#: get_direction/templates/get_direction/get_direction.html:18
+msgid "Current Status"
+msgstr "Stádas reatha"
+
+#: get_direction/templates/get_direction/get_direction.html:18
+msgid "Loading"
+msgstr "Lódáil"
+
+#: get_direction/templates/get_direction/get_direction.html:21
+msgid "Loading controls"
+msgstr "Rialuithe luchtaithe"
+
+#: get_direction/templates/get_direction/get_direction.html:27
+msgid "Select Categories"
+msgstr "Roghnaigh Catagóirí"
+
+#: main/templates/about.html:5
+msgid "About GoRide"
+msgstr "Maidir le Goride"
+
+#: main/templates/about.html:10
+msgid "GoRide: A Journey by Two Ukrainian Students"
+msgstr "Goride: Turas le beirt mhac léinn Úcráinis"
+
+#: main/templates/about.html:11
+msgid ""
+"We’re Alex and Oleksandr, two friends from Ukraine, building a greener way "
+"to explore the city."
+msgstr ""
+"Táimid Alex agus Oleksandr, beirt chairde ón Úcráin, ag tógáil bealach níos "
+"glaise chun an chathair a iniúchadh."
+
+#: main/templates/about.html:16
+msgid "Our Story"
+msgstr "Ár scéal"
+
+#: main/templates/about.html:20
+msgid "The Struggle That Sparked GoRide"
+msgstr "An streachailt a spreag goride"
+
+#: main/templates/about.html:22
+msgid ""
+"Back in 2023, we were just two Ukrainian students at TU Dublin, Tallaght "
+"Campus, trying to survive university life. The campus was far from our "
+"place, and relying on public transport was a nightmare – buses were late, "
+"overcrowded, and it took ages to get anywhere. We knew there had to be a "
+"better way, so we decided to create one ourselves."
+msgstr ""
+"Ar ais i 2023, ní raibh againn ach beirt mhac léinn Úcráinis ag TU Bhaile "
+"Átha Cliath, Campas Tallaght, ag iarraidh maireachtáil le saol na "
+"hollscoile.Bhí an campas i bhfad ón áit a bhí againn, agus bhí tromluí ag "
+"brath ar iompar poiblí - bhí busanna déanach, plódaithe, agus thóg sé "
+"aoiseanna chun dul in áit ar bith.Bhí a fhios againn go raibh ar bhealach "
+"níos fearr a bheith ann, mar sin shocraíomar muid féin a chruthú."
+
+#: main/templates/about.html:28
+msgid "From Late-Night Coding to Real Rides"
+msgstr "Ó chódú déanach san oíche go fíor-turais"
+
+#: main/templates/about.html:30
+msgid ""
+"We spent countless nights coding GoRide in our dorms, fueled by borscht, "
+"coffee, and Ukrainian grit. Our first bike test ended with Oleksandr stuck "
+"in a puddle – we laughed so hard we forgot how to code for a day! But by "
+"2025, GoRide was live, helping people zip around Dublin on electric bikes "
+"and scooters, all while keeping the planet green."
+msgstr ""
+"Chaith muid oíche gan choinne ag códú gorde inár dorms, a chuir borscht, "
+"caife, agus grit na hÚcráine chun cinn.Tháinig deireadh lenár gcéad tástáil "
+"rothar le Oleksandr greamaithe i lochán - rinneamar gáire chomh crua sin go "
+"ndearna muid dearmad ar conas cód a dhéanamh ar feadh lae!Ach faoi 2025, bhí"
+" Goride beo, ag cuidiú le daoine zip timpeall Bhaile Átha Cliath ar rothair "
+"agus scútair leictreacha, agus an phláinéid a choinneáil glas."
+
+#: main/templates/about.html:38
+msgid "The GoRide Team"
+msgstr "An Fhoireann Goride"
+
+#: main/templates/about.html:41
+msgid "Alex"
+msgstr "Alex"
+
+#: main/templates/about.html:42
+msgid "Alex – The Full Stack Enthusiast"
+msgstr "Alex - an díograiseoir iomlán stack"
+
+#: main/templates/about.html:44
+msgid ""
+"I’m Oleksandr, but everyone calls me Alex. Together with my friend, I worked"
+" on the backend to make GoRide run smoothly. But I also poured my heart into"
+" the design – creating the app’s look and the avatar system, so you can ride"
+" in style!"
+msgstr ""
+"Is mise Oleksandr, ach glaonn gach duine orm Alex.In éineacht le mo chara, "
+"d'oibrigh mé ar an inneall chun Goride a reáchtáil go réidh.Ach dhoirt mé mo"
+" chroí isteach sa dearadh freisin - ag cruthú cuma an aip agus an córas "
+"avatar, ionas gur féidir leat turas a dhéanamh i stíl!"
+
+#: main/templates/about.html:48
+msgid "Oleksandr"
+msgstr "Oleksandr"
+
+#: main/templates/about.html:49
+msgid "Oleksandr – The Server Master"
+msgstr "Oleksandr - Máistir an fhreastalaí"
+
+#: main/templates/about.html:51
+msgid ""
+"I’m Oleksandr, the other half of GoRide. I teamed up with Alex on the "
+"backend, but I also focused on setting up the servers and APIs to keep "
+"everything running like a dream. We both gave our all to make GoRide happen!"
+msgstr ""
+"Is mise Oleksandr, an leath eile de Goride.Chuaigh mé i gcomhar le Alex ar "
+"an inneall, ach dhírigh mé freisin ar na freastalaithe agus na APIs a bhunú "
+"chun gach rud a choinneáil ag rith mar bhrionglóid.Thug an bheirt againn an "
+"t -iomlán chun go dtarlódh Goride!"
+
+#: main/templates/about.html:60
+msgid "Our Mission"
+msgstr "Ár Misean"
+
+#: main/templates/about.html:62
+msgid ""
+"GoRide is more than just a rental service – it’s our way of making city "
+"travel eco-friendly, affordable, and fun. We want to help people explore "
+"Dublin without the hassle of unreliable transport, all while reducing "
+"emissions. And yeah, we added a cool avatar system because we believe even "
+"your virtual self deserves to look awesome!"
+msgstr ""
+"Tá Goride níos mó ná seirbhís ar cíos amháin-is é an bealach atá againn chun"
+" taisteal na cathrach a dhéanamh neamhdhíobhálach don chomhshaol, "
+"inacmhainne, agus spraoi.Is mian linn cabhrú le daoine iniúchadh a dhéanamh "
+"ar Bhaile Átha Cliath gan an t -iompar neamhiontaofa a bheith ann, agus "
+"astaíochtaí á laghdú acu.Agus yeah, chuireamar córas avatar fionnuar leis "
+"mar creidimid go bhfuil fiú do fhéinfhíorúil tuillte ag cuma iontach!"
+
+#: main/templates/about.html:66 main/templates/home.html:38
+msgid "Urban Scene"
+msgstr "Radharc Uirbeach"
+
+#: main/templates/about.html:73
+msgid "Join the GoRide Revolution!"
+msgstr "Bí ar an Réabhlóid Goride!"
+
+#: main/templates/about.html:74
+msgid ""
+"We’re two Ukrainian students with a big dream, and we’d love for you to be "
+"part of it. Download the app, rent a ride, and let’s make cities greener "
+"together!"
+msgstr ""
+"Is beirt mhac léinn Úcráinis a bhfuil aisling mhór againn, agus ba bhreá "
+"linn go mbeadh tú mar chuid de.Íoslódáil an feidhmchlár, turas a fháil ar "
+"cíos, agus déanaimis cathracha níos glaise le chéile!"
+
+#: main/templates/auth_base.html:8
+msgid "GoRide Auth"
+msgstr "Goride Auth"
+
+#: main/templates/base.html:75
+msgid "Jack is riding to your page..."
+msgstr "Tá Jack ag marcaíocht ar do leathanach ..."
+
+#: main/templates/base.html:76
+msgid "Please wait a moment"
+msgstr "Fan nóiméad le do thoil"
+
+#: main/templates/base.html:91
+msgid "Admin Chats"
+msgstr "Comhráite riaracháin"
+
+#: main/templates/base.html:98
+msgid "Support Chat"
+msgstr "Comhrá tacaíochta"
+
+#: main/templates/base.html:107
+msgid "New Message"
+msgstr "Teachtaireacht nua"
+
+#: main/templates/base.html:109
+msgid "Expand"
+msgstr "Leathnú"
+
+#: main/templates/contacts.html:5
+msgid "Contact Us"
+msgstr "Déan teagmháil linn"
+
+#: main/templates/contacts.html:17
+msgid "Get in Touch with GoRide"
+msgstr "Téigh i dteagmháil le Goride"
+
+#: main/templates/contacts.html:18
+msgid "We're here to help. Find our details below or send us a message."
+msgstr ""
+"Táimid anseo chun cabhrú leat.Faigh ár sonraí thíos nó seol teachtaireacht "
+"chugainn."
+
+#: main/templates/contacts.html:20
+msgid "Scroll Down"
+msgstr "Scrollaigh síos"
+
+#: main/templates/contacts.html:28
+msgid "Our Main Office"
+msgstr "Ár bpríomhoifig"
+
+#: main/templates/contacts.html:32
+msgid "Monday - Friday: 9:00 AM - 6:00 PM"
+msgstr "Dé Luain - Dé hAoine: 9:00 AM - 6:00 PM"
+
+#: main/templates/contacts.html:54
+msgid "Send Us a Message"
+msgstr "Seol teachtaireacht chugainn"
+
+#: main/templates/contacts.html:58
+msgid "Name"
+msgstr "Ainmnigh"
+
+#: main/templates/contacts.html:66
+msgid "Subject"
+msgstr "Ceist"
+
+#: main/templates/contacts.html:70
+msgid "Message"
+msgstr "Gar"
+
+#: main/templates/contacts.html:73
+msgid "Send Message"
+msgstr "Seol teachtaireacht"
+
+#: main/templates/contacts.html:82
+msgid "Customer Support"
+msgstr "Tacaíocht custaiméirí"
+
+#: main/templates/contacts.html:83
+msgid ""
+"Need help with a rental, your account, or have any questions? Our team is "
+"ready to assist."
+msgstr ""
+"Teastaíonn cabhair uait le cíos, le do chuntas, nó aon cheisteanna a bheith "
+"agat?Tá ár bhfoireann réidh le cuidiú."
+
+#: main/templates/contacts.html:84
+msgid "Reach out for quick help:"
+msgstr "Reach amach le haghaidh cabhair thapa:"
+
+#: main/templates/contacts.html:96
+msgid "Our Team in Action"
+msgstr "Ár bhfoireann i mbun gnímh"
+
+#: main/templates/footer.html:12 main/templates/header.html:21
+msgid "About"
+msgstr "Thart ar"
+
+#: main/templates/footer.html:13
+msgid "Careers"
+msgstr "Gairm bheatha"
+
+#: main/templates/footer.html:14
+msgid "Locations"
+msgstr "Ionad"
+
+#: main/templates/footer.html:15
+msgid "Events"
+msgstr "Ócáidí"
+
+#: main/templates/header.html:18
+msgid "Home"
+msgstr "Áit"
+
+#: main/templates/header.html:24
+msgid "Rentals"
+msgstr "Cíos"
+
+#: main/templates/header.html:27
+msgid "Plans"
+msgstr "Pleanáil"
+
+#: main/templates/header.html:30
+msgid "Contacts"
+msgstr "Tadhall"
+
+#: main/templates/header.html:35
+msgid "Admin Panel"
+msgstr "Painéal riaracháin"
+
+#: main/templates/header.html:78
+msgid "Logout"
+msgstr "Logáil amach"
+
+#: main/templates/header.html:85
+msgid "Sign Up"
+msgstr "Sínigh"
+
+#: main/templates/header.html:87
+msgid "Switch theme"
+msgstr "Téama lasc"
+
+#: main/templates/header.html:90
+msgid "Accessibility mode button"
+msgstr "Cnaipe Mód Inrochtaineachta"
+
+#: main/templates/header.html:99
+msgid "Connecting"
+msgstr "Ceangail"
+
+#: main/templates/header.html:100
+msgid "Manage"
+msgstr "Bainistiú a dhéanamh ar"
+
+#: main/templates/home.html:4
+msgid "Main page"
+msgstr "An leathanach is mó"
+
+#: main/templates/home.html:11
+msgid "Modern electric bikes and scooters for the sustainable urban explorer"
+msgstr ""
+"Rothair agus scútair leictreacha nua -aimseartha don Explorer Uirbeach "
+"Inbhuanaithe"
+
+#: main/templates/home.html:12
+msgid ""
+"GoRide offers a convenient, eco-friendly fleet of electric bikes and "
+"scooters available 24 hours to easily zip around the city."
+msgstr ""
+"Tairgeann Goride cabhlach áisiúil, cairdiúil don chomhshaol de rothair "
+"leictreacha agus scútair atá ar fáil 24 uair an chloig chun zip a dhéanamh "
+"go héasca timpeall na cathrach."
+
+#: main/templates/home.html:16
+msgid "City Transport"
+msgstr "Iompar cathrach"
+
+#: main/templates/home.html:26
+msgid "Sustainable commuting"
+msgstr "Comaitéireacht inbhuanaithe"
+
+#: main/templates/home.html:27
+msgid "Transforming urban transport"
+msgstr "Iompar uirbeach a athrú"
+
+#: main/templates/home.html:29
+msgid ""
+"GoRide provides eco-friendly electric scooter and bike rentals for "
+"convenient, smooth urban commuting. Founded in 2021 by green mobility "
+"advocates, our mission is to transform urban transportation through "
+"innovative zero-emission mobility solutions."
+msgstr ""
+"Soláthraíonn Goride scútar leictreach agus cíosanna rothar atá "
+"neamhdhíobhálach don chomhshaol le haghaidh comaitéireacht áisiúil, réidh "
+"uirbeach.Bunaithe in 2021 ag Abhcóidí Soghluaisteachta Glas, is é ár misean "
+"iompar uirbeach a athrú trí réitigh shoghluaisteachta nuálaíocha nialais."
+
+#: main/templates/home.html:31
+msgid "Our Services"
+msgstr "Ár Seirbhísí"
+
+#: main/templates/home.html:44
+msgid "Retro Poster"
+msgstr "Póstaer retro"
+
+#: main/templates/home.html:48
+msgid "Bike Parking"
+msgstr "Páirceáil rothar"
+
+#: main/templates/home.html:57
+msgid "Ride the Future with GoRide!"
+msgstr "Taistil an todhchaí le Goride!"
+
+#: main/templates/home.html:58
+msgid ""
+"Hop on our electric bikes and scooters and zip through the city with style, "
+"speed, and zero hassle!"
+msgstr ""
+"Buail ar ár rothair agus scútair leictreacha agus zip tríd an gcathair le "
+"stíl, luas, agus nialas hassle!"
+
+#: main/templates/home.html:63
+msgid "Rent in a Snap"
+msgstr "Cíos i Snap"
+
+#: main/templates/home.html:65
+msgid ""
+"\n"
+"                        Unlock your ride in seconds! Just scan a QR code or punch in a code in the GoRide app, and you're off to explore the city.\n"
+"                        "
+msgstr ""
+"\n"
+"Díghlasáil do thuras i soicindí!Just a scanadh cód QR nó punch i gcód san "
+"aip Goride, agus tá tú chun an chathair a iniúchadh."
+
+#: main/templates/home.html:74
+msgid "Wallet-Friendly Vibes"
+msgstr "Vibes atá neamhdhíobhálach don sparán"
+
+#: main/templates/home.html:76
+#, python-format
+msgid ""
+"\n"
+"                        Ride from just <strong>%(price)s</strong> or grab a subscription to save big. Pay your way, ride your day!\n"
+"                        "
+msgstr ""
+"\n"
+"Taisteal ó díreach <strong>%(price)s </strong> nó síntiús a ghreamú chun "
+"BIG a shábháil.Íoc do bhealach, marcaíocht ar do lá!"
+
+#: main/templates/home.html:85
+msgid "Park Anywhere, Anytime"
+msgstr "Páirceáil áit ar bith, am ar bith"
+
+#: main/templates/home.html:87
+#, python-format
+msgid ""
+"\n"
+"                        Drop your ride at any of our <strong>%(stations)s stations</strong> across the city or park in designated zones. Freedom’s never been this easy!\n"
+"                        "
+msgstr ""
+"\n"
+"Buail do thiomána ag aon cheann dár stáisiúin <strong>%(stations)s "
+"stáisiúin </strong> ar fud na cathrach nó páirceáil i gcriosanna "
+"ainmnithe.Ní raibh an tsaoirse seo éasca riamh!"
+
+#: main/templates/home.html:99
+msgid "What People Are Saying About Us! "
+msgstr "Cad atá á rá ag daoine fúinn!"
+
+#: main/templates/home.html:128 reviews/templates/review_list.html:14
+msgid "Previous"
+msgstr "Roimhe seo"
+
+#: main/templates/home.html:132 reviews/templates/review_list.html:16
+msgid "Next"
+msgstr "Ar aghaidh"
+
+#: main/templates/home.html:138
+msgid "No reviews yet. Be the first to leave one!"
+msgstr "Gan aon athbhreithnithe fós.Bí ar an gcéad duine a fhágfaidh ceann!"
+
+#: main/templates/home.html:141
+msgid "See All Reviews"
+msgstr "Féach gach athbhreithniú"
+
+#: main/templates/home.html:148
+msgid "Discover Amazing Stats "
+msgstr "Faigh amach stats iontach"
+
+#: main/templates/home.html:153
+msgid "Total Users"
+msgstr "Úsáideoirí iomlána"
+
+#: main/templates/home.html:161
+msgid "Average raiting"
+msgstr "Meánráta"
+
+#: main/templates/home.html:167
+msgid "Completed Trips"
+msgstr "Turais Críochnaithe"
+
+#: main/templates/home.html:176
+msgid "Download the GoRide app and start riding "
+msgstr "Íoslódáil an aip Goride agus Tosaigh marcaíocht"
+
+#: main/templates/home.html:177
+msgid "With just a few taps, you can locate, unlock, and ride."
+msgstr ""
+"Le cúpla sconnaí amháin, is féidir leat a aimsiú, a dhíghlasáil agus a "
+"thiomána."
+
+#: main/templates/home.html:178
+msgid "Get Started"
+msgstr "Faigh Tosaigh"
+
+#: payments/templates/payments/booking.html:23
+#: payments/templates/payments/stripe_payment.html:5
+msgid "Stripe Payment for"
+msgstr "Íocaíocht stríoc do"
+
+#: payments/templates/payments/booking.html:24
+#: payments/templates/payments/stripe_payment.html:6
+msgid "Total Amount:"
+msgstr "Méid iomlán:"
+
+#: payments/templates/payments/booking.html:30
+#: payments/templates/payments/stripe_payment.html:13
+msgid "Pay with Stripe"
+msgstr "Íoc le stríoc"
+
+#: payments/templates/payments/payment.html:5
+msgid "Payment for"
+msgstr "Íocaíocht le haghaidh"
+
+#: payments/templates/payments/payment.html:9
+msgid "Pay"
+msgstr "Íoc"
+
+#: payments/templates/payments/payment_success.html:8
+msgid "Payment Successful"
+msgstr "Íocaíocht rathúil"
+
+#: payments/templates/payments/payment_success.html:9
+msgid "Thank you for your payment!"
+msgstr "Go raibh maith agat as d’íocaíocht!"
+
+#: payments/templates/payments/payment_success.html:10
+msgid "Return to Transport"
+msgstr "Filleadh ar iompar"
+
+#: reviews/templates/review_list.html:7
+msgid "All Reviews"
+msgstr "Gach Léirmheasanna"
+
+#: reviews/templates/review_list.html:13
+msgid "First"
+msgstr "An chéad"
+
+#: reviews/templates/review_list.html:17
+msgid "Last"
+msgstr "Is deireanaí"
+
+#: subscriptions/models.py:11
+msgid "Daily Subscription"
+msgstr "Síntiús laethúil"
+
+#: subscriptions/models.py:12
+msgid "Weekly Subscription"
+msgstr "Síntiús seachtainiúil"
+
+#: subscriptions/models.py:13
+msgid "Monthly Subscription"
+msgstr "Síntiús míosúil"
+
+#: subscriptions/models.py:14
+msgid "Student"
+msgstr "Mac léinn"
+
+#: subscriptions/models.py:15
+msgid "Athlete"
+msgstr "Lúthchleasaí"
+
+#: subscriptions/templates/plans.html:5 subscriptions/templates/plans.html:9
+msgid "Choose a Subscription Plan"
+msgstr "Roghnaigh plean síntiúis"
+
+#: subscriptions/templates/plans.html:18
+msgid "Price:"
+msgstr "Praghas:"
+
+#: subscriptions/templates/plans.html:20
+msgid "Transport type:"
+msgstr "Cineál iompair:"
+
+#: subscriptions/templates/plans.html:22
+msgid "Bike only"
+msgstr "Rothar amháin"
+
+#: subscriptions/templates/plans.html:24
+msgid "All types available"
+msgstr "Gach cineál ar fáil"
+
+#: subscriptions/templates/success.html:5
+msgid "Subscription Successful"
+msgstr "Suibscríobh rathúil"
+
+#: subscriptions/templates/success.html:10
+msgid "Subscription Successful!"
+msgstr "Suibscríobh rathúil!"
+
+#: subscriptions/templates/success.html:11
+msgid "Your subscription has been activated."
+msgstr "Tá do shuibscríobh curtha i ngníomh."
+
+#: subscriptions/templates/success.html:12
+msgid "Return to Plans"
+msgstr "Filleadh ar phleananna"
+
+#: support/templates/support/admin_chat.html:7
+msgid "Admin Support Panel"
+msgstr "Painéal Tacaíochta Riaracháin"
+
+#: support/templates/support/admin_chat.html:13
+#: support/templates/support/admin_chat_list.html:3
+msgid "Active Chats"
+msgstr "Comhráite gníomhacha"
+
+#: support/templates/support/admin_chat.html:23
+msgid "No active chats"
+msgstr "Gan comhráite gníomhacha"
+
+#: support/templates/support/admin_chat.html:33
+#: support/templates/support/admin_chat_detail.html:6
+#: support/templates/support/admin_chat_list.html:6
+msgid "Chat with"
+msgstr "Comhrá a dhéanamh le"
+
+#: support/templates/support/admin_chat.html:43
+#: support/templates/support/user_chat.html:21
+msgid "No messages yet. Start the conversation!"
+msgstr "Gan teachtaireachtaí fós.Cuir tús leis an gcomhrá!"
+
+#: support/templates/support/admin_chat.html:53
+#: support/templates/support/user_chat.html:31
+msgid "Send"
+msgstr "Cuir"
+
+#: support/templates/support/admin_chat_detail.html:3
+msgid "Admin chat details"
+msgstr "Sonraí Comhrá Riaracháin"
+
+#: support/templates/support/admin_chat_detail.html:14
+msgid "Reply to the chat:"
+msgstr "Freagra a thabhairt ar an gcomhrá:"
+
+#: support/templates/support/admin_chat_detail.html:18
+msgid "Send Reply"
+msgstr "Seol freagra"
+
+#: support/templates/support/admin_chat_detail.html:21
+msgid "Back to chat list"
+msgstr "Ar ais ar liosta comhrá"
+
+#: support/templates/support/admin_chats.html:5
+msgid "All chats"
+msgstr "Gach comhrá"
+
+#: support/templates/support/admin_chats.html:11
+msgid "Chat"
+msgstr "Comhrá a chomhraáil"
+
+#: support/templates/support/admin_chats.html:15
+msgid "No active chats."
+msgstr "Gan comhráite gníomhacha."
+
+#: support/templates/support/user_chat.html:7
+msgid "Chat with Support"
+msgstr "Comhrá le tacaíocht"
+
+#: support/templates/support/user_chat.html:10
+msgid "Chat History"
+msgstr "Stair comhrá"
+
+#: support/forms.py:12
+msgid "Write your message..."
+msgstr "Scríobh do theachtaireacht..."
+
+#: support/forms.py:16
+msgid "Content"
+msgstr "Ábhar"

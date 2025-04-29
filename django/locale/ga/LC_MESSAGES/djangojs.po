@@ -1,0 +1,320 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-29 12:40+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);\n"
+
+#: static/js/events.js:16 static/js/events.js:18 static/js/events.js:235
+msgid "km"
+msgstr "km"
+
+#: static/js/events.js:73
+msgid "Could not load events:"
+msgstr "Níorbh fhéidir imeachtaí a luchtú:"
+
+#: static/js/events.js:73
+msgid "Please try again later."
+msgstr "Bain triail eile as níos déanaí."
+
+#: static/js/events.js:87
+msgid "Unnamed Event"
+msgstr "Imeacht gan ainm"
+
+#: static/js/events.js:99
+msgid "Date N/A"
+msgstr "Dáta N/A."
+
+#: static/js/events.js:127
+msgid "Venue N/A"
+msgstr "Ionad n/a"
+
+#: static/js/events.js:150
+msgid "View Event"
+msgstr "Imeacht Féach"
+
+#: static/js/events.js:162
+msgid "Get Directions"
+msgstr "Faigh treoracha"
+
+#: static/js/events.js:174
+msgid "Directions unavailable"
+msgstr "Treoracha nach bhfuil ar fáil"
+
+#: static/js/events.js:203
+msgid "Getting location..."
+msgstr "Suíomh a fháil ..."
+
+#: static/js/events.js:210
+msgid "My Location"
+msgstr "Mo Suíomh"
+
+#: static/js/events.js:213 static/js/events.js:221
+msgid "Use My Location"
+msgstr "Úsáid mo shuíomh"
+
+#: static/js/events.js:218
+msgid ""
+"Could not get your location. Please ensure location services are enabled and"
+" permissions are granted."
+msgstr ""
+"Níorbh fhéidir do shuíomh a fháil.Cinntigh le do thoil go bhfuil seirbhísí "
+"suímh cumasaithe agus go ndeonaítear ceadanna."
+
+#: static/js/events.js:226
+msgid "Geolocation is not supported by your browser."
+msgstr "Ní thacaíonn do bhrabhsálaí le geolocation."
+
+#: static/js/find_transport.js:177
+msgid "Max spaces"
+msgstr "Uas -spásanna"
+
+#: static/js/find_transport.js:177
+msgid "Free spaces"
+msgstr "Spásanna saor in aisce"
+
+#: static/js/find_transport.js:242
+msgid "Error loading vehicles. Please try again later."
+msgstr "Earráid ag luchtú feithiclí.Bain triail eile as níos déanaí."
+
+#: static/js/find_transport.js:291 static/js/find_transport.js:297
+msgid "Type"
+msgstr "Tíopáil"
+
+#: static/js/find_transport.js:293
+msgid "Battery charge"
+msgstr "Muirear ceallraí"
+
+#: static/js/find_transport.js:325
+msgid "No vehicles match the current criteria"
+msgstr "Níl aon fheithicil ag teacht leis na critéir reatha"
+
+#: static/js/find_transport.js:361
+msgid "Show on Map"
+msgstr "Taispeáin ar léarscáil"
+
+#: static/js/find_transport.js:364
+msgid "Map N/A"
+msgstr "Léarscáil N/A."
+
+#: static/js/find_transport.js:371 static/js/find_transport.js:372
+msgid "Battery"
+msgstr "Bataire"
+
+#: static/js/find_transport.js:393
+msgid "Price per hour"
+msgstr "Praghas in aghaidh na huaire"
+
+#: static/js/find_transport.js:538
+msgid ""
+"Please select a station or vehicle first, and ensure location is enabled"
+msgstr ""
+"Roghnaigh stáisiún nó feithicil ar dtús, agus cinntigh go bhfuil an suíomh "
+"cumasaithe"
+
+#: static/js/find_transport.js:579
+msgid "Could not get directions"
+msgstr "Níorbh fhéidir treoracha a fháil"
+
+#: static/js/find_transport.js:622
+msgid "Could not process directions"
+msgstr "Níorbh fhéidir treoracha a phróiseáil"
+
+#: static/js/get_direction.js:39
+msgid "Address"
+msgstr "Tabhair faoi"
+
+#: static/js/get_direction.js:42
+msgid "Distance"
+msgstr "Téigh chun cinn ar"
+
+#: static/js/get_direction.js:44
+msgid "meters"
+msgstr "méadar"
+
+#: static/js/get_direction.js:45
+msgid "Estimated Time"
+msgstr "Am measta"
+
+#: static/js/get_direction.js:47
+msgid "minutes"
+msgstr "nóiméad"
+
+#: static/js/get_direction.js:81
+msgid "Start"
+msgstr "Cuir ar siúl"
+
+#: static/js/get_direction.js:84
+msgid "Pause"
+msgstr "Cúis"
+
+#: static/js/get_direction.js:85 static/js/get_direction.js:90
+msgid "Finish"
+msgstr "Bailchríoch"
+
+#: static/js/get_direction.js:89
+msgid "Resume"
+msgstr "Atosaigh"
+
+#: static/js/get_direction.js:93
+msgid "Trip finished"
+msgstr "Turas críochnaithe"
+
+#: static/js/get_direction.js:95
+msgid "Loading"
+msgstr "Lódáil"
+
+#: static/js/get_direction.js:130
+msgid "Start error"
+msgstr "Earráid Tosaigh"
+
+#: static/js/get_direction.js:139
+msgid "Network error starting trip"
+msgstr "Earráid líonra ag tosú turas"
+
+#: static/js/get_direction.js:153
+msgid "Pause error"
+msgstr "Earráid sos"
+
+#: static/js/get_direction.js:162
+msgid "Network error pausing trip."
+msgstr "Earráid líonra ag stopadh turas."
+
+#: static/js/get_direction.js:176
+msgid "Resume error"
+msgstr "Atosú earráid"
+
+#: static/js/get_direction.js:185
+msgid "Network error resuming trip."
+msgstr "Earráid líonra ag dul ar ais ar an turas."
+
+#: static/js/get_direction.js:190
+msgid "Are you sure you want to end the current trip?"
+msgstr ""
+"An bhfuil tú cinnte gur mhaith leat deireadh a chur leis an turas reatha?"
+
+#: static/js/get_direction.js:202
+msgid "End error"
+msgstr "Deireadh earráid"
+
+#: static/js/get_direction.js:209
+msgid "Network error ending trip"
+msgstr "Earráid líonra ag críochnú turas"
+
+#: static/js/review_popup.js:31
+msgid "Leave a Review"
+msgstr "Fág léirmheas"
+
+#: static/js/review_popup.js:39
+msgid "Write your review..."
+msgstr "Scríobh d’athbhreithniú ..."
+
+#: static/js/review_popup.js:41
+msgid "Submit"
+msgstr "Cuir isteach"
+
+#: static/js/review_popup.js:42
+msgid "Close"
+msgstr "Críoch a chur le"
+
+#: static/js/review_popup.js:72
+msgid "Please write a review before submitting."
+msgstr "Scríobh athbhreithniú le do thoil sula gcuirfear isteach é."
+
+#: static/js/review_popup.js:106
+msgid "Thank you for your review!"
+msgstr "Go raibh maith agat as do léirmheas!"
+
+#: static/js/review_popup.js:114 static/js/review_popup.js:123
+msgid "Error submitting review. Please try again."
+msgstr "Earráid ag cur isteach Athbhreithniú.Bain triail eile as."
+
+#: static/js/support.js:103
+msgid "Failed to send message. Connection might be down."
+msgstr "Theip ar theachtaireacht a sheoladh.D'fhéadfadh nasc a bheith síos."
+
+#: static/js/support.js:107
+msgid "Error: Chat ID is missing."
+msgstr "Earráid: Tá ID comhrá ar iarraidh."
+
+#: static/js/theme_change.js:21 static/js/theme_change.js:41
+msgid "Switch to light theme"
+msgstr "Athraigh go téama éadrom"
+
+#: static/js/theme_change.js:30 static/js/theme_change.js:48
+msgid "Switch to dark theme"
+msgstr "Athraigh go téama dorcha"
+
+#: static/js/theme_change.js:74 static/js/theme_change.js:98
+msgid "Disable Accessibility Mode"
+msgstr "Mód Inrochtaineachta a dhíchumasú"
+
+#: static/js/theme_change.js:80 static/js/theme_change.js:104
+msgid "Enable Accessibility Mode"
+msgstr "Cumasaigh Mód Inrochtaineachta"
+
+#: static/js/websocket_manager.js:70
+msgid "Timer Sync Error"
+msgstr "Earráid Sync Timer"
+
+#: static/js/websocket_manager.js:82 static/js/websocket_manager.js:95
+#: static/js/websocket_manager.js:353 static/js/websocket_manager.js:357
+msgid "Trip in progress"
+msgstr "Turas ar siúl"
+
+#: static/js/websocket_manager.js:211 static/js/websocket_manager.js:561
+msgid "Connecting"
+msgstr "Ceangail"
+
+#: static/js/websocket_manager.js:223
+msgid "Connected"
+msgstr "Nasctha"
+
+#: static/js/websocket_manager.js:372
+msgid "Paused"
+msgstr "Sosaithe"
+
+#: static/js/websocket_manager.js:380
+msgid "No current trip"
+msgstr "Gan aon turas reatha"
+
+#: static/js/websocket_manager.js:381
+msgid "Trip not started"
+msgstr "Ní thosaigh an turas"
+
+#: static/js/websocket_manager.js:388
+msgid "Trip status: Unknown"
+msgstr "Stádas turais: anaithnid"
+
+#: static/js/websocket_manager.js:428
+msgid "New Message"
+msgstr "Teachtaireacht nua"
+
+#: static/js/websocket_manager.js:432
+msgid "Click to view"
+msgstr "Cliceáil chun féachaint air"
+
+#: static/js/websocket_manager.js:484
+msgid "You've unlocked a new"
+msgstr "Díghlasáil tú nua"
+
+#: static/js/websocket_manager.js:521
+msgid "Cashback"
+msgstr "Aisairgead"
+
+#: static/js/find_transport.js:394
+msgid "Rent"
+msgstr "Cíos"

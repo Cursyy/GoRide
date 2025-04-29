@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">{% trans "All Reviews" %}</h1>
+
+    <div id="reviews-list" class="reviews-list row">
+    </div>
+
+    <div class="pagination d-flex justify-content-center align-items-center" style="margin-top: 20px;">
+        <a id="first-page" class="btn btn-secondary mx-1" style="display: none;">&laquo;{% trans "First" %}</a>
+        <a id="prev-page" class="btn btn-secondary mx-1" style="display: none;">{% trans "Previous" %}</a>
+        <span id="page-info" class="mx-2"></span>
+        <a id="next-page" class="btn btn-secondary mx-1" style="display: none;">{% trans "Next" %}</a>
+        <a id="last-page" class="btn btn-secondary mx-1" style="display: none;">{% trans "Last" %} &raquo;</a>
+    </div>
+</div>
+
+<script>
+    let currentPage = 1;
+
+    function fetchReviews(page) {
+        fetch(`/reviews/api/?page=${page}`)
+            .then(response => response.json())
+            .then(data => {
+                const reviewsList = document.getElementById('reviews-list');
+                reviewsList.innerHTML = '';
+
+                if (data.reviews.length === 0) {
+                    reviewsList.innerHTML = '<p>No reviews yet.</p>';
+                    return;
+                }
+
+                data.reviews.forEach(review => {
+                    const reviewCard = document.createElement('div');
+                    reviewCard.className = 'col-lg-4 col-md-6 col-sm-12 mb-4';
+                    reviewCard.innerHTML = `
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="user-info mb-3">
+                                    <img src="${review.photo}" alt="${review.username}" class="rounded-circle mb-2" style="width: 60px; height: 60px;">
+                                    <h5 class="card-title mb-0">${review.username}</h5>
+                                </div>
+                                <div class="rating mb-3">
+                                    ${Array(5).fill().map((_, i) => `<span class="star" style="color: ${i < review.rating ? '#ffd700' : '#ccc'}; font-size: 20px;">★</span>`).join('')}
+                                </div>
+                                <p class="card-text">${review.text}</p>
+                            </div>
+                            <div class="card-footer text-muted text-center">
+                                <small>${review.created_at}</small>
+                            </div>
+                        </div>
+                    `;
+                    reviewsList.appendChild(reviewCard);
+                });
+
+                const firstPageBtn = document.getElementById('first-page');
+                const prevPageBtn = document.getElementById('prev-page');
+                const nextPageBtn = document.getElementById('next-page');
+                const lastPageBtn = document.getElementById('last-page');
+                const pageInfo = document.getElementById('page-info');
+
+                firstPageBtn.style.display = data.has_previous ? 'inline-block' : 'none';
+                prevPageBtn.style.display = data.has_previous ? 'inline-block' : 'none';
+                nextPageBtn.style.display = data.has_next ? 'inline-block' : 'none';
+                lastPageBtn.style.display = data.has_next ? 'inline-block' : 'none';
+                pageInfo.textContent = `Page ${data.current_page} of ${data.total_pages}`;
+
+                currentPage = data.current_page;
+
+                firstPageBtn.onclick = () => fetchReviews(1);
+                prevPageBtn.onclick = () => fetchReviews(currentPage - 1);
+                nextPageBtn.onclick = () => fetchReviews(currentPage + 1);
+                lastPageBtn.onclick = () => fetchReviews(data.total_pages);
+            })
+            .catch(error => {
+                console.error('Error fetching reviews:', error);
+                document.getElementById('reviews-list').innerHTML = '<p>Error loading reviews.</p>';
+            });
+    }
+
+    fetchReviews(1);
+</script>
+{% endblock %}

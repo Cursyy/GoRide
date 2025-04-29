@@ -1,0 +1,320 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-29 12:40+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: static/js/events.js:16 static/js/events.js:18 static/js/events.js:235
+msgid "km"
+msgstr "км"
+
+#: static/js/events.js:73
+msgid "Could not load events:"
+msgstr "Не вдалося завантажити події:"
+
+#: static/js/events.js:73
+msgid "Please try again later."
+msgstr "Будь ласка, спробуйте пізніше."
+
+#: static/js/events.js:87
+msgid "Unnamed Event"
+msgstr "Подія без назви"
+
+#: static/js/events.js:99
+msgid "Date N/A"
+msgstr "Дата невідома"
+
+#: static/js/events.js:127
+msgid "Venue N/A"
+msgstr "Місце проведення невідоме"
+
+#: static/js/events.js:150
+msgid "View Event"
+msgstr "Переглянути подію"
+
+#: static/js/events.js:162
+msgid "Get Directions"
+msgstr "Отримати напрямки"
+
+#: static/js/events.js:174
+msgid "Directions unavailable"
+msgstr "Напрямки недоступні"
+
+#: static/js/events.js:203
+msgid "Getting location..."
+msgstr "Отримання локації ..."
+
+#: static/js/events.js:210
+msgid "My Location"
+msgstr "Моє місцезнаходження"
+
+#: static/js/events.js:213 static/js/events.js:221
+msgid "Use My Location"
+msgstr "Використовуйте моє місцезнаходження"
+
+#: static/js/events.js:218
+msgid ""
+"Could not get your location. Please ensure location services are enabled and"
+" permissions are granted."
+msgstr ""
+"Не вдалося отримати своє місцезнаходження.Будь ласка, переконайтеся, що "
+"послуги місцезнаходження ввімкнуться та надаються дозволи."
+
+#: static/js/events.js:226
+msgid "Geolocation is not supported by your browser."
+msgstr "Геолокація не підтримується вашим браузером."
+
+#: static/js/find_transport.js:177
+msgid "Max spaces"
+msgstr "Максимальна кількість місць"
+
+#: static/js/find_transport.js:177
+msgid "Free spaces"
+msgstr "Вільні місця"
+
+#: static/js/find_transport.js:242
+msgid "Error loading vehicles. Please try again later."
+msgstr ""
+"Помилка завантаження транспортних засобів. Будь ласка, спробуйте пізніше."
+
+#: static/js/find_transport.js:291 static/js/find_transport.js:297
+msgid "Type"
+msgstr "Тип"
+
+#: static/js/find_transport.js:293
+msgid "Battery charge"
+msgstr "Заряд акумулятора"
+
+#: static/js/find_transport.js:325
+msgid "No vehicles match the current criteria"
+msgstr "Жодне транспортні засоби не відповідають поточним критеріям"
+
+#: static/js/find_transport.js:361
+msgid "Show on Map"
+msgstr "Показати на карті"
+
+#: static/js/find_transport.js:364
+msgid "Map N/A"
+msgstr "Карта відсутня"
+
+#: static/js/find_transport.js:371 static/js/find_transport.js:372
+msgid "Battery"
+msgstr "Акумулятор"
+
+#: static/js/find_transport.js:393
+msgid "Price per hour"
+msgstr "Ціна на годину"
+
+#: static/js/find_transport.js:538
+msgid ""
+"Please select a station or vehicle first, and ensure location is enabled"
+msgstr ""
+"Спочатку виберіть станцію або транспортний засіб та переконайтеся, що місце "
+"розташування включено"
+
+#: static/js/find_transport.js:579
+msgid "Could not get directions"
+msgstr "Не вдалося отримати напрямки"
+
+#: static/js/find_transport.js:622
+msgid "Could not process directions"
+msgstr "Не вдалося обробити напрямки"
+
+#: static/js/get_direction.js:39
+msgid "Address"
+msgstr "Адреса"
+
+#: static/js/get_direction.js:42
+msgid "Distance"
+msgstr "Відстань"
+
+#: static/js/get_direction.js:44
+msgid "meters"
+msgstr "метри"
+
+#: static/js/get_direction.js:45
+msgid "Estimated Time"
+msgstr "Орієнтовний час"
+
+#: static/js/get_direction.js:47
+msgid "minutes"
+msgstr "хвилини"
+
+#: static/js/get_direction.js:81
+msgid "Start"
+msgstr "Почати"
+
+#: static/js/get_direction.js:84
+msgid "Pause"
+msgstr "Пауза"
+
+#: static/js/get_direction.js:85 static/js/get_direction.js:90
+msgid "Finish"
+msgstr "Закінчити"
+
+#: static/js/get_direction.js:89
+msgid "Resume"
+msgstr "Відновити"
+
+#: static/js/get_direction.js:93
+msgid "Trip finished"
+msgstr "Поїздка закінчена"
+
+#: static/js/get_direction.js:95
+msgid "Loading"
+msgstr "Завантаження"
+
+#: static/js/get_direction.js:130
+msgid "Start error"
+msgstr "Початкова помилка"
+
+#: static/js/get_direction.js:139
+msgid "Network error starting trip"
+msgstr "Помилка мережі Початок поїздки"
+
+#: static/js/get_direction.js:153
+msgid "Pause error"
+msgstr "Помилка паузи"
+
+#: static/js/get_direction.js:162
+msgid "Network error pausing trip."
+msgstr "Помилка мережі призупиняє поїздку."
+
+#: static/js/get_direction.js:176
+msgid "Resume error"
+msgstr "Помилка резюме"
+
+#: static/js/get_direction.js:185
+msgid "Network error resuming trip."
+msgstr "Помилка мережі Відновлює поїздку."
+
+#: static/js/get_direction.js:190
+msgid "Are you sure you want to end the current trip?"
+msgstr "Ви впевнені, що хочете закінчити поточну поїздку?"
+
+#: static/js/get_direction.js:202
+msgid "End error"
+msgstr "Кінцева помилка"
+
+#: static/js/get_direction.js:209
+msgid "Network error ending trip"
+msgstr "Мережева помилка, що закінчується поїздкою"
+
+#: static/js/review_popup.js:31
+msgid "Leave a Review"
+msgstr "Залишити відгук"
+
+#: static/js/review_popup.js:39
+msgid "Write your review..."
+msgstr "Напишіть свій відгук ..."
+
+#: static/js/review_popup.js:41
+msgid "Submit"
+msgstr "Надіслати"
+
+#: static/js/review_popup.js:42
+msgid "Close"
+msgstr "Закрити"
+
+#: static/js/review_popup.js:72
+msgid "Please write a review before submitting."
+msgstr "Будь ласка, напишіть відгук перед поданням."
+
+#: static/js/review_popup.js:106
+msgid "Thank you for your review!"
+msgstr "Дякуємо за відгук!"
+
+#: static/js/review_popup.js:114 static/js/review_popup.js:123
+msgid "Error submitting review. Please try again."
+msgstr "Помилка подання огляду.Будь ласка, спробуйте ще раз."
+
+#: static/js/support.js:103
+msgid "Failed to send message. Connection might be down."
+msgstr "Не вдалося надіслати повідомлення.Зв'язок може бути вниз."
+
+#: static/js/support.js:107
+msgid "Error: Chat ID is missing."
+msgstr "Помилка: ідентифікатор чату відсутній."
+
+#: static/js/theme_change.js:21 static/js/theme_change.js:41
+msgid "Switch to light theme"
+msgstr "Перейти на світлу тему"
+
+#: static/js/theme_change.js:30 static/js/theme_change.js:48
+msgid "Switch to dark theme"
+msgstr "Перейти на темну тему"
+
+#: static/js/theme_change.js:74 static/js/theme_change.js:98
+msgid "Disable Accessibility Mode"
+msgstr "Вимкнути режим доступності"
+
+#: static/js/theme_change.js:80 static/js/theme_change.js:104
+msgid "Enable Accessibility Mode"
+msgstr "Увімкнути режим доступності"
+
+#: static/js/websocket_manager.js:70
+msgid "Timer Sync Error"
+msgstr "Помилка синхронізації таймера"
+
+#: static/js/websocket_manager.js:82 static/js/websocket_manager.js:95
+#: static/js/websocket_manager.js:353 static/js/websocket_manager.js:357
+msgid "Trip in progress"
+msgstr "Поїздка в процесі"
+
+#: static/js/websocket_manager.js:211 static/js/websocket_manager.js:561
+msgid "Connecting"
+msgstr "З'єднання"
+
+#: static/js/websocket_manager.js:223
+msgid "Connected"
+msgstr "З'єднаний"
+
+#: static/js/websocket_manager.js:372
+msgid "Paused"
+msgstr "Призупинений"
+
+#: static/js/websocket_manager.js:380
+msgid "No current trip"
+msgstr "Немає поточної поїздки"
+
+#: static/js/websocket_manager.js:381
+msgid "Trip not started"
+msgstr "Поїздка не розпочалася"
+
+#: static/js/websocket_manager.js:388
+msgid "Trip status: Unknown"
+msgstr "Статус поїздки: Невідомий"
+
+#: static/js/websocket_manager.js:428
+msgid "New Message"
+msgstr "Нове повідомлення"
+
+#: static/js/websocket_manager.js:432
+msgid "Click to view"
+msgstr "Клацніть, щоб переглянути"
+
+#: static/js/websocket_manager.js:484
+msgid "You've unlocked a new"
+msgstr "Ви розблокували нове"
+
+#: static/js/websocket_manager.js:521
+msgid "Cashback"
+msgstr "Повернення коштів"
+
+#: static/js/find_transport.js:394
+msgid "Rent"
+msgstr "Орендувати"

@@ -1,0 +1,4047 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-29 11:18+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: accounts/templates/profile.html:4 main/templates/header.html:72
+msgid "Profile"
+msgstr "Профіль"
+
+#: accounts/templates/profile.html:12 accounts/templates/profile_edit.html:28
+msgid "Profile Picture"
+msgstr "Зображення профілю"
+
+#: accounts/templates/profile.html:16 accounts/templates/profile_edit.html:5
+#: accounts/templates/profile_edit.html:9
+msgid "Edit Profile"
+msgstr "Редагувати профіль"
+
+#: accounts/templates/profile.html:19 accounts/templates/profile_edit.html:20
+msgid "Email"
+msgstr "Електронна пошта"
+
+#: accounts/templates/profile.html:21
+msgid "Phone"
+msgstr "Телефон"
+
+#: accounts/templates/profile.html:37
+msgid "No achievements yet. Keep riding!"
+msgstr "Ще немає досягнень.Продовжуйте їздити!"
+
+#: accounts/templates/profile.html:48
+msgid "Statistics"
+msgstr "Статистика"
+
+#: accounts/templates/profile.html:51
+msgid "Avatar"
+msgstr "Аватар"
+
+#: accounts/templates/profile.html:60
+msgid "Total Rides:"
+msgstr "Всього поїздок:"
+
+#: accounts/templates/profile.html:61
+msgid "Total Hours:"
+msgstr "Загальна кількість годин:"
+
+#: accounts/templates/profile.html:62
+msgid "Total Spent:"
+msgstr "Всього витрачено:"
+
+#: accounts/templates/profile.html:63
+msgid "Most Used Vehicle:"
+msgstr "Найбільш використовуваний транспортний засіб:"
+
+#: accounts/templates/profile.html:63
+msgid "N/A"
+msgstr "N/a"
+
+#: accounts/templates/profile.html:65 accounts/templates/profile.html:103
+msgid "No statistics available."
+msgstr "Статистики немає."
+
+#: accounts/templates/profile.html:72 accounts/templates/profile.html:84
+#: booking/templates/rental_booking.html:43
+#: booking/templates/rental_booking.html:48
+msgid "Subscription"
+msgstr "Підписка"
+
+#: accounts/templates/profile.html:73
+msgid "Start date"
+msgstr "Дата початку"
+
+#: accounts/templates/profile.html:74
+msgid "End date"
+msgstr "Дата закінчення"
+
+#: accounts/templates/profile.html:84
+msgid "You have no active subscriptions"
+msgstr "У вас немає активних підписок"
+
+#: accounts/templates/profile.html:85
+msgid "Choose plan"
+msgstr "Виберіть план"
+
+#: accounts/templates/profile.html:109
+#: booking/templates/rental_booking.html:61
+#: booking/templates/subscription_booking.html:38
+msgid "Balance"
+msgstr "Баланс"
+
+#: accounts/templates/profile.html:110
+msgid "Top up"
+msgstr "Поповнити"
+
+#: accounts/templates/profile.html:120 accounts/templates/profile.html:122
+msgid "Background image"
+msgstr "Фонове зображення"
+
+#: accounts/templates/profile.html:124
+msgid "Avatar image"
+msgstr "Зображення аватара"
+
+#: accounts/templates/profile.html:126 accounts/templates/profile.html:128
+msgid "Shirt image"
+msgstr "Зображення костюму"
+
+#: accounts/templates/profile.html:131 accounts/templates/profile.html:133
+msgid "Hat image"
+msgstr "Зображення капелюха"
+
+#: accounts/templates/profile.html:136 accounts/templates/profile.html:138
+msgid "Accessory image"
+msgstr "Аксесуарне зображення"
+
+#: accounts/templates/profile.html:143
+msgid "Hats"
+msgstr "Шапки"
+
+#: accounts/templates/profile.html:152 accounts/templates/profile.html:170
+#: accounts/templates/profile.html:188 accounts/templates/profile.html:206
+msgid "Unlock by"
+msgstr "Розблокувати"
+
+#: accounts/templates/profile.html:161
+msgid "Shirts"
+msgstr "Костюми"
+
+#: accounts/templates/profile.html:179
+msgid "Accessories"
+msgstr "Аксесуари"
+
+#: accounts/templates/profile.html:197
+msgid "Backgrounds"
+msgstr "Фон"
+
+#: accounts/templates/profile_edit.html:16
+msgid "Username"
+msgstr "Ім'я користувача"
+
+#: accounts/templates/profile_edit.html:24 careers/templates/careers.html:104
+msgid "Phone Number"
+msgstr "Номер телефону"
+
+#: accounts/templates/profile_edit.html:31
+msgid "Save Changes"
+msgstr "Зберегти зміни"
+
+#: accounts/templates/registration/email_sent.html:4
+msgid "Email sent"
+msgstr "Надіслано електронною поштою"
+
+#: accounts/templates/registration/email_sent.html:11
+msgid "Email Sent"
+msgstr "Надіслано електронною поштою"
+
+#: accounts/templates/registration/email_sent.html:14
+msgid ""
+"A confirmation email has been sent to your email address. Please check your "
+"inbox (and spam folder) to confirm your account."
+msgstr ""
+"На вашу електронну адресу надсилається електронний лист.Будь ласка, "
+"перевірте свою поштову скриньку (і папку спаму), щоб підтвердити свій "
+"рахунок."
+
+#: accounts/templates/registration/email_sent.html:15
+#: careers/templates/careers_thank_you.html:53
+msgid "Back to Home"
+msgstr "Назад на головну"
+
+#: accounts/templates/registration/login.html:7
+#: accounts/templates/registration/login.html:26
+#: accounts/templates/registration/password_reset_complete.html:13
+#: accounts/templates/registration/signup.html:17
+#: main/templates/header.html:84
+msgid "Login"
+msgstr "Логін"
+
+#: accounts/templates/registration/login.html:12
+msgid "Login or Create a New Account"
+msgstr "Увійти або створити новий обліковий запис"
+
+#: accounts/templates/registration/login.html:16
+msgid "New Customer?"
+msgstr "Новий клієнт?"
+
+#: accounts/templates/registration/login.html:17
+msgid "Create New Account"
+msgstr "Створити новий обліковий запис"
+
+#: accounts/templates/registration/login.html:22
+msgid "Registered Customers Only"
+msgstr "Тільки зареєстровані клієнти"
+
+#: accounts/templates/registration/login.html:28
+msgid "Forgot your password?"
+msgstr "Забули свій пароль?"
+
+#: accounts/templates/registration/password_change_done.html:6
+msgid "Password Changed"
+msgstr "Пароль змінено"
+
+#: accounts/templates/registration/password_change_done.html:11
+msgid "Password Changed Successfully"
+msgstr "Пароль успішно змінено"
+
+#: accounts/templates/registration/password_change_done.html:15
+msgid "Your password has been updated successfully."
+msgstr "Ваш пароль успішно оновлено."
+
+#: accounts/templates/registration/password_change_done.html:16
+msgid "Return to Homepage"
+msgstr "Повернутися на головну сторінку"
+
+#: accounts/templates/registration/password_change_form.html:7
+#: accounts/templates/registration/password_change_form.html:21
+#: accounts/templates/registration/password_reset_confirm.html:21
+#: main/templates/header.html:73
+msgid "Change Password"
+msgstr "Змінити пароль"
+
+#: accounts/templates/registration/password_change_form.html:12
+msgid "Change Your Password"
+msgstr "Змініть свій пароль"
+
+#: accounts/templates/registration/password_change_form.html:16
+msgid "Secure Your Account"
+msgstr "Захистіть свій акаунт"
+
+#: accounts/templates/registration/password_change_form.html:17
+msgid "Enter your current password and choose a new one."
+msgstr "Введіть свій поточний пароль і виберіть новий."
+
+#: accounts/templates/registration/password_reset_complete.html:6
+msgid "Password Reset Complete"
+msgstr "Скидання пароля завершено"
+
+#: accounts/templates/registration/password_reset_complete.html:11
+msgid "Password Reset Successful"
+msgstr "Скидання паролю успішне"
+
+#: accounts/templates/registration/password_reset_complete.html:12
+msgid "Your password has been reset successfully."
+msgstr "Ваш пароль успішно скинуто."
+
+#: accounts/templates/registration/password_reset_confirm.html:7
+#: accounts/templates/registration/password_reset_confirm.html:12
+msgid "Set a New Password"
+msgstr "Встановіть новий пароль"
+
+#: accounts/templates/registration/password_reset_confirm.html:16
+msgid "Create a New Password"
+msgstr "Створіть новий пароль"
+
+#: accounts/templates/registration/password_reset_confirm.html:17
+msgid "Enter your new password below."
+msgstr "Введіть свій новий пароль нижче."
+
+#: accounts/templates/registration/password_reset_done.html:6
+#: accounts/templates/registration/password_reset_done.html:11
+msgid "Check Your Email"
+msgstr "Перевірте свою електронну пошту"
+
+#: accounts/templates/registration/password_reset_done.html:12
+msgid ""
+"If an account exists with the email you entered, you will receive a password"
+" reset link."
+msgstr ""
+"Якщо акаунт існує з введеним вами електронною поштою, ви отримаєте посилання"
+" на скидання пароля."
+
+#: accounts/templates/registration/password_reset_done.html:13
+msgid "Back to Login"
+msgstr "Назад до входу"
+
+#: accounts/templates/registration/password_reset_form.html:7
+msgid "Reset Password"
+msgstr "Скинути пароль"
+
+#: accounts/templates/registration/password_reset_form.html:12
+msgid "Forgot Your Password?"
+msgstr "Забули свій пароль?"
+
+#: accounts/templates/registration/password_reset_form.html:16
+msgid "Reset Your Password"
+msgstr "Скиньте свій пароль"
+
+#: accounts/templates/registration/password_reset_form.html:17
+msgid "Enter your email, and we’ll send you a link to reset your password."
+msgstr ""
+"Введіть свій електронний лист, і ми надішлемо вам посилання, щоб скинути "
+"пароль."
+
+#: accounts/templates/registration/password_reset_form.html:21
+msgid "Send Reset Link"
+msgstr "Надіслати посилання на скидання"
+
+#: accounts/templates/registration/signup.html:7
+#: accounts/templates/registration/signup.html:12
+#: accounts/templates/registration/signup.html:22
+msgid "Create a New Account"
+msgstr "Створіть новий обліковий запис"
+
+#: accounts/templates/registration/signup.html:16
+msgid "Already have an account?"
+msgstr "Уже є акаунт?"
+
+#: accounts/templates/registration/signup.html:23
+msgid "Enter the following information to create a new account."
+msgstr "Введіть наступну інформацію, щоб створити новий обліковий запис."
+
+#: accounts/templates/registration/signup.html:27
+msgid "Register Account"
+msgstr "Зареєструйтесь"
+
+#: avatar/models.py:39
+#, python-format
+msgid "Complete %(value)s rides"
+msgstr "Завершіть %(value)s поїздок"
+
+#: avatar/models.py:41
+#, python-format
+msgid "Complete %(value)s bike rides"
+msgstr "Завершіть %(value)s велосипедних поїздок"
+
+#: avatar/models.py:43
+#, python-format
+msgid "Complete %(value)s scooter rides"
+msgstr "Завершіть %(value)s поїздок на самокаті"
+
+#: avatar/models.py:45
+#, python-format
+msgid "Spend %(value)s hours riding"
+msgstr "Витратити %(value)s"
+
+#: avatar/models.py:47
+#, python-format
+msgid "Spend €%(value)s"
+msgstr "Витратити €%(value)s"
+
+#: avatar/models.py:48
+msgid "Unknown condition"
+msgstr "Невідомий стан"
+
+#: booking/templates/booking_success.html:5
+msgid "Booking Successful"
+msgstr "Бронювання успішнe"
+
+#: booking/templates/booking_success.html:11
+msgid "Booking Successful!"
+msgstr "Бронювання успішнe!"
+
+#: booking/templates/booking_success.html:12
+msgid "Thank you for booking with"
+msgstr "Дякую за бронювання з"
+
+#: booking/templates/booking_success.html:12
+msgid "Your booking has been confirmed."
+msgstr "Ваше бронювання було підтверджено."
+
+#: booking/templates/booking_success.html:15
+msgid "Return to Home"
+msgstr "Повернутись на головну"
+
+#: booking/templates/booking_success.html:18
+msgid "Find Your Way"
+msgstr "Знайдіть свій шлях"
+
+#: booking/templates/rental_booking.html:4
+#: booking/templates/rental_booking.html:10
+msgid "Rent"
+msgstr "Оренда"
+
+#: booking/templates/rental_booking.html:13
+msgid "Price per hour"
+msgstr "Ціна на годину"
+
+#: booking/templates/rental_booking.html:14
+msgid "Total amount"
+msgstr "Загальна сума"
+
+#: booking/templates/rental_booking.html:18
+msgid "Your subscription"
+msgstr "Ваша підписка"
+
+#: booking/templates/rental_booking.html:24
+#: booking/templates/subscription_booking.html:17
+msgid "Enter voucher code"
+msgstr "Введіть код ваучера"
+
+#: booking/templates/rental_booking.html:25
+#: booking/templates/subscription_booking.html:18
+msgid "Apply"
+msgstr "Застосовувати"
+
+#: booking/templates/rental_booking.html:33
+msgid "Number of Hours"
+msgstr "Кількість годин"
+
+#: booking/templates/rental_booking.html:38
+#: booking/templates/subscription_booking.html:26
+#: booking/templates/top_up_wallet.html:22
+msgid "Choose Payment Method"
+msgstr "Виберіть метод оплати"
+
+#: booking/templates/rental_booking.html:53
+#: booking/templates/subscription_booking.html:30
+#: booking/templates/top_up_wallet.html:26
+msgid "Stripe"
+msgstr "Stripe"
+
+#: booking/templates/rental_booking.html:57
+#: booking/templates/subscription_booking.html:34
+#: booking/templates/top_up_wallet.html:30
+msgid "Paypal"
+msgstr "Paypal"
+
+#: booking/templates/rental_booking.html:67 main/templates/home.html:13
+msgid "Rent Now"
+msgstr "Орендувати зараз"
+
+#: booking/templates/subscription_booking.html:4
+#: subscriptions/templates/plans.html:27
+msgid "Subscribe"
+msgstr "Підписатися"
+
+#: booking/templates/subscription_booking.html:10
+msgid "Subscribe to"
+msgstr "Підписатися на"
+
+#: booking/templates/subscription_booking.html:13
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1863
+msgid "Duration"
+msgstr "Тривалість"
+
+#: booking/templates/subscription_booking.html:14
+#: booking/templates/top_up_wallet.html:14
+msgid "Price"
+msgstr "Ціна"
+
+#: booking/templates/subscription_booking.html:44
+#: booking/templates/top_up_wallet.html:34
+msgid "Proceed to Pay"
+msgstr "Перейти до оплати"
+
+#: booking/templates/top_up_wallet.html:4 main/templates/header.html:68
+msgid "Top Up"
+msgstr "Поповнити"
+
+#: booking/templates/top_up_wallet.html:10
+msgid "Top up your wallet"
+msgstr "Поповнити свій гаманець"
+
+#: booking/templates/top_up_wallet.html:13
+msgid "Current balance"
+msgstr "Поточний баланс"
+
+#: booking/templates/top_up_wallet.html:18
+msgid "Top up amount"
+msgstr "Сума поповнення"
+
+#: careers/templates/careers.html:5
+msgid "Careers at GoRide"
+msgstr "Кар'єра в Goride"
+
+#: careers/templates/careers.html:70
+msgid "Join the GoRide Team!"
+msgstr "Приєднуйтесь до команди Goride!"
+
+#: careers/templates/careers.html:71
+msgid ""
+"We’re a small student startup with big dreams. Help us make urban travel "
+"greener and more fun!"
+msgstr ""
+"Ми маленький студентський стартап з великими мріями. Допоможіть нам зробити "
+"міські подорожі зеленішими та веселішими!"
+
+#: careers/templates/careers.html:78
+msgid "Why Work With Us?"
+msgstr "Навіщо працювати з нами?"
+
+#: careers/templates/careers.html:80
+msgid ""
+"GoRide was started by two Ukrainian students, Alex and Oleksandr, with a "
+"mission to transform urban mobility. We’re passionate about sustainability, "
+"innovation, and having a good time while we’re at it. Join us to be part of "
+"a fun, young team that’s making a real difference in Dublin!"
+msgstr ""
+"GoRide був запущений двома українськими студентами, Алексом та Олександром, з"
+" місією перетворення міської мобільності.Ми захоплюємося стійкістю, "
+"інноваціями та добре провести час, поки ми на цьому.Приєднуйтесь до нас, щоб"
+" стати частиною веселощів, молода команда, яка реально змінює Дубліна!"
+
+#: careers/templates/careers.html:83
+msgid ""
+"We might be small now, but we’re dreaming big. If you love tech, green "
+"solutions, or just want to work with two guys who code while eating borscht,"
+" we’d love to hear from you!"
+msgstr ""
+"Зараз ми можемо бути маленькими, але мріємо великі.Якщо ви любите "
+"технології, зелені рішення або просто хочете працювати з двома хлопцями, які"
+" кодують під час поїдання борщу, ми хотіли б почути від вас!"
+
+#: careers/templates/careers.html:88
+msgid "Apply Now"
+msgstr "Подайте заявку зараз"
+
+#: careers/templates/careers.html:92
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:14
+msgid "First Name"
+msgstr "Ім'я"
+
+#: careers/templates/careers.html:96
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:15
+msgid "Last Name"
+msgstr "Прізвище"
+
+#: careers/templates/careers.html:100 main/templates/contacts.html:62
+msgid "Email Address"
+msgstr "Електронна адреса"
+
+#: careers/templates/careers.html:108
+msgid "Desired Position"
+msgstr "Бажана посада"
+
+#: careers/templates/careers.html:112
+msgid "Tell Us About Yourself"
+msgstr "Розкажіть про себе"
+
+#: careers/templates/careers.html:116
+msgid "Upload Resume (optional)"
+msgstr "Завантажити резюме (необов’язково)"
+
+#: careers/templates/careers.html:119
+msgid "Submit Application"
+msgstr "Подайте заявку"
+
+#: careers/templates/careers.html:128
+msgid "Ready to Make a Difference?"
+msgstr "Готові змінити?"
+
+#: careers/templates/careers.html:129
+msgid ""
+"We can’t wait to meet you! Submit your application, and let’s build a "
+"greener future together."
+msgstr ""
+"Ми не можемо дочекатися , щоб зустрітися з вами! Надішліть свою заявку, і давайте разом"
+" побудуємо зелене майбутнє."
+
+#: careers/templates/careers_thank_you.html:5
+#: careers/templates/careers_thank_you.html:49
+msgid "Thank You for Applying!"
+msgstr "Дякуємо за подання заявки!"
+
+#: careers/templates/careers_thank_you.html:51
+msgid ""
+"We’ve received your application and are super excited to learn more about "
+"you! Alex and Oleksandr will take a look soon – probably over a bowl of "
+"borscht. We’ll get back to you as soon as we can."
+msgstr ""
+"Ми отримали вашу заявку і дуже раді дізнатися більше про вас! Алекс і "
+"Олександр незабаром поглянуть - напевно, за мискою Борщу. Ми зв’яжемося з"
+" вами, як тільки зможемо."
+
+#: careers/templates/careers_thank_you.html:60
+msgid "Explore GoRide While You Wait"
+msgstr "Досліджуйте GoRide, поки ви чекаєте"
+
+#: careers/templates/careers_thank_you.html:61
+msgid ""
+"Why not take a ride on one of our electric bikes or scooters? It’s the best "
+"way to get around Dublin!"
+msgstr ""
+"Чому б не покататися на одному з наших електричних велосипедів чи "
+"самокатів? Це найкращий спосіб оглянути Дублін!"
+
+#: careers/templates/careers_thank_you.html:62 main/templates/about.html:75
+msgid "Start Riding Now"
+msgstr "Почніть кататися зараз"
+
+#: env/lib/python3.13/site-packages/click/_termui_impl.py:556
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr "{editor}: Редагування не вдалося"
+
+#: env/lib/python3.13/site-packages/click/_termui_impl.py:560
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr "{editor}: Редагування не вдалося: {e}"
+
+#: env/lib/python3.13/site-packages/click/core.py:1124
+msgid "Aborted!"
+msgstr "Аборт!"
+
+#: env/lib/python3.13/site-packages/click/core.py:1349
+#: env/lib/python3.13/site-packages/click/core.py:1379
+#, python-brace-format
+msgid "(Deprecated) {text}"
+msgstr "(Застарілий) {text}"
+
+#: env/lib/python3.13/site-packages/click/core.py:1396
+msgid "Options"
+msgstr "Варіанти"
+
+#: env/lib/python3.13/site-packages/click/core.py:1422
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/core.py:1438
+msgid "DeprecationWarning: The command {name!r} is deprecated."
+msgstr "AmberationWarning: команда {name!r} застаріла."
+
+#: env/lib/python3.13/site-packages/click/core.py:1645
+msgid "Commands"
+msgstr "Командування"
+
+#: env/lib/python3.13/site-packages/click/core.py:1677
+msgid "Missing command."
+msgstr "Відсутня команда."
+
+#: env/lib/python3.13/site-packages/click/core.py:1755
+msgid "No such command {name!r}."
+msgstr "Немає такої команди {name!r}."
+
+#: env/lib/python3.13/site-packages/click/core.py:2313
+msgid "Value must be an iterable."
+msgstr "Значення повинно бути ітером."
+
+#: env/lib/python3.13/site-packages/click/core.py:2334
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/core.py:2783
+#, python-brace-format
+msgid "env var: {var}"
+msgstr "env var: {var}"
+
+#: env/lib/python3.13/site-packages/click/core.py:2813
+msgid "(dynamic)"
+msgstr "(Динаміка)"
+
+#: env/lib/python3.13/site-packages/click/core.py:2828
+#, python-brace-format
+msgid "default: {default}"
+msgstr "default: {default}"
+
+#: env/lib/python3.13/site-packages/click/core.py:2841
+msgid "required"
+msgstr "необхідний"
+
+#: env/lib/python3.13/site-packages/click/decorators.py:457
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr "%(prog)s, версія %(version)s"
+
+#: env/lib/python3.13/site-packages/click/decorators.py:520
+msgid "Show the version and exit."
+msgstr "Покажіть версію та вихід."
+
+#: env/lib/python3.13/site-packages/click/decorators.py:541
+msgid "Show this message and exit."
+msgstr "Покажіть це повідомлення та вихід."
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:49
+#: env/lib/python3.13/site-packages/click/exceptions.py:88
+#, python-brace-format
+msgid "Error: {message}"
+msgstr "Помилка: {message}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:80
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr "Спробуйте '{command} {option}' для допомоги."
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:129
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr "Недійсне значення: {message}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:131
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr "Недійсне значення для {param_hint}: {message}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:187
+msgid "Missing argument"
+msgstr "Відсутній аргумент"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:189
+msgid "Missing option"
+msgstr "Відсутній варіант"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:191
+msgid "Missing parameter"
+msgstr "Відсутній параметр"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:193
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr "Відсутність {param_type}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:200
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr "Відсутній параметр: {param_name}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:220
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr "Немає такого варіанту: {name}"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:232
+#, python-brace-format
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:270
+msgid "unknown error"
+msgstr "Невідома помилка"
+
+#: env/lib/python3.13/site-packages/click/exceptions.py:277
+msgid "Could not open file {filename!r}: {message}"
+msgstr "Не вдалося відкрити файл {filename!r}: {message}"
+
+#: env/lib/python3.13/site-packages/click/formatting.py:156
+msgid "Usage:"
+msgstr "Використання:"
+
+#: env/lib/python3.13/site-packages/click/parser.py:233
+msgid "Argument {name!r} takes {nargs} values."
+msgstr "Аргумент {name!r} приймає {nargs} значення."
+
+#: env/lib/python3.13/site-packages/click/parser.py:415
+msgid "Option {name!r} does not take a value."
+msgstr "Варіант {name!r} не бере значення."
+
+#: env/lib/python3.13/site-packages/click/parser.py:476
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/shell_completion.py:326
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr "Завершення оболонки не підтримується для версій Bash старше 4,4."
+
+#: env/lib/python3.13/site-packages/click/shell_completion.py:333
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr "Не вдалося виявити версію Bash, завершення Shell не підтримується."
+
+#: env/lib/python3.13/site-packages/click/termui.py:158
+msgid "Repeat for confirmation"
+msgstr "Повторіть для підтвердження"
+
+#: env/lib/python3.13/site-packages/click/termui.py:174
+msgid "Error: The value you entered was invalid."
+msgstr "Помилка: значення, яке ви ввели, було недійсним."
+
+#: env/lib/python3.13/site-packages/click/termui.py:176
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr "Помилка: {e.message}"
+
+#: env/lib/python3.13/site-packages/click/termui.py:187
+msgid "Error: The two entered values do not match."
+msgstr "Помилка: Два введені значення не відповідають."
+
+#: env/lib/python3.13/site-packages/click/termui.py:243
+msgid "Error: invalid input"
+msgstr "Помилка: недійсний вхід"
+
+#: env/lib/python3.13/site-packages/click/termui.py:773
+msgid "Press any key to continue..."
+msgstr "Натисніть будь -яку клавішу, щоб продовжити ..."
+
+#: env/lib/python3.13/site-packages/click/types.py:267
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+"Виберіть з:\n"
+"{choices}"
+
+#: env/lib/python3.13/site-packages/click/types.py:299
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/types.py:393
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/click/types.py:415
+msgid "{value!r} is not a valid {number_type}."
+msgstr "{value! r} - це не дійсне {number_type}."
+
+#: env/lib/python3.13/site-packages/click/types.py:471
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr "{value} не в діапазоні {range}."
+
+#: env/lib/python3.13/site-packages/click/types.py:612
+msgid "{value!r} is not a valid boolean."
+msgstr "{value!r} - це не дійсне булін значення."
+
+#: env/lib/python3.13/site-packages/click/types.py:636
+msgid "{value!r} is not a valid UUID."
+msgstr "{value!r} - це не дійсне uuid."
+
+#: env/lib/python3.13/site-packages/click/types.py:826
+msgid "file"
+msgstr "файл"
+
+#: env/lib/python3.13/site-packages/click/types.py:828
+msgid "directory"
+msgstr "каталог"
+
+#: env/lib/python3.13/site-packages/click/types.py:830
+msgid "path"
+msgstr "шлях"
+
+#: env/lib/python3.13/site-packages/click/types.py:881
+msgid "{name} {filename!r} does not exist."
+msgstr "{name} {filename!r} не існує."
+
+#: env/lib/python3.13/site-packages/click/types.py:890
+msgid "{name} {filename!r} is a file."
+msgstr "{name} {filename!r} - це файл."
+
+#: env/lib/python3.13/site-packages/click/types.py:898
+msgid "{name} {filename!r} is a directory."
+msgstr "{name} {filename!r} - це каталог."
+
+#: env/lib/python3.13/site-packages/click/types.py:907
+msgid "{name} {filename!r} is not readable."
+msgstr "{name} {filename!r} не читається."
+
+#: env/lib/python3.13/site-packages/click/types.py:916
+msgid "{name} {filename!r} is not writable."
+msgstr "{name} {filename!r} не зачиняється."
+
+#: env/lib/python3.13/site-packages/click/types.py:925
+msgid "{name} {filename!r} is not executable."
+msgstr "{name} {filename!r} не виконується."
+
+#: env/lib/python3.13/site-packages/click/types.py:992
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/contrib/messages/apps.py:16
+msgid "Messages"
+msgstr "Повідомлення"
+
+#: env/lib/python3.13/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr "Карти сайтів"
+
+#: env/lib/python3.13/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr "Статичні файли"
+
+#: env/lib/python3.13/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr "Синдикація"
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: env/lib/python3.13/site-packages/django/core/paginator.py:30
+msgid "…"
+msgstr "..."
+
+#: env/lib/python3.13/site-packages/django/core/paginator.py:32
+msgid "That page number is not an integer"
+msgstr "Цей номер сторінки не є цілим числом"
+
+#: env/lib/python3.13/site-packages/django/core/paginator.py:33
+msgid "That page number is less than 1"
+msgstr "Цей номер сторінки менше 1"
+
+#: env/lib/python3.13/site-packages/django/core/paginator.py:34
+msgid "That page contains no results"
+msgstr "Ця сторінка не містить результатів"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr "Введіть дійсне значення."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:70
+msgid "Enter a valid domain name."
+msgstr "Введіть дійсне доменне ім’я."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:155
+#: env/lib/python3.13/site-packages/django/forms/fields.py:768
+msgid "Enter a valid URL."
+msgstr "Введіть дійсну URL -адресу."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:216
+msgid "Enter a valid integer."
+msgstr "Введіть дійсне ціле число."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:227
+msgid "Enter a valid email address."
+msgstr "Введіть дійсну електронну адресу."
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: env/lib/python3.13/site-packages/django/core/validators.py:310
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+"Введіть дійсну «слиз», що складається з букв, цифр, підкреслень або дефісів."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:318
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or"
+" hyphens."
+msgstr ""
+"Введіть дійсну «слиз», що складається з букв Unicode, чисел, підкреслень або"
+" дефісів."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:330
+#: env/lib/python3.13/site-packages/django/core/validators.py:339
+#: env/lib/python3.13/site-packages/django/core/validators.py:353
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2215
+#, python-format
+msgid "Enter a valid %(protocol)s address."
+msgstr "Введіть дійсну адресу %(protocol)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:332
+msgid "IPv4"
+msgstr "Ipv4"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:341
+#: env/lib/python3.13/site-packages/django/utils/ipv6.py:43
+msgid "IPv6"
+msgstr "Ipv6"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:355
+msgid "IPv4 or IPv6"
+msgstr "IPv4 або IPv6"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:396
+msgid "Enter only digits separated by commas."
+msgstr "Введіть лише цифри, розділені коми."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:402
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+"Переконайтесь, що це значення становить %(limit_value)s (це %(show_value)s.)"
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:437
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr "Переконайтесь, що це значення менше або дорівнює %(limit_value)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:446
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+"Переконайтесь, що це значення перевищує або дорівнює %(limit_value)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:455
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+"Переконайтесь, що це значення є кратним розміром кроку %(limit_value)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:462
+#, python-format
+msgid ""
+"Ensure this value is a multiple of step size %(limit_value)s, starting from "
+"%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
+msgstr ""
+"Переконайтесь, що це значення є кратним розміром кроку %(limit_value)s, "
+"починаючи з %(offset)s, наприклад %(offset)s, %(valid_value1)s, "
+"%(valid_value2)s тощо."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:494
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:512
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:535
+#: env/lib/python3.13/site-packages/django/forms/fields.py:359
+#: env/lib/python3.13/site-packages/django/forms/fields.py:398
+msgid "Enter a number."
+msgstr "Введіть номер."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:537
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:542
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:547
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:618
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+"Розширення файлу “%(extension)s” заборонено.Дозволені розширення: "
+"%(allowed_extensions)s."
+
+#: env/lib/python3.13/site-packages/django/core/validators.py:680
+msgid "Null characters are not allowed."
+msgstr "Нульові символи заборонені."
+
+#: env/lib/python3.13/site-packages/django/db/models/base.py:1572
+#: env/lib/python3.13/site-packages/django/forms/models.py:908
+msgid "and"
+msgstr "і"
+
+#: env/lib/python3.13/site-packages/django/db/models/base.py:1574
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr "%(model_name) s з цим %(field_labels) s вже існує."
+
+#: env/lib/python3.13/site-packages/django/db/models/constraints.py:22
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr "Обмеження “%(name)s” порушується."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:134
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr "Значення %(value)r - це не дійсне вибір."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:135
+msgid "This field cannot be null."
+msgstr "Це поле не може бути нульовим."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:136
+msgid "This field cannot be blank."
+msgstr "Це поле не може бути порожнім."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:137
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr "%(model_name) s з цим %(field_label) s вже існує."
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:141
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+"%(field_label) s повинен бути унікальним для %(date_field_label) s "
+"%(lookup_type) s."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:180
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr "Поле типу: %(field_type)s"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1156
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr "Значення “%(value) s” повинно бути правдивим, або помилковим."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1157
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+"Значення “%(value) s” повинно бути правдивим, помилковим, або жодним."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1159
+msgid "Boolean (Either True or False)"
+msgstr "Булевий (правдивий, або хибний)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1209
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr "Рядок (до %(max_length) s)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1211
+msgid "String (unlimited)"
+msgstr "Рядок (необмежений)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1320
+msgid "Comma-separated integers"
+msgstr "Цілі числа, розділені комами"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1421
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+"Значення “%(value) s” має недійсне формат дати.Він повинен бути у форматі"
+" yyyy-mm-dd."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1425
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1560
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+"Значення “%(value)s” має правильний формат (yyyy-mm-dd), але це "
+"недійсна дата."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1429
+msgid "Date (without time)"
+msgstr "Дата (без часу)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1556
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+"Значення “%(value)s” має недійсний формат.Він повинен бути в yyyy-mm-dd "
+"hh: mm [: ss [.uuuuuu]] [tz] формат."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1564
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ]) but it is an invalid date/time."
+msgstr ""
+"Значення “%(value)s” має правильний формат (yyyy-mm-dd hh: mm [: ss "
+"[.uuuuuu]] [tz]), але це недійсна дата/час."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1569
+msgid "Date (with time)"
+msgstr "Дата (з часом)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1696
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr "Значення “%(value) s” повинно бути десятковим числом."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1698
+msgid "Decimal number"
+msgstr "Десятковий номер"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1859
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+"value “%(value) s” має недійсний формат.Він повинен бути у [dd] [[hh:]"
+" mm:] ss [.uuuuuu] формат."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1915
+msgid "Email address"
+msgstr "Електронна адреса"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:1940
+msgid "File path"
+msgstr "Файловий шлях"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2018
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr "value “%(value) s” повинно бути поплавком."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2020
+msgid "Floating point number"
+msgstr "Номер плаваючої точки"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2060
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr "value “%(value) s” повинно бути цілим числом."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2062
+msgid "Integer"
+msgstr "Ціле число"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2158
+msgid "Big (8 byte) integer"
+msgstr "Велике (8 байт) ціле число"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2175
+msgid "Small integer"
+msgstr "Невелике ціле число"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2183
+msgid "IPv4 address"
+msgstr "IPv4 адреса"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2214
+msgid "IP address"
+msgstr "IP -адреса"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2305
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2306
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+"value “%(value) s” повинно бути або жодним, правдивим, або помилковим."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2308
+msgid "Boolean (Either True, False or None)"
+msgstr "Булева (правда, помилкова або жодна)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2359
+msgid "Positive big integer"
+msgstr "Позитивне велике ціле число"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2374
+msgid "Positive integer"
+msgstr "Позитивне ціле число"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2389
+msgid "Positive small integer"
+msgstr "Позитивне малий ціле число"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2405
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr "Slug (до %(max_length) s)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2441
+msgid "Text"
+msgstr "Текст"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2521
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+"value “%(value) s” має недійсний формат.Він повинен бути в hh: mm [: "
+"ss [.uuuuuu]] формат."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2525
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+"value “%(value) s” має правильний формат (hh: mm [: ss [.uuuuuu]]), "
+"але це недійсний час."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2529
+msgid "Time"
+msgstr "Час"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2637
+msgid "URL"
+msgstr "URL"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2661
+msgid "Raw binary data"
+msgstr "Сирі двійкові дані"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2726
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr "“%(value)s” не є дійсним UUID."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/__init__.py:2728
+msgid "Universally unique identifier"
+msgstr "Універсально унікальний ідентифікатор"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/files.py:244
+msgid "File"
+msgstr "Файл"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/files.py:420
+msgid "Image"
+msgstr "Зображення"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/json.py:24
+msgid "A JSON object"
+msgstr "Об'єкт JSON"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/json.py:26
+msgid "Value must be valid JSON."
+msgstr "value повинно бути дійсним JSON."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:932
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr "%(model)s екземпляр із %(field)s %(value)r не існує."
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:934
+msgid "Foreign Key (type determined by related field)"
+msgstr "Іноземний ключ (тип, визначений спорідненим полем)"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:1228
+msgid "One-to-one relationship"
+msgstr "Відносини один на один"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:1285
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr "%(from)s-%(to)s"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:1287
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr "%(from)s-%(to)s"
+
+#: env/lib/python3.13/site-packages/django/db/models/fields/related.py:1335
+msgid "Many-to-many relationship"
+msgstr "Багато-багато стосунків"
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the
+#. label
+#: env/lib/python3.13/site-packages/django/forms/boundfield.py:185
+msgid ":?.!"
+msgstr ":?"
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:95
+msgid "This field is required."
+msgstr "Це поле потрібно."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:308
+msgid "Enter a whole number."
+msgstr "Введіть цілий номер."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:479
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1260
+msgid "Enter a valid date."
+msgstr "Введіть дійсну дату."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:502
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1261
+msgid "Enter a valid time."
+msgstr "Введіть дійсний час."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:529
+msgid "Enter a valid date/time."
+msgstr "Введіть дійсну дату/час."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:563
+msgid "Enter a valid duration."
+msgstr "Введіть дійсну тривалість."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:564
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr "Кількість днів повинна бути між {min_days} та {max_days}."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:633
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr "Файлу не було подано.Перевірте тип кодування на формі."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:634
+msgid "No file was submitted."
+msgstr "Файлу не було подано."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:635
+msgid "The submitted file is empty."
+msgstr "Поданий файл порожній."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:637
+#, python-format
+msgid ""
+"Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:642
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+"Будь ласка, надішліть файл, або встановіть прапорець Clear, а не обидва."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:710
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+"Завантажте дійсне зображення.Файл, який ви завантажили, не був або "
+"зображенням, або пошкодженим зображенням."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:882
+#: env/lib/python3.13/site-packages/django/forms/fields.py:968
+#: env/lib/python3.13/site-packages/django/forms/models.py:1592
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+"Виберіть дійсний вибір. %(value)s - це не один із доступних варіантів."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:970
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1089
+#: env/lib/python3.13/site-packages/django/forms/models.py:1590
+msgid "Enter a list of values."
+msgstr "Введіть список значень."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1090
+msgid "Enter a complete value."
+msgstr "Введіть повне value."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1332
+msgid "Enter a valid UUID."
+msgstr "Введіть дійсну uuid."
+
+#: env/lib/python3.13/site-packages/django/forms/fields.py:1362
+msgid "Enter a valid JSON."
+msgstr "Введіть дійсний JSON."
+
+#. Translators: This is the default suffix added to form field labels
+#: env/lib/python3.13/site-packages/django/forms/forms.py:94
+msgid ":"
+msgstr ":"
+
+#: env/lib/python3.13/site-packages/django/forms/forms.py:230
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr "(Приховане поле %(name)s) %(error)s"
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:61
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+"Дані FormForm відсутні або були підроблені.Відсутні поля: %(field_names)s. "
+"Можливо, вам знадобиться подати звіт про помилку, якщо проблема "
+"зберігається."
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:65
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:70
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:484
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:491
+msgid "Order"
+msgstr "Наказ"
+
+#: env/lib/python3.13/site-packages/django/forms/formsets.py:499
+msgid "Delete"
+msgstr "Видаляти"
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:901
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr "Будь ласка, виправте дублікат даних для %(field)s."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:906
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+"Будь ласка, виправте дублікат даних для %(field)s, які повинні бути "
+"унікальними."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:913
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+"Будь ласка, виправте дублікат даних для %(field_name)s, які повинні бути "
+"унікальними для %(lookup)s у %(date_field)s."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:922
+msgid "Please correct the duplicate values below."
+msgstr "Будь ласка, виправте повторні значення нижче."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:1359
+msgid "The inline value did not match the parent instance."
+msgstr "Вбудоване значення не відповідало батьківському екземплярі."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:1450
+msgid ""
+"Select a valid choice. That choice is not one of the available choices."
+msgstr "Виберіть дійсний вибір.Цей вибір не є одним із доступних варіантів."
+
+#: env/lib/python3.13/site-packages/django/forms/models.py:1594
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr "“%(pk)s” не є дійсним значенням."
+
+#: env/lib/python3.13/site-packages/django/forms/utils.py:227
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+"%(datetime)s не можна інтерпретувати у часовому поясі %(current_timezone)s"
+";Це може бути неоднозначним або може не існувати."
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:461
+msgid "Clear"
+msgstr "Чіткий"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:462
+msgid "Currently"
+msgstr "В даний час"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:463
+msgid "Change"
+msgstr "Зміна"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:800
+msgid "Unknown"
+msgstr "Невідомий"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:801
+msgid "Yes"
+msgstr "Так"
+
+#: env/lib/python3.13/site-packages/django/forms/widgets.py:802
+msgid "No"
+msgstr "Ні"
+
+#. Translators: Please do not add spaces around commas.
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:873
+msgid "yes,no,maybe"
+msgstr "Так, ні, можливо"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:903
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:920
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:922
+#, python-format
+msgid "%s KB"
+msgstr "%s kb"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:924
+#, python-format
+msgid "%s MB"
+msgstr "%s mb"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:926
+#, python-format
+msgid "%s GB"
+msgstr "%s gb"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:928
+#, python-format
+msgid "%s TB"
+msgstr "%s tb"
+
+#: env/lib/python3.13/site-packages/django/template/defaultfilters.py:930
+#, python-format
+msgid "%s PB"
+msgstr "%s PB"
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:74
+msgid "p.m."
+msgstr "П."
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:75
+msgid "a.m."
+msgstr "О."
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:80
+msgid "PM"
+msgstr "Вечора"
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:81
+msgid "AM"
+msgstr "Амор"
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:153
+msgid "midnight"
+msgstr "опівночі"
+
+#: env/lib/python3.13/site-packages/django/utils/dateformat.py:155
+msgid "noon"
+msgstr "полудень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:7
+#: env/lib/python3.13/site-packages/tornado/locale.py:295
+msgid "Monday"
+msgstr "Понеділок"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:8
+#: env/lib/python3.13/site-packages/tornado/locale.py:296
+msgid "Tuesday"
+msgstr "У вівторок"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:9
+#: env/lib/python3.13/site-packages/tornado/locale.py:297
+msgid "Wednesday"
+msgstr "Середа"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:10
+#: env/lib/python3.13/site-packages/tornado/locale.py:298
+msgid "Thursday"
+msgstr "Четвер"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:11
+#: env/lib/python3.13/site-packages/tornado/locale.py:299
+msgid "Friday"
+msgstr "П’ятниця"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:12
+#: env/lib/python3.13/site-packages/tornado/locale.py:300
+msgid "Saturday"
+msgstr "Субота"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:13
+#: env/lib/python3.13/site-packages/tornado/locale.py:301
+msgid "Sunday"
+msgstr "Неділя"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:16
+msgid "Mon"
+msgstr "Мн"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:17
+msgid "Tue"
+msgstr "Зміст"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:18
+msgid "Wed"
+msgstr "Одружуватися"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:19
+msgid "Thu"
+msgstr "Чт"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:20
+msgid "Fri"
+msgstr "Пт"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:21
+msgid "Sat"
+msgstr "Сидіти"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:22
+msgid "Sun"
+msgstr "Сонце"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:25
+#: env/lib/python3.13/site-packages/tornado/locale.py:281
+msgid "January"
+msgstr "Січень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:26
+#: env/lib/python3.13/site-packages/tornado/locale.py:282
+msgid "February"
+msgstr "Лютий"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:27
+#: env/lib/python3.13/site-packages/tornado/locale.py:283
+msgid "March"
+msgstr "Марш"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:28
+#: env/lib/python3.13/site-packages/tornado/locale.py:284
+msgid "April"
+msgstr "Квітень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:29
+#: env/lib/python3.13/site-packages/tornado/locale.py:285
+msgid "May"
+msgstr "Травень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:30
+#: env/lib/python3.13/site-packages/tornado/locale.py:286
+msgid "June"
+msgstr "Червень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:31
+#: env/lib/python3.13/site-packages/tornado/locale.py:287
+msgid "July"
+msgstr "Липень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:32
+#: env/lib/python3.13/site-packages/tornado/locale.py:288
+msgid "August"
+msgstr "Серпень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:33
+#: env/lib/python3.13/site-packages/tornado/locale.py:289
+msgid "September"
+msgstr "Вересень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:34
+#: env/lib/python3.13/site-packages/tornado/locale.py:290
+msgid "October"
+msgstr "Жовтень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:35
+#: env/lib/python3.13/site-packages/tornado/locale.py:291
+msgid "November"
+msgstr "Листопад"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:36
+#: env/lib/python3.13/site-packages/tornado/locale.py:292
+msgid "December"
+msgstr "Грудень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:39
+msgid "jan"
+msgstr "ян"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:40
+msgid "feb"
+msgstr "лютий"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:41
+msgid "mar"
+msgstr "марнотратство"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:42
+msgid "apr"
+msgstr "квітня"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:43
+msgid "may"
+msgstr "травень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:44
+msgid "jun"
+msgstr "червень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:45
+msgid "jul"
+msgstr "липень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:46
+msgid "aug"
+msgstr "серпень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:47
+msgid "sep"
+msgstr "сеп"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:48
+msgid "oct"
+msgstr "жовт"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:49
+msgid "nov"
+msgstr "листопада"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:50
+msgid "dec"
+msgstr "ухвала"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr "Січень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr "Лютий"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr "Марш"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr "Квітень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr "Травень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr "Червень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr "Липень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr "Серпня"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr "Вересень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr "Жовт"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr "Листопад"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr "Грудень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr "Січень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr "Лютий"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr "Марш"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr "Квітень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr "Травень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr "Червень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr "Липень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr "Серпень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr "Вересень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr "Жовтень"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr "Листопад"
+
+#: env/lib/python3.13/site-packages/django/utils/dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr "Грудень"
+
+#: env/lib/python3.13/site-packages/django/utils/ipv6.py:20
+msgid "This is not a valid IPv6 address."
+msgstr "Це не дійсна адреса IPv6."
+
+#: env/lib/python3.13/site-packages/django/utils/text.py:75
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr "%(truncated_text)s…"
+
+#: env/lib/python3.13/site-packages/django/utils/text.py:286
+msgid "or"
+msgstr "або"
+
+#. Translators: This string is used as a separator between list elements
+#: env/lib/python3.13/site-packages/django/utils/text.py:305
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:135
+msgid ", "
+msgstr ","
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:29
+msgid "Forbidden"
+msgstr "Заборонений"
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:30
+msgid "CSRF verification failed. Request aborted."
+msgstr "Помилка перевірки CSRF.Прохання про аборт."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:34
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+"Ви бачите це повідомлення, оскільки цей веб -сайт HTTPS вимагає \"заголовка "
+"рефератора\", який надсилає ваш веб -браузер, але жоден не був "
+"надісланий.Цей заголовок необхідний з міркувань безпеки, щоб переконатися, "
+"що ваш браузер не викрадається третіми сторонами."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:40
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+"Якщо ви налаштували свій браузер для відключення заголовків \"рефератора\", "
+"будь ласка, повторно їх, принаймні для цього сайту, або для підключень "
+"HTTPS, або для запитів \"одного походження\"."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:45
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or"
+" including the “Referrer-Policy: no-referrer” header, please remove them. "
+"The CSRF protection requires the “Referer” header to do strict referer "
+"checking. If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+"Якщо ви використовуєте тег <meta name = \"Referrer\" = \"no-referrer\"> "
+"включати заголовка \"реферер-поліція: без реферер\", будь ласка, видаліть "
+"їх.Захист від CSRF вимагає, щоб заголовки \"референта\" виконували сувору "
+"перевірку рефератів.Якщо ви стурбовані конфіденційністю, використовуйте такі"
+" альтернативи, як <a rel = \"noreferrer\" ...> для посилань на сторонні "
+"сайти."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:54
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+"Ви бачите це повідомлення, оскільки на цьому веб -сайті потрібні файли COCER"
+" CSRF під час подання форм.Цей файл cookie необхідний з міркувань безпеки, "
+"щоб переконатися, що ваш браузер не викрадається третіми сторонами."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:60
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+"Якщо ви налаштували свій браузер для відключення файлів cookie, будь ласка, "
+"повторно їх, принаймні для цього веб-сайту або для запитів \"одного "
+"походження\"."
+
+#: env/lib/python3.13/site-packages/django/views/csrf.py:66
+msgid "More information is available with DEBUG=True."
+msgstr "Більше інформації доступно з налагодженням = true."
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:44
+msgid "No year specified"
+msgstr "Жодного року не вказано"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:64
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:115
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:214
+msgid "Date out of range"
+msgstr "Дата поза діапазоном"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:94
+msgid "No month specified"
+msgstr "Не вказано місяць"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:147
+msgid "No day specified"
+msgstr "Жодного дня не вказано"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:194
+msgid "No week specified"
+msgstr "Жодного тижня не вказано"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:349
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr "Відсутність %(verbose_name_plural)s"
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+"Майбутній %(verbose_name_plural)s недоступний, оскільки %(class_name)s."
+".allow_future є помилковим."
+
+#: env/lib/python3.13/site-packages/django/views/generic/dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr "Недійсний рядок дати “%(datestr)s” заданий формат “%(format)s”"
+
+#: env/lib/python3.13/site-packages/django/views/generic/detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "Немає %(verbose_name)s знайдено відповідність запиту"
+
+#: env/lib/python3.13/site-packages/django/views/generic/list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr "Сторінка не є “last”, а також не може бути перетворена на Int."
+
+#: env/lib/python3.13/site-packages/django/views/generic/list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr "Недійсна сторінка ( %(page_number)s): %(message)s"
+
+#: env/lib/python3.13/site-packages/django/views/generic/list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr "Порожній список і “%(class_name) s.allow_empty” є помилковим."
+
+#: env/lib/python3.13/site-packages/django/views/static.py:49
+msgid "Directory indexes are not allowed here."
+msgstr "Індекси каталогів тут заборонені."
+
+#: env/lib/python3.13/site-packages/django/views/static.py:51
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr "“%(path)s” не існує"
+
+#: env/lib/python3.13/site-packages/django/views/static.py:68
+#: env/lib/python3.13/site-packages/django/views/templates/directory_index.html:8
+#: env/lib/python3.13/site-packages/django/views/templates/directory_index.html:11
+#, python-format
+msgid "Index of %(directory)s"
+msgstr "Індекс %(directory)s"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:7
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:204
+msgid "The install worked successfully! Congratulations!"
+msgstr "Установка працювала успішно!Вітаємо!"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:208
+#, python-format
+msgid ""
+"You are seeing this page because <a "
+"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
+"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> is in your settings file "
+"and you have not configured any URLs."
+msgstr ""
+"Ви бачите цю сторінку, тому що <a href = "
+"\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" target"
+" = \"_ blank\" rel = \"noopener\"> debug = true </a> у ваших налаштуваннях, "
+"і ви не налаштували жодних урлів."
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:217
+msgid "Django Documentation"
+msgstr "Документація Джанго"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:218
+msgid "Topics, references, &amp; how-to’s"
+msgstr "Теми, посилання, & amp;Hos-to"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:226
+msgid "Tutorial: A Polling App"
+msgstr "Підручник: додаток для опитування"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:227
+msgid "Get started with Django"
+msgstr "Почніть з Джанго"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:235
+msgid "Django Community"
+msgstr "Спільнота Джанго"
+
+#: env/lib/python3.13/site-packages/django/views/templates/default_urlconf.html:236
+msgid "Connect, get help, or contribute"
+msgstr "Підключитися, отримати допомогу або внести свій внесок"
+
+#: env/lib/python3.13/site-packages/kombu/transport/qpid.py:1311
+#, python-format
+msgid "Attempting to connect to qpid with SASL mechanism %s"
+msgstr "Спроба підключитися до QPID з механізмом SASL %s"
+
+#: env/lib/python3.13/site-packages/kombu/transport/qpid.py:1316
+#, python-format
+msgid "Connected to qpid with SASL mechanism %s"
+msgstr "Підключений до QPID з механізмом SASL %s"
+
+#: env/lib/python3.13/site-packages/kombu/transport/qpid.py:1334
+#, python-format
+msgid "Unable to connect to qpid with SASL mechanism %s"
+msgstr "Неможливо підключитися до QPID з механізмом SASL %s"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:110
+msgid "United States of America"
+msgstr "Сполучені Штати Америки"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:111
+msgid "Canada"
+msgstr "Канада"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:112
+msgid "Afghanistan"
+msgstr "Афганістан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:113
+msgid "Albania"
+msgstr "Албанія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:114
+msgid "Algeria"
+msgstr "Алжир"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:115
+msgid "American Samoa"
+msgstr "Американський Самоа"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:116
+msgid "Andorra"
+msgstr "Андорра"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:117
+msgid "Angola"
+msgstr "Ангола"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:118
+msgid "Anguilla"
+msgstr "Ангоя"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:119
+msgid "Antarctica"
+msgstr "Антарктида"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:120
+msgid "Antigua & Barbuda"
+msgstr "Антигуа та Барбуда"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:121
+msgid "Argentina"
+msgstr "Аргентина"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:122
+msgid "Armenia"
+msgstr "Вірменія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:123
+msgid "Aruba"
+msgstr "Аруба"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:124
+msgid "Australia"
+msgstr "Австралія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:125
+msgid "Austria"
+msgstr "Австрія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:126
+msgid "Azerbaijan"
+msgstr "Азербайджан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:127
+msgid "Bahama"
+msgstr "Багама"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:128
+msgid "Bahrain"
+msgstr "Бахрейн"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:129
+msgid "Bangladesh"
+msgstr "Бангладеш"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:130
+msgid "Barbados"
+msgstr "Барбадос"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:131
+msgid "Belarus"
+msgstr "Білорус"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:132
+msgid "Belgium"
+msgstr "Бельгія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:133
+msgid "Belize"
+msgstr "Белізувати"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:134
+msgid "Benin"
+msgstr "Бенін"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:135
+msgid "Bermuda"
+msgstr "Бермудські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:136
+msgid "Bhutan"
+msgstr "Бутан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:137
+msgid "Bolivia"
+msgstr "Болівія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:138
+msgid "Bosnia and Herzegovina"
+msgstr "Боснія та Герцеговина"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:139
+msgid "Botswana"
+msgstr "Ботсвана"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:140
+msgid "Bouvet Island"
+msgstr "Острів Бувет"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:141
+msgid "Brazil"
+msgstr "Бразилія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:142
+msgid "British Indian Ocean Territory"
+msgstr "Британська територія Індійського океану"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:143
+msgid "British Virgin Islands"
+msgstr "Британські Віргінські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:144
+msgid "Brunei Darussalam"
+msgstr "Бруней Даруссалам"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:145
+msgid "Bulgaria"
+msgstr "Болгарія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:146
+msgid "Burkina Faso"
+msgstr "Буркіна Фасо"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:147
+msgid "Burundi"
+msgstr "Бурунді"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:148
+msgid "Cambodia"
+msgstr "Камбоджа"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:149
+msgid "Cameroon"
+msgstr "Камерун"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:150
+msgid "Cape Verde"
+msgstr "КАПО ВЕРДЕ"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:151
+msgid "Cayman Islands"
+msgstr "Кайманські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:152
+msgid "Central African Republic"
+msgstr "Центральноафриканська республіка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:153
+msgid "Chad"
+msgstr "Чад"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:154
+msgid "Chile"
+msgstr "Чилі"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:155
+msgid "China"
+msgstr "Китай"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:156
+msgid "Christmas Island"
+msgstr "Різдвяний острів"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:157
+msgid "Cocos (Keeling) Islands"
+msgstr "Кокос (кілінг) острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:158
+msgid "Colombia"
+msgstr "Колумбія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:159
+msgid "Comoros"
+msgstr "Комор"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:160
+msgid "Congo"
+msgstr "Конго"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:161
+msgid "Cook Iislands"
+msgstr "Кухарські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:162
+msgid "Costa Rica"
+msgstr "Коста -Ріка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:163
+msgid "Croatia"
+msgstr "Хорватія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:164
+msgid "Cuba"
+msgstr "Куба"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:165
+msgid "Cyprus"
+msgstr "Кіпр"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:166
+msgid "Czech Republic"
+msgstr "Чехія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:167
+msgid "Denmark"
+msgstr "Данія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:168
+msgid "Djibouti"
+msgstr "Djibouti"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:169
+msgid "Dominica"
+msgstr "Домініка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:170
+msgid "Dominican Republic"
+msgstr "Домініканська Республіка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:171
+msgid "East Timor"
+msgstr "Східний Тимор"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:172
+msgid "Ecuador"
+msgstr "Еквадор"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:173
+msgid "Egypt"
+msgstr "Єгипет"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:174
+msgid "El Salvador"
+msgstr "Сальвадор"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:175
+msgid "Equatorial Guinea"
+msgstr "Екваторіальна морська"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:176
+msgid "Eritrea"
+msgstr "Еритрея"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:177
+msgid "Estonia"
+msgstr "Естонія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:178
+msgid "Ethiopia"
+msgstr "Ефіопія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:179
+msgid "Falkland Islands (Malvinas)"
+msgstr "Фолклендські острови (Мальвінас)"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:180
+msgid "Faroe Islands"
+msgstr "Фарерські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:181
+msgid "Fiji"
+msgstr "Фіджі"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:182
+msgid "Finland"
+msgstr "Фінляндія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:183
+msgid "France"
+msgstr "Франція"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:184
+msgid "France, Metropolitan"
+msgstr "Франція, мегаполіс"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:185
+msgid "French Guiana"
+msgstr "Французька Гвіана"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:186
+msgid "French Polynesia"
+msgstr "Французька полінезія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:187
+msgid "French Southern Territories"
+msgstr "Французькі південні території"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:188
+msgid "Gabon"
+msgstr "Габон"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:189
+msgid "Gambia"
+msgstr "Гамбія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:190
+msgid "Georgia"
+msgstr "Грузія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:191
+msgid "Germany"
+msgstr "Німеччина"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:192
+msgid "Ghana"
+msgstr "Гана"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:193
+msgid "Gibraltar"
+msgstr "Гібралтар"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:194
+msgid "Greece"
+msgstr "Греція"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:195
+msgid "Greenland"
+msgstr "Гренландія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:196
+msgid "Grenada"
+msgstr "Гренада"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:197
+msgid "Guadeloupe"
+msgstr "Гваделуп"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:198
+msgid "Guam"
+msgstr "Гуам"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:199
+msgid "Guatemala"
+msgstr "Гватемала"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:200
+msgid "Guinea"
+msgstr "Гвінея"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:201
+msgid "Guinea-Bissau"
+msgstr "Гвінея-Біссау"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:202
+msgid "Guyana"
+msgstr "Гайана"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:203
+msgid "Haiti"
+msgstr "Гаїті"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:204
+msgid "Heard & McDonald Islands"
+msgstr "Heard & McDonald островів"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:205
+msgid "Honduras"
+msgstr "Гондурас"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:206
+msgid "Hong Kong"
+msgstr "Гонконг"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:207
+msgid "Hungary"
+msgstr "Угорщина"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:208
+msgid "Iceland"
+msgstr "Ісландія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:209
+msgid "India"
+msgstr "Індія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:210
+msgid "Indonesia"
+msgstr "Індонезія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:211
+msgid "Iraq"
+msgstr "Ірак"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:212
+msgid "Ireland"
+msgstr "Ірландія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:213
+msgid "Islamic Republic of Iran"
+msgstr "Ісламська Республіка Іран"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:214
+msgid "Israel"
+msgstr "Ізраїль"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:215
+msgid "Italy"
+msgstr "Італія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:216
+msgid "Ivory Coast"
+msgstr "Узбережжя слонової кістки"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:217
+msgid "Jamaica"
+msgstr "Ямайка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:218
+msgid "Japan"
+msgstr "Японія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:219
+msgid "Jordan"
+msgstr "Йордан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:220
+msgid "Kazakhstan"
+msgstr "Казахстан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:221
+msgid "Kenya"
+msgstr "Кенія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:222
+msgid "Kiribati"
+msgstr "Кірібаті"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:223
+msgid "Korea, Democratic People's Republic of"
+msgstr "Корея, демократична народна республіка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:224
+msgid "Korea, Republic of"
+msgstr "Корея, Республіка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:225
+msgid "Kuwait"
+msgstr "Кувейт"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:226
+msgid "Kyrgyzstan"
+msgstr "Киргизстан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:227
+msgid "Lao People's Democratic Republic"
+msgstr "Народна демократична республіка Лао"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:228
+msgid "Latvia"
+msgstr "Латвія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:229
+msgid "Lebanon"
+msgstr "Ліван"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:230
+msgid "Lesotho"
+msgstr "Лесото"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:231
+msgid "Liberia"
+msgstr "Ліберія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:232
+msgid "Libyan Arab Jamahiriya"
+msgstr "Лівійська арабська Джамахірія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:233
+msgid "Liechtenstein"
+msgstr "Ліхтенштейн"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:234
+msgid "Lithuania"
+msgstr "Литва"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:235
+msgid "Luxembourg"
+msgstr "Люксембург"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:236
+msgid "Macau"
+msgstr "Макао"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:237
+msgid "Madagascar"
+msgstr "Мадагаскар"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:238
+msgid "Malawi"
+msgstr "Малаві"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:239
+msgid "Malaysia"
+msgstr "Малайзія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:240
+msgid "Maldives"
+msgstr "Мальдіви"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:241
+msgid "Mali"
+msgstr "Малі"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:242
+msgid "Malta"
+msgstr "Мальта"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:243
+msgid "Marshall Islands"
+msgstr "Маршаллські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:244
+msgid "Martinique"
+msgstr "Мартиніка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:245
+msgid "Mauritania"
+msgstr "Мавританія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:246
+msgid "Mauritius"
+msgstr "Маврикій"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:247
+msgid "Mayotte"
+msgstr "Майотта"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:248
+msgid "Mexico"
+msgstr "Мексика"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:249
+msgid "Micronesia"
+msgstr "Мікронезія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:250
+msgid "Moldova, Republic of"
+msgstr "Молдова, Республіка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:251
+msgid "Monaco"
+msgstr "Монако"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:252
+msgid "Mongolia"
+msgstr "Монголія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:253
+msgid "Monserrat"
+msgstr "Monserrat"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:254
+msgid "Morocco"
+msgstr "Марокко"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:255
+msgid "Mozambique"
+msgstr "Мозамбік"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:256
+msgid "Myanmar"
+msgstr "М'янма"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:257
+msgid "Namibia"
+msgstr "Намібія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:258
+msgid "Nauru"
+msgstr "Науру"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:259
+msgid "Nepal"
+msgstr "Непал"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:260
+msgid "Netherlands"
+msgstr "Нідерланди"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:261
+msgid "Netherlands Antilles"
+msgstr "Нідерланди Антильські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:262
+msgid "New Caledonia"
+msgstr "Нова Каледонія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:263
+msgid "New Zealand"
+msgstr "Нова Зеландія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:264
+msgid "Nicaragua"
+msgstr "Нікарагуа"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:265
+msgid "Niger"
+msgstr "Нігер"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:266
+msgid "Nigeria"
+msgstr "Нігерія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:267
+msgid "Niue"
+msgstr "Ніуе"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:268
+msgid "Norfolk Island"
+msgstr "Острів Норфолк"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:269
+msgid "Northern Mariana Islands"
+msgstr "Північні Маріанські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:270
+msgid "Norway"
+msgstr "Норвегія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:271
+msgid "Oman"
+msgstr "Оманський"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:272
+msgid "Pakistan"
+msgstr "Пакистан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:273
+msgid "Palau"
+msgstr "Палау"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:274
+msgid "Panama"
+msgstr "Панама"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:275
+msgid "Papua New Guinea"
+msgstr "Папуа -Нова Гвінея"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:276
+msgid "Paraguay"
+msgstr "Парагвай"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:277
+msgid "Peru"
+msgstr "Перу"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:278
+msgid "Philippines"
+msgstr "Філіппіни"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:279
+msgid "Pitcairn"
+msgstr "Піткерн"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:280
+msgid "Poland"
+msgstr "Польща"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:281
+msgid "Portugal"
+msgstr "Португалія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:282
+msgid "Puerto Rico"
+msgstr "Пуерто -Рико"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:283
+msgid "Qatar"
+msgstr "Катар"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:284
+msgid "Reunion"
+msgstr "Возз'єднання"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:285
+msgid "Romania"
+msgstr "Румунія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:286
+msgid "Russian Federation"
+msgstr "Російська федерація"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:287
+msgid "Rwanda"
+msgstr "Руанда"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:288
+msgid "Saint Lucia"
+msgstr "Сент -Люсія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:289
+msgid "Samoa"
+msgstr "Самоа"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:290
+msgid "San Marino"
+msgstr "Сан -Маріно"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:291
+msgid "Sao Tome & Principe"
+msgstr "Sao Tome & Principe"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:292
+msgid "Saudi Arabia"
+msgstr "Саудівська Аравія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:293
+msgid "Senegal"
+msgstr "Сенегал"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:294
+msgid "Seychelles"
+msgstr "Сейшели"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:295
+msgid "Sierra Leone"
+msgstr "Сьєрра -Леоне"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:296
+msgid "Singapore"
+msgstr "Сінгапур"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:297
+msgid "Slovakia"
+msgstr "Словаччина"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:298
+msgid "Slovenia"
+msgstr "Словенія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:299
+msgid "Solomon Islands"
+msgstr "Соломонські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:300
+msgid "Somalia"
+msgstr "Сомалі"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:301
+msgid "South Africa"
+msgstr "Південна Африка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:302
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "Південна Джорджія та Південні сендвіч -острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:303
+msgid "Spain"
+msgstr "Іспанія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:304
+msgid "Sri Lanka"
+msgstr "Шрі -Ланка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:305
+msgid "St. Helena"
+msgstr "Св. Гелена"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:306
+msgid "St. Kitts and Nevis"
+msgstr "Сент -Кітс і Невіс"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:307
+msgid "St. Pierre & Miquelon"
+msgstr "Сент -П'єр і Мікелон"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:308
+msgid "St. Vincent & the Grenadines"
+msgstr "Сент -Вінсент та Гренадини"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:309
+msgid "Sudan"
+msgstr "Судан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:310
+msgid "Suriname"
+msgstr "Сурінам"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:311
+msgid "Svalbard & Jan Mayen Islands"
+msgstr "Острови Свальбард та Ян Мейен"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:312
+msgid "Swaziland"
+msgstr "Свазіленд"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:313
+msgid "Sweden"
+msgstr "Швеція"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:314
+msgid "Switzerland"
+msgstr "Швейцарія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:315
+msgid "Syrian Arab Republic"
+msgstr "Сирійська арабська республіка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:316
+msgid "Taiwan, Province of China"
+msgstr "Тайвань, провінція Китай"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:317
+msgid "Tajikistan"
+msgstr "Таджикистан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:318
+msgid "Tanzania, United Republic of"
+msgstr "Танзанія, Об'єднана республіка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:319
+msgid "Thailand"
+msgstr "Таїланд"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:320
+msgid "Togo"
+msgstr "Того"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:321
+msgid "Tokelau"
+msgstr "Токелау"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:322
+msgid "Tonga"
+msgstr "Тонга"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:323
+msgid "Trinidad & Tobago"
+msgstr "Тринідад і Тобаго"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:324
+msgid "Tunisia"
+msgstr "Туніс"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:325
+msgid "Turkey"
+msgstr "Індичка"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:326
+msgid "Turkmenistan"
+msgstr "Туркменістан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:327
+msgid "Turks & Caicos Islands"
+msgstr "Турки та острови Кайкос"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:328
+msgid "Tuvalu"
+msgstr "Тувалу"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:329
+msgid "Uganda"
+msgstr "Уганда"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:330
+msgid "Ukraine"
+msgstr "Україна"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:331
+msgid "United Arab Emirates"
+msgstr "Об'єднані Арабські Емірати"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:332
+msgid "United Kingdom (Great Britain)"
+msgstr "Великобританія (Великобританія)"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:333
+msgid "United States Minor Outlying Islands"
+msgstr "Сполучені Штати незначні острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:334
+msgid "United States Virgin Islands"
+msgstr "Сполучені Штати Віргінські острови"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:335
+msgid "Unknown or unspecified country"
+msgstr "Невідома або не визначена країна"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:336
+msgid "Uruguay"
+msgstr "Уругвай"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:337
+msgid "Uzbekistan"
+msgstr "Узбекистан"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:338
+msgid "Vanuatu"
+msgstr "Вануату"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:339
+msgid "Vatican City State (Holy See)"
+msgstr "Ватиканський міський штат (святий див.)"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:340
+msgid "Venezuela"
+msgstr "Венесуела"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:341
+msgid "Viet Nam"
+msgstr "В'єтнам"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:342
+msgid "Wallis & Futuna Islands"
+msgstr "Острови Wallis & Futuna"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:343
+msgid "Western Sahara"
+msgstr "Західна Сахара"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:344
+msgid "Yemen"
+msgstr "Ємен"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:345
+msgid "Yugoslavia"
+msgstr "Югославія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:346
+msgid "Zaire"
+msgstr "Зер"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:347
+msgid "Zambia"
+msgstr "Замбія"
+
+#: env/lib/python3.13/site-packages/paypal/pro/fields.py:348
+msgid "Zimbabwe"
+msgstr "Зімбабве"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:16
+msgid "Street Address"
+msgstr "Адреса вулиці"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:17
+msgid "City"
+msgstr "Місто"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:18
+msgid "State"
+msgstr "Держави"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:19
+msgid "Country"
+msgstr "Країна"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:20
+msgid "Postal / Zip Code"
+msgstr "Поштовий / поштовий індекс"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:21
+msgid "Credit Card Number"
+msgstr "Номер кредитної картки"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:22
+msgid "Expiration Date"
+msgstr "Дата закінчення терміну дії"
+
+#: env/lib/python3.13/site-packages/paypal/pro/forms.py:23
+msgid "Card Security Code"
+msgstr "Код безпеки картки"
+
+#: env/lib/python3.13/site-packages/paypal/standard/forms.py:83
+#, python-format
+msgid "Invalid date format %(value)s: %(e)s"
+msgstr "Недійсне формат дати %(value) s: %(e) s"
+
+#: env/lib/python3.13/site-packages/silk/middleware.py:79
+msgid ""
+"SILKY_AUTHENTICATION can not be enabled without Session, Authentication or "
+"Message Django's middlewares"
+msgstr ""
+"Silky_authentication не можна включати без сеансу, аутентифікації або "
+"повідомлення про середніми проведення"
+
+#: env/lib/python3.13/site-packages/timezone_field/rest_framework.py:10
+msgid "A valid timezone is required."
+msgstr "Потрібна дійсна часова пояс."
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:377
+msgid "1 second ago"
+msgstr "1 секунда тому"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:383
+msgid "1 minute ago"
+msgstr "1 хвилина тому"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:388
+msgid "1 hour ago"
+msgstr "1 година тому"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:391
+#, python-format
+msgid "%(time)s"
+msgstr "%(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:393
+msgid "yesterday"
+msgstr "вчора"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:393
+#, python-format
+msgid "yesterday at %(time)s"
+msgstr "вчора на %(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:395
+#, python-format
+msgid "%(weekday)s"
+msgstr "%(weekday)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:395
+#, python-format
+msgid "%(weekday)s at %(time)s"
+msgstr "%(weekday)s at %(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:398
+#: env/lib/python3.13/site-packages/tornado/locale.py:451
+#, python-format
+msgid "%(month_name)s %(day)s"
+msgstr "%(month_name)s %(day)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:400
+#, python-format
+msgid "%(month_name)s %(day)s at %(time)s"
+msgstr "%(month_name)s %(day)s at %(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:405
+#, python-format
+msgid "%(month_name)s %(day)s, %(year)s"
+msgstr "%(month_name)s %(day)s, %(year)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:407
+#, python-format
+msgid "%(month_name)s %(day)s, %(year)s at %(time)s"
+msgstr "%(month_name)s %(day)s, %(year)s at %(time)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:445
+#, python-format
+msgid "%(weekday)s, %(month_name)s %(day)s"
+msgstr "%(weekday)s, %(month_name)s %(day)s"
+
+#: env/lib/python3.13/site-packages/tornado/locale.py:468
+#, python-format
+msgid "%(commas)s and %(last)s"
+msgstr "%(commas)s і %(last)s"
+
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:68
+msgctxt "law"
+msgid "right"
+msgstr "право"
+
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:69
+msgctxt "good"
+msgid "right"
+msgstr "право"
+
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:70
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:72
+msgctxt "organization"
+msgid "club"
+msgstr "клуб"
+
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:74
+#: env/lib/python3.13/site-packages/tornado/test/locale_test.py:75
+msgctxt "stick"
+msgid "club"
+msgstr "клуб"
+
+#: events_near_me/templates/events_page.html:6
+msgid "Upcoming Events"
+msgstr "Майбутні події"
+
+#: events_near_me/templates/events_page.html:11
+msgid "Find Events"
+msgstr "Знайдіть події"
+
+#: events_near_me/templates/events_page.html:17
+msgid "Keyword:"
+msgstr "Ключове слово:"
+
+#: events_near_me/templates/events_page.html:18
+msgid "Concert, festival, artist..."
+msgstr "Концерт, фестиваль, художник ..."
+
+#: events_near_me/templates/events_page.html:22
+msgid "Near Location (Optional):"
+msgstr "Поблизу місця (необов’язково):"
+
+#: events_near_me/templates/events_page.html:23
+msgid "e.g., Dublin City Centre"
+msgstr "Наприклад, Центр міста Дублін"
+
+#: events_near_me/templates/events_page.html:26
+msgid "Use My Location"
+msgstr "Використовуйте моє місцезнаходження"
+
+#: events_near_me/templates/events_page.html:30
+msgid "Radius (km):"
+msgstr "Радіус (км):"
+
+#: events_near_me/templates/events_page.html:36
+msgid "Start Date:"
+msgstr "Дата початку:"
+
+#: events_near_me/templates/events_page.html:41
+msgid "End Date:"
+msgstr "Дата кінця:"
+
+#: events_near_me/templates/events_page.html:47
+msgid "Search Events"
+msgstr "Пошук подій"
+
+#: events_near_me/templates/events_page.html:48
+msgid "Reset Filters"
+msgstr "Скинути фільтри"
+
+#: events_near_me/templates/events_page.html:56
+msgid "Loading events..."
+msgstr "Завантаження подій ..."
+
+#: events_near_me/templates/events_page.html:60
+msgid "No events found matching your criteria."
+msgstr "Жодних подій не знайшли відповідності вашим критеріям."
+
+#: find_transport/models.py:17 find_transport/templates/find_transport.html:22
+msgid "Bike"
+msgstr "Велосипед"
+
+#: find_transport/models.py:18 find_transport/templates/find_transport.html:20
+msgid "E-Bike"
+msgstr "Електронний велосипед"
+
+#: find_transport/models.py:19 find_transport/templates/find_transport.html:21
+msgid "E-Scooter"
+msgstr "Електронний"
+
+#: find_transport/templates/find_transport.html:6
+#: find_transport/templates/find_transport.html:11
+msgid "Available Transport"
+msgstr "Доступний транспорт"
+
+#: find_transport/templates/find_transport.html:17
+msgid "Type:"
+msgstr "Тип:"
+
+#: find_transport/templates/find_transport.html:19
+msgid "All"
+msgstr "Все"
+
+#: find_transport/templates/find_transport.html:27
+msgid "Minimum Battery:"
+msgstr "Мінімальний акумулятор:"
+
+#: find_transport/templates/find_transport.html:38
+msgid "Get Direction"
+msgstr "Отримати напрямок"
+
+#: get_direction/templates/get_direction/get_direction.html:5
+msgid "Find your way"
+msgstr "Знайдіть свій шлях"
+
+#: get_direction/templates/get_direction/get_direction.html:11
+msgid "Search locations"
+msgstr "Пошукові місця"
+
+#: get_direction/templates/get_direction/get_direction.html:12
+msgid "Search"
+msgstr "Обшук"
+
+#: get_direction/templates/get_direction/get_direction.html:13
+msgid "My Location"
+msgstr "Моє місцезнаходження"
+
+#: get_direction/templates/get_direction/get_direction.html:16
+msgid "Trip Management"
+msgstr "Управління поїздкою"
+
+#: get_direction/templates/get_direction/get_direction.html:18
+msgid "Current Status"
+msgstr "Поточний статус"
+
+#: get_direction/templates/get_direction/get_direction.html:18
+msgid "Loading"
+msgstr "Навантаження"
+
+#: get_direction/templates/get_direction/get_direction.html:21
+msgid "Loading controls"
+msgstr "Завантаження елементів управління"
+
+#: get_direction/templates/get_direction/get_direction.html:27
+msgid "Select Categories"
+msgstr "Виберіть категорії"
+
+#: main/templates/about.html:5
+msgid "About GoRide"
+msgstr "Про Горід"
+
+#: main/templates/about.html:10
+msgid "GoRide: A Journey by Two Ukrainian Students"
+msgstr "GoRide: Подорож двох українських студентів"
+
+#: main/templates/about.html:11
+msgid ""
+"We’re Alex and Oleksandr, two friends from Ukraine, building a greener way "
+"to explore the city."
+msgstr ""
+"Ми Алекс і Олександр, двоє друзів з України, будуючи зеленіший спосіб "
+"вивчити місто."
+
+#: main/templates/about.html:16
+msgid "Our Story"
+msgstr "Наша історія"
+
+#: main/templates/about.html:20
+msgid "The Struggle That Sparked GoRide"
+msgstr "Боротьба, що викликала GoRide"
+
+#: main/templates/about.html:22
+msgid ""
+"Back in 2023, we were just two Ukrainian students at TU Dublin, Tallaght "
+"Campus, trying to survive university life. The campus was far from our "
+"place, and relying on public transport was a nightmare – buses were late, "
+"overcrowded, and it took ages to get anywhere. We knew there had to be a "
+"better way, so we decided to create one ourselves."
+msgstr ""
+"Ще в 2023 році ми були лише двома українськими студентами в Ту Дублін, штат "
+"Талла, намагалися пережити університетське життя.Кампус був далеко від "
+"нашого місця, і покладатися на громадський транспорт був кошмаром - автобуси"
+" запізнювались, переповнені, і для того, щоб дістатися куди завгодно, "
+"знадобилося вік.Ми знали, що має бути кращий шлях, тому вирішили створити "
+"його самі."
+
+#: main/templates/about.html:28
+msgid "From Late-Night Coding to Real Rides"
+msgstr "Від кодування пізньої ночі до справжніх атракціонів"
+
+#: main/templates/about.html:30
+msgid ""
+"We spent countless nights coding GoRide in our dorms, fueled by borscht, "
+"coffee, and Ukrainian grit. Our first bike test ended with Oleksandr stuck "
+"in a puddle – we laughed so hard we forgot how to code for a day! But by "
+"2025, GoRide was live, helping people zip around Dublin on electric bikes "
+"and scooters, all while keeping the planet green."
+msgstr ""
+"Ми провели незліченну кількість ночей, кодуючи GoRide у наших гуртожитках, "
+"підживлювані Борштом, Кава та Українською крупою.Наш перший тест на "
+"велосипеді закінчився тим, що Олександр застряг у калюжі - ми так сміялися, "
+"що забули, як кодувати на день!Але до 2025 року Goride був живим, "
+"допомагаючи людям блискавити навколо Дубліна на електричних велосипедах та "
+"скутерах, і все, зберігаючи планети зеленою."
+
+#: main/templates/about.html:38
+msgid "The GoRide Team"
+msgstr "Команда Goride"
+
+#: main/templates/about.html:41
+msgid "Alex"
+msgstr "Алекс"
+
+#: main/templates/about.html:42
+msgid "Alex – The Full Stack Enthusiast"
+msgstr "Алекс - Ентузіаст повного стека"
+
+#: main/templates/about.html:44
+msgid ""
+"I’m Oleksandr, but everyone calls me Alex. Together with my friend, I worked"
+" on the backend to make GoRide run smoothly. But I also poured my heart into"
+" the design – creating the app’s look and the avatar system, so you can ride"
+" in style!"
+msgstr ""
+"Я Олександр, але всі називають мене Алексом.Разом зі своїм другом я працював"
+" на бік, щоб змусити GoRide безперебійно працювати.Але я також налив своє "
+"серце в дизайн - створюючи вигляд програми та систему аватара, щоб ви могли "
+"їздити в стилі!"
+
+#: main/templates/about.html:48
+msgid "Oleksandr"
+msgstr "Олександр"
+
+#: main/templates/about.html:49
+msgid "Oleksandr – The Server Master"
+msgstr "Олександр - майстер сервера"
+
+#: main/templates/about.html:51
+msgid ""
+"I’m Oleksandr, the other half of GoRide. I teamed up with Alex on the "
+"backend, but I also focused on setting up the servers and APIs to keep "
+"everything running like a dream. We both gave our all to make GoRide happen!"
+msgstr ""
+"Я Олександр, інша половина GoRide.Я об'єднався з Алексом на бекенді, але "
+"також зосередився на налаштуванні серверів та API, щоб все працювало, як "
+"мрія.Ми обоє дали все, щоб зробити GoRide!"
+
+#: main/templates/about.html:60
+msgid "Our Mission"
+msgstr "Наша місія"
+
+#: main/templates/about.html:62
+msgid ""
+"GoRide is more than just a rental service – it’s our way of making city "
+"travel eco-friendly, affordable, and fun. We want to help people explore "
+"Dublin without the hassle of unreliable transport, all while reducing "
+"emissions. And yeah, we added a cool avatar system because we believe even "
+"your virtual self deserves to look awesome!"
+msgstr ""
+"Goride-це більше, ніж просто послуга оренди-це наш спосіб зробити міські "
+"подорожі екологічно чистими, доступними та веселими.Ми хочемо допомогти "
+"людям досліджувати Дублін без клопоту ненадійного транспорту, все, зменшуючи"
+" викиди.І так, ми додали круту аватарну систему, тому що ми віримо, що "
+"навіть ваша віртуальна самостійно заслуговує на те, щоб виглядати "
+"приголомшливо!"
+
+#: main/templates/about.html:66 main/templates/home.html:38
+msgid "Urban Scene"
+msgstr "Міська сцена"
+
+#: main/templates/about.html:73
+msgid "Join the GoRide Revolution!"
+msgstr "Приєднуйтесь до революції GoRide!"
+
+#: main/templates/about.html:74
+msgid ""
+"We’re two Ukrainian students with a big dream, and we’d love for you to be "
+"part of it. Download the app, rent a ride, and let’s make cities greener "
+"together!"
+msgstr ""
+"Ми двоє українських студентів з великою мрією, і ми хотіли б, щоб ви були "
+"частиною цього.Завантажте додаток, орендуйте їзду, і давайте зробимо міста "
+"зеленішими разом!"
+
+#: main/templates/auth_base.html:8
+msgid "GoRide Auth"
+msgstr "Goride Auth"
+
+#: main/templates/base.html:75
+msgid "Jack is riding to your page..."
+msgstr "Джек їде на вашу сторінку ..."
+
+#: main/templates/base.html:76
+msgid "Please wait a moment"
+msgstr "Будь ласка, зачекайте мить"
+
+#: main/templates/base.html:91
+msgid "Admin Chats"
+msgstr "Чат адміністратора"
+
+#: main/templates/base.html:98
+msgid "Support Chat"
+msgstr "Чат підтримки"
+
+#: main/templates/base.html:107
+msgid "New Message"
+msgstr "Нове повідомлення"
+
+#: main/templates/base.html:109
+msgid "Expand"
+msgstr "Розширити"
+
+#: main/templates/contacts.html:5
+msgid "Contact Us"
+msgstr "Зв’яжіться з нами"
+
+#: main/templates/contacts.html:17
+msgid "Get in Touch with GoRide"
+msgstr "Зв’яжіться з GoRide"
+
+#: main/templates/contacts.html:18
+msgid "We're here to help. Find our details below or send us a message."
+msgstr ""
+"Ми тут, щоб допомогти.Знайдіть наші дані нижче або надішліть нам "
+"повідомлення."
+
+#: main/templates/contacts.html:20
+msgid "Scroll Down"
+msgstr "Прокрутити вниз"
+
+#: main/templates/contacts.html:28
+msgid "Our Main Office"
+msgstr "Наш головний офіс"
+
+#: main/templates/contacts.html:32
+msgid "Monday - Friday: 9:00 AM - 6:00 PM"
+msgstr "Понеділок - п’ятниця: 9:00 - 18:00"
+
+#: main/templates/contacts.html:54
+msgid "Send Us a Message"
+msgstr "Надішліть нам повідомлення"
+
+#: main/templates/contacts.html:58
+msgid "Name"
+msgstr "Назва"
+
+#: main/templates/contacts.html:66
+msgid "Subject"
+msgstr "Предмет"
+
+#: main/templates/contacts.html:70
+msgid "Message"
+msgstr "Повідомлення"
+
+#: main/templates/contacts.html:73
+msgid "Send Message"
+msgstr "Надіслати повідомлення"
+
+#: main/templates/contacts.html:82
+msgid "Customer Support"
+msgstr "Підтримка клієнтів"
+
+#: main/templates/contacts.html:83
+msgid ""
+"Need help with a rental, your account, or have any questions? Our team is "
+"ready to assist."
+msgstr ""
+"Потрібна допомога з орендою, вашим рахунком чи у вас запитання?Наша команда "
+"готова допомогти."
+
+#: main/templates/contacts.html:84
+msgid "Reach out for quick help:"
+msgstr "Зверніться до швидкої допомоги:"
+
+#: main/templates/contacts.html:96
+msgid "Our Team in Action"
+msgstr "Наша команда в дії"
+
+#: main/templates/footer.html:12 main/templates/header.html:21
+msgid "About"
+msgstr "Про нас"
+
+#: main/templates/footer.html:13
+msgid "Careers"
+msgstr "Кар'єра"
+
+#: main/templates/footer.html:14
+msgid "Locations"
+msgstr "Локації"
+
+#: main/templates/footer.html:15
+msgid "Events"
+msgstr "Події"
+
+#: main/templates/header.html:18
+msgid "Home"
+msgstr "Головна"
+
+#: main/templates/header.html:24
+msgid "Rentals"
+msgstr "Оренда"
+
+#: main/templates/header.html:27
+msgid "Plans"
+msgstr "Плани"
+
+#: main/templates/header.html:30
+msgid "Contacts"
+msgstr "Контакти"
+
+#: main/templates/header.html:35
+msgid "Admin Panel"
+msgstr "Панель адміністратора"
+
+#: main/templates/header.html:78
+msgid "Logout"
+msgstr "Вийти"
+
+#: main/templates/header.html:85
+msgid "Sign Up"
+msgstr "Зареєструватися"
+
+#: main/templates/header.html:87
+msgid "Switch theme"
+msgstr "Тема перемикання"
+
+#: main/templates/header.html:90
+msgid "Accessibility mode button"
+msgstr "Кнопка режиму доступності"
+
+#: main/templates/header.html:99
+msgid "Connecting"
+msgstr "З'єднання"
+
+#: main/templates/header.html:100
+msgid "Manage"
+msgstr "Керувати"
+
+#: main/templates/home.html:4
+msgid "Main page"
+msgstr "Головна сторінка"
+
+#: main/templates/home.html:11
+msgid "Modern electric bikes and scooters for the sustainable urban explorer"
+msgstr ""
+"Сучасні електричні велосипеди та скутери для стійкого міського дослідника"
+
+#: main/templates/home.html:12
+msgid ""
+"GoRide offers a convenient, eco-friendly fleet of electric bikes and "
+"scooters available 24 hours to easily zip around the city."
+msgstr ""
+"Goride пропонує зручний, екологічно чистий флот електричних велосипедів та "
+"скутерів, доступних 24 години, щоб легко застебнути місто."
+
+#: main/templates/home.html:16
+msgid "City Transport"
+msgstr "Міський транспорт"
+
+#: main/templates/home.html:26
+msgid "Sustainable commuting"
+msgstr "Стійкі маршрути"
+
+#: main/templates/home.html:27
+msgid "Transforming urban transport"
+msgstr "Трансформація міського транспорту"
+
+#: main/templates/home.html:29
+msgid ""
+"GoRide provides eco-friendly electric scooter and bike rentals for "
+"convenient, smooth urban commuting. Founded in 2021 by green mobility "
+"advocates, our mission is to transform urban transportation through "
+"innovative zero-emission mobility solutions."
+msgstr ""
+"Goride забезпечує екологічно чистий електричний скутер та прокат велосипедів"
+" для зручного, плавного міського маршруту.Заснована в 2021 році адвокатами "
+"Green Mobility, наша місія полягає у перетворенні міського транспорту за "
+"допомогою інноваційних рішень для мобільності нульового викиду."
+
+#: main/templates/home.html:31
+msgid "Our Services"
+msgstr "Наші послуги"
+
+#: main/templates/home.html:44
+msgid "Retro Poster"
+msgstr "Ретро -плакат"
+
+#: main/templates/home.html:48
+msgid "Bike Parking"
+msgstr "Велосипедна парковка"
+
+#: main/templates/home.html:57
+msgid "Ride the Future with GoRide!"
+msgstr "Покатайтеся з майбутнім з Goride!"
+
+#: main/templates/home.html:58
+msgid ""
+"Hop on our electric bikes and scooters and zip through the city with style, "
+"speed, and zero hassle!"
+msgstr ""
+"Стривайте на наші електричні велосипеди та скутери та застібте через місто "
+"зі стилем, швидкістю та нульовими клопотами!"
+
+#: main/templates/home.html:63
+msgid "Rent in a Snap"
+msgstr "Оренда в оснащенні"
+
+#: main/templates/home.html:65
+msgid ""
+"\n"
+"                        Unlock your ride in seconds! Just scan a QR code or punch in a code in the GoRide app, and you're off to explore the city.\n"
+"                        "
+msgstr ""
+"\n"
+"Розблокуйте свою їзду за лічені секунди!Просто сканувати QR -код або пробити"
+" в коді в додатку Goride, і ви збираєтеся досліджувати місто."
+
+#: main/templates/home.html:74
+msgid "Wallet-Friendly Vibes"
+msgstr "Гаманці, зручні для гаманця"
+
+#: main/templates/home.html:76
+#, python-format
+msgid ""
+"\n"
+"                        Ride from just <strong>%(price)s</strong> or grab a subscription to save big. Pay your way, ride your day!\n"
+"                        "
+msgstr ""
+"\n"
+"Їдьте від просто <strong>%(price)s </strong> або захопіть підписку, щоб "
+"зберегти велику.Платіть свій шлях, їдьте своїм днем!"
+
+#: main/templates/home.html:85
+msgid "Park Anywhere, Anytime"
+msgstr "Припаркуйте де завгодно, у будь -який час"
+
+#: main/templates/home.html:87
+#, python-format
+msgid ""
+"\n"
+"                        Drop your ride at any of our <strong>%(stations)s stations</strong> across the city or park in designated zones. Freedom’s never been this easy!\n"
+"                        "
+msgstr ""
+"\n"
+"Затримайте свою їзду на будь -якій з наших <strong>%(stations)s станцій"
+"</strong> по місту або парку у визначених зонах.Свобода ніколи не була такою"
+" простою!"
+
+#: main/templates/home.html:99
+msgid "What People Are Saying About Us! "
+msgstr "Що люди говорять про нас!"
+
+#: main/templates/home.html:128 reviews/templates/review_list.html:14
+msgid "Previous"
+msgstr "Попередній"
+
+#: main/templates/home.html:132 reviews/templates/review_list.html:16
+msgid "Next"
+msgstr "Наступний"
+
+#: main/templates/home.html:138
+msgid "No reviews yet. Be the first to leave one!"
+msgstr "Ще немає відгуків.Будьте першим, хто залишив одного!"
+
+#: main/templates/home.html:141
+msgid "See All Reviews"
+msgstr "Дивіться всі відгуки"
+
+#: main/templates/home.html:148
+msgid "Discover Amazing Stats "
+msgstr "Відкрийте для себе дивовижну статистику"
+
+#: main/templates/home.html:153
+msgid "Total Users"
+msgstr "Всього користувачів"
+
+#: main/templates/home.html:161
+msgid "Average raiting"
+msgstr "Середній рейтинг"
+
+#: main/templates/home.html:167
+msgid "Completed Trips"
+msgstr "Завершені поїздки"
+
+#: main/templates/home.html:176
+msgid "Download the GoRide app and start riding "
+msgstr "Завантажте додаток Goride і почніть їздити"
+
+#: main/templates/home.html:177
+msgid "With just a few taps, you can locate, unlock, and ride."
+msgstr "Лише кілька кранів ви можете знайти, розблокувати та їздити."
+
+#: main/templates/home.html:178
+msgid "Get Started"
+msgstr "Розпочати"
+
+#: payments/templates/payments/booking.html:23
+#: payments/templates/payments/stripe_payment.html:5
+msgid "Stripe Payment for"
+msgstr "Плата за смужку за"
+
+#: payments/templates/payments/booking.html:24
+#: payments/templates/payments/stripe_payment.html:6
+msgid "Total Amount:"
+msgstr "Загальна сума:"
+
+#: payments/templates/payments/booking.html:30
+#: payments/templates/payments/stripe_payment.html:13
+msgid "Pay with Stripe"
+msgstr "Оплатити смугою"
+
+#: payments/templates/payments/payment.html:5
+msgid "Payment for"
+msgstr "Оплата за"
+
+#: payments/templates/payments/payment.html:9
+msgid "Pay"
+msgstr "Оплачувати"
+
+#: payments/templates/payments/payment_success.html:8
+msgid "Payment Successful"
+msgstr "Оплата успішна"
+
+#: payments/templates/payments/payment_success.html:9
+msgid "Thank you for your payment!"
+msgstr "Дякую за ваш платіж!"
+
+#: payments/templates/payments/payment_success.html:10
+msgid "Return to Transport"
+msgstr "Повернення до транспорту"
+
+#: reviews/templates/review_list.html:7
+msgid "All Reviews"
+msgstr "Усі відгуки"
+
+#: reviews/templates/review_list.html:13
+msgid "First"
+msgstr "Спочатку"
+
+#: reviews/templates/review_list.html:17
+msgid "Last"
+msgstr "Останній"
+
+#: subscriptions/models.py:11
+msgid "Daily Subscription"
+msgstr "Щоденна підписка"
+
+#: subscriptions/models.py:12
+msgid "Weekly Subscription"
+msgstr "Щотижнева підписка"
+
+#: subscriptions/models.py:13
+msgid "Monthly Subscription"
+msgstr "Щомісячна підписка"
+
+#: subscriptions/models.py:14
+msgid "Student"
+msgstr "Студент"
+
+#: subscriptions/models.py:15
+msgid "Athlete"
+msgstr "Спортсмен"
+
+#: subscriptions/templates/plans.html:5 subscriptions/templates/plans.html:9
+msgid "Choose a Subscription Plan"
+msgstr "Виберіть план передплати"
+
+#: subscriptions/templates/plans.html:18
+msgid "Price:"
+msgstr "Ціна:"
+
+#: subscriptions/templates/plans.html:20
+msgid "Transport type:"
+msgstr "Тип транспорту:"
+
+#: subscriptions/templates/plans.html:22
+msgid "Bike only"
+msgstr "Тільки велосипед"
+
+#: subscriptions/templates/plans.html:24
+msgid "All types available"
+msgstr "Всі доступні типи"
+
+#: subscriptions/templates/success.html:5
+msgid "Subscription Successful"
+msgstr "Підписка успішна"
+
+#: subscriptions/templates/success.html:10
+msgid "Subscription Successful!"
+msgstr "Підписка успішна!"
+
+#: subscriptions/templates/success.html:11
+msgid "Your subscription has been activated."
+msgstr "Ваша підписка активована."
+
+#: subscriptions/templates/success.html:12
+msgid "Return to Plans"
+msgstr "Повернутися до планів"
+
+#: support/templates/support/admin_chat.html:7
+msgid "Admin Support Panel"
+msgstr "Панель підтримки адміністратора"
+
+#: support/templates/support/admin_chat.html:13
+#: support/templates/support/admin_chat_list.html:3
+msgid "Active Chats"
+msgstr "Активні чати"
+
+#: support/templates/support/admin_chat.html:23
+msgid "No active chats"
+msgstr "Немає активних чатів"
+
+#: support/templates/support/admin_chat.html:33
+#: support/templates/support/admin_chat_detail.html:6
+#: support/templates/support/admin_chat_list.html:6
+msgid "Chat with"
+msgstr "Спілкуватися з"
+
+#: support/templates/support/admin_chat.html:43
+#: support/templates/support/user_chat.html:21
+msgid "No messages yet. Start the conversation!"
+msgstr "Повідомлення ще немає.Почніть розмову!"
+
+#: support/templates/support/admin_chat.html:53
+#: support/templates/support/user_chat.html:31
+msgid "Send"
+msgstr "Надіслати"
+
+#: support/templates/support/admin_chat_detail.html:3
+msgid "Admin chat details"
+msgstr "Деталі чату адміністратора"
+
+#: support/templates/support/admin_chat_detail.html:14
+msgid "Reply to the chat:"
+msgstr "Відповідь на чат:"
+
+#: support/templates/support/admin_chat_detail.html:18
+msgid "Send Reply"
+msgstr "Надішліть відповідь"
+
+#: support/templates/support/admin_chat_detail.html:21
+msgid "Back to chat list"
+msgstr "Назад до списку чату"
+
+#: support/templates/support/admin_chats.html:5
+msgid "All chats"
+msgstr "Всі чати"
+
+#: support/templates/support/admin_chats.html:11
+msgid "Chat"
+msgstr "Чат"
+
+#: support/templates/support/admin_chats.html:15
+msgid "No active chats."
+msgstr "Немає активних чатів."
+
+#: support/templates/support/user_chat.html:7
+msgid "Chat with Support"
+msgstr "Поспілкуватися з підтримкою"
+
+#: support/templates/support/user_chat.html:10
+msgid "Chat History"
+msgstr "Історія чату"
+
+#: support/forms.py:12
+msgid "Write your message..."
+msgstr "Введіть своє повідомлення..."
+
+#: support/forms.py:16
+msgid "Content"
+msgstr "Вміст"

@@ -1,0 +1,7 @@
+com.example.go_ride_app-pngs-0 /Users/cursyy/Documents/Programming/Projects/GoRide/go_ride_app/android/build/generated/res/pngs/debug
+com.example.go_ride_app-resValues-1 /Users/cursyy/Documents/Programming/Projects/GoRide/go_ride_app/android/build/generated/res/resValues/debug
+com.example.go_ride_app-packageDebugResources-2 /Users/cursyy/Documents/Programming/Projects/GoRide/go_ride_app/android/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.example.go_ride_app-packageDebugResources-3 /Users/cursyy/Documents/Programming/Projects/GoRide/go_ride_app/android/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.example.go_ride_app-debug-4 /Users/cursyy/Documents/Programming/Projects/GoRide/go_ride_app/android/build/intermediates/merged_res/debug/mergeDebugResources
+com.example.go_ride_app-debug-5 /Users/cursyy/Documents/Programming/Projects/GoRide/go_ride_app/android/src/debug/res
+com.example.go_ride_app-main-6 /Users/cursyy/Documents/Programming/Projects/GoRide/go_ride_app/android/src/main/res
